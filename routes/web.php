@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HelloWorld;
+use App\Http\Controllers\TipoEventoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,3 +24,5 @@ Route::get('/hello', [HelloWorld::class, 'sayHello']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/tipo-eventos', [TipoEventoController::class, 'all']);
