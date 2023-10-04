@@ -11977,38 +11977,3 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-
-.modal-body{
-  background-color: #D9D9D9;
-}
-.modal-header{
-  background-color: #d9d9d9;
-}
-.modal-footer{
-  background-color: #d9d9d9;
-}
-
-.btn.btn-secondary {
-  background-color: transparent;
-  color: #0A7ACC;
-  border: none;
-}
-
-.circle {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: none;
-}
-
-.dropdown-toggle {
-  padding: 0;
-}
-
-.double-height {
-  line-height: 4;
-}
-
-.form-label{
-  font-weight: bolder;
-}
