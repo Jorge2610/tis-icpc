@@ -27201,3 +27201,8 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 	
 /******/ })()
 ;
+
+function changeColor(color) {
+  let colorDisplay = document.querySelector("#color-display");
+  colorDisplay.style.backgroundColor = color;
+}
