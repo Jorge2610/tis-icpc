@@ -4,6 +4,14 @@
 <div class="container">
     <div class="d-flex" style="height: 625px;">
         <div class="col-2">
+            <div class="row justify-content-start">
+                <div class="col-8">
+                    <a class="text-decoration-none text-dark" href="{{ url('/eventos/crear-evento') }}">
+                        <h5>Crear evento</h5>
+                    </a>
+                </div>
+                <div class="col-3"></div>
+            </div>
             <div class="row align-items-end">
                 <div class="col-8 ">
                     <h5>Tipo de evento</h5>

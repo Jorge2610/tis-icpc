@@ -27,3 +27,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/eventos', function () {
     return view('eventos');
 });
+
+Route::get('/eventos/crear-evento', function () {
+    return view('crearEvento');
+});
