@@ -51,12 +51,82 @@
                                                             <div id="color-display" class="circle" style="background-color: #FF6347;"></div>
                                                         </button>
                                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                            <li><a class="dropdown-item" onclick="changeColor('#FF6347')">
-                                                                    <div class="circle" style="background-color: #FF6347;"></div>
-                                                                </a></li>
-                                                            <li><a class="dropdown-item" onclick="changeColor('#90EE90')">
-                                                                    <div class="circle" style="background-color: #90EE90;"></div>
-                                                                </a></li>
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    <div class="row">
+                                                                        <li>
+                                                                            <a class="dropdown-item" onclick="changeColor('#FF6347')">
+                                                                                <div class="circle" style="background-color: #FF6347;"></div>
+                                                                            </a>
+                                                                        </li>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <li>
+                                                                            <a class="dropdown-item" onclick="changeColor('#FF6347')">
+                                                                                <div class="circle" style="background-color: #FF6347;"></div>
+                                                                            </a>
+                                                                        </li>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <li>
+                                                                            <a class="dropdown-item" onclick="changeColor('#FF6347')">
+                                                                                <div class="circle" style="background-color: #FF6347;"></div>
+                                                                            </a>
+                                                                        </li>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <li>
+                                                                            <a class="dropdown-item" onclick="changeColor('#FF6347')">
+                                                                                <div class="circle" style="background-color: #FF6347;"></div>
+                                                                            </a>
+                                                                        </li>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <li>
+                                                                            <a class="dropdown-item" onclick="changeColor('#FF6347')">
+                                                                                <div class="circle" style="background-color: #FF6347;"></div>
+                                                                            </a>
+                                                                        </li>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <div class="row">
+                                                                        <li>
+                                                                            <a class="dropdown-item" onclick="changeColor('#FF6347')">
+                                                                                <div class="circle" style="background-color: #FF6347;"></div>
+                                                                            </a>
+                                                                        </li>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <li>
+                                                                            <a class="dropdown-item" onclick="changeColor('#FF6347')">
+                                                                                <div class="circle" style="background-color: #FF6347;"></div>
+                                                                            </a>
+                                                                        </li>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <li>
+                                                                            <a class="dropdown-item" onclick="changeColor('#FF6347')">
+                                                                                <div class="circle" style="background-color: #FF6347;"></div>
+                                                                            </a>
+                                                                        </li>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <li>
+                                                                            <a class="dropdown-item" onclick="changeColor('#FF6347')">
+                                                                                <div class="circle" style="background-color: #FF6347;"></div>
+                                                                            </a>
+                                                                        </li>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <li>
+                                                                            <a class="dropdown-item" onclick="changeColor('#FF6347')">
+                                                                                <div class="circle" style="background-color: #FF6347;"></div>
+                                                                            </a>
+                                                                        </li>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </ul>
                                                     </div>
                                                 </div>
