@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="d-flex" style="height: 625px;">
-        <div class="col-2">
+        <div class="col-2 border-end">
             <div class="row justify-content-start">
                 <div class="col-8">
                     <a class="text-decoration-none text-dark" href="{{ url('/eventos/crear-evento') }}">
@@ -48,7 +48,7 @@
                                             <div class="row">
                                             <div class="col-md-12">
                                                 <label for="validationCustom02" class="form-label">Descripcion del evento</label>
-                                                <textarea class="form-control" id="validationCustom02" rows="6" required></textarea>
+                                                <textarea class="form-control" id="validationCustom02" rows="6" style="resize: none;" required></textarea>
                                                 <div class="valid-feedback">
                                                 Looks good!
                                                 </div>
@@ -162,8 +162,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-1 vr"></div>
-        <div class="col-9"></div>
+        <div class="col-10"></div>
     </div>
 </div>
 @endsection
