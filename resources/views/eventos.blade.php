@@ -29,12 +29,12 @@
                                         <div class="container">
                                             <div class="row">
                                             <div class="col-md-12">
-  <label for="validationCustom01" class="form-label">Nombre del tipo de evento*</label>
-  <input type="text" class="form-control custom-input" id="validationCustom01" value="" required>
-  <div class="valid-feedback">
-    Looks good!
-  </div>
-</div>
+                                                <label for="validationCustom01" class="form-label">Nombre del tipo de evento*</label>
+                                                <input type="text" class="form-control custom-input" id="validationCustom01" value="" required>
+                                                <div class="valid-feedback">
+                                                     Looks good!
+                                                </div>
+                                            </div>
 
                                             </div>
                                             <div class="row">
