@@ -1,35 +1,69 @@
 
 .modal-body{
-    background-color: #D9D9D9;
-  }
-  .modal-header{
-    background-color: #d9d9d9;
-  }
-  .modal-footer{
-    background-color: #d9d9d9;
-  }
+  background-color: #D9D9D9;
+}
+.modal-header{
+  background-color: #d9d9d9;
+}
+.modal-footer{
+  background-color: #d9d9d9;
+}
   
-  .btn.btn-secondary {
-    background-color: transparent;
-    color: #0A7ACC;
-    border: none;
-  }
+.btn.btn-secondary {
+  background-color: transparent;
+  color: #0A7ACC;
+  border: none;
+}
   
-  .circle {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: none;
-  }
+.circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+}
   
-  .dropdown-toggle {
-    padding: 0;
-  }
+.dropdown-toggle {
+  padding: 0;
+}
   
-  .double-height {
-    line-height: 4;
-  }
+.double-height {
+  line-height: 4;
+}
   
-  .form-label{
-    font-family: "Inter", sans-serif;
-  }
+.form-label{
+  font-family: "Inter", sans-serif;
+} 
+  
+.col{
+  background-color: #f4f567;
+}
+
+.custom-col {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.contenedor-titulo{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-btn:hover {
+  color: red;
+}
+
+.custom-input {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+
+
+
+  
+  
+  
