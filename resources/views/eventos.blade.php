@@ -74,11 +74,8 @@
                 </div>
             </div>
         </div>
+        <div class="col-1 vr"></div>
+        <div class="col-9"></div>
     </div>
-    <div class="col-1 vr"></div>
-    <div class="col-9">
-
-    </div>
-</div>
 </div>
 @endsection
