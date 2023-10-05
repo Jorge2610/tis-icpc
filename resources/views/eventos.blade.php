@@ -27,8 +27,8 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <div class = "contenedor-titulo">
-                                    <h5 class="modal-title" id="modalCrearTipoEventoLabel">Crear tipo de evento</h5>
+                                    <div class="contenedor-titulo">
+                                        <h5 class="modal-title" id="modalCrearTipoEventoLabel">Crear tipo de evento</h5>
                                     </div>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
@@ -36,120 +36,120 @@
                                     <form class="needs-validation" novalidate>
                                         <div class="container">
                                             <div class="row">
-                                            <div class="col-md-12">
-                                                <label for="validationCustom01" class="form-label">Nombre del tipo de evento*</label>
-                                                <input type="text" class="form-control custom-input" id="validationCustom01" value="" required>
-                                                <div class="valid-feedback">
-                                                     Looks good!
-                                                </div>
-                                            </div>
-
-                                            </div>
-                                            <div class="row">
-                                            <div class="col-md-12">
-                                                <label for="validationCustom02" class="form-label">Descripcion del evento</label>
-                                                <textarea class="form-control" id="validationCustom02" rows="6" style="resize: none;" required></textarea>
-                                                <div class="valid-feedback">
-                                                Looks good!
-                                                </div>
+                                                <div class="col-md-12">
+                                                    <label for="validationCustom01" class="form-label">Nombre del tipo de evento*</label>
+                                                    <input type="text" class="form-control custom-input" id="validationCustom01" value="" required>
+                                                    <div class="valid-feedback">
+                                                        Looks good!
+                                                    </div>
                                                 </div>
 
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                <div class="row">
-                                                <div class="col-5 mt-3">
-                                                    <label for="validationCustom04" class="form-label">Color de referencia</label>
+                                                    <label for="validationCustom02" class="form-label">Descripcion del evento</label>
+                                                    <textarea class="form-control" id="validationCustom02" rows="6" style="resize: none;" required></textarea>
+                                                    <div class="valid-feedback">
+                                                        Looks good!
+                                                    </div>
                                                 </div>
-                                                <div class="col-1 mt-3 custom-col">
-                                                    <div class="dropdown">
-                                                    <button class="btn btn-secondary dropdown-toggle d-flex align-items-center" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <div id="color-display" class="circle" style="background-color: #FF6347;"></div>
-                                                        <span class="caret ms-2"></span>
-                                                    </button>
-                                                        <ul class="dropdown-menu contenedor-color" aria-labelledby="dropdownMenuButton">
-                                                            <div class="row">
-                                                                <div class="col-6">
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-5 mt-3">
+                                                            <label for="validationCustom04" class="form-label">Color de referencia</label>
+                                                        </div>
+                                                        <div class="col-1 mt-3 custom-col">
+                                                            <div class="dropdown">
+                                                                <button class="btn btn-secondary dropdown-toggle d-flex align-items-center" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                    <div id="color-display" class="circle" style="background-color: #FF6347;"></div>
+                                                                    <span class="caret ms-2"></span>
+                                                                </button>
+                                                                <ul class="dropdown-menu contenedor-color" aria-labelledby="dropdownMenuButton">
                                                                     <div class="row">
-                                                                        <li>
-                                                                            <a class="dropdown-item" onclick="changeColor('#FF0000')">
-                                                                                <div class="circle" style="background-color: #FF0000;"></div>
-                                                                            </a>
-                                                                        </li>
+                                                                        <div class="col-6">
+                                                                            <div class="row">
+                                                                                <li>
+                                                                                    <a class="dropdown-item" onclick="changeColor('#FF0000')">
+                                                                                        <div class="circle" style="background-color: #FF0000;"></div>
+                                                                                    </a>
+                                                                                </li>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <li>
+                                                                                    <a class="dropdown-item" onclick="changeColor('#00FF00')">
+                                                                                        <div class="circle" style="background-color: #00FF00;"></div>
+                                                                                    </a>
+                                                                                </li>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <li>
+                                                                                    <a class="dropdown-item" onclick="changeColor('#0000FF')">
+                                                                                        <div class="circle" style="background-color: #0000FF;"></div>
+                                                                                    </a>
+                                                                                </li>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <li>
+                                                                                    <a class="dropdown-item" onclick="changeColor('#FF00FF')">
+                                                                                        <div class="circle" style="background-color: #FF00FF;"></div>
+                                                                                    </a>
+                                                                                </li>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <li>
+                                                                                    <a class="dropdown-item" onclick="changeColor('#FFFF00')">
+                                                                                        <div class="circle" style="background-color: #FFFF00;"></div>
+                                                                                    </a>
+                                                                                </li>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <div class="row">
+                                                                                <li>
+                                                                                    <a class="dropdown-item" onclick="changeColor('#000000')">
+                                                                                        <div class="circle" style="background-color: #000000;"></div>
+                                                                                    </a>
+                                                                                </li>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <li>
+                                                                                    <a class="dropdown-item" onclick="changeColor('#800000')">
+                                                                                        <div class="circle" style="background-color: #800000;"></div>
+                                                                                    </a>
+                                                                                </li>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <li>
+                                                                                    <a class="dropdown-item" onclick="changeColor('#FF8000')">
+                                                                                        <div class="circle" style="background-color: #FF8000;"></div>
+                                                                                    </a>
+                                                                                </li>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <li>
+                                                                                    <a class="dropdown-item" onclick="changeColor('#BBBB20')">
+                                                                                        <div class="circle" style="background-color: #BBBB20;"></div>
+                                                                                    </a>
+                                                                                </li>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <li>
+                                                                                    <a class="dropdown-item" onclick="changeColor('#FF8080')">
+                                                                                        <div class="circle" style="background-color: #FF8080;"></div>
+                                                                                    </a>
+                                                                                </li>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="row">
-                                                                        <li>
-                                                                            <a class="dropdown-item" onclick="changeColor('#00FF00')">
-                                                                                <div class="circle" style="background-color: #00FF00;"></div>
-                                                                            </a>
-                                                                        </li>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <li>
-                                                                            <a class="dropdown-item" onclick="changeColor('#0000FF')">
-                                                                                <div class="circle" style="background-color: #0000FF;"></div>
-                                                                            </a>
-                                                                        </li>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <li>
-                                                                            <a class="dropdown-item" onclick="changeColor('#FF00FF')">
-                                                                                <div class="circle" style="background-color: #FF00FF;"></div>
-                                                                            </a>
-                                                                        </li>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <li>
-                                                                            <a class="dropdown-item" onclick="changeColor('#FFFF00')">
-                                                                                <div class="circle" style="background-color: #FFFF00;"></div>
-                                                                            </a>
-                                                                        </li>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <div class="row">
-                                                                        <li>
-                                                                            <a class="dropdown-item" onclick="changeColor('#000000')">
-                                                                                <div class="circle" style="background-color: #000000;"></div>
-                                                                            </a>
-                                                                        </li>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <li>
-                                                                            <a class="dropdown-item" onclick="changeColor('#800000')">
-                                                                                <div class="circle" style="background-color: #800000;"></div>
-                                                                            </a>
-                                                                        </li>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <li>
-                                                                            <a class="dropdown-item" onclick="changeColor('#FF8000')">
-                                                                                <div class="circle" style="background-color: #FF8000;"></div>
-                                                                            </a>
-                                                                        </li>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <li>
-                                                                            <a class="dropdown-item" onclick="changeColor('#BBBB20')">
-                                                                                <div class="circle" style="background-color: #BBBB20;"></div>
-                                                                            </a>
-                                                                        </li>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <li>
-                                                                            <a class="dropdown-item" onclick="changeColor('#FF8080')">
-                                                                                <div class="circle" style="background-color: #FF8080;"></div>
-                                                                            </a>
-                                                                        </li>
-                                                                    </div>
-                                                                </div>
-                                                                </div>
                                                             </div>
-                                                        </ul>
+                                                            </ul>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
@@ -160,6 +160,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="col-12 mt-1 text-center">
+                <h6>Tipo de evento 1</h6>
             </div>
         </div>
         <div class="col-10"></div>
