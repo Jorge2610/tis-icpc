@@ -31,3 +31,5 @@ Route::get('/eventos', function () {
 Route::get('/eventos/crear-evento', function () {
     return view('crearEvento');
 });
+
+Route::post('/eventos/crear-evento', [App\Http\Controllers\ModalTipoEvento::class, 'procesarFormulario'])->name('ModalTipoEvento');

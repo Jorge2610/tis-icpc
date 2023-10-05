@@ -61,6 +61,14 @@
   overflow: hidden;
 }
 
+.customAlertContainer {
+  position: fixed;
+  top: 15%; /* Puedes ajustar esta propiedad para cambiar la posición vertical */
+  left:40%;
+  z-index: 1000; /* Asegura que la alerta esté sobre otros elementos en la página */
+  align-items: center;
+}
+
 
 
 

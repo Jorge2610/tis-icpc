@@ -12,6 +12,8 @@
                 </div>
                 <div class="col-3"></div>
             </div>
+
+            <div id="alertsContainer" class="customAlertContainer"></div>
             <div class="row align-items-end">
                 <div class="col-8 ">
                     <h5>Tipo de evento</h5>
@@ -33,7 +35,8 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form class="needs-validation" novalidate>
+                                    <form id="formularioTipoEvento" class="needs-validation" action="{{ url('/eventos/crear-evento') }}" method="POST" novalidate>
+                                        @csrf
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-md-12">
@@ -150,11 +153,11 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                <button id="confirmarBoton" type="submit" class="btn btn-primary" data-bs-dismiss="modal">Confirmar</button>
+                                            </div>
                                     </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary custom-btn" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-primary">Confirmar</button>
                                 </div>
                             </div>
                         </div>
@@ -168,4 +171,6 @@
         <div class="col-10"></div>
     </div>
 </div>
+
+
 @endsection
