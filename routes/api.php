@@ -20,7 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Rutas para guardar tipos de eventos
+// Ruta para crear tipos de eventos
 Route::post('/tipo-evento', [TipoEventoController::class, 'store'])->name('tipo-eventos.store');
+// Ruta para mostrar tipos de eventos
 Route::get('/tipo-eventos', [TipoEventoController::class, 'index']);
+// Ruta para crear eventos
 Route::post('/evento', [EventoController::class, 'store'])->name('eventos.store');

@@ -25,12 +25,14 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//vista eventos
 Route::get('/eventos', function () {
     return view('eventos');
 });
-
+//modal formulario evento
 Route::get('/eventos/crear-evento', function () {
     return view('crearEvento');
 });
 
+//modal tipo de evento
 Route::post('/eventos/crear-evento', [App\Http\Controllers\ModalTipoEvento::class, 'procesarFormulario'])->name('ModalTipoEvento');
