@@ -24,3 +24,13 @@ Route::get('/hello', [HelloWorld::class, 'sayHello']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/eventos', function () {
+    return view('eventos');
+});
+
+Route::get('/eventos/crear-evento', function () {
+    return view('crearEvento');
+});
+
+Route::post('/eventos/crear-evento', [App\Http\Controllers\ModalTipoEvento::class, 'procesarFormulario'])->name('ModalTipoEvento');

@@ -1,0 +1,24 @@
+.custom-file-upload {
+    display: block;
+    width: 140px;
+    height: 160px;
+    border: 1px solid white;
+    background-color: white;
+}
+
+#sponsorPreview {
+    background-image: url('../image/uploading.png');
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.modal-title {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
