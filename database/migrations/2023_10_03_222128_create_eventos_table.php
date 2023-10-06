@@ -18,10 +18,10 @@ class CreateEventosTable extends Migration
             $table->id();
             $table->string('nombre');
             $table->text('descripcion')->nullable();
-            $table->time('inicio_inscripcion');
-            $table->time('fin_inscripcion');
-            $table->time('inicio_evento');
-            $table->time('fin_evento');
+            $table->date('inicio_inscripcion')->format('d-m-Y');
+            $table->date('fin_inscripcion')->format('d-m-Y');
+            $table->date('inicio_evento')->format('d-m-Y');
+            $table->date('fin_evento')->format('d-m-Y');
             $table->integer('limite_edad')->nullable();
             $table->tinyInteger('evento_pago')->default(0);
             $table->tinyInteger('competencia_general')->default(0);

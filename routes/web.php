@@ -24,5 +24,3 @@ Route::get('/hello', [HelloWorld::class, 'sayHello']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/tipo-eventos', [TipoEventoController::class, 'all']);

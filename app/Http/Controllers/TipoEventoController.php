@@ -14,10 +14,12 @@ class TipoEventoController extends Controller
      */
     public function index()
     {
-        //
+        $tipo_eventos = TipoEvento::all();
+        return $tipo_eventos;
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $tipo_evento = new TipoEvento();
         $tipo_evento->nombre = $request->nombre;
         $tipo_evento->descripcion = $request->descripcion;
@@ -26,7 +28,8 @@ class TipoEventoController extends Controller
         return "Guardado exitosamente";
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $tipo_evento = TipoEvento::find($id);
         $tipo_evento->nombre = $request->nombre;
         $tipo_evento->descripcion = $request->descripcion;
@@ -35,19 +38,21 @@ class TipoEventoController extends Controller
         return "Actualizado exitosamente";
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         $tipo_evento = TipoEvento::find($id);
         $tipo_evento->delete();
         return "Eliminado exitosamente";
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $tipo_evento = TipoEvento::find($id);
         return $tipo_evento;
     }
 
-    public function all(){
-        $tipo_eventos = TipoEvento::all();
-        return $tipo_eventos;
+    public function all()
+    {
+        
     }
 }
