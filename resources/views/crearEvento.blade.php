@@ -31,12 +31,12 @@
                 </div>
                 <div class="d-flex justify-content-center mt-3">
                     <div class="col-md-4">
-                        <input type="file" class="form-control custom-input" id="validationCustom03" required
-                            style="display: none;" accept="image/*" onchange="previewImage(event)">
-                        <label for="validationCustom03" class="custom-file-upload">
+                        <input type="file" class="form-control input" id="validacionAfiche"
+                            style="display: none;" accept="image/*" onchange="previewAfiche(event)">
+                        <label for="validacionAfiche" class="file-upload">
                             <div class="col-md-12 border">
-                                <img src="{{ URL::asset('/image/uploading.png') }}" class="img" alt="logo_departamento"
-                                    id="imagePreview" width="200vh">
+                                <img src="{{ URL::asset('/image/uploading.png') }}" class="img" alt="aficheImg"
+                                    id="afiche" width="200vh">
                             </div>
                         </label>
                     </div>
@@ -128,10 +128,9 @@
                                                         <div class="col-md-4">
                                                             <input type="file" class="form-control custom-input"
                                                                 id="validationCustom03" required style="display: none;"
-                                                                accept="image/*" onchange="previewImage(event)">
+                                                                accept="image/*" onchange="previewSponsorLogo(event)">
                                                             <label for="validationCustom03" class="custom-file-upload">
-                                                                <div id="imagePreview"
-                                                                    style="background-image: url('image/uploading.png');">
+                                                                <div id="sponsorPreview">
                                                                 </div>
                                                             </label>
                                                             <div class="valid-feedback">
@@ -184,7 +183,7 @@
                     </div>
                 </div>
 
-                <div class="row mt-3 text-center">
+                <div class="row mt-4 text-center">
                     <div class="col-md-6">
                         <button type="reset" class="btn btn-light text-primary">Cancelar</button>
                     </div>

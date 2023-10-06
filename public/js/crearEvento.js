@@ -14,13 +14,20 @@ fechaInicio.addEventListener('change', (e) => {
   fechaFin.setAttribute('min', valor)
 })
 
-function previewImage(event) {
+function previewAfiche(event) {
   var reader = new FileReader();
   reader.readAsDataURL(event.target.files[0]);
   reader.onloadend = function() {
-    var output = document.getElementById('imagePreview');
-    console.log(reader.result)
-    output.setAttribute('src', reader.result)
+    var img = document.getElementById('afiche');
+    img.setAttribute('src', reader.result)
   };
-  
+}
+
+function previewSponsorLogo(event) {
+  var reader = new FileReader();
+  reader.onload = function() {
+    var output = document.getElementById('sponsorPreview');
+    output.style.backgroundImage = 'url(' + reader.result + ')';
+  };
+  reader.readAsDataURL(event.target.files[0]);
 }
