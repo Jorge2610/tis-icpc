@@ -103,19 +103,18 @@
                                 Patrocinadores
                             </div>
                             <div class="col-md-7">
-                                <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-light btn-lg" data-bs-toggle="modal"
-                                    data-bs-target="#modalCrearTipoEvento">
+                                    data-bs-target="#modalAgregarPatrocinador">
                                     +
                                 </button>
-                                <!-- Modal -->
-                                <div class="modal fade" id="modalCrearTipoEvento" data-bs-backdrop="static"
-                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalCrearTipoEventoLabel"
+                                
+                                <div class="modal fade" id="modalAgregarPatrocinador" data-bs-backdrop="static"
+                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalAgregarPatrocinadorLabel"
                                     aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="modalCrearTipoEventoLabel">Agregar
+                                                <h5 class="modal-title" id="modalAgregarPatrocinador">Agregar
                                                     patrocinador
                                                 </h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -124,12 +123,12 @@
                                             <div class="modal-body">
                                                 <div class="container">
                                                     <div class="row">
-                                                        <!-- Column for the image -->
+                                                        
                                                         <div class="col-md-4">
                                                             <input type="file" class="form-control custom-input"
-                                                                id="validationCustom03" required style="display: none;"
+                                                                id="validationCustomImage" required style="display: none;"
                                                                 accept="image/*" onchange="previewSponsorLogo(event)">
-                                                            <label for="validationCustom03" class="custom-file-upload">
+                                                            <label for="validationCustomImage" class="custom-file-upload">
                                                                 <div id="sponsorPreview">
                                                                 </div>
                                                             </label>
@@ -137,27 +136,27 @@
                                                                 Looks good!
                                                             </div>
                                                         </div>
-                                                        <!-- Column for the rest of the form -->
+                                                        
                                                         <div class="col-md-8">
                                                             <div class="row">
                                                                 <div class="col-md-12">
-                                                                    <label for="validationCustom01"
+                                                                    <label for="validationCustomName"
                                                                         class="form-label">Nombre
                                                                         del patrocinador*</label>
                                                                     <input type="text"
                                                                         class="form-control custom-input"
-                                                                        id="validationCustom01" value="" required>
+                                                                        id="validationCustomName" value="" required>
                                                                     <div class="valid-feedback">
                                                                         Looks good!
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12 mt-3">
-                                                                    <label for="validationCustom02"
+                                                                    <label for="validationCustomLink"
                                                                         class="form-label">Enlace
                                                                         a la pagina web del patrocinador</label>
                                                                     <input type="url"
                                                                         class="form-control custom-input"
-                                                                        id="validationCustom02" value="" required>
+                                                                        id="validationCustomLink" value="" required>
                                                                     <div class="valid-feedback">
                                                                         Looks good!
                                                                     </div>
