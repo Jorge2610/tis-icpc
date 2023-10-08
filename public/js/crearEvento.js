@@ -31,3 +31,13 @@ function previewSponsorLogo(event) {
   };
   reader.readAsDataURL(event.target.files[0]);
 }
+
+function resetModal(idModal, idForm) {
+  var output = document.getElementById('sponsorPreview');
+  output.style.backgroundImage = 'url(' + '../image/uploading.png' + ')';
+  let modal = document.getElementById(idModal);
+  let inputs = modal.querySelectorAll('input');
+  inputs.forEach((element) => element.value = '');
+  let form = document.getElementById(idForm);
+  form.classList.remove('was-validated');
+}

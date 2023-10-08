@@ -27,12 +27,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //vista eventos
 Route::get('/eventos', function () {
-    return view('eventos');
-});
-//modal formulario evento
-Route::get('/eventos/crear-evento', function () {
-    return view('crearEvento');
+    return view('eventos/eventos');
 });
 
-//modal tipo de evento
-Route::post('/eventos/crear-evento', [App\Http\Controllers\ModalTipoEvento::class, 'procesarFormulario'])->name('ModalTipoEvento');
+Route::group(['prefix' => 'eventos'], function(){
+    Route::get('crear-evento', function () {
+        return view('crear-evento/crearEvento');
+    });
+    Route::post('crear-evento', [App\Http\Controllers\ModalTipoEvento::class, 'procesarFormulario'])->name('ModalTipoEvento');
+});
