@@ -35,4 +35,7 @@ Route::group(['prefix' => 'eventos'], function(){
         return view('crear-evento/crearEvento');
     });
     Route::post('crear-evento', [App\Http\Controllers\ModalTipoEvento::class, 'procesarFormulario'])->name('ModalTipoEvento');
+    Route::get('tipos-de-evento', function () {
+        return view('tipos-de-evento/tiposDeEvento');
+    });
 });

@@ -41,3 +41,13 @@ function resetModal(idModal, idForm) {
   let form = document.getElementById(idForm);
   form.classList.remove('was-validated');
 }
+
+function prueba(){
+  let genero = document.getElementById('genero');
+  console.log(genero.value);
+}
+
+function prueba1(){
+  let genero = document.getElementById('limiteDeEdad');
+  console.log(typeof(genero.value));
+}

@@ -11,8 +11,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="formularioTipoEvento" class="needs-validation" action="{{ url('/eventos/crear-evento') }}"
-                        method="POST" novalidate>
+                    <form id="formularioTipoEvento" class="needs-validation" novalidate>
                         @csrf
                         <div class="container">
                             <div class="row">
@@ -31,7 +30,7 @@
                                 <div class="col-md-12 mt-3">
                                     <label for="detalleTipoEvento" class="form-label">Descripción del
                                         evento</label>
-                                    <textarea name="detalle" class="form-control" id="detalleTipoEvento" rows="6" style="resize: none;" required
+                                    <textarea name="descripcion" class="form-control" id="detalleTipoEvento" rows="6" style="resize: none;" required
                                         placeholder="Ingrese una descripción..."></textarea>
                                 </div>
                             </div>
@@ -53,8 +52,7 @@
                             <div class="modal-footer">
                                 <button type="reset" class="btn btn-secondary"
                                     data-bs-dismiss="modal">Cancelar</button>
-                                <button id="confirmarBoton" type="submit" class="btn btn-primary"
-                                    data-bs-dismiss="modal">Confirmar</button>
+                                <button id="confirmarBoton" type="submit" class="btn btn-primary">Confirmar</button>
                             </div>
                     </form>
                 </div>
