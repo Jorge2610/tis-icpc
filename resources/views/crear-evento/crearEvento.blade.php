@@ -76,7 +76,7 @@
                         <div class="col-md-6">
                             <input name="" type="checkbox" class="form-check-input border-dark" id="generoCheck">
                             <label for="genero" class="form-label">Género</label>
-                            <select class="form-select" name="" id="genero" disabled>
+                            <select class="form-select" name="" id="genero" style="display:none;">
                                 <option value="femenino">Femenino</option>
                                 <option value="masculino">Masculino</option>
                             </select>
@@ -85,7 +85,7 @@
                         <div class="col-md-6">
                             <input name="evento_pago" type="checkbox" class="form-check-input border-dark" id="edadCheck">
                             <label for="limiteDeEdad" class="form-label">Limite de edad</label>
-                            <select name="limite_edad" id="limiteDeEdad" class="form-select" disabled>
+                            <select name="limite_edad" id="limiteDeEdad" class="form-select" style="display:none;">
                                 <!--Edades de ejemplo-->
                                 @for ($i = 10; $i <= 99; $i++)
                                     <option>{{ $i }}</option>
@@ -116,7 +116,7 @@
                         </div>
 
                         <div class="col-md-6">
-                            <div class="row ">
+                            <div class="row " id="eventoPago" style="display:none;">
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="costoEvento">Costo</label>
                                 </div>

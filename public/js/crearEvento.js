@@ -1,5 +1,8 @@
 let fechaInscripcionInicio = document.getElementById('fechaInscripcionInicio')
 let fechaInscripcionFin = document.getElementById('fechaInscripcionFin')
+let inputGenero = document.getElementById('generoCheck');
+let inputEdad = document.getElementById('edadCheck');
+let inputCosto = document.getElementById('eventoPagoCheck');
 
 fechaInscripcionInicio.addEventListener('change', (e) => {
   let valor = e.target.value
@@ -51,3 +54,28 @@ function prueba1(){
   let genero = document.getElementById('limiteDeEdad');
   console.log(typeof(genero.value));
 }
+
+function utilizarInput(indInput,check){
+  let input = document.getElementById(indInput);
+  input.disabled = !check;
+}
+
+function mostrarInput(indInput,check){
+  let input = document.getElementById(indInput);
+  if(!check){
+    input.style.display= "none";
+  }
+  else{
+    input.style.display = "flex";
+  }
+}
+
+inputGenero.addEventListener("change",()=>{
+  mostrarInput('genero',inputGenero.checked);
+});
+inputEdad.addEventListener("change",()=>{
+  mostrarInput('limiteDeEdad',inputEdad.checked);
+});
+inputCosto.addEventListener('change',()=>{
+  mostrarInput('eventoPago',inputCosto.checked);
+});
