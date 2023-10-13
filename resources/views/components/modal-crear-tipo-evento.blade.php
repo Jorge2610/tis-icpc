@@ -20,7 +20,7 @@
                                         de evento *</label>
                                     <input name="nombre" type="text" class="form-control custom-input"
                                         id="nombreTipoEvento" value="" required
-                                        placeholder="Ingrese el nombre del tipo de evento">
+                                        placeholder="Ingrese el nombre del tipo de evento" maxlength="64">
                                     <div class="invalid-feedback">
                                         El nombre no puede estar vacio.
                                     </div>
@@ -31,7 +31,7 @@
                                     <label for="detalleTipoEvento" class="form-label">Descripción del
                                         evento</label>
                                     <textarea name="descripcion" class="form-control" id="detalleTipoEvento" rows="6" style="resize: none;" required
-                                        placeholder="Ingrese una descripción..."></textarea>
+                                        placeholder="Ingrese una descripción..." maxlength="500"></textarea>
                                 </div>
                             </div>
                             <div class="row">
