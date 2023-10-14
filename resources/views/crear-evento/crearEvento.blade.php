@@ -13,7 +13,7 @@
                 <div class="col-md-12">
                     <label for="nombreDelEvento" class="form-label">Nombre del evento *</label>
                     <input name="nombre" type="text" class="form-control" id="nombreDelEvento"
-                        placeholder="Ingrese el nombre del evento" required>
+                        placeholder="Ingrese el nombre del evento" maxlength="64" required>
                     <div class="invalid-feedback">
                         El nombre no puede estar vacio.
                     </div>
@@ -25,7 +25,7 @@
                         <label for="tipoDelEvento" class="form-label">Tipo de evento</label>
                         <!-Cargar tipos de evento->
                             <select name="id_tipo_evento" class="form-select" id="tipoDelEvento"
-                                aria-placeholder="Elija un tipo de evento..." required>
+                                aria-placeholder="Elija un tipo de evento...">
                                 <option value="">Tipo de evento 1</option>
                             </select>
                             <div class="invalid-feedback">
@@ -34,9 +34,17 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label for="gradoDelEvento" class="form-label">Grado</label>
-                        <input name="" type="text" class="form-control" id="gradoDelEvento"
-                            placeholder="Ingrese el grado del evento" required>
+                        <label for="gradoDelEvento" class="form-label">Grado academico requerido</label>
+                        <select name="grado_academico" class="form-select" id="gradoDelEvento"
+                            aria-placeholder="Elija un tipo de evento...">
+                            <option value="Ninguno">Ninguno</option>
+                            <option value="Primaria">Primaria</option>
+                            <option value="Secundaria">Secundaria</option>
+                            <option value="Universidad">Universidad</option>
+                            <option value="Licenciatura">Licenciatura</option>
+                            <option value="Maestria">Maestria</option>
+                            <option value="Doctorado">Doctorado</option>
+                        </select>
                         <div class="invalid-feedback">
                             Este campo no puede estar vacio.
                         </div>
@@ -47,9 +55,9 @@
                 <div class="row mt-3">
 
                     <div class="col-md-6">
-                        <label for="institucionDelEvento" class="form-label">Institución</label>
-                        <input name="" type="text" class="form-control" id="institucionDelEvento"
-                            placeholder="Ingrese la institución del evento" required>
+                        <label for="institucionDelEvento" class="form-label">Instituciones admitidas</label>
+                        <input name="institucion" type="text" class="form-control" id="institucionDelEvento"
+                            placeholder="Ingrese la institución del evento">
                         <div class="invalid-feedback">
                             Este campo no puede estar vacio.
                         </div>
@@ -57,8 +65,8 @@
 
                     <div class="col-md-6">
                         <label for="regionDelEvento" class="form-label">Región</label>
-                        <input name="" type="text" class="form-control" id="regionDelEvento"
-                            placeholder="Ingrese el grado del evento" required>
+                        <input name="region" type="text" class="form-control" id="regionDelEvento"
+                            placeholder="Ingrese el grado del evento" maxlength="64">
                         <div class="invalid-feedback">
                             Este campo no puede estar vacio.
                         </div>
@@ -74,30 +82,53 @@
 
                     <div class="row mt-3">
                         <div class="col-md-6">
-                            <input name="" type="checkbox" class="form-check-input border-dark" id="generoCheck">
-                            <label for="genero" class="form-label">Género</label>
-                            <select class="form-select" name="" id="genero" disabled>
+                            <input name="evento_genero" type="checkbox" class="form-check-input border-dark" id="generoCheck">
+                            <label for="genero" class="form-label">Género admitido</label>
+                            <select class="form-select" name="genero" id="genero" style="display:none;">
                                 <option value="femenino">Femenino</option>
                                 <option value="masculino">Masculino</option>
                             </select>
                         </div>
 
                         <div class="col-md-6">
-                            <input name="evento_pago" type="checkbox" class="form-check-input border-dark" id="edadCheck">
-                            <label for="limiteDeEdad" class="form-label">Limite de edad</label>
-                            <select name="limite_edad" id="limiteDeEdad" class="form-select" disabled>
-                                <!--Edades de ejemplo-->
-                                @for ($i = 10; $i <= 99; $i++)
-                                    <option>{{ $i }}</option>
-                                @endfor
-                            </select>
+                            <input name="rango_edad" type="checkbox" class="form-check-input border-dark" id="edadCheck">
+                            <label for="limiteDeEdad" class="form-label">Rango de edad</label>
+                            <div class="row" id="rangosDeEdad" style="display: none;">
+                                <div class="col-md-6">
+                                    <div class="row " id="rangoMin">
+                                        <div class="col-md-4">
+                                            <label for="edadMinima" class="form-label">Min</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="input-group">
+                                                <input name="edad_minima" type="number" class="form-control" min="0"
+                                                    id="edadMinima" step="1" value="0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row " id="rangoMax">
+                                        <div class="col-md-4">
+                                            <label for="edadMaxima" class="form-label">Max</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="input-group">
+                                                <input name="edad_maxima" type="number" class="form-control"
+                                                    id="edadMaxima" step="1" value="0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <div class="row mt-3">
 
                         <div class="col-md-6">
-                            <input name="por_equipos" type="checkbox" class="form-check-input border-dark" id="equipoCheck">
+                            <input name="evento_equipos" type="checkbox" class="form-check-input border-dark"
+                                id="equipoCheck">
                             <label class="form-check-label" for="equipoCheck">Por equipos</label>
                         </div>
 
@@ -118,14 +149,14 @@
                         </div>
 
                         <div class="col-md-6">
-                            <div class="row ">
+                            <div class="row " id="eventoPago" style="display:none;">
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="costoEvento">Costo</label>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Bs.</span>
-                                        <input name="competencia_general" type="number" class="form-control"
+                                        <input name="costo" type="number" class="form-control"
                                             min="0" id="costoEvento" step="0.5" value="0.0">
                                     </div>
                                 </div>
