@@ -13,7 +13,7 @@
                 <div class="col-md-12">
                     <label for="nombreDelEvento" class="form-label">Nombre del evento *</label>
                     <input name="nombre" type="text" class="form-control" id="nombreDelEvento"
-                        placeholder="Ingrese el nombre del evento" required>
+                        placeholder="Ingrese el nombre del evento" maxlength="64" required>
                     <div class="invalid-feedback">
                         El nombre no puede estar vacio.
                     </div>
