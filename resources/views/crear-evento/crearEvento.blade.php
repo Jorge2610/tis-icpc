@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label for="gradoDelEvento" class="form-label">Grado</label>
+                        <label for="gradoDelEvento" class="form-label">Grado academico</label>
                         <input name="" type="text" class="form-control" id="gradoDelEvento"
                             placeholder="Ingrese el grado del evento" required>
                         <div class="invalid-feedback">
@@ -47,7 +47,7 @@
                 <div class="row mt-3">
 
                     <div class="col-md-6">
-                        <label for="institucionDelEvento" class="form-label">Institución</label>
+                        <label for="institucionDelEvento" class="form-label">Institucion/es adminita/s</label>
                         <input name="" type="text" class="form-control" id="institucionDelEvento"
                             placeholder="Ingrese la institución del evento" required>
                         <div class="invalid-feedback">
