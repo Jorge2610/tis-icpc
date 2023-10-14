@@ -15,9 +15,9 @@ class CreateTipoEventosTable extends Migration
     {
         Schema::create('tipo_eventos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->text('descripcion')->nullable();
-            $table->string('color')->default('#000000');
+            $table->string('nombre', 64)->unique();
+            $table->text('descripcion', 500)->nullable();
+            $table->string('color',10)->default('#000000');
             $table->timestamps();
         });
     }
