@@ -35,8 +35,8 @@ Route::group(['prefix' => 'eventos'], function () {
     Route::put('/{id}', [EventoController::class, 'update'])->name('eventos.update');
     Route::delete('/{id}', [EventoController::class, 'destroy'])->name('eventos.destroy');
     Route::post('/afiche', [EventoController::class, 'storageAfiche'])->name('eventos.storageAfiche');
-    Route::put('/afiche/{id}', [EventoController::class, 'asignarAfiche'])->name('eventos.asignarAfiche');
-    Route::delete('/afiche/{id}', [EventoController::class, 'destroyAfiche'])->name('eventos.desasignarAfiche');
+    Route::post('/afiche/{id}', [EventoController::class, 'asignarAfiche'])->name('eventos.asignarAfiche');
+    Route::delete('/afiche/{id}', [EventoController::class, 'eliminarAfiche'])->name('eventos.eliminarAfiche');
 });
 
 

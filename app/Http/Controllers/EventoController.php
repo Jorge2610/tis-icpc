@@ -5,11 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use App\Models\Evento;
+use Illuminate\Support\Facades\Storage;
 
 class EventoController extends Controller
 {
-
-
     public function index()
     {
         $eventos = Evento::all();
@@ -32,13 +31,10 @@ class EventoController extends Controller
             $evento->evento_pago = $request->evento_pago;
             $evento->evento_equipos = $request->evento_equipos;
             $evento->requiere_registro = $request->requiere_registro;
-            $evento->rango_edad = $request->rango_edad;
             $evento->edad_minima = $request->edad_minima;
             $evento->edad_maxima = $request->edad_maxima;
-            $evento->evento_genero = $request->evento_genero;
             $evento->genero = $request->genero;
-            $evento->evento_pago = $request->evento_pago;
-            $evento->costo = $request->costo;
+            $evento->precio_inscripcion = $request->precio_inscripcion;
             $evento->ruta_afiche = $request->ruta_afiche;
             $evento->id_tipo_evento = $request->id_tipo_evento;
             $evento->save();
@@ -58,27 +54,51 @@ class EventoController extends Controller
 
     public function storageAfiche(Request $request)
     {
+        
         try {
-            $ruta = $request->file('ruta_afiche')->store('evento');
-            return $ruta;
+            if ($request->hasFile('afiche')) {
+                $ruta = $request->file('afiche')->store('public/evento');
+                return $ruta;
+            }
+            return "error";
         } catch (\Throwable $th) {
             return response()->json(['error' => true]);
         }
     }
 
-    public function asignarAfiche($id){
+    public function asignarAfiche(Request $request, $id)
+    {
         try {
             $evento = Evento::find($id);
-            $ruta = $evento->storageAfiche();
+            if (!$evento) {
+                return response()->json(['error' => true, 'mensaje' => 'Evento no encontrado']);
+            }
+            if ($request->hasFile('afiche') && $evento->ruta_afiche) {
+                Storage::delete($evento->ruta_afiche);
+            }
+            $ruta = $this->storageAfiche($request);
             $evento->ruta_afiche = $ruta;
             $evento->save();
-            return response()->json(['mensaje' => 'Subido exitosamente', 'error' => false]);
+            return response()->json(['mensaje' => 'Asignado exitosamente', 'error' => false]);
         } catch (QueryException $e) {
             return $e->getMessage();
         }
     }
 
-    public function update(Request $request, $id){
+    public function eliminarAfiche($id)
+    {
+        try {
+            $evento = Evento::find($id);
+            $evento->ruta_afiche = "/evento/afiche.jpg";
+            $evento->save();
+            return response()->json(['mensaje' => 'Eliminado exitosamente', 'error' => false]);
+        } catch (QueryException $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
         try {
             $evento = Evento::find($id);
             $evento->nombre = $request->nombre;
@@ -93,13 +113,10 @@ class EventoController extends Controller
             $evento->evento_pago = $request->evento_pago;
             $evento->evento_equipos = $request->evento_equipos;
             $evento->requiere_registro = $request->requiere_registro;
-            $evento->rango_edad = $request->rango_edad;
             $evento->edad_minima = $request->edad_minima;
             $evento->edad_maxima = $request->edad_maxima;
-            $evento->evento_genero = $request->evento_genero;
             $evento->genero = $request->genero;
-            $evento->evento_pago = $request->evento_pago;
-            $evento->costo = $request->costo;
+            $evento->precio_inscripcion = $request->precio_inscripcion;
             $evento->ruta_afiche = $request->ruta_afiche;
             $evento->id_tipo_evento = $request->id_tipo_evento;
             $evento->save();
@@ -128,7 +145,8 @@ class EventoController extends Controller
         }
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $evento = Evento::find($id);
         return $evento;
     }

@@ -102,7 +102,8 @@
                         </div>
 
                         <div class="col-md-6">
-                            <input name="requiere_registro" type="checkbox" class="form-check-input border-dark" id="registroCheck">
+                            <input name="requiere_registro" type="checkbox" class="form-check-input border-dark"
+                                id="registroCheck">
                             <label class="form-check-label" for="registroCheck">Requiere registro</label>
                         </div>
 
@@ -111,7 +112,8 @@
                     <div class="row mt-3">
 
                         <div class="col-md-6 mt-2">
-                            <input name="evento_pago" type="checkbox" class="form-check-input border-dark" id="eventoPagoCheck">
+                            <input name="evento_pago" type="checkbox" class="form-check-input border-dark"
+                                id="eventoPagoCheck">
                             <label class="form-check-label" for="eventoPagoCheck">Evento de pago</label>
                         </div>
 
