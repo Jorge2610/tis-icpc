@@ -19,24 +19,23 @@ class EventoController extends Controller
     {
         try {
             $evento = new Evento();
-            $evento->nombre = $request->nombre;
-            $evento->descripcion = $request->descripcion;
+            $evento->nombre             = $request->nombre;
+            $evento->descripcion        = $request->descripcion;
             $evento->inicio_inscripcion = $request->inicio_inscripcion;
-            $evento->fin_inscripcion = $request->fin_inscripcion;
-            $evento->inicio_evento = $request->inicio_evento;
-            $evento->fin_evento = $request->fin_evento;
-            $evento->institucion = $request->institucion;
-            $evento->region = $request->region;
-            $evento->grado_academico = $request->grado_academico;
-            $evento->evento_pago = $request->evento_pago;
-            $evento->evento_equipos = $request->evento_equipos;
-            $evento->requiere_registro = $request->requiere_registro;
-            $evento->edad_minima = $request->edad_minima;
-            $evento->edad_maxima = $request->edad_maxima;
-            $evento->genero = $request->genero;
+            $evento->fin_inscripcion    = $request->fin_inscripcion;
+            $evento->inicio_evento      = $request->inicio_evento;
+            $evento->fin_evento         = $request->fin_evento;
+            $evento->institucion        = $request->institucion;
+            $evento->region             = $request->region;
+            $evento->grado_academico    = $request->grado_academico;
+            $evento->evento_equipos     = $request->evento_equipos;
+            $evento->requiere_registro  = $request->requiere_registro;
+            $evento->edad_minima        = $request->edad_minima;
+            $evento->edad_maxima        = $request->edad_maxima;
+            $evento->genero             = $request->genero;
             $evento->precio_inscripcion = $request->precio_inscripcion;
-            $evento->ruta_afiche = $request->ruta_afiche;
-            $evento->id_tipo_evento = $request->id_tipo_evento;
+            $evento->ruta_afiche        = $request->input('ruta_afiche','/evento/afiche.jpg');
+            $evento->id_tipo_evento     = $request->id_tipo_evento;
             $evento->save();
             return response()->json(['mensaje' => 'Creado exitosamente', 'error' => false]);
         } catch (QueryException $e) {
@@ -110,7 +109,6 @@ class EventoController extends Controller
             $evento->institucion = $request->institucion;
             $evento->region = $request->region;
             $evento->grado_academico = $request->grado_academico;
-            $evento->evento_pago = $request->evento_pago;
             $evento->evento_equipos = $request->evento_equipos;
             $evento->requiere_registro = $request->requiere_registro;
             $evento->edad_minima = $request->edad_minima;
