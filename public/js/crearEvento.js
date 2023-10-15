@@ -19,19 +19,10 @@ fechaInicio.addEventListener('change', (e) => {
   fechaFin.setAttribute('min', valor)
 })
 
-let edadMinima = document.getElementById("edadMinima");
-let edadMaxima = document.getElementById("edadMaxima");
-
-edadMinima.addEventListener('change', (e) => {
-  let valor = e.target.value;
-  edadMaxima.value = valor;
-  edadMaxima.min = valor;
-})
-
 function previewAfiche(event) {
   var reader = new FileReader();
   reader.readAsDataURL(event.target.files[0]);
-  reader.onloadend = function () {
+  reader.onloadend = function() {
     var img = document.getElementById('afiche');
     img.setAttribute('src', reader.result)
   };
@@ -39,7 +30,7 @@ function previewAfiche(event) {
 
 function previewSponsorLogo(event) {
   var reader = new FileReader();
-  reader.onload = function () {
+  reader.onload = function() {
     var output = document.getElementById('sponsorPreview');
     output.style.backgroundImage = 'url(' + reader.result + ')';
   };
@@ -94,3 +85,44 @@ form.addEventListener("submit", (event) => {
 edadCheck.addEventListener('change', () => {
   mostrarInput('rangosDeEdad', edadCheck.checked);
 });
+
+//Guardar evento
+document.addEventListener('DOMContentLoaded', function () {
+  let form = document.getElementById('formularioCrearEvento');
+  form.addEventListener('submit', function (event) {
+    console.log(typeof(document.getElementById('costoEvento').value));  
+    event.preventDefault()
+      if (!form.checkValidity()) {
+          event.stopPropagation()
+      } else {
+          // Enviar formulario con AJAX
+          var formData = new FormData(this);
+          axios.post('/api/evento', formData)
+              .then(function (response) {
+                  mostrarAlerta('Éxito', response.data.mensaje, 'success');
+              })
+              .catch(function (error) {
+                  mostrarAlerta('Error', 'Hubo un error al guardar el tipo de evento', 'danger');
+              });
+      }
+      form.classList.add('was-validated')
+  });
+});
+//Recuperar tipos de eventos
+window.addEventListener("load", async () => {
+  await axios.get('/api/tipo-evento')
+        .then(function (response) {
+            var select = document.getElementById('tipoDelEvento');
+            var tiposDeEvento = response.data;
+            tiposDeEvento.forEach(function (tipo) {
+                var option = document.createElement('option');
+                option.value = tipo.id; 
+                option.text = tipo.nombre;
+                select.appendChild(option);
+            });
+        })
+        .catch(function (error) {
+            console.error(error);
+        });
+});
+

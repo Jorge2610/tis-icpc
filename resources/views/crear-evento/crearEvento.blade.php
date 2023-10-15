@@ -26,7 +26,7 @@
                         <!-Cargar tipos de evento->
                             <select name="id_tipo_evento" class="form-select" id="tipoDelEvento"
                                 aria-placeholder="Elija un tipo de evento...">
-                                <option value="">Tipo de evento 1</option>
+                                
                             </select>
                             <div class="invalid-feedback">
                                 Seleccione un tipo de evento.
@@ -156,7 +156,7 @@
                                 <div class="col-md-8">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Bs.</span>
-                                        <input name="costo" type="number" class="form-control"
+                                        <input name="precio_inscripcion" type="number" class="form-control"
                                             min="0" id="costoEvento" step="0.5" value="0.0">
                                     </div>
                                 </div>

@@ -28,7 +28,7 @@ Route::group(['prefix' => 'tipo-evento'], function () {
     Route::delete('/{id}', [TipoEventoController::class, 'destroy'])->name('tipo-eventos.destroy');
 });
 
-Route::group(['prefix' => 'eventos'], function () {
+Route::group(['prefix' => 'evento'], function () {
     Route::get('/', [EventoController::class, 'index'])->name('eventos.index');
     Route::get('/{id}', [EventoController::class, 'show'])->name('eventos.show');
     Route::post('/', [EventoController::class, 'store'])->name('eventos.store');
