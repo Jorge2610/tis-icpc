@@ -89,17 +89,26 @@ edadCheck.addEventListener('change', () => {
 //Guardar evento
 document.addEventListener('DOMContentLoaded', function () {
   let form = document.getElementById('formularioCrearEvento');
-  form.addEventListener('submit', function (event) {
-    console.log(typeof(document.getElementById('costoEvento').value));  
+  form.addEventListener('submit', function (event) {  
     event.preventDefault()
       if (!form.checkValidity()) {
           event.stopPropagation()
       } else {
+        let formData = new FormData(this);
+        if(!inputEdad .checked){
+          formData.set("edad_minima","");
+          formData.set("edad_maxima","");
+        }
+        if(!inputGenero.checked){
+          formData.set("genero","");
+        }
+        if(!inputCosto.checked){
+          formData.set("precio_inscripcion","");
+        }
           // Enviar formulario con AJAX
-          var formData = new FormData(this);
           axios.post('/api/evento', formData)
               .then(function (response) {
-                  mostrarAlerta('Éxito', response.data.mensaje, 'success');
+                  mostrarAlerta('Éxito', response.data.mensaje, response.data.error?'danger':'success');
               })
               .catch(function (error) {
                   mostrarAlerta('Error', 'Hubo un error al guardar el tipo de evento', 'danger');
