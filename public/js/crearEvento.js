@@ -19,6 +19,15 @@ fechaInicio.addEventListener('change', (e) => {
   fechaFin.setAttribute('min', valor)
 })
 
+let edadMinima = document.getElementById("edadMinima");
+let edadMaxima = document.getElementById("edadMaxima");
+
+edadMinima.addEventListener('change', (e) => {
+  let valor = e.target.value;
+  edadMaxima.value = valor;
+  edadMaxima.min = valor;
+})
+
 function previewAfiche(event) {
   var reader = new FileReader();
   reader.readAsDataURL(event.target.files[0]);
