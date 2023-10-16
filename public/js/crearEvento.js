@@ -112,6 +112,7 @@ document.addEventListener('DOMContentLoaded', function () {
     event.preventDefault()
       if (!form.checkValidity()) {
           event.stopPropagation()
+          $("#modalConfirmacion").modal("hide")
       } else {
         let formData = new FormData(this);
         if(!inputEdad .checked){
@@ -133,6 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
                   mostrarAlerta('Error', 'Hubo un error al guardar el tipo de evento', 'danger');
               });
       }
+
       form.classList.add('was-validated')
   });
 });
