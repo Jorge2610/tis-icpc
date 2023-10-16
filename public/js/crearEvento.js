@@ -134,7 +134,8 @@ document.addEventListener('DOMContentLoaded', function () {
                   mostrarAlerta('Error', 'Hubo un error al guardar el tipo de evento', 'danger');
               });
         $("#modalConfirmacion").modal("hide")
-        form.classList.add('was-validated')
+        form.classList.remove('was-validated')
+        form.reset();
       }
 
   });
@@ -182,6 +183,7 @@ function mostrarAlerta(titulo, mensaje, tipo) {
   `;
   document.getElementById("alertsContainer").innerHTML = alerta;
   setTimeout(function () {
-      document.querySelector(".alert").remove(); // Remover la alerta después de 2 segundos
+      document.querySelector(".alert").remove();
+      window.location.href = '/eventos'; // Remover la alerta después de 2 segundos
   }, 2000);
 }

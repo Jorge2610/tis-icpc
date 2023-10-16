@@ -10,9 +10,15 @@
                     </div>
                     <div class="modal-footer d-flex justify-content-center">
                     <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>
-                        <button type="reset" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal">Sí</button>
+                    <button type="reset" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal" onclick="cerrar()">Sí</button>
                     </div>
                 </div>
             </div>
         </div>
 </div>
+<script>
+    function cerrar(){
+        document.getElementById("formularioCrearEvento").classList.remove('was-validated');
+        //window.location.href = '/eventos';
+    }
+</script>
