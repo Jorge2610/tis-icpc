@@ -30,7 +30,7 @@
                                 <div class="col-md-12 mt-3">
                                     <label for="detalleTipoEvento" class="form-label">Descripción del
                                         evento</label>
-                                    <textarea name="descripcion" class="form-control" id="detalleTipoEvento" rows="6" style="resize: none;" required
+                                    <textarea name="descripcion" class="form-control" id="detalleTipoEvento" rows="6" style="resize: none;"
                                         placeholder="Ingrese una descripción..." maxlength="500"></textarea>
                                 </div>
                             </div>
