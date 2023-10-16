@@ -224,10 +224,17 @@
                 <div class="row mt-4 text-center">
                     <div class="col-md-6">
                         <!-Añadir el modal de confirmacion antes de hacer el reset al form->
-                            <button type="reset" class="btn btn-light text-primary">Cancelar</button>
+                        <button type="button" class="btn btn-light text-primary" data-bs-toggle="modal" data-bs-target="#modalCancelar">
+                                Cancelar
+                            </button>
+                            <x-modal-cancelar/>
                     </div>
                     <div class="col-md-6">
-                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#modalConfirmacion">
+                                Confirmar
+                            </button>
+                            <x-modal-confirmacion/>
                     </div>
                 </div>
 

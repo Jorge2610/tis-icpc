@@ -7,7 +7,7 @@ const dataTableOptions = {
     destroy: true,
     language: {
         lengthMenu: "Mostrar _MENU_  entradas",
-        zeroRecords: "Ningún usuario encontrado",
+        zeroRecords: "Ningún tipo de evento encontrado",
         info: "Mostrando de _START_ a _END_ de un total de _TOTAL_ registros",
         infoEmpty: "Ningún usuario encontrado",
         infoFiltered: "(filtrados desde _MAX_ registros totales)",
