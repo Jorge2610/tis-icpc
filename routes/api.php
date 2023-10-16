@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TipoEventoController;
 use App\Http\Controllers\EventoController;
+use App\Http\Controllers\PatrocinadorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,10 @@ Route::group(['prefix' => 'evento'], function () {
     Route::delete('/afiche/{id}', [EventoController::class, 'eliminarAfiche'])->name('eventos.eliminarAfiche');
 });
 
-
-
-
+Route::group(['prefix' => 'patrocinadores'], function () {
+    Route::get('/', [PatrocinadorController::class, 'index'])->name('patrocinadores.index');
+    Route::get('/{id}', [PatrocinadorController::class, 'show'])->name('patrocinadores.show');
+    Route::post('/', [PatrocinadorController::class, 'store'])->name('patrocinadores.store');
+    Route::put('/{id}', [PatrocinadorController::class, 'update'])->name('patrocinadores.update');
+    Route::delete('/{id}', [PatrocinadorController::class, 'destroy'])->name('patrocinadores.destroy');
+});
