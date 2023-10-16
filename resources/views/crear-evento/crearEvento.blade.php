@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <form class="row g-4 needs-validation" method="POST" novalidate id="formularioCrearEvento">
+        <form class="row g-4 needs-validation mt-1" method="POST" novalidate id="formularioCrearEvento">
             @csrf
             <div class="col-md-12">
                 <h5>Crear evento</h5>
@@ -19,7 +19,7 @@
                     </div>
                 </div>
 
-                <div class="row mt-3">
+                <div class="row mt-4">
 
                     <div class="col-md-6">
                         <label for="tipoDelEvento" class="form-label">Tipo de evento</label>
@@ -52,7 +52,7 @@
 
                 </div>
 
-                <div class="row mt-3">
+                <div class="row mt-4">
 
                     <div class="col-md-6">
                         <label for="institucionDelEvento" class="form-label">Instituciones admitidas</label>
@@ -74,13 +74,13 @@
 
                 </div>
 
-                <div class="col-md-12 mt-3">
+                <div class="col-md-12 mt-5">
                     Configuración del evento
                 </div>
 
                 <div class="row">
 
-                    <div class="row mt-3">
+                    <div class="row mt-4">
                         <div class="col-md-6">
                             <input name="evento_genero" type="checkbox" class="form-check-input border-dark" id="generoCheck">
                             <label for="genero" class="form-label">Género admitido</label>
@@ -124,7 +124,7 @@
                         </div>
                     </div>
 
-                    <div class="row mt-3">
+                    <div class="row mt-4">
 
                         <div class="col-md-6">
                             <input name="evento_equipos" type="checkbox" class="form-check-input border-dark"
@@ -140,7 +140,7 @@
 
                     </div>
 
-                    <div class="row mt-3">
+                    <div class="row mt-4">
 
                         <div class="col-md-6 mt-2">
                             <input name="evento_pago" type="checkbox" class="form-check-input border-dark"
@@ -171,11 +171,11 @@
 
             <div class="col-md-7">
 
-                <div class="col-md-12">
+                <div class="col-md-12 ms-3">
                     <h6>Periodo de inscripción</h6>
                 </div>
 
-                <div class="row">
+                <div class="row mt-3 ms-3">
 
                     <div class="col-md-2">Inicio</div>
 
@@ -193,11 +193,11 @@
 
                 </div>
 
-                <div class="col-md-12 mt-3">
+                <div class="col-md-12 mt-4  ms-3">
                     <h6>Duracion del evento *</h6>
                 </div>
 
-                <div class="row mt-3">
+                <div class="row mt-3 ms-3">
 
                     <div class="col-md-2">Inicio</div>
 
@@ -215,7 +215,7 @@
 
                 </div>
 
-                <div class="col-md-12">
+                <div class="col-md-12 mt-5  ms-3">
                     <label for="descripcionDelEvento" class="form-label">Descripción del evento</label>
                     <textarea name="descripcion" class="form-control" id="descripcionDelEvento" rows="8" style="resize: none;"
                         placeholder="Ingrese una descripcion..."></textarea>
@@ -234,6 +234,8 @@
             </div>
 
         </form>
+
+        <div class="col-12 mt-4"></div>
 
     </div>
 
