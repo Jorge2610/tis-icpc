@@ -28,7 +28,6 @@ class EventoController extends Controller
             $evento->institucion = $request->institucion;
             $evento->region = $request->region;
             $evento->grado_academico = $request->grado_academico;
-            $evento->evento_pago = $request->evento_pago;
             $evento->evento_equipos = $request->evento_equipos;
             $evento->requiere_registro = $request->requiere_registro;
             $evento->edad_minima = $request->edad_minima;
@@ -110,7 +109,6 @@ class EventoController extends Controller
             $evento->institucion = $request->institucion;
             $evento->region = $request->region;
             $evento->grado_academico = $request->grado_academico;
-            $evento->evento_pago = $request->evento_pago;
             $evento->evento_equipos = $request->evento_equipos;
             $evento->requiere_registro = $request->requiere_registro;
             $evento->edad_minima = $request->edad_minima;
