@@ -187,7 +187,8 @@
                     <div class="col-md-2">Fin</div>
 
                     <div class="col-md-4">
-                        <input name="fin_inscripcion" id="fechaInscripcionFin" class="form-control" type="date" />
+                        <input name="fin_inscripcion" id="fechaInscripcionFin" class="form-control" type="date"
+                        min="<?php echo date('Y-m-d'); ?>" /> 
                     </div>
 
                 </div>
@@ -201,14 +202,15 @@
                     <div class="col-md-2">Inicio</div>
 
                     <div class="col-md-4">
-                        <input name="inicio_evento" id="fechaInicio" class="form-control" type="date"
-                            min="<?php echo date('Y-m-d'); ?>" required />
+                        <input name="inicio_evento" id="fechaInicio" class="form-control" type="datetime-local"
+                            min="<?php echo date('Y-m-d\TH:i'); ?>" required />
                     </div>
 
                     <div class="col-md-2">Fin</div>
 
                     <div class="col-md-4">
-                        <input name="fin_evento" id="fechaFin" class="form-control" type="date" required />
+                        <input name="fin_evento" id="fechaFin" class="form-control" type="datetime-local" 
+                        min="<?php echo date('Y-m-d\TH:i'); ?>" required />
                     </div>
 
                 </div>

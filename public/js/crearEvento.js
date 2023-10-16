@@ -14,9 +14,19 @@ fechaInscripcionInicio.addEventListener('change', (e) => {
 let fechaInicio = document.getElementById('fechaInicio')
 let fechaFin = document.getElementById('fechaFin')
 
-fechaInicio.addEventListener('change', (e) => {
-  let valor = e.target.value
-  fechaFin.setAttribute('min', valor)
+fechaInicio.addEventListener('change', () => {
+fechaFin.min=fechaInicio.value;
+fechaFin.value="";
+console.log(fechaInicio.value);
+})
+
+fechaFin.addEventListener('change',()=>{
+  let fecha1 = new Date (fechaInicio.value);
+  let fecha2 = new Date (fechaFin.value);
+  if(fecha2<fecha1){
+    mostrarA()
+    fechaFin.value="";
+  }
 })
 
 let edadMinima = document.getElementById("edadMinima");
@@ -144,3 +154,19 @@ window.addEventListener("load", async () => {
         });
 });
 
+function mostrarA() {
+    var alerta = `
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div class="d-flex align-items-center">
+                <div class="mr-2"><i class="bi bi-x-circle"></i></div>
+                <div>
+                    La hora no es valida
+                </div>
+            </div>
+        </div>
+    `;
+    document.getElementById("alertsContainer").innerHTML = alerta;
+    setTimeout(function () {
+        document.querySelector(".alert").remove(); // Remover la alerta después de 2 segundos
+    }, 2000);
+}
