@@ -23,27 +23,27 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'tipo-evento'], function () {
     Route::get('/', [TipoEventoController::class, 'index'])->name('tipo-eventos.index');
-    Route::get('/{id}', [TipoEventoController::class, 'show'])->name('tipo-eventos.show');
+    Route::get('{id}', [TipoEventoController::class, 'show'])->name('tipo-eventos.show');
     Route::post('/', [TipoEventoController::class, 'store'])->name('tipo-eventos.store');
-    Route::put('/{id}', [TipoEventoController::class, 'update'])->name('tipo-eventos.update');
-    Route::delete('/{id}', [TipoEventoController::class, 'destroy'])->name('tipo-eventos.destroy');
+    Route::post('actualizar/{id}', [TipoEventoController::class, 'update'])->name('tipo-eventos.update');
+    Route::delete('{id}', [TipoEventoController::class, 'destroy'])->name('tipo-eventos.destroy');
 });
 
 Route::group(['prefix' => 'evento'], function () {
     Route::get('/', [EventoController::class, 'index'])->name('eventos.index');
-    Route::get('/{id}', [EventoController::class, 'show'])->name('eventos.show');
+    Route::get('{id}', [EventoController::class, 'show'])->name('eventos.show');
     Route::post('/', [EventoController::class, 'store'])->name('eventos.store');
-    Route::put('/{id}', [EventoController::class, 'update'])->name('eventos.update');
-    Route::delete('/{id}', [EventoController::class, 'destroy'])->name('eventos.destroy');
+    Route::post('actualizar/{id}', [EventoController::class, 'update'])->name('eventos.update');
+    Route::delete('{id}', [EventoController::class, 'destroy'])->name('eventos.destroy');
     Route::post('/afiche', [EventoController::class, 'storageAfiche'])->name('eventos.storageAfiche');
     Route::post('/afiche/{id}', [EventoController::class, 'asignarAfiche'])->name('eventos.asignarAfiche');
     Route::delete('/afiche/{id}', [EventoController::class, 'eliminarAfiche'])->name('eventos.eliminarAfiche');
 });
 
-Route::group(['prefix' => 'patrocinadores'], function () {
+Route::group(['prefix' => 'patrocinador', 'middleware' => 'api'], function () {
     Route::get('/', [PatrocinadorController::class, 'index'])->name('patrocinadores.index');
-    Route::get('/{id}', [PatrocinadorController::class, 'show'])->name('patrocinadores.show');
+    Route::get('{id}', [PatrocinadorController::class, 'show'])->name('patrocinadores.show');
     Route::post('/', [PatrocinadorController::class, 'store'])->name('patrocinadores.store');
-    Route::put('/{id}', [PatrocinadorController::class, 'update'])->name('patrocinadores.update');
-    Route::delete('/{id}', [PatrocinadorController::class, 'destroy'])->name('patrocinadores.destroy');
+    Route::post('/actualizar/{id}', [PatrocinadorController::class, 'update'])->name('patrocinadores.update');
+    Route::delete('{id}', [PatrocinadorController::class, 'destroy'])->name('patrocinadores.destroy');
 });
