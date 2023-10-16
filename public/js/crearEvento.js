@@ -4,7 +4,6 @@ let inputGenero = document.getElementById('generoCheck');
 let inputEdad = document.getElementById('edadCheck');
 let inputCosto = document.getElementById('eventoPagoCheck');
 let form = document.getElementById("formularioCrearEvento")
-let edadCheck = document.getElementById("edadCheck");
 
 fechaInscripcionInicio.addEventListener('change', (e) => {
   let valor = e.target.value
@@ -76,7 +75,7 @@ inputGenero.addEventListener("change", () => {
   mostrarInput('genero', inputGenero.checked);
 });
 inputEdad.addEventListener("change", () => {
-  mostrarInput('limiteDeEdad', inputEdad.checked);
+  mostrarInput('rangosDeEdad', inputEdad.checked);
 });
 inputCosto.addEventListener('change', () => {
   mostrarInput('eventoPago', inputCosto.checked);
@@ -89,10 +88,6 @@ form.addEventListener("submit", (event) => {
   }
 
   form.classList.add('was-validated')
-});
-
-edadCheck.addEventListener('change', () => {
-  mostrarInput('rangosDeEdad', edadCheck.checked);
 });
 
 //Guardar evento
