@@ -40,7 +40,7 @@ Route::group(['prefix' => 'evento'], function () {
     Route::delete('/afiche/{id}', [EventoController::class, 'eliminarAfiche'])->name('eventos.eliminarAfiche');
 });
 
-Route::group(['prefix' => 'patrocinadores', 'middleware' => 'api'], function () {
+Route::group(['prefix' => 'patrocinador', 'middleware' => 'api'], function () {
     Route::get('/', [PatrocinadorController::class, 'index'])->name('patrocinadores.index');
     Route::get('{id}', [PatrocinadorController::class, 'show'])->name('patrocinadores.show');
     Route::post('/', [PatrocinadorController::class, 'store'])->name('patrocinadores.store');
