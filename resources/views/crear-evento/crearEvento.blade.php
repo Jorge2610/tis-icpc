@@ -224,7 +224,7 @@
                 <div class="row mt-4 text-center">
                     <div class="col-md-6">
                         <!-Añadir el modal de confirmacion antes de hacer el reset al form->
-                            <button type="reset" class="btn btn-light text-primary">Cancelar</button>
+                            <button type="reset" class="btn btn-light text-primary" onclick="reset()">Cancelar</button>
                     </div>
                     <div class="col-md-6">
                         <button type="submit" class="btn btn-primary">Confirmar</button>
