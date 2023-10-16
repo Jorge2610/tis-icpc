@@ -5,13 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use App\Models\Patrocinador;
-use Illuminate\Contracts\Cache\Store;
+use Illuminate\Support\Facades\Storage;
 
 class PatrocinadorController extends Controller
 {
     public function index(){
         $patrocinadores = Patrocinador::all();
         return $patrocinadores;
+    }
+
+    public function show($id){
+        $patrocinador = Patrocinador::find($id);
+        return $patrocinador;
     }
 
     public function store(Request $request){
@@ -43,7 +48,10 @@ class PatrocinadorController extends Controller
         try{
             $patrocinador = Patrocinador::find($id);
             $patrocinador->nombre = $request->nombre;
-            $patrocinador->ruta_logo = $this->storeImage($request);
+            if($request->hasFile('logo')){
+                Storage::delete($patrocinador->ruta_logo);
+                $patrocinador->ruta_logo = $this->storeImage($request);
+            }
             $patrocinador->enlace_web = $request->enlace_web;
             $patrocinador->id_evento = $request->id_evento;
             $patrocinador->save();
@@ -56,6 +64,7 @@ class PatrocinadorController extends Controller
     public function destroy($id){
         try{
             $patrocinador = Patrocinador::find($id);
+            Storage::delete($patrocinador->ruta_logo);
             $patrocinador->delete();
             return response()->json(['mensaje' => 'Eliminado exitosamente', 'error' => false]);
         }catch(QueryException $e){

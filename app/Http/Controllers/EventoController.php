@@ -88,6 +88,7 @@ class EventoController extends Controller
     {
         try {
             $evento = Evento::find($id);
+            Storage::delete($evento->ruta_afiche);
             $evento->ruta_afiche = "/evento/afiche.jpg";
             $evento->save();
             return response()->json(['mensaje' => 'Eliminado exitosamente', 'error' => false]);
@@ -136,6 +137,7 @@ class EventoController extends Controller
     {
         try {
             $evento = Evento::find($id);
+            Storage::delete($evento->ruta_afiche);
             $evento->delete();
             return response()->json(['mensaje' => 'Eliminado exitosamente', 'error' => false]);
         } catch (QueryException $e) {
