@@ -1,5 +1,6 @@
 let tablaDeTipos;
 let tablaInicializada = false;
+let formulario = document.getElementById("formularioTipoEvento");
 
 const dataTableOptions = {
     pageLength: 10,
@@ -21,7 +22,9 @@ const dataTableOptions = {
         },
     },
 };
-
+function remover(){
+    formulario.classList.remove("was-validated");
+}
 const initDataTable = async () => {
     if (tablaInicializada) {
         tablaDeTipos.destroy();
@@ -73,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let form = document.getElementById("formularioTipoEvento");
     form.addEventListener("submit", function (event) {
         event.preventDefault();
+        form.classList.add("was-validated");
         if (!form.checkValidity()) {
             event.stopPropagation();
         } else {
@@ -94,10 +98,11 @@ document.addEventListener("DOMContentLoaded", function () {
                         "danger"
                     );
                 });
+            form.classList.remove("was-validated");
             $("#modalCrearTipoEvento").modal("hide");
             initDataTable();
         }
-        form.classList.add("was-validated");
+        
     });
 });
 

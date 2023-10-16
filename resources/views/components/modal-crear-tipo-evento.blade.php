@@ -8,7 +8,7 @@
                     <div class="contenedor-titulo">
                         <h5 class="modal-title" id="modalCrearTipoEventoLabel">Crear tipo de evento</h5>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="remover()"></button>
                 </div>
                 <div class="modal-body">
                     <form id="formularioTipoEvento" class="needs-validation" novalidate>
@@ -51,8 +51,8 @@
 
                             <div class="modal-footer">
                                 <button type="reset" class="btn btn-secondary"
-                                    data-bs-dismiss="modal">Cancelar</button>
-                                <button id="confirmarBoton" type="submit" class="btn btn-primary">Confirmar</button>
+                                    data-bs-dismiss="modal" onclick="remover()" >Cancelar</button>
+                                <button id="confirmarBoton" type="submit" class="btn btn-primary" >Confirmar</button>
                             </div>
                     </form>
                 </div>
