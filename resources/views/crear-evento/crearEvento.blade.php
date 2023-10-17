@@ -66,7 +66,7 @@
                     <div class="col-md-6">
                         <label for="regionDelEvento" class="form-label">Región</label>
                         <input name="region" type="text" class="form-control" id="regionDelEvento"
-                            placeholder="Ingrese el grado del evento" maxlength="64">
+                            placeholder="Ingrese la región del evento" maxlength="64">
                         <div class="invalid-feedback">
                             Este campo no puede estar vacio.
                         </div>

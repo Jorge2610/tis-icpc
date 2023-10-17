@@ -56,12 +56,12 @@ const tiposDeEvento = async () => {
             content += `
             <tr>
                 <th scope='row'>${contador}</th>
-                <td>${element.nombre}</td>
+                <td >${element.nombre}</td>
                 <td class="container-color">
                     <div class="color-cell" style="background-color:${element.color};"></div>
                 </td>
-                <td>Yo</td>
-                <td>${fechaFormateada}</td>
+                <td class="text-center">Yo</td>
+                <td class="text-center">${fechaFormateada}</td>
             </tr>`;
             contador++;
         });

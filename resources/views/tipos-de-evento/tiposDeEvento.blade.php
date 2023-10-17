@@ -22,11 +22,11 @@
             <table class="table table-striped text-secondary" id="tablaTipoDeEvento">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nombre del tipo de evento</th>
-                        <th scope="col">Color de referencia</th>
-                        <th scope="col">Creador</th>
-                        <th scope="col">Fecha de creación</th>
+                        <th scope="col" class="col-md-1 ">#</th>
+                        <th scope="col" class="col-md-4">Nombre del tipo de evento</th>
+                        <th scope="col" class="col-md-2 text-center">Color de referencia</th>
+                        <th scope="col" class="col-md-2 text-center">Creador</th>
+                        <th scope="col" class="col-md-3 text-center">Fecha de creación</th>
                     </tr>
                 </thead>
                 <tbody id="datosTabla">
