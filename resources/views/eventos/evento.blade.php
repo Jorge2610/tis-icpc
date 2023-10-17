@@ -4,25 +4,27 @@
     <div class="container">
         <div class="col-3">
             <div class="row">
-                <h3 class="col-10 mt-0">{{ $evento->nombre }}</h3>
-                    <div class="btn-group col-2">
-                                <button type="button" class="btn btn-secondary" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="20" fill="#808080" class="bi bi-three-dots-vertical mb-3" viewBox="0 0 16 16">
-                                        <circle cx="8" cy="4" r="1.5"/>
-                                        <circle cx="8" cy="8" r="1.5"/>
-                                        <circle cx="8" cy="12" r="1.5"/>
-                                    </svg>
-                                </button>
-                                <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{ route('evento.editar', ['id' => $evento->id]) }}">Editar Evento</a></li>
-                            </ul>
-                        </div>
+                <div class="col-md-11">
+                    <h3 class="col-10 mt-0">{{ $evento->nombre }}</h3>
+                </div>
+                <div class="col-md-1">
+                    <button type="button" class="btn btn-light" data-bs-toggle="dropdown">
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('evento.editar', ['id' => $evento->id]) }}">Editar
+                                Evento
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="row mt-5">
             <div class="col-md-3">
-                <div class="d-flex flex-column justify-content-center align-items-center border p-3" style="cursor: pointer;"
-                    onclick="document.getElementById('imageUpload').click()">
+                <div class="d-flex flex-column justify-content-center align-items-center border p-3"
+                    style="cursor: pointer;" onclick="document.getElementById('imageUpload').click()">
                     <img id="uploadIcon" src="/image/uploading.png" alt="Upload Icon" style="width: 250px; height: 250px;">
                     <button id="uploadButton" class="boton-subir">Presione para subir imagen</button>
                     <img id="imagePreview" src="#" class="img-fluid mt-3" alt="Imagen del evento"
@@ -129,7 +131,7 @@
                         data-bs-target="#modalAgregarPatrocinador">
                         +
                     </button>
-                    <x-modal-agregar-patrocinador/>
+                    <x-modal-agregar-patrocinador />
                 </h4>
                 <div class="col-md-12 ms-5">
                     <img id="imagenPatrocinador" src="/image/logo-departamento.png" class=""

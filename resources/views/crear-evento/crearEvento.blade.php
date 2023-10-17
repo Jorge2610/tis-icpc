@@ -8,9 +8,9 @@
             <input type="hidden" id="imagen" name='imagen' value="{{isset($datos['ruta_afiche']) ? $datos['ruta_afiche'] : ''}}">
             <div class="col-md-12">
                 @if(Route::currentRouteName() == 'evento.editar')
-                    <h5>Editar evento</h5>
+                    <h5 id="titulo">Editar evento</h5>
                 @else
-                    <h5>Crear evento</h5>
+                    <h5 id="titulo">Crear evento</h5>
                 @endif
             </div>
 
@@ -18,7 +18,7 @@
 
                 <div class="col-md-12">
                     <label for="nombreDelEvento" class="form-label">Nombre del evento *</label>
-                    <input name="nombre" type="text" class="form-control" id="nombreDelEvento"
+                    <input name="nombre" type="text" class="form-control" id="nombreDelEvento" onchange="datoCambiado()"
                         placeholder="Ingrese el nombre del evento" maxlength="64" value="{{ isset($datos['nombreDelEvento'])? $datos['nombreDelEvento'] : ''}}" required>
                     <div class="invalid-feedback">
                         El nombre no puede estar vacio.
@@ -71,11 +71,7 @@
                         <label for="regionDelEvento" class="form-label">Región</label>
                         <input name="region" type="text" class="form-control" id="regionDelEvento"
                             placeholder="Ingrese el grado del evento" maxlength="64"  value="{{ isset($datos['region'])? $datos['region']:''}}">
-                        <div class="invalid-feedback">
-                            Este campo no puede estar vacio.
-                        </div>
                     </div>
-
                 </div>
 
                 <div class="col-md-12 mt-5">
@@ -98,7 +94,7 @@
                         </div>
 
                         <div class="col-md-6">
-                            <input name="rango_edad" type="checkbox" class="form-check-input border-dark" id="edadCheck" data-id="{{$datos['edad_minima']}}" @if($datos['edad_minima']) checked @endif>
+                            <input name="rango_edad" type="checkbox" class="form-check-input border-dark" id="edadCheck"data-id="{{$datos['edad_minima']}}" @if($datos['edad_minima']) checked @endif>
                             <label for="limiteDeEdad" class="form-label">Rango de edad</label>
                             <div class="row" id="rangosDeEdad" style="display: none;">
                                 <div class="col-md-6">
@@ -188,14 +184,14 @@
 
                     <div class="col-md-4">
                         <input name="inicio_inscripcion" id="fechaInscripcionInicio" class="form-control" type="date"
-                            min="<?php echo date('Y-m-d'); ?>" value="{{ isset($datos['inicio_inscripcion'])? $datos['inicio_inscripcion']:'' }}"/>
+                            min="" value="{{ isset($datos['inicio_inscripcion'])? $datos['inicio_inscripcion']:'' }}"/>
                     </div>
 
                     <div class="col-md-2">Fin</div>
 
                     <div class="col-md-4">
                         <input name="fin_inscripcion" id="fechaInscripcionFin" class="form-control" type="date"
-                        min="<?php echo date('Y-m-d'); ?>" value="{{ isset($datos['fin_inscripcion'])? $datos['fin_inscripcion']:'' }}"/> 
+                        min="" value="{{ isset($datos['fin_inscripcion'])? $datos['fin_inscripcion']:'' }}"/> 
                     </div>
 
                 </div>
@@ -210,14 +206,14 @@
 
                     <div class="col-md-4">
                         <input name="inicio_evento" id="fechaInicio" class="form-control" type="datetime-local"
-                            min="<?php echo date('Y-m-d\TH:i'); ?>" value="{{ isset($datos['inicio_evento'])? $datos['inicio_evento']:'' }}" required />
+                            min="" value="{{ isset($datos['inicio_evento'])? $datos['inicio_evento']:'' }}" required />
                     </div>
 
                     <div class="col-md-2">Fin</div>
 
                     <div class="col-md-4">
-                        <input name="fin_evento" id="fechaFin" class="form-control" type="datetime-local" 
-                        min="<?php echo date('Y-m-d\TH:i'); ?>" value="{{ isset($datos['fin_evento'])? $datos['fin_evento']:'' }}" required />
+                        <input name="fin_evento" id="fechaFin" class="form-control" type="datetime-local"
+                        min="" value="{{ isset($datos['fin_evento'])? $datos['fin_evento']:'' }}" required />
                     </div>
 
                 </div>
