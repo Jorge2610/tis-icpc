@@ -110,9 +110,10 @@
             <div class="col-md-3">
                 <h4 class="ms-3">Patrocinadores
                     <button type="button" class="btn btn-light btn-lg" data-bs-toggle="modal"
-                        data-bs-target="#agregarPatrocinador">
+                        data-bs-target="#modalAgregarPatrocinador">
                         +
                     </button>
+                    <x-modal-agregar-patrocinador/>
                 </h4>
                 <div class="col-md-12 ms-5">
                     <img id="imagenPatrocinador" src="/image/logo-departamento.png" class=""
