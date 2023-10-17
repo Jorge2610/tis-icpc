@@ -24,7 +24,9 @@ const dataTableOptions = {
 };
 function remover(){
     formulario.classList.remove("was-validated");
+    formulario.reset();
 }
+
 const initDataTable = async () => {
     if (tablaInicializada) {
         tablaDeTipos.destroy();
@@ -55,7 +57,9 @@ const tiposDeEvento = async () => {
             <tr>
                 <th scope='row'>${contador}</th>
                 <td>${element.nombre}</td>
-                <td>${element.color}</td>
+                <td class="container-color">
+                    <div class="color-cell" style="background-color:${element.color};"></div>
+                </td>
                 <td>Yo</td>
                 <td>${fechaFormateada}</td>
             </tr>`;
@@ -99,6 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     );
                 });
             form.classList.remove("was-validated");
+            form.reset();
             $("#modalCrearTipoEvento").modal("hide");
             initDataTable();
         }

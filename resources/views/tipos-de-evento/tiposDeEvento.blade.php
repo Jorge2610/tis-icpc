@@ -30,7 +30,6 @@
                     </tr>
                 </thead>
                 <tbody id="datosTabla">
-                    
                 </tbody>
             </table>
         </div>
