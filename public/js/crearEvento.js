@@ -185,8 +185,9 @@ window.addEventListener("load", async () => {
 
             var idTipoEvento = document.getElementById('tipoDelEvento').getAttribute('data-id');
             // Establecer el valor seleccionado
-            //console.log(idTipoEvento)
-            select.value = idTipoEvento;            
+            if(idTipoEvento != ""){
+              select.value = idTipoEvento; 
+            }
         })
         .catch(function (error) {
             console.error(error);
