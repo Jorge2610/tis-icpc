@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\HelloWorld;
-use App\Http\Controllers\TipoEventoController;
+use App\Http\Controllers\EventoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,11 +31,13 @@ Route::get('/eventos', function () {
 });
 
 Route::group(['prefix' => 'eventos'], function(){
-    Route::get('crear-evento', function () {
-        return view('crear-evento/crearEvento');
-    });
-    Route::post('crear-evento', [App\Http\Controllers\ModalTipoEvento::class, 'procesarFormulario'])->name('ModalTipoEvento');
+    //Crear Evento
+    Route::get('crear-evento/',[EventoController::class,'showEventForm'])->name('crear');
+    //Ver tipos de evento
     Route::get('tipos-de-evento', function () {
         return view('tipos-de-evento/tiposDeEvento');
     });
+    //Ruta para editar evento
+    //Editar evento por id
+    Route::get('editar-evento/{id}',[EventoController::class,'showEventForm'])->name('editar');
 });

@@ -102,6 +102,7 @@ form.addEventListener("submit", (event) => {
 
 //Guardar evento
 document.addEventListener('DOMContentLoaded', function () {
+  
   let form = document.getElementById('formularioCrearEvento');
   form.addEventListener('submit', function (event) {  
     event.preventDefault()
@@ -109,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
           event.stopPropagation()
           $("#modalConfirmacion").modal("hide")
           
-      } else {
+      }else {
         let formData = new FormData(this);
         if(!inputEdad .checked){
           formData.set("edad_minima","");
@@ -121,7 +122,29 @@ document.addEventListener('DOMContentLoaded', function () {
         if(!inputCosto.checked){
           formData.set("precio_inscripcion","");
         }
-          // Enviar formulario con AJAX
+          
+        //Si existe el evento se debe editar
+        var eventoId = formData.get('evento_id');
+        var imagen = document.getElementById("imagen").value
+        formData.set('ruta_afiche',imagen)
+        console.log(eventoId)
+        if(eventoId != ''){
+          axios.post('/api/evento/actualizar/' + eventoId, formData)
+              .then(function (response) {
+                mostrarAlerta(
+                  "Éxito",
+                  response.data.mensaje,
+                  response.data.error ? "danger" : "success"
+              );
+              })
+              .catch(function (error) {
+                mostrarAlerta(
+                  "Error",
+                  "Hubo un error al guardar el tipo de evento",
+                  "danger"
+              );
+              });
+        }else{       
           axios.post('/api/evento', formData)
               .then(function (response) {
                 mostrarAlerta(
@@ -131,14 +154,21 @@ document.addEventListener('DOMContentLoaded', function () {
               );
               })
               .catch(function (error) {
-                  mostrarAlerta('Error', 'Hubo un error al guardar el tipo de evento', 'danger');
+                mostrarAlerta(
+                  "Error",
+                  "Hubo un error al guardar el tipo de evento",
+                  "danger"
+              );
               });
-        $("#modalConfirmacion").modal("hide")
-        form.classList.add('was-validated')
-      }
+          }
+            $("#modalConfirmacion").modal("hide")
+    }
+    form.classList.add('was-validated')
+});
 
   });
-});
+
+
 //Recuperar tipos de eventos
 window.addEventListener("load", async () => {
   await axios.get('/api/tipo-evento')
@@ -151,6 +181,11 @@ window.addEventListener("load", async () => {
                 option.text = tipo.nombre;
                 select.appendChild(option);
             });
+
+            var idTipoEvento = document.getElementById('tipoDelEvento').getAttribute('data-id');
+            // Establecer el valor seleccionado
+            //console.log(idTipoEvento)
+            select.value = idTipoEvento;            
         })
         .catch(function (error) {
             console.error(error);
