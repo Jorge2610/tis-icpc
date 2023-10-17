@@ -162,6 +162,7 @@ document.addEventListener('DOMContentLoaded', function () {
                   "danger"
               );
               });
+          }
         $("#modalConfirmacion").modal("hide")
         form.classList.remove('was-validated')
         form.reset();

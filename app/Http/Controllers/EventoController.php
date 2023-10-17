@@ -49,7 +49,7 @@ class EventoController extends Controller
             $evento->edad_maxima        = $request->edad_maxima;
             $evento->genero             = $request->genero;
             $evento->precio_inscripcion = $request->precio_inscripcion;
-            $evento->ruta_afiche        = $request->input('ruta_afiche', 'public/evento/afiche.jpg');
+            //$evento->ruta_afiche        = $request->input('ruta_afiche', 'public/evento/afiche.jpg');
             $evento->id_tipo_evento     = $request->id_tipo_evento;
             $evento->save();
             return response()->json(['mensaje' => 'Creado exitosamente', 'error' => false]);

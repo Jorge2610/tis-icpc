@@ -23,7 +23,8 @@ Route::get('/', [EventoController::class, 'cargarEventos']);
 
 Route::group(['prefix' => 'eventos'], function(){
     Route::get('/', [EventoController::class, 'cargarEventos']);
-    Route::get('crear-evento', function () {return view('crear-evento/crearEvento');});
+    Route::get('crear-evento/',[EventoController::class,'showEventForm'])->name('crear');
     Route::get('tipos-de-evento', function () {return view('tipos-de-evento/tiposDeEvento');});
     Route::get('{nombre}', [EventoController::class, 'cargarEvento'])->name('evento.cargarEvento');
+    Route::get('editar-evento/{id}',[EventoController::class,'showEventForm'])->name('evento.editar');
 });

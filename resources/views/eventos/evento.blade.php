@@ -14,7 +14,7 @@
                                     </svg>
                                 </button>
                                 <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Editar Evento</a></li>
+                                <li><a class="dropdown-item" href="{{ route('evento.editar', ['id' => $evento->id]) }}">Editar Evento</a></li>
                             </ul>
                         </div>
             </div>
