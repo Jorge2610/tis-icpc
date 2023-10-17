@@ -6,10 +6,10 @@
                         <h5 class="modal-title" id="modalConfirmacionLabel">Confirmación</h5>
                     </div>
                     <div class="modal-body">
-                        @if(Route::currentRouteName() == 'editar')
-                            ¿Está seguro de editar Evento?
+                        @if(Route::currentRouteName() == 'evento.editar')
+                            ¿Está seguro de editar evento?
                         @else
-                            ¿Está seguro de crear Evento?
+                            ¿Está seguro de crear evento?
                         @endif
                     </div>
                     <div class="modal-footer d-flex justify-content-center">

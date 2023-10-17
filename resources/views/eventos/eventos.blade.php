@@ -3,6 +3,10 @@
 @section('content')
     <div class="container">
         <div class="row g-5" id="tarjetasRow">
+            @php
+                //dd($eventos);
+                //$eventos = $eventos->reverse();
+            @endphp
             @foreach ($eventos as $evento)
                 <div class="col-md-auto">
                     <div class="tarjeta card mb-3" style="max-width: 540px;">
@@ -24,10 +28,12 @@
                                         <span>Fecha del evento:</span>
                                         <span id="fechaInicioEvento"
                                             class="mx-2 fst-italic">{{ date('d-m-Y', strtotime($evento->inicio_evento)) }}</span>
-                                        <span id="fechaFinEvento" class="fst-italic">{{ date('d-m-Y', strtotime($evento->fin_evento)) }}</span>
+                                        <span id="fechaFinEvento"
+                                            class="fst-italic">{{ date('d-m-Y', strtotime($evento->fin_evento)) }}</span>
                                     </p>
                                     <div class="row text-end">
-                                        <a href="{{ route('evento.cargarEvento', ['nombre' => $evento->nombre]) }}" id="linkEvento" class="text-decoration-none stretched-link">Saber
+                                        <a href="{{ route('evento.cargarEvento', ['nombre' => $evento->nombre]) }}"
+                                            id="linkEvento" class="text-decoration-none stretched-link">Saber
                                             más...</a>
                                     </div>
                                 </div>
@@ -42,4 +48,5 @@
             @endforeach
         </div>
     </div>
+    <script src="{{ asset('js/eventos.js') }}" defer></script>
 @endsection

@@ -7,7 +7,7 @@
             <input type="hidden" name="evento_id" value="{{ isset($datos['evento_id']) ? $datos['evento_id'] : '' }}">
             <input type="hidden" id="imagen" name='imagen' value="{{isset($datos['ruta_afiche']) ? $datos['ruta_afiche'] : ''}}">
             <div class="col-md-12">
-                @if(Route::currentRouteName() == 'editar')
+                @if(Route::currentRouteName() == 'evento.editar')
                     <h5>Editar evento</h5>
                 @else
                     <h5>Crear evento</h5>

@@ -17,14 +17,16 @@ class EventoController extends Controller
 
     public function cargarEventos()
     {
-        $eventos = Evento::with('tipoEvento')->get();
-        return view('/eventos/eventos', ['eventos' => $eventos]);
+        $eventos = Evento::with('tipoEvento')
+            ->orderBy('updated_at', 'desc')
+            ->get();
+        return view('eventos.eventos', ['eventos' => $eventos]);
     }
 
     public function cargarEvento(String $nombre)
     {
         $evento = Evento::where('nombre', $nombre)->first();
-        if(!$evento){
+        if (!$evento) {
             return abort(404);
         }
         return view('eventos/evento', ['evento' => $evento]);
@@ -165,7 +167,8 @@ class EventoController extends Controller
         return $evento;
     }
 
-    public function showEventForm($id = null){
+    public function showEventForm($id = null)
+    {
         $datos = [
             'nombreDelEvento' => '',
             'descripcionDelEvento' => '',
@@ -186,14 +189,14 @@ class EventoController extends Controller
             'id_tipo_evento' => ''
 
         ];
-        if($id !== null){
-            $evento = $this->show($id);   
+        if ($id !== null) {
+            $evento = $this->show($id);
             $datos = [
                 'evento_id' => $evento->id,
                 'nombreDelEvento' => $evento->nombre,
                 'descripcionDelEvento' => $evento->descripcion,
-                'inicio_inscripcion' => ($evento->inicio_inscripcion)?date('Y-m-d', strtotime($evento->inicio_inscripcion)):'',
-                'fin_inscripcion' => ($evento->fin_inscripcion)?date('Y-m-d', strtotime($evento->fin_inscripcion)):'',
+                'inicio_inscripcion' => ($evento->inicio_inscripcion) ? date('Y-m-d', strtotime($evento->inicio_inscripcion)) : '',
+                'fin_inscripcion' => ($evento->fin_inscripcion) ? date('Y-m-d', strtotime($evento->fin_inscripcion)) : '',
                 'inicio_evento' => $evento->inicio_evento,
                 'fin_evento' => $evento->fin_evento,
                 'institucion' => $evento->institucion,
@@ -210,5 +213,5 @@ class EventoController extends Controller
             ];
         }
         return view('crear-evento.crearEvento', compact('datos'));
-    } 
+    }
 }
