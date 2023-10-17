@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HelloWorld;
 use App\Http\Controllers\TipoEventoController;
+use App\Http\Controllers\EventoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,27 +16,15 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('eventos/eventos');
-});
-
-Route::get('/hello', [HelloWorld::class, 'sayHello']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//vista eventos
-Route::get('/eventos', function () {
-    return view('eventos/eventos');
-});
+Route::get('/', [EventoController::class, 'cargarEventos']);
 
 Route::group(['prefix' => 'eventos'], function(){
-    Route::get('crear-evento', function () {
-        return view('crear-evento/crearEvento');
-    });
-    Route::post('crear-evento', [App\Http\Controllers\ModalTipoEvento::class, 'procesarFormulario'])->name('ModalTipoEvento');
-    Route::get('tipos-de-evento', function () {
-        return view('tipos-de-evento/tiposDeEvento');
-    });
+    Route::get('/', [EventoController::class, 'cargarEventos']);
+    Route::get('crear-evento', function () {return view('crear-evento/crearEvento');});
+    Route::get('tipos-de-evento', function () {return view('tipos-de-evento/tiposDeEvento');});
+    Route::get('{nombre}', [EventoController::class, 'cargarEvento'])->name('evento.cargarEvento');
 });

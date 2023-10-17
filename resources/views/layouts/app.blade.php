@@ -25,6 +25,7 @@
     <link href="{{ asset('css/crearTipoDeEvento.css') }}" rel="stylesheet">
     <link href="{{ asset('css/crearEvento.css') }}" rel="stylesheet">
     <link href="{{ asset('css/tipoEvento.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/eventos.css') }}" rel="stylesheet">
 </head>
 
 <body>
