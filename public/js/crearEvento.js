@@ -102,7 +102,9 @@ form.addEventListener("submit", (event) => {
 
 //Guardar evento
 document.addEventListener('DOMContentLoaded', function () {
-  
+  mostrarInput('genero', inputGenero.checked);
+  mostrarInput('rangosDeEdad', inputEdad.checked);
+  mostrarInput('eventoPago', inputCosto.checked);
   let form = document.getElementById('formularioCrearEvento');
   form.addEventListener('submit', function (event) {  
     event.preventDefault()
