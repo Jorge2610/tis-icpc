@@ -9,3 +9,16 @@ function handleImageUpload() {
     }
     reader.readAsDataURL(document.getElementById('imageUpload').files[0]);
   }
+
+const borrarPatrocinador = (id) => {
+    axios.delete(`/api/patrocinador/${id}`)
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.error(error);
+        });
+}
+
+
+

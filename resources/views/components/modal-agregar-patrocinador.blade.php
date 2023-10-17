@@ -7,7 +7,8 @@
                     <h5 class="modal-title">Agregar
                         patrocinador
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="resetModal('modalAgregarPatrocinador')"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        onclick="resetModal('modalAgregarPatrocinador')"></button>
                 </div>
                 <form class="needs-validation" method="POST" novalidate id="formularioAgregarPatrocinador">
                     @csrf
@@ -29,7 +30,8 @@
                                             <label for="validationCustomName" class="form-label">Nombre
                                                 del patrocinador *</label>
                                             <input name="nombre" type="text" class="form-control custom-input"
-                                                id="validationCustomName" value="" placeholder="Ingrese un nombre" required>
+                                                id="validationCustomName" value="" placeholder="Ingrese un nombre"
+                                                required>
                                             <div class="invalid-feedback">
                                                 El nombre no puede estar vacio.
                                             </div>
@@ -38,7 +40,8 @@
                                             <label for="validationCustomLink" class="form-label">Enlace
                                                 a la pagina web del patrocinador</label>
                                             <input name="enlace_web" type="url" class="form-control custom-input"
-                                                id="validationCustomLink" value="" placeholder="https://www.patrocinador.com" required>
+                                                id="validationCustomLink" value=""
+                                                placeholder="https://www.patrocinador.com" required>
                                             <div class="invalid-feedback">
                                                 El enlace ingresado no es valido.
                                             </div>
@@ -51,8 +54,8 @@
                 </form>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary custom-btn"
-                        data-bs-dismiss="modal" onclick="resetModal('modalAgregarPatrocinador')">Cancelar</button>
+                    <button type="button" class="btn btn-secondary custom-btn" data-bs-dismiss="modal"
+                        onclick="resetModal('modalAgregarPatrocinador')">Cancelar</button>
                     <button type="button" class="btn btn-primary">Confirmar</button>
                 </div>
             </div>

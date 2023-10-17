@@ -16,7 +16,7 @@
                     onchange="handleImageUpload()">
             </div>
 
-            <div class="col-md-6 border-end">
+            <div class="col-md-7 border-end">
                 <!-- <h2>Detalles del evento</h2>-->
                 <p>{{ $evento->descripcion }}</p>
                 <table class="table">
@@ -33,25 +33,21 @@
                             <tr>
                                 <th scope="row">Periodo de inscripción</th>
                                 <td>
-                                    <span>Del&nbsp;</span>
-                                    <span id="fechaInicioIns"
-                                        class="mx-2 fst-italic">{{ date('d-m-Y', strtotime($evento->inicio_inscripcion)) }}</span>
-                                    <span> al </span>
-                                    <span id="fechaFinIns"
-                                        class="fst-italic">{{ date('d-m-Y', strtotime($evento->fin_inscripcion)) }}</span>
-
+                                    Del
+                                    <span
+                                        id="fechaInicioIns">{{ date('d-m-Y', strtotime($evento->inicio_inscripcion)) }}</span>
+                                    al
+                                    <span id="fechaFinIns">{{ date('d-m-Y', strtotime($evento->fin_inscripcion)) }}</span>
                                 </td>
                             </tr>
                         @endif
                         <tr>
                             <th scope="row">Duración del evento</th>
                             <td>
-                                <span>Del&nbsp;</span>
-                                <span id="fechaInicioEvento"
-                                    class="fst-italic">{{ date('d-m-Y', strtotime($evento->inicio_evento)) }}</span>
-                                <span> al </span>
-                                <span id="fechaFinEvento"
-                                    class="fst-italic">{{ date('d-m-Y', strtotime($evento->fin_evento)) }}</span>
+                                Del </span>
+                                <span id="fechaInicioEvento">{{ date('d-m-Y', strtotime($evento->inicio_evento)) }}</span>
+                                al
+                                <span id="fechaFinEvento">{{ date('d-m-Y', strtotime($evento->fin_evento)) }}</span>
                             </td>
                         </tr>
                         @if ($evento->institucion != null)
@@ -107,24 +103,56 @@
                 </table>
             </div>
 
-            <div class="col-md-3">
-                <h4 class="ms-3">Patrocinadores
-                    <button type="button" class="btn btn-light btn-lg" data-bs-toggle="modal"
+            <div class="col-md-2">
+                <div class="col-12 d-flex justify-content-center align-items-center">
+                    <h4>Patrocinadores</h4>
+                    <button type="button" class="btn btn-light btn-lg " data-bs-toggle="modal"
                         data-bs-target="#modalAgregarPatrocinador">
                         +
                     </button>
-                    <x-modal-agregar-patrocinador/>
-                </h4>
-                <div class="col-md-12 ms-5">
-                    <img id="imagenPatrocinador" src="/image/logo-departamento.png" class=""
-                        alt="Imagen del patrocinador" style="object-fit: cover; max-height: 2cm;">
+                    <x-modal-agregar-patrocinador />
                 </div>
-                <div class="col-md-12 ms-5">
-                    <img id="imagenPatrocinador" src="/image/logo-umss.png" class="" alt="Imagen del patrocinador"
-                        style="object-fit: cover; max-height: 2cm;">
+                <div class="container mt-5 ms-3">
+                    <div class="row g-4 ">
+                        <div class="col-12 col-md-12 d-flex justify-content-center">
+
+                            <a href="#">
+                                <div id="imagenPatrocinador" class="">
+                                    <a href="#"><img id="imagenPatrocinador" src="/image/icpc.png" class=""
+                                            alt="Imagen del patrocinador" style="object-fit: cover; max-height: 7rem;">
+                                    </a>
+                                    <div class="borrar-patrocinador"><i class="fa-solid fa-trash-can"></i></div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-md-12 d-flex justify-content-center">
+
+                            <a href="#">
+                                <div id="imagenPatrocinador" class="">
+                                    <a href="#"><img id="imagenPatrocinador" src="/image/logo-departamento.png" class="imagen-contendor"
+                                            alt="Imagen del patrocinador" style="object-fit: cover; max-height: 7rem;">
+                                    </a>
+                                    <div id="borrarPatrocinador" class="borrar-patrocinador"><i class="fa-solid fa-trash-can"></i></div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-md-12 d-flex justify-content-center">
+
+                            <a href="#">
+                                <div id="imagenPatrocinador" class="">
+                                    <a href="#"><img id="imagenPatrocinador" src="/image/logo-umss.png" class=""
+                                            alt="Imagen del patrocinador" style="object-fit: cover; max-height: 7rem;">
+                                    </a>
+                                    <div class="borrar-patrocinador"><i class="fa-solid fa-trash-can"></i></div>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <script src="{{ asset('js/mostrarEvento.js') }}" defer></script>

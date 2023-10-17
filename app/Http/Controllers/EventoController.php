@@ -17,14 +17,16 @@ class EventoController extends Controller
 
     public function cargarEventos()
     {
-        $eventos = Evento::with('tipoEvento')->get();
-        return view('/eventos/eventos', ['eventos' => $eventos]);
+        $eventos = Evento::with('tipoEvento')
+            ->orderBy('updated_at', 'desc')
+            ->get();
+        return view('eventos.eventos', ['eventos' => $eventos]);
     }
 
     public function cargarEvento(String $nombre)
     {
         $evento = Evento::where('nombre', $nombre)->first();
-        if(!$evento){
+        if (!$evento) {
             return abort(404);
         }
         return view('eventos/evento', ['evento' => $evento]);
@@ -57,10 +59,14 @@ class EventoController extends Controller
             if ($e->errorInfo[1] == 1062) {
                 return response()->json(['mensaje' => 'El evento ya existe', 'error' => true]);
             } else {
-                if ($e->errorInfo[1] == 1406) {
-                    return response()->json(['mensaje' => 'Campo demasiado grande', 'error' => true]);
+                if ($e->errorInfo[1] == 1048) {
+                    return response()->json(['mensaje' => 'No hay tipo de evento seleccionado', 'error' => true]);
                 } else {
-                    return $e->getMessage();
+                    if ($e->errorInfo[1] == 1406) {
+                        return response()->json(['mensaje' => 'Campo demasiado grande', 'error' => true]);
+                    } else {
+                        return $e->getMessage();
+                    }
                 }
             }
         }
@@ -116,23 +122,22 @@ class EventoController extends Controller
     {
         try {
             $evento = Evento::find($id);
-            $evento->nombre = $request->nombre;
-            $evento->descripcion = $request->descripcion;
+            $evento->nombre             = $request->nombre;
+            $evento->descripcion        = $request->descripcion;
             $evento->inicio_inscripcion = $request->inicio_inscripcion;
-            $evento->fin_inscripcion = $request->fin_inscripcion;
-            $evento->inicio_evento = $request->inicio_evento;
-            $evento->fin_evento = $request->fin_evento;
-            $evento->institucion = $request->institucion;
-            $evento->region = $request->region;
-            $evento->grado_academico = $request->grado_academico;
-            $evento->evento_equipos = $request->evento_equipos;
-            $evento->requiere_registro = $request->requiere_registro;
-            $evento->edad_minima = $request->edad_minima;
-            $evento->edad_maxima = $request->edad_maxima;
-            $evento->genero = $request->genero;
+            $evento->fin_inscripcion    = $request->fin_inscripcion;
+            $evento->inicio_evento      = $request->inicio_evento;
+            $evento->fin_evento         = $request->fin_evento;
+            $evento->institucion        = $request->institucion;
+            $evento->region             = $request->region;
+            $evento->grado_academico    = $request->grado_academico;
+            $evento->evento_equipos     = $request->evento_equipos;
+            $evento->requiere_registro  = $request->requiere_registro;
+            $evento->edad_minima        = $request->edad_minima;
+            $evento->edad_maxima        = $request->edad_maxima;
+            $evento->genero             = $request->genero;
             $evento->precio_inscripcion = $request->precio_inscripcion;
-            $evento->ruta_afiche = $request->ruta_afiche;
-            $evento->id_tipo_evento = $request->id_tipo_evento;
+            $evento->id_tipo_evento     = $request->id_tipo_evento;
             $evento->save();
             return response()->json(['mensaje' => 'Actualizado exitosamente', 'error' => false]);
         } catch (QueryException $e) {
