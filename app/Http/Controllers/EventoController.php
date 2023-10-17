@@ -131,7 +131,6 @@ class EventoController extends Controller
             $evento->edad_maxima = $request->edad_maxima;
             $evento->genero = $request->genero;
             $evento->precio_inscripcion = $request->precio_inscripcion;
-            $evento->ruta_afiche = $request->ruta_afiche;
             $evento->id_tipo_evento = $request->id_tipo_evento;
             $evento->save();
             return response()->json(['mensaje' => 'Actualizado exitosamente', 'error' => false]);
@@ -165,4 +164,51 @@ class EventoController extends Controller
         $evento = Evento::find($id);
         return $evento;
     }
+
+    public function showEventForm($id = null){
+        $datos = [
+            'nombreDelEvento' => '',
+            'descripcionDelEvento' => '',
+            'inicio_inscripcion' => '',
+            'fin_inscripcion' => '',
+            'inicio_evento' => '',
+            'fin_evento' => '',
+            'institucion' => '',
+            'region' => '',
+            'grado_academico' => '',
+            'evento_equipos' => '',
+            'requiere_registro' => '',
+            'edad_minima' => '',
+            'edad_maxima' => '',
+            'genero' => '',
+            'precio_inscripcion' => '',
+            'ruta_afiche' => '',
+            'id_tipo_evento' => ''
+
+        ];
+        if($id !== null){
+            $evento = $this->show($id);   
+            $datos = [
+                'evento_id' => $evento->id,
+                'nombreDelEvento' => $evento->nombre,
+                'descripcionDelEvento' => $evento->descripcion,
+                'inicio_inscripcion' => ($evento->inicio_inscripcion)?date('Y-m-d', strtotime($evento->inicio_inscripcion)):'',
+                'fin_inscripcion' => ($evento->fin_inscripcion)?date('Y-m-d', strtotime($evento->fin_inscripcion)):'',
+                'inicio_evento' => $evento->inicio_evento,
+                'fin_evento' => $evento->fin_evento,
+                'institucion' => $evento->institucion,
+                'region' => $evento->region,
+                'grado_academico' =>  $evento->grado_academico,
+                'evento_equipos' => $evento->evento_equipos,
+                'requiere_registro' => $evento->requiere_registro,
+                'edad_minima' => $evento->edad_minima,
+                'edad_maxima' => $evento->edad_maxima,
+                'genero' => $evento->genero,
+                'precio_inscripcion' => $evento->precio_inscripcion,
+                'ruta_afiche' => $evento->ruta_afiche,
+                'id_tipo_evento' => $evento->id_tipo_evento
+            ];
+        }
+        return view('crear-evento.crearEvento', compact('datos'));
+    } 
 }

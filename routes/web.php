@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\HelloWorld;
-use App\Http\Controllers\TipoEventoController;
 use App\Http\Controllers\EventoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
