@@ -29,7 +29,8 @@
                                         <div class="col-md-12">
                                             <label for="validationCustomName" class="form-label">Nombre
                                                 del patrocinador *</label>
-                                            <input name="nombre" type="text" class="form-control custom-input"
+                                                <input name="id_evento" type="hidden" id="id_evento"  value="{{ $evento->id }}">
+                                                <input name="nombre" type="text" class="form-control custom-input"
                                                 id="validationCustomName" value="" placeholder="Ingrese un nombre"
                                                 required>
                                             <div class="invalid-feedback">
@@ -56,7 +57,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary custom-btn" data-bs-dismiss="modal"
                         onclick="resetModal('modalAgregarPatrocinador')">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Confirmar</button>
+                    <button type="button" onClick="guardarPatrocinador()" class="btn btn-primary">Confirmar</button>
                 </div>
             </div>
         </div>
