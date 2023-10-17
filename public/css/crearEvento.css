@@ -29,11 +29,11 @@
     z-index: 100;
     cursor: pointer;
     border-radius: 15%;
-    height: 20px;
-    width: 20px;
+    height: 25px;
+    width: 25px;
     color: white;
     font-weight: bold;
-    font-size: small;
+    font-size:medium;
     text-align: center;
     align-items: center;
     justify-content: center;
