@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   });
 });
-//Recuperar tipos de eventos
+//Recuperar tipos de eventos necesario para el form 
 window.addEventListener("load", async () => {
   await axios.get('/api/tipo-evento')
         .then(function (response) {
@@ -156,7 +156,7 @@ window.addEventListener("load", async () => {
             console.error(error);
         });
 });
-
+       
 function mostrarAlerta(titulo, mensaje, tipo) {
   var icono = "";
 
