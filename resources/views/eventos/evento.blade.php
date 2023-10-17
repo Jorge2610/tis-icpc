@@ -128,7 +128,7 @@
                         data-bs-target="#modalAgregarPatrocinador">
                         <i class="fa-regular fa-plus"></i>
                     </button>
-                    <x-modal-agregar-patrocinador />
+                    <x-modal-agregar-patrocinador :evento="$evento"/>
                     </h4>
                 </div>
 

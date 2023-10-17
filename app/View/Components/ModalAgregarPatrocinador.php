@@ -11,9 +11,11 @@ class ModalAgregarPatrocinador extends Component
      *
      * @return void
      */
-    public function __construct()
+    public $evento;
+
+    public function __construct($evento)
     {
-        //
+        $this->evento = $evento;
     }
 
     /**
