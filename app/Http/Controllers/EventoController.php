@@ -15,6 +15,21 @@ class EventoController extends Controller
         return $eventos;
     }
 
+    public function cargarEventos()
+    {
+        $eventos = Evento::with('tipoEvento')->get();
+        return view('/eventos/eventos', ['eventos' => $eventos]);
+    }
+
+    public function cargarEvento(String $nombre)
+    {
+        $evento = Evento::where('nombre', $nombre)->first();
+        if(!$evento){
+            return abort(404);
+        }
+        return view('eventos/evento', ['evento' => $evento]);
+    }
+
     public function store(Request $request)
     {
         try {
@@ -34,7 +49,7 @@ class EventoController extends Controller
             $evento->edad_maxima        = $request->edad_maxima;
             $evento->genero             = $request->genero;
             $evento->precio_inscripcion = $request->precio_inscripcion;
-            $evento->ruta_afiche        = $request->input('ruta_afiche','public/evento/afiche.jpg');
+            $evento->ruta_afiche        = $request->input('ruta_afiche', 'public/evento/afiche.jpg');
             $evento->id_tipo_evento     = $request->id_tipo_evento;
             $evento->save();
             return response()->json(['mensaje' => 'Creado exitosamente', 'error' => false]);
@@ -53,7 +68,7 @@ class EventoController extends Controller
 
     public function storageAfiche(Request $request)
     {
-        
+
         try {
             if ($request->hasFile('afiche')) {
                 $ruta = $request->file('afiche')->store('public/evento');
