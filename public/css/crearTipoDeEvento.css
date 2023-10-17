@@ -62,7 +62,7 @@
   align-items: center;
 }
 
-.custom-col {
+.colum-col {
   padding-right: 0;
   padding-left: 0;
   width: 40px;
@@ -72,14 +72,14 @@
   align-items: center;
 }
 
-input[type="color"].form-control-color {
+input[type="color"].controlador {
   width: 30px;
   height: 30px;
   border-radius: 100%;
   cursor: pointer;
 }
 
-.form-label{
+.text-container{
   width: 100%;
 }
 

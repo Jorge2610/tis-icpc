@@ -36,7 +36,7 @@
 
             <div class="col-md-7 border-end">
                 <!-- <h2>Detalles del evento</h2>-->
-                <p>{{ $evento->descripcion }}</p>
+                <p class="descripcion-evento">{{ $evento->descripcion }}</p>
                 <table class="table">
                     <tbody>
                         <tr>

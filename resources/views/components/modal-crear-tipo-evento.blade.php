@@ -39,12 +39,12 @@
                                     <div class="row contenedor-titulo-color">
                                         <div class="contenedor-subtitulo">
                                         <div class=" mt-3">
-                                            <label for="colorTipoEvento" class="form-label">Color de
+                                            <label for="colorTipoEvento" class="form-label text-container">Color de
                                                 referencia</label>
                                         </div>
                                         </div>
-                                        <div class=" mt-2 custom-col">
-                                            <input name="color" type="color" class="form-control form-control-color"
+                                        <div class=" mt-2 custom-col colum-col">
+                                            <input name="color" type="color" class="form-control form-control-color controlador"
                                             id="colorTipoEvento" value="#563d7c" title="Choose your color">
                                         </div>
                                     </div>
