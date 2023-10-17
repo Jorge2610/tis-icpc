@@ -1,0 +1,9 @@
+.boton-subir{
+    background-color: transparent;
+    border: none;
+}
+
+.boton-subir:hover{
+    color: #0D99FF;
+    border: none;
+}
