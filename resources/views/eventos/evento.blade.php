@@ -2,7 +2,23 @@
 
 @section('content')
     <div class="container">
-        <h3>{{ $evento->nombre }}</h3>
+        <div class="col-3">
+            <div class="row">
+                <h3 class="col-10 mt-0">{{ $evento->nombre }}</h3>
+                    <div class="btn-group col-2">
+                                <button type="button" class="btn btn-secondary" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="20" fill="#808080" class="bi bi-three-dots-vertical mb-3" viewBox="0 0 16 16">
+                                        <circle cx="8" cy="4" r="1.5"/>
+                                        <circle cx="8" cy="8" r="1.5"/>
+                                        <circle cx="8" cy="12" r="1.5"/>
+                                    </svg>
+                                </button>
+                                <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Editar Evento</a></li>
+                            </ul>
+                        </div>
+            </div>
+        </div>
         <div class="row mt-5">
             <div class="col-md-3">
                 <div class="d-flex flex-column justify-content-center align-items-center border p-3" style="cursor: pointer;"
