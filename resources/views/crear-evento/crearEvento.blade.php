@@ -221,7 +221,7 @@
                 <div class="col-md-12 mt-5  ms-3">
                     <label for="descripcionDelEvento" class="form-label">Descripción del evento</label>
                     <textarea name="descripcion" class="form-control" id="descripcionDelEvento" rows="8" style="resize: none;"
-                        placeholder="Ingrese una descripcion...">{{ $datos['descripcionDelEvento'] }}</textarea>
+                        placeholder="Ingrese una descripcion..." maxlength="2048">{{ $datos['descripcionDelEvento'] }}</textarea>
                 </div>
 
                 <div class="row mt-4 text-center">
