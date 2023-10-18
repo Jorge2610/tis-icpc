@@ -23,6 +23,9 @@
                                         <div id="sponsorPreview">
                                         </div>
                                     </label>
+                                    <div class="invalid-feedback">
+                                        Se requiere una imagen.
+                                    </div>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="row">
@@ -42,10 +45,7 @@
                                                 a la pagina web del patrocinador</label>
                                             <input name="enlace_web" type="url" class="form-control custom-input"
                                                 id="validationCustomLink" value=""
-                                                placeholder="https://www.patrocinador.com" required>
-                                            <div class="invalid-feedback">
-                                                El enlace ingresado no es valido.
-                                            </div>
+                                                placeholder="https://www.patrocinador.com">
                                         </div>
                                     </div>
                                 </div>

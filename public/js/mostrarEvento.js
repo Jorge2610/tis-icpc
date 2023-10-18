@@ -21,6 +21,10 @@ function previewSponsorLogo(event) {
       };
       reader.readAsDataURL(event.target.files[0]);
     }
+    else{
+      var output = document.getElementById('sponsorPreview');
+      output.style.backgroundImage = 'url(' + '../image/uploading.png' + ')';
+    }
     console.log(response.mensaje);
   });
 }
@@ -35,33 +39,41 @@ function resetModal(idModal, idForm) {
   form.classList.remove('was-validated');
 }
 
+
 // Esta función se llama cuando se hace clic en el botón "Confirmar"
 async function guardarPatrocinador() {
-  // Obtén los valores del formulario
-  const nombre = document.getElementById('validationCustomName').value;
-  const enlaceWeb = document.getElementById('validationCustomLink').value;
-  const imagen = document.getElementById('validationCustomImage').files[0];
-  const id_evento = document.getElementById('id_evento').value;
-  // Crea un objeto FormData para enviar los datos
-  const formData = new FormData();
-  formData.append('nombre', nombre);
-  formData.append('enlace_web', enlaceWeb);
-  formData.append('logo', imagen);
-  formData.append('id_evento', id_evento);
-  // Realiza una solicitud POST a la ruta de Laravel
-  axios.post('/api/patrocinador', formData)
-    .then(response => {
-      // Maneja la respuesta exitosa aquí
-      cargarPatrocinadores();
-    })
-    .catch(error => {
-      // Maneja errores aquí
-      console.error(error);
-    });
-  $("#modalAgregarPatrocinador").modal("hide");
-  document.getElementById("formularioAgregarPatrocinador").reset();
-  var output = document.getElementById('sponsorPreview');
-  output.style.backgroundImage = 'url(' + '../image/uploading.png' + ')';
+  let form = document.getElementById("formularioAgregarPatrocinador");
+  if(form.checkValidity()){
+    // Obtén los valores del formulario
+    const nombre = document.getElementById('validationCustomName').value;
+    const enlaceWeb = document.getElementById('validationCustomLink').value;
+    const imagen = document.getElementById('validationCustomImage').files[0];
+    const id_evento = document.getElementById('id_evento').value;
+    // Crea un objeto FormData para enviar los datos
+    const formData = new FormData();
+    formData.append('nombre', nombre);
+    formData.append('enlace_web', enlaceWeb);
+    formData.append('logo', imagen);
+    formData.append('id_evento', id_evento);
+    // Realiza una solicitud POST a la ruta de Laravel
+    axios.post('/api/patrocinador', formData)
+      .then(response => {
+        // Maneja la respuesta exitosa aquí
+        cargarPatrocinadores();
+      })
+      .catch(error => {
+        // Maneja errores aquí
+        console.error(error);
+      });
+    $("#modalAgregarPatrocinador").modal("hide");
+    document.getElementById("formularioAgregarPatrocinador").reset();
+    var output = document.getElementById('sponsorPreview');
+    output.style.backgroundImage = 'url(' + '../image/uploading.png' + ')';
+  }
+  else{
+    form.classList.add('was-validated');
+  }
+  
 }
 
 const validarImagen = (id, peso, callback) => {
@@ -100,10 +112,17 @@ async function cargarPatrocinadores() {
     const patrocinadores = response.data;
     let content = ``;
     patrocinadores.forEach((patrocinador) => {
+      let ruta;
+      if(patrocinador.enlace_web===null){
+        ruta='#';
+      }
+      else{
+        ruta=patrocinador.enlace_web;
+      }
       content += `
         <div class="col-12 col-md-12 d-flex justify-content-center">
             <div id="imagenPatrocinador">
-                <a href="https://${patrocinador.enlace_web}">
+                <a href="${ruta}" target="_blank">
                   <img id="imagenPatrocinador" src="${patrocinador.ruta_logo}" title="${patrocinador.nombre}"
                         alt="Imagen del patrocinador" style="object-fit: cover; max-height: 7rem;">
                 </a>
