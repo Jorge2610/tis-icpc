@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HelloWorld;
+use App\Http\Controllers\EventoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,12 +15,16 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/hello', [HelloWorld::class, 'sayHello']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/', [EventoController::class, 'cargarEventos']);
+
+Route::group(['prefix' => 'eventos'], function(){
+    Route::get('/', [EventoController::class, 'cargarEventos']);
+    Route::get('crear-evento/',[EventoController::class,'showEventForm'])->name('crear');
+    Route::get('tipos-de-evento', function () {return view('tipos-de-evento/tiposDeEvento');});
+    Route::get('{nombre}', [EventoController::class, 'cargarEvento'])->name('evento.cargarEvento');
+    Route::get('editar-evento/{id}',[EventoController::class,'showEventForm'])->name('evento.editar');
+});
