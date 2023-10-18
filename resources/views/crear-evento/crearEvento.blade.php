@@ -30,7 +30,7 @@
                     <div class="col-md-6">
                         <label for="tipoDelEvento" class="form-label">Tipo de evento</label>
                         <!-Cargar tipos de evento->
-                            <select name="id_tipo_evento" class="form-select" id="tipoDelEvento"
+                            <select name="id_tipo_evento" class="form-select" id="tipoDelEvento" onchange="datoCambiado()"
                                 aria-placeholder="Elija un tipo de evento..." data-id="{{$datos['id_tipo_evento']}}"> 
                                 
                             </select>
@@ -41,7 +41,7 @@
 
                     <div class="col-md-6">
                         <label for="gradoDelEvento" class="form-label">Grado academico requerido</label>
-                        <select name="grado_academico" class="form-select" id="gradoDelEvento"
+                        <select name="grado_academico" class="form-select" id="gradoDelEvento" onchange="datoCambiado()"
                             aria-placeholder="Elija un tipo de evento...">
                             @foreach(['Ninguno', 'Primaria', 'Secundaria', 'Universidad', 'Licenciatura', 'Maestria', 'Doctorado'] as $grado)
                                 <option value="{{ $grado }}" @if($datos['grado_academico'] == $grado) selected @endif>
@@ -60,7 +60,7 @@
 
                     <div class="col-md-6">
                         <label for="institucionDelEvento" class="form-label">Instituciones admitidas</label>
-                        <input name="institucion" type="text" class="form-control" id="institucionDelEvento"
+                        <input name="institucion" type="text" class="form-control" id="institucionDelEvento" onchange="datoCambiado()"
                             placeholder="Ingrese la institución del evento" value="{{ isset($datos['institucion'])? $datos['institucion'] : '' }}">
                         <div class="invalid-feedback">
                             Este campo no puede estar vacio.
@@ -69,7 +69,7 @@
 
                     <div class="col-md-6">
                         <label for="regionDelEvento" class="form-label">Región</label>
-                        <input name="region" type="text" class="form-control" id="regionDelEvento"
+                        <input name="region" type="text" class="form-control" id="regionDelEvento" onchange="datoCambiado()"
                             placeholder="Ingrese la region del evento" maxlength="64"  value="{{ isset($datos['region'])? $datos['region']:''}}">
                     </div>
                 </div>
@@ -82,7 +82,7 @@
 
                     <div class="row mt-4">
                         <div class="col-md-6">
-                            <input name="evento_genero" type="checkbox" class="form-check-input border-dark" id="generoCheck" data-id="{{$datos['genero']}}" @if($datos['genero']) checked @endif>
+                            <input name="evento_genero" type="checkbox" class="form-check-input border-dark" id="generoCheck" onchange="datoCambiado()" data-id="{{$datos['genero']}}" @if($datos['genero']) checked @endif>
                             <label for="genero" class="form-label">Género admitido</label>
                             <select class="form-select" name="genero" id="genero" style="display:none;">
                             @foreach(['Femenino', 'Masculino'] as $sexo)
@@ -94,7 +94,7 @@
                         </div>
 
                         <div class="col-md-6">
-                            <input name="rango_edad" type="checkbox" class="form-check-input border-dark" id="edadCheck"data-id="{{$datos['edad_minima']}}" @if($datos['edad_minima']) checked @endif>
+                            <input name="rango_edad" type="checkbox" class="form-check-input border-dark" id="edadCheck" onchange="datoCambiado()" data-id="{{$datos['edad_minima']}}" @if($datos['edad_minima']) checked @endif>
                             <label for="limiteDeEdad" class="form-label">Rango de edad</label>
                             <div class="row" id="rangosDeEdad" style="display: none;">
                                 <div class="col-md-6">
@@ -130,13 +130,13 @@
                     <div class="row mt-4">
 
                         <div class="col-md-6">
-                            <input name="evento_equipos" type="checkbox" class="form-check-input border-dark"
+                            <input name="evento_equipos" type="checkbox" class="form-check-input border-dark" onchange="datoCambiado()"
                                 id="equipoCheck" @if($datos['evento_equipos']) checked @endif>
                             <label class="form-check-label" for="equipoCheck">Por equipos</label>
                         </div>
 
                         <div class="col-md-6">
-                            <input name="requiere_registro" type="checkbox" class="form-check-input border-dark"
+                            <input name="requiere_registro" type="checkbox" class="form-check-input border-dark" onchange="datoCambiado()"
                                 id="registroCheck" @if($datos['requiere_registro']) checked @endif>
                             <label class="form-check-label" for="registroCheck">Requiere registro</label>
                         </div>
@@ -146,7 +146,7 @@
                     <div class="row mt-4">
 
                         <div class="col-md-6 mt-2">
-                            <input name="evento_pago" type="checkbox" class="form-check-input border-dark"
+                            <input name="evento_pago" type="checkbox" class="form-check-input border-dark" onchange="datoCambiado()"
                                 id="eventoPagoCheck" data-id="{{$datos['precio_inscripcion']}}" @if($datos['precio_inscripcion']) checked @endif>
                             <label class="form-check-label" for="eventoPagoCheck">Evento de pago</label>
                         </div>
@@ -183,14 +183,14 @@
                     <div class="col-md-2">Inicio</div>
 
                     <div class="col-md-4">
-                        <input name="inicio_inscripcion" id="fechaInscripcionInicio" class="form-control" type="date"
+                        <input name="inicio_inscripcion" id="fechaInscripcionInicio" class="form-control" type="date" onchange="datoCambiado()"
                             min="" value="{{ isset($datos['inicio_inscripcion'])? $datos['inicio_inscripcion']:'' }}"/>
                     </div>
 
                     <div class="col-md-2">Fin</div>
 
                     <div class="col-md-4">
-                        <input name="fin_inscripcion" id="fechaInscripcionFin" class="form-control" type="date"
+                        <input name="fin_inscripcion" id="fechaInscripcionFin" class="form-control" type="date" onchange="datoCambiado()"
                         min="" value="{{ isset($datos['fin_inscripcion'])? $datos['fin_inscripcion']:'' }}"/> 
                     </div>
 
@@ -205,14 +205,14 @@
                     <div class="col-md-2">Inicio</div>
 
                     <div class="col-md-4">
-                        <input name="inicio_evento" id="fechaInicio" class="form-control" type="datetime-local"
+                        <input name="inicio_evento" id="fechaInicio" class="form-control" type="datetime-local" onchange="datoCambiado()"
                             min="" value="{{ isset($datos['inicio_evento'])? $datos['inicio_evento']:'' }}" required />
                     </div>
 
                     <div class="col-md-2">Fin</div>
 
                     <div class="col-md-4">
-                        <input name="fin_evento" id="fechaFin" class="form-control" type="datetime-local"
+                        <input name="fin_evento" id="fechaFin" class="form-control" type="datetime-local" onchange="datoCambiado()"
                         min="" value="{{ isset($datos['fin_evento'])? $datos['fin_evento']:'' }}" required />
                     </div>
 
@@ -220,7 +220,7 @@
 
                 <div class="col-md-12 mt-5  ms-3">
                     <label for="descripcionDelEvento" class="form-label">Descripción del evento</label>
-                    <textarea name="descripcion" class="form-control" id="descripcionDelEvento" rows="8" style="resize: none;"
+                    <textarea name="descripcion" class="form-control" id="descripcionDelEvento" rows="8" style="resize: none;" onchange="datoCambiado()"
                         placeholder="Ingrese una descripcion..." maxlength="2048">{{ $datos['descripcionDelEvento'] }}</textarea>
                 </div>
 

@@ -1,3 +1,4 @@
+
 function handleImageUpload(id) {
     document.getElementById("uploadButton").style.display = "none";
     document.getElementById("uploadIcon").style.display = "none";

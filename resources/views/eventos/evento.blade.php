@@ -100,7 +100,7 @@
                         @if ($evento->genero != null)
                             <tr>
                                 <th scope="row">Género admitido</th>
-                                <td>{{ $evento->region }}</td>
+                                <td>{{ $evento->genero }}</td>
                             </tr>
                         @endif
                         @if ($evento->edad_minima && $evento->edad_maxima)
