@@ -2,6 +2,8 @@ function handleImageUpload() {
   document.getElementById('uploadButton').style.display = 'none';
   document.getElementById('uploadIcon').style.display = 'none';
   document.getElementById('imagePreview').style.display = 'block';
+  document.getElementById('botonBorrarAfiche').style.visibility = 'visible';
+  document.getElementById('botonSubirAfiche').style.visibility = 'visible';
 
   var reader = new FileReader();
   reader.onload = function (e) {
@@ -9,6 +11,8 @@ function handleImageUpload() {
   }
   reader.readAsDataURL(document.getElementById('imageUpload').files[0]);
 }
+
+
 
 function previewSponsorLogo(event) {
   validarImagen("validationCustomImage", 2, (response) => {
