@@ -134,7 +134,9 @@
 
                 <div class="row g-4 mt-3" id="contenedorPatrocinadores">
                     <!-Patrocinadores->
+                    
                 </div>
+                <x-modal-confirmacion-eliminar-patrocinador/>
             </div>
         </div>
     </div>

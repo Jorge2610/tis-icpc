@@ -126,7 +126,9 @@ async function cargarPatrocinadores() {
                   <img id="imagenPatrocinador" src="${patrocinador.ruta_logo}" title="${patrocinador.nombre}"
                         alt="Imagen del patrocinador" style="object-fit: cover; max-height: 7rem;">
                 </a>
-                <div class="borrar-patrocinador" onclick="borrarPatrocinador(${patrocinador.id})"><i class="fa-solid fa-trash-can"></i></div>
+                <button class="borrar-patrocinador" data-bs-toggle="modal" data-bs-whateve="${patrocinador.id}" data-bs-target="#modalBorrarPatrocinador" onclick="borrarPatrocinador(${patrocinador.id})">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
             </div>
         </div>
       `;
@@ -149,4 +151,20 @@ async function getPatrocinadores() {
       return error;
     });
   return datos;
+}
+
+function borrarPatrocinador(id){
+  let modalBorrar = document.getElementById('modalBorrarPatrocinador')
+  modalBorrar.setAttribute("idpatrocinador",id);
+}
+
+async function borrar1(){
+  let modalBorrar = document.getElementById('modalBorrarPatrocinador');
+  await axios.delete("/api/patrocinador/"+modalBorrar.getAttribute("idpatrocinador")).then((response) => {
+    return response;
+  })
+  .catch((error) => {
+    return error;
+  });
+  await cargarPatrocinadores();
 }
