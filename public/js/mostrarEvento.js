@@ -128,9 +128,9 @@ async function cargarPatrocinadores() {
             <div id="imagenPatrocinador">
                 <a href="${ruta}" target="_blank">
                   <img id="imagenPatrocinador" src="${patrocinador.ruta_logo}" title="${patrocinador.nombre}"
-                        alt="Imagen del patrocinador" style="object-fit: cover; max-height: 7rem;">
+                        alt="Imagen del patrocinador" style="object-fit: cover; max-height: 7rem; max-width: 100%;">
                 </a>
-                <div class="borrar-patrocinador" onclick="borrarPatrocinador(${patrocinador.id})"><i class="fa-solid fa-trash-can"></i></div>
+                <div class="borrar-patrocinador" title="Borrar patrocinador" onclick="borrarPatrocinador(${patrocinador.id})"><i class="fa-solid fa-trash-can"></i></div>
             </div>
         </div>
       `;
