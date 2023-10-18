@@ -27,7 +27,7 @@
                     style="cursor: pointer; position: relative;">
                     <button id="botonBorrarAfiche"type="button" class="btn btn-light btn-lg hover-button boton-borrar"
                         data-bs-toggle="modal" data-bs-target="#modalEliminarImage" data-bs-toggle="tooltip"
-                        data-bs-placement="top" title="Eliminar afiche">
+                        data-bs-placement="top" title="Eliminar afiche" onclick="borrarAfiche({{$evento->id}})">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
                     <button id="botonSubirAfiche" type="button"
@@ -42,11 +42,13 @@
 
                     <img id="imagePreview" src="#" class="img-fluid mt-3 imagen-afiche" alt="Imagen del evento"
                         style="display: none;">
-                    <a id="uploadButton" class="boton-subir-2">Presione para subir imagen</a>
+                    <a id="uploadButton" class="boton-subir-2 text-center">Presione para subir imagen</a>
                 </div>
-                <input class="form-control" type="file" id="imageUpload" accept="image/png image/jpeg image/jpg"
-                    style="display: none;" onchange="handleImageUpload()">
+                <input class="form-control" type="file" id="imageUpload" accept="image/png, image/jpeg, image/jpg"
+                    style="display: none;" onchange="handleImageUpload({{$evento->id}})">
             </div>
+            
+            <div hidden id="rutaImagen" value="">{{ $evento->ruta_afiche }}</div>
 
             <div class="col-md-7 border-end">
                 <!-- <h2>Detalles del evento</h2>-->
