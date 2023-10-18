@@ -2,6 +2,8 @@ function handleImageUpload() {
   document.getElementById('uploadButton').style.display = 'none';
   document.getElementById('uploadIcon').style.display = 'none';
   document.getElementById('imagePreview').style.display = 'block';
+  document.getElementById('botonBorrarAfiche').style.visibility = 'visible';
+  document.getElementById('botonSubirAfiche').style.visibility = 'visible';
 
   var reader = new FileReader();
   reader.onload = function (e) {
@@ -9,6 +11,8 @@ function handleImageUpload() {
   }
   reader.readAsDataURL(document.getElementById('imageUpload').files[0]);
 }
+
+
 
 function previewSponsorLogo(event) {
   validarImagen("validationCustomImage", 2, (response) => {
@@ -124,7 +128,7 @@ async function cargarPatrocinadores() {
             <div id="imagenPatrocinador">
                 <a href="${ruta}" target="_blank">
                   <img id="imagenPatrocinador" src="${patrocinador.ruta_logo}" title="${patrocinador.nombre}"
-                        alt="Imagen del patrocinador" style="object-fit: cover; max-height: 7rem;">
+                        alt="Imagen del patrocinador" style="object-fit: cover; max-height: 7rem; max-width: 100%;">
                 </a>
                 <button class="borrar-patrocinador" data-bs-toggle="modal" data-bs-whateve="${patrocinador.id}" data-bs-target="#modalBorrarPatrocinador" onclick="borrarPatrocinador(${patrocinador.id})">
                   <i class="fa-solid fa-trash-can"></i>
