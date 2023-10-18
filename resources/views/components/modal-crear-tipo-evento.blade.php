@@ -36,14 +36,16 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="row align-items-end">
-                                        <div class="col-md-5 mt-3">
-                                            <label for="colorTipoEvento" class="form-label">Color de
+                                    <div class="row contenedor-titulo-color">
+                                        <div class="contenedor-subtitulo">
+                                        <div class=" mt-3">
+                                            <label for="colorTipoEvento" class="form-label text-container">Color de
                                                 referencia</label>
                                         </div>
-                                        <div class="col-md-1 mt-3 custom-col">
-                                            <input name="color" type="color" class="form-control form-control-color"
-                                                id="colorTipoEvento" value="#563d7c" title="Choose your color">
+                                        </div>
+                                        <div class=" mt-2 custom-col colum-col">
+                                            <input name="color" type="color" class="form-control form-control-color controlador"
+                                            id="colorTipoEvento" value="#563d7c" title="Choose your color">
                                         </div>
                                     </div>
                                 </div>

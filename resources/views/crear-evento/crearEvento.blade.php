@@ -70,7 +70,7 @@
                     <div class="col-md-6">
                         <label for="regionDelEvento" class="form-label">Región</label>
                         <input name="region" type="text" class="form-control" id="regionDelEvento"
-                            placeholder="Ingrese el grado del evento" maxlength="64"  value="{{ isset($datos['region'])? $datos['region']:''}}">
+                            placeholder="Ingrese la region del evento" maxlength="64"  value="{{ isset($datos['region'])? $datos['region']:''}}">
                     </div>
                 </div>
 
