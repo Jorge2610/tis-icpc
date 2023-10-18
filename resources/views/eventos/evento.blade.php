@@ -132,42 +132,8 @@
                     </h4>
                 </div>
 
-                <div class="row g-4 mt-3">
-                    <div class="col-12 col-md-12 d-flex justify-content-center">
-
-                        <a href="#">
-                            <div id="imagenPatrocinador" class="">
-                                <a href="#"><img id="imagenPatrocinador" src="/image/icpc.png" class=""
-                                        alt="Imagen del patrocinador" style="object-fit: cover; max-height: 7rem;">
-                                </a>
-                                <div class="borrar-patrocinador"><i class="fa-solid fa-trash-can"></i></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-12 col-md-12 d-flex justify-content-center">
-
-                        <a href="#">
-                            <div id="imagenPatrocinador" class="">
-                                <a href="#"><img id="imagenPatrocinador" src="/image/logo-departamento.png"
-                                        class="imagen-contendor" alt="Imagen del patrocinador"
-                                        style="object-fit: cover; max-height: 7rem;">
-                                </a>
-                                <div id="borrarPatrocinador" class="borrar-patrocinador"><i
-                                        class="fa-solid fa-trash-can"></i></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-12 col-md-12 d-flex justify-content-center">
-
-                        <a href="#">
-                            <div id="imagenPatrocinador" class="">
-                                <a href="#"><img id="imagenPatrocinador" src="/image/logo-umss.png" class=""
-                                        alt="Imagen del patrocinador" style="object-fit: cover; max-height: 7rem;">
-                                </a>
-                                <div class="borrar-patrocinador"><i class="fa-solid fa-trash-can"></i></div>
-                            </div>
-                        </a>
-                    </div>
+                <div class="row g-4 mt-3" id="contenedorPatrocinadores">
+                    <!-Patrocinadores->
                 </div>
             </div>
         </div>

@@ -8,7 +8,7 @@
                         patrocinador
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                        onclick="resetModal('modalAgregarPatrocinador')"></button>
+                        onclick="resetModal('modalAgregarPatrocinador', 'formularioAgregarPatrocinador')"></button>
                 </div>
                 <form class="needs-validation" method="POST" novalidate id="formularioAgregarPatrocinador">
                     @csrf
@@ -16,7 +16,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <input type="file" class="form-control custom-input" id="validationCustomImage"
+                                    <input name="logo" type="file" class="form-control custom-input" id="validationCustomImage"
                                         required style="display: none;" accept="image/*"
                                         onchange="previewSponsorLogo(event)">
                                     <label for="validationCustomImage" class="custom-file-upload">
@@ -56,8 +56,8 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary custom-btn" data-bs-dismiss="modal"
-                        onclick="resetModal('modalAgregarPatrocinador')">Cancelar</button>
-                    <button type="button" onClick="guardarPatrocinador()" class="btn btn-primary">Confirmar</button>
+                        onclick="resetModal('modalAgregarPatrocinador', 'formularioAgregarPatrocinador')">Cancelar</button>
+                    <button type="button" onclick="guardarPatrocinador()" class="btn btn-primary">Confirmar</button>
                 </div>
             </div>
         </div>

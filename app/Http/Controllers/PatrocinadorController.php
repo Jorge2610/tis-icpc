@@ -37,11 +37,16 @@ class PatrocinadorController extends Controller
         try{
             if ($request->hasFile('logo')) {
                 $ruta = $request->file('logo')->store('public/patrocinadores');
-                return $ruta;
+                return Storage::url($ruta);
             }
         }catch(QueryException $e){
             return $e->getMessage();
         }
+    }
+
+    public function showPatrocinadorbyEvento($id){
+        $patrocinadores = Patrocinador::where('id_evento', $id)->get();
+        return $patrocinadores;
     }
 
     public function update(Request $request, $id){

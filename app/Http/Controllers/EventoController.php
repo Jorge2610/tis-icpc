@@ -78,7 +78,7 @@ class EventoController extends Controller
         try {
             if ($request->hasFile('afiche')) {
                 $ruta = $request->file('afiche')->store('public/evento');
-                return $ruta;
+                return Storage::url($ruta);
             }
             return "error";
         } catch (\Throwable $th) {
