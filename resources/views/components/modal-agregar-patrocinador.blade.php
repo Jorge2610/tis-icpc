@@ -17,7 +17,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <input name="logo" type="file" class="form-control custom-input" id="validationCustomImage"
-                                        required style="display: none;" accept="image/*"
+                                        required style="display: none;" accept="image/png image/jpeg image/jpg"
                                         onchange="previewSponsorLogo(event)">
                                     <label for="validationCustomImage" class="custom-file-upload">
                                         <div id="sponsorPreview">

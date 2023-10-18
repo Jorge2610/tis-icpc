@@ -24,15 +24,16 @@
         <div class="row mt-5">
             <div class="col-md-3">
                 <div class="d-flex flex-column justify-content-center align-items-center border p-3 container-image"
-                    style="cursor: pointer; position: relative;" >
-                    <button id="botonBorrarAfiche"type="button" class="btn btn-light btn-lg hover-button boton-borrar" data-bs-toggle="modal"
-                        data-bs-target="#modalEliminarImage" data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="Eliminar afiche">
+                    style="cursor: pointer; position: relative;">
+                    <button id="botonBorrarAfiche"type="button" class="btn btn-light btn-lg hover-button boton-borrar"
+                        data-bs-toggle="modal" data-bs-target="#modalEliminarImage" data-bs-toggle="tooltip"
+                        data-bs-placement="top" title="Eliminar afiche">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
-                    <button id="botonSubirAfiche" type="button" class="boton-subir btn btn-light btn-lg hover-button-center "
-                        data-bs-toggle="modal" data-bs-target="#modalCambiarAfiche" data-bs-toggle="tooltip"
-                        data-bs-placement="top" title="Cambiar afiche" onclick="document.getElementById('imageUpload').click()">
+                    <button id="botonSubirAfiche" type="button"
+                        class="boton-subir btn btn-light btn-lg hover-button-center " data-bs-toggle="modal"
+                        data-bs-target="#modalCambiarAfiche" data-bs-toggle="tooltip" data-bs-placement="top"
+                        title="Cambiar afiche" onclick="document.getElementById('imageUpload').click()">
                         <i class="fa fa-arrow-up-from-bracket fa-lg"></i>
                     </button>
                     <img id="uploadIcon" src="/image/uploading.png" alt="Upload Icon" class="imagen-afiche"
@@ -43,13 +44,14 @@
                         style="display: none;">
                     <a id="uploadButton" class="boton-subir-2">Presione para subir imagen</a>
                 </div>
-                <input class="form-control" type="file" id="imageUpload" accept="image/*" style="display: none;"
-                    onchange="handleImageUpload()" >
+                <input class="form-control" type="file" id="imageUpload" accept="image/png image/jpeg image/jpg"
+                    style="display: none;" onchange="handleImageUpload()">
             </div>
 
             <div class="col-md-7 border-end">
                 <!-- <h2>Detalles del evento</h2>-->
-                <p class="descripcion-evento">{{ $evento->descripcion }}</p>
+                <p class="descripcion-evento mx-3" style="text-align: justify" >{!! nl2br($evento->descripcion) !!}</p>
+
                 <table class="table">
                     <tbody>
                         <tr>
@@ -141,7 +143,7 @@
                         data-bs-target="#modalAgregarPatrocinador" title="Agregar patrocinador">
                         <i class="fa-regular fa-plus"></i>
                     </button>
-                    <x-modal-agregar-patrocinador :evento="$evento"/>
+                    <x-modal-agregar-patrocinador :evento="$evento" />
                     </h4>
                 </div>
 
