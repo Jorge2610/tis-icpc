@@ -1,3 +1,5 @@
+import {mostrarAlerta} from "./alerta.js"
+
 let tablaDeTipos;
 let tablaInicializada = false;
 let formulario = document.getElementById("formularioTipoEvento");
@@ -44,15 +46,15 @@ const tiposDeEvento = async () => {
         let contador = 1;
         tiposDeEvento.forEach((element) => {
             // Convierte la cadena a un objeto Date
-            var fecha = new Date(element.created_at);
+            let fecha = new Date(element.created_at);
 
             // Obtiene los componentes de la fecha
-            var dia = fecha.getDate();
-            var mes = fecha.getMonth() + 1; // Los meses en JavaScript se cuentan desde 0, así que sumamos 1.
-            var anio = fecha.getFullYear();
+            let dia = fecha.getDate();
+            let mes = fecha.getMonth() + 1; // Los meses en JavaScript se cuentan desde 0, así que sumamos 1.
+            let anio = fecha.getFullYear();
 
             // Formatea la fecha en el nuevo formato 'd-m-Y'
-            var fechaFormateada = dia + "-" + mes + "-" + anio;
+            let fechaFormateada = dia + "-" + mes + "-" + anio;
             content += `
             <tr>
                 <th scope='row'>${contador}</th>
@@ -85,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
             event.stopPropagation();
         } else {
             // Enviar formulario con AJAX
-            var formData = new FormData(this);
+            let formData = new FormData(this);
             axios
                 .post("/api/tipo-evento", formData)
                 .then(function (response) {
@@ -112,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 async function cargarTiposDeEvento() {
-    datos = await axios
+    let datos = await axios
         .get("/api/tipo-evento")
         .then((response) => {
             return response;
@@ -121,32 +123,4 @@ async function cargarTiposDeEvento() {
             return error;
         });
     return datos;
-}
-
-function mostrarAlerta(titulo, mensaje, tipo) {
-    var icono = "";
-
-    // Asignar el icono y el color de fondo según el tipo
-    if (tipo === "success") {
-        icono = '<i class="bi bi-check-circle"></i>'; // Icono de círculo con check verde de Bootstrap Icons
-    } else if (tipo === "danger") {
-        icono = '<i class="bi bi-x-circle"></i>'; // Icono de círculo con cruz roja de Bootstrap Icons
-    } else {
-        icono = '<i class="bi bi-info-circle"></i>'; // Icono de círculo con información azul de Bootstrap Icons por defecto
-    }
-
-    var alerta = `
-        <div class="alert alert-${tipo} alert-dismissible fade show" role="alert">
-            <div class="d-flex align-items-center">
-                <div class="mr-2">${icono}</div>
-                <div>
-                    ${mensaje}
-                </div>
-            </div>
-        </div>
-    `;
-    document.getElementById("alertsContainer").innerHTML = alerta;
-    setTimeout(function () {
-        document.querySelector(".alert").remove(); // Remover la alerta después de 2 segundos
-    }, 2000);
 }

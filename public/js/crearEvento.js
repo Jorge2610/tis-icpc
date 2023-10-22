@@ -1,3 +1,4 @@
+import {mostrarAlerta} from "./alerta.js"
 let fechaInscripcionInicio = document.getElementById('fechaInscripcionInicio')
 let fechaInscripcionFin = document.getElementById('fechaInscripcionFin')
 let inputGenero = document.getElementById('generoCheck');
