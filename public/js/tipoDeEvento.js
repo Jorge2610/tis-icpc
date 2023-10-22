@@ -1,5 +1,3 @@
-import {mostrarAlerta} from "./alerta.js"
-
 let tablaDeTipos;
 let tablaInicializada = false;
 let formulario = document.getElementById("formularioTipoEvento");

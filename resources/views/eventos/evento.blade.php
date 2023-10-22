@@ -153,7 +153,17 @@
                     <!-Patrocinadores->
                     
                 </div>
-                <x-modal-confirmacion-eliminar-patrocinador/>
+                @component('components.modal')
+                    @slot('modalId', 'modalBorrarPatrocinador')
+                    @slot('modalTitle', 'Confirmacion')
+                    @slot('modalContent')
+                        ¿Está seguro de eliminar al patrocinador?
+                    @endslot
+                    @slot('modalButton')
+                        <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal" onclick="borrar1()" >Sí</button>
+                    @endslot
+                @endcomponent
             </div>
         </div>
     </div>

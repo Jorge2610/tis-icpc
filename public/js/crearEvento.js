@@ -1,278 +1,257 @@
-import {mostrarAlerta} from "./alerta.js"
-let fechaInscripcionInicio = document.getElementById('fechaInscripcionInicio')
-let fechaInscripcionFin = document.getElementById('fechaInscripcionFin')
-let inputGenero = document.getElementById('generoCheck');
-let inputEdad = document.getElementById('edadCheck');
-let inputCosto = document.getElementById('eventoPagoCheck');
-let form = document.getElementById("formularioCrearEvento")
+let fechaInscripcionInicio = document.getElementById("fechaInscripcionInicio");
+let fechaInscripcionFin = document.getElementById("fechaInscripcionFin");
+let inputGenero = document.getElementById("generoCheck");
+let inputEdad = document.getElementById("edadCheck");
+let inputCosto = document.getElementById("eventoPagoCheck");
+let form = document.getElementById("formularioCrearEvento");
 let tipoForm = 0; //0-> Crear  1->Editar
 let datosActualizados = false;
 let nombreEvento = document.getElementById("nombreDelEvento").value;
-
-let fechaInicio = document.getElementById('fechaInicio')
-let fechaFin = document.getElementById('fechaFin')
-
-if (fechaInicio.value === "") {
-  fechaFin.min = fechaInicio.min;
-} else {
-  fechaFin.min = fechaInicio.value;
-}
-
-
-fechaInicio.addEventListener('change', () => {
-  fechaFin.min = fechaInicio.value;
-  if (fechaFin.value < fechaInicio.value || fechaInicio.value === "") {
-    fechaFin.value = fechaInicio.value;
-  }
-  datoCambiado();
-})
-
-fechaFin.addEventListener('change', () => {
-  if (fechaFin.value < fechaInicio.value) {
-    fechaFin.value = fechaInicio.value;
-  }
-  datoCambiado();
-})
-
-if (fechaInscripcionInicio.value === "") {
-  fechaInscripcionFin.min = fechaInscripcionInicio.min;
-} else {
-  fechaInscripcionFin.min = fechaInscripcionInicio.value;
-}
-
-
-fechaInscripcionInicio.addEventListener('change', () => {
-  fechaInscripcionFin.min = fechaInscripcionInicio.value;
-  if (fechaInscripcionFin.value < fechaInscripcionInicio.value || fechaInscripcionInicio.value === "") {
-    fechaInscripcionFin.value = fechaInscripcionInicio.value;
-  }
-  datoCambiado();
-})
-
-fechaInscripcionFin.addEventListener('change', () => {
-  if (fechaInscripcionFin.value < fechaInscripcionInicio.value) {
-    fechaInscripcionFin.value = fechaInscripcionInicio.value;
-  }
-  datoCambiado();
-})
-
+let fechaInicio = document.getElementById("fechaInicio");
+let fechaFin = document.getElementById("fechaFin");
 let edadMinima = document.getElementById("edadMinima");
 let edadMaxima = document.getElementById("edadMaxima");
 
-edadMinima.addEventListener('change', (e) => {
-  let valor = e.target.value;
-  edadMaxima.value = valor;
-  edadMaxima.min = valor;
-})
+//Validaciones
+const setMinDate = (input, target) => {
+    if (input.value === "") {
+        target.min = input.min;
+    } else {
+        target.min = input.value;
+    }
+};
 
-function previewAfiche(event) {
-  var reader = new FileReader();
-  reader.readAsDataURL(event.target.files[0]);
-  reader.onloadend = function () {
-    var img = document.getElementById('afiche');
-    img.setAttribute('src', reader.result)
-  };
-}
+const validarFechas = (fechaInicio, fechaFin) => {
+    if (fechaFin.value < fechaInicio.value) {
+        fechaFin.value = fechaInicio.value;
+    }
+    datoCambiado();
+};
 
-function previewSponsorLogo(event) {
-  var reader = new FileReader();
-  reader.onload = function () {
-    var output = document.getElementById('sponsorPreview');
-    output.style.backgroundImage = 'url(' + reader.result + ')';
-  };
-  reader.readAsDataURL(event.target.files[0]);
-}
+const copiarEdadMaxima = (edadMinima, edadMaxima) => {
+    const valor = edadMinima.value;
+    edadMaxima.value = valor;
+    edadMaxima.min = valor;
+};
 
-function resetModal(idModal, idForm) {
-  var output = document.getElementById('sponsorPreview');
-  output.style.backgroundImage = 'url(' + '../image/uploading.png' + ')';
-  let modal = document.getElementById(idModal);
-  let inputs = modal.querySelectorAll('input');
-  inputs.forEach((element) => element.value = '');
-  let form = document.getElementById(idForm);
-  form.classList.remove('was-validated');
-}
+fechaInicio.addEventListener("change", () => {
+    setMinDate(fechaFin, fechaInicio);
+    validarFechas(fechaInicio, fechaFin);
+});
+
+fechaFin.addEventListener("change", () => {
+    validarFechas(fechaInicio, fechaFin);
+});
+
+fechaInscripcionInicio.addEventListener("change", () => {
+    setMinDate(fechaInscripcionFin, fechaInscripcionInicio);
+    validarFechas(fechaInscripcionInicio, fechaInscripcionFin);
+});
+
+fechaInscripcionFin.addEventListener("change", () => {
+    validarFechas(fechaInscripcionInicio, fechaInscripcionFin);
+});
+
+edadMinima.addEventListener("change", () => {
+   copiarEdadMaxima(edadMinima, edadMaxima);
+});
 
 function utilizarInput(indInput, check) {
-  let input = document.getElementById(indInput);
-  input.disabled = !check;
+    let input = document.getElementById(indInput);
+    input.disabled = !check;
 }
 
 function mostrarInput(indInput, check) {
-  let input = document.getElementById(indInput);
-  if (!check) {
-    input.style.display = "none";
-  }
-  else {
-    input.style.display = "flex";
-  }
+    let input = document.getElementById(indInput);
+    if (!check) {
+        input.style.display = "none";
+    } else {
+        input.style.display = "flex";
+    }
 }
 
 //check
 inputGenero.addEventListener("change", () => {
-  mostrarInput('genero', inputGenero.checked);
+    mostrarInput("genero", inputGenero.checked);
 });
 inputEdad.addEventListener("change", () => {
-  mostrarInput('rangosDeEdad', inputEdad.checked);
+    mostrarInput("rangosDeEdad", inputEdad.checked);
 });
-inputCosto.addEventListener('change', () => {
-  mostrarInput('eventoPago', inputCosto.checked);
+inputCosto.addEventListener("change", () => {
+    mostrarInput("eventoPago", inputCosto.checked);
 });
-//validacion
+
 form.addEventListener("submit", (event) => {
-  if (tipoForm === 0 || datosActualizados) {
-    if (!form.checkValidity()) {
-      event.preventDefault()
-      event.stopPropagation()
+    if (tipoForm === 0 || datosActualizados) {
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        form.classList.add("was-validated");
     }
-    form.classList.add('was-validated')
-  }
 });
+
+//FUNCIONES
+const previewAfiche = (event) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onloadend = () => {
+        let img = document.getElementById("afiche");
+        img.setAttribute("src", reader.result);
+    };
+};
+
+const previewSponsorLogo = (event) => {
+    let reader = new FileReader();
+    reader.onload = (reader) => {
+        let output = document.getElementById("sponsorPreview");
+        output.style.backgroundImage = `url('${reader.result}')`;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+};
+
+const resetModal = (idModal, idForm) => {
+    let output = document.getElementById("sponsorPreview");
+    output.style.backgroundImage = "url(" + "../image/uploading.png" + ")";
+    let modal = document.getElementById(idModal);
+    let inputs = modal.querySelectorAll("input");
+    inputs.forEach((element) => (element.value = ""));
+    let form = document.getElementById(idForm);
+    form.classList.remove("was-validated");
+};
 
 //Guardar evento
-document.addEventListener('DOMContentLoaded', function () {
-  mostrarInput('genero', inputGenero.checked);
-  mostrarInput('rangosDeEdad', inputEdad.checked);
-  mostrarInput('eventoPago', inputCosto.checked);
-  let form = document.getElementById('formularioCrearEvento');
-  form.addEventListener('submit', function (event) {
-    event.preventDefault()
-    if (!form.checkValidity()) {
-      event.stopPropagation()
-      $("#modalConfirmacion").modal("hide")
+document.addEventListener("DOMContentLoaded", () => {
+    mostrarInput("genero", inputGenero.checked);
+    mostrarInput("rangosDeEdad", inputEdad.checked);
+    mostrarInput("eventoPago", inputCosto.checked);
+    let form = document.getElementById("formularioCrearEvento");
 
-    } else {
-      let formData = new FormData(this);
-      if (!inputEdad.checked) {
-        formData.set("edad_minima", "");
-        formData.set("edad_maxima", "");
-      }
-      if (!inputGenero.checked) {
-        formData.set("genero", "");
-      }
-      if (!inputCosto.checked) {
-        formData.set("precio_inscripcion", "");
-      }
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
 
-      //Si existe el evento se debe editar
-      var eventoId = formData.get('evento_id');
-      var imagen = document.getElementById("imagen").value
-      formData.set('ruta_afiche', imagen)
-      if (eventoId != '') {
-        if (!datosActualizados) {
-          window.location.href = '/eventos/' + document.getElementById("nombreDelEvento").value;
+        if (!form.checkValidity()) {
+            event.stopPropagation();
+            $("#modalConfirmacion").modal("hide");
+            return;
         }
-        nombreEvento = document.getElementById("nombreDelEvento").value;
-        axios.post('/api/evento/actualizar/' + eventoId, formData)
-          .then(function (response) {
-            mostrarAlerta(
-              "Éxito",
-              response.data.mensaje,
-              response.data.error ? "danger" : "success"
-            );
-          })
-          .catch(function (error) {
-            mostrarAlerta(
-              "Error",
-              "Hubo un error al guardar el tipo de evento",
-              "danger"
-            );
-          });
-      } else {
-        axios.post('/api/evento', formData)
-          .then(function (response) {
-            mostrarAlerta(
-              "Éxito",
-              response.data.mensaje,
-              response.data.error ? "danger" : "success"
-            );
-          })
-          .catch(function (error) {
-            mostrarAlerta(
-              "Error",
-              "Hubo un error al guardar el tipo de evento",
-              "danger"
-            );
-          });
-      }
-      $("#modalConfirmacion").modal("hide")
-      form.classList.remove('was-validated')
-      form.reset();
-    }
 
-  });
-});
+        let formData = prepararFormData();
 
-function datoCambiado() {
-  if (tipoForm === 1) {
-    datosActualizados = true;
-  }
-}
+        let eventoId = formData.get("evento_id");
+        let imagen = document.getElementById("imagen").value;
+        formData.set("ruta_afiche", imagen);
 
-//Recuperar tipos de eventos necesario para el form 
-window.addEventListener("load", async () => {
-  if (document.getElementById("nombreDelEvento").value != "") {
-    tipoForm = 1;
-  }
-  await axios.get('/api/tipo-evento')
-    .then(function (response) {
-      var select = document.getElementById('tipoDelEvento');
-      var tiposDeEvento = response.data;
-      tiposDeEvento.forEach(function (tipo) {
-        var option = document.createElement('option');
-        option.value = tipo.id;
-        option.text = tipo.nombre;
-        select.appendChild(option);
-      });
+        if (eventoId) {
+            editarEvento(formData, eventoId);
+        } else {
+            crearEvento(formData);
+        }
 
-      var idTipoEvento = document.getElementById('tipoDelEvento').getAttribute('data-id');
-      // Establecer el valor seleccionado
-      if (idTipoEvento != "") {
-        select.value = idTipoEvento;
-      }
-    })
-    .catch(function (error) {
-      console.error(error);
+        $("#modalConfirmacion").modal("hide");
+        form.classList.remove("was-validated");
+        form.reset();
     });
 });
-
-function mostrarAlerta(titulo, mensaje, tipo) {
-  var icono = "";
-
-  // Asignar el icono y el color de fondo según el tipo
-  if (tipo === "success") {
-    icono = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#28a745" viewBox="0 0 24 24"> <path d="M9 16.17l-3.83-3.83a1 1 0 0 1 1.41-1.41L9 13.35l6.18-6.18a1 1 0 1 1 1.41 1.41L9 16.17z"/> </svg>';
-  } else if (tipo === "danger") {
-  } else if (tipo === "danger") {
-    icono = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#dc3545" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#dc3545" /><path fill="#fff" d="M8.29 8.29a1 1 0 0 1 1.41 0L12 10.59l2.29-2.3a1 1 0 1 1 1.41 1.41L13.41 12l2.3 2.29a1 1 0 1 1-1.41 1.41L12 13.41l-2.29 2.3a1 1 0 1 1-1.41-1.41L10.59 12 8.29 9.71a1 1 0 0 1 0-1.42z"/></svg>';
-  } else {
-    icono = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#dc3545" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#dc3545" /><path fill="#fff" d="M8.29 8.29a1 1 0 0 1 1.41 0L12 10.59l2.29-2.3a1 1 0 1 1 1.41 1.41L13.41 12l2.3 2.29a1 1 0 1 1-1.41 1.41L12 13.41l-2.29 2.3a1 1 0 1 1-1.41-1.41L10.59 12 8.29 9.71a1 1 0 0 1 0-1.42z"/></svg>';
-  }
-
-  var alerta = `
-      <div class="alert alert-${tipo} alert-dismissible fade show" role="alert">
-          <div class="d-flex align-items-center">
-              <div class="mr-2">${icono}</div>
-              <div>
-                  ${mensaje}
-              </div>
-          </div>
-      </div>
-  `;
-  document.getElementById("alertsContainer").innerHTML = alerta;
-  setTimeout(function () {
-    document.querySelector(".alert").remove();
-    if (tipoForm === 0) {
-      window.location.href = '/eventos'; // Remover la alerta después de 2 segundos
+const prepararFormData = () => {
+    let formData = new FormData(form);
+    if (!inputEdad.checked) {
+        formData.set("edad_minima", "");
+        formData.set("edad_maxima", "");
     }
-    window.location.href = '/eventos/' + nombreEvento;
-  }, 2000);
+    if (!inputGenero.checked) {
+        formData.set("genero", "");
+    }
+    if (!inputCosto.checked) {
+        formData.set("precio_inscripcion", "");
+    }
+    return formData;
+};
+
+const editarEvento = (formData, eventoId) => {
+    if (!datosActualizados) {
+        window.location.href =
+            "/eventos/" + document.getElementById("nombreDelEvento").value;
+    }
+
+    nombreEvento = document.getElementById("nombreDelEvento").value;
+
+    axios
+        .post("/api/evento/actualizar/" + eventoId, formData)
+        .then(function (response) {
+            mostrarAlerta(
+                "Éxito",
+                response.data.mensaje,
+                response.data.error ? "danger" : "success"
+            );
+        })
+        .catch(function (error) {
+            mostrarAlerta(
+                "Error",
+                "Hubo un error al guardar el tipo de evento",
+                "danger"
+            );
+        });
+};
+
+const crearEvento = (formData) => {
+    axios
+        .post("/api/evento", formData)
+        .then(function (response) {
+            mostrarAlerta(
+                "Éxito",
+                response.data.mensaje,
+                response.data.error ? "danger" : "success"
+            );
+        })
+        .catch(function (error) {
+            mostrarAlerta(
+                "Error",
+                "Hubo un error al guardar el tipo de evento",
+                "danger"
+            );
+        });
+};
+function datoCambiado() {
+    if (tipoForm === 1) {
+        datosActualizados = true;
+    }
 }
 
-function cerrar(edicion) {
-  if (edicion) {
-    window.location.href = '/eventos/' + nombreEvento;
-  }
-  document.getElementById("formularioCrearEvento").classList.remove('was-validated');
-  //window.location.href = '/eventos';
-}
+//Recuperar tipos de eventos necesario para el form
+
+window.addEventListener("load", () => {
+    if (document.getElementById("nombreDelEvento").value != "") {
+        tipoForm = 1;
+    }
+    axios
+        .get("/api/tipo-evento")
+        .then(function (response) {
+            const select = document.getElementById("tipoDelEvento");
+            const tiposDeEvento = response.data;
+            tiposDeEvento.forEach(function (tipo) {
+                const option = document.createElement("option");
+                option.value = tipo.id;
+                option.text = tipo.nombre;
+                select.appendChild(option);
+            });
+            const idTipoEvento = document
+                .getElementById("tipoDelEvento")
+                .getAttribute("data-id");
+            if (idTipoEvento != "") {
+                select.value = idTipoEvento;
+            }
+        })
+        .catch(function (error) {
+            console.error(error);
+        });
+});
+
+const cerrar = (edicion) => {
+    if (edicion) {
+        window.location.href = "/eventos/" + nombreEvento;
+    }
+    document
+        .getElementById("formularioCrearEvento")
+        .classList.remove("was-validated");
+};

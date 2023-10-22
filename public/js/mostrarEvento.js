@@ -1,21 +1,27 @@
+let linkSubir = document.getElementById("uploadButton");
+let imagenPredeterminada = document.getElementById("uploadIcon");
+let imagenPrevisualizada = document.getElementById("imagePreview");
+let botonBorrarAfiche = document.getElementById("botonBorrarAfiche");
+let botonSubirAfiche = document.getElementById("botonSubirAfiche");
 
-function handleImageUpload(id) {
-    document.getElementById("uploadButton").style.display = "none";
-    document.getElementById("uploadIcon").style.display = "none";
-    document.getElementById("imagePreview").style.display = "block";
-    document.getElementById("botonBorrarAfiche").style.visibility = "visible";
-    document.getElementById("botonSubirAfiche").style.visibility = "visible";
+const handleImageUpload = (id) => {
+    linkSubir.style.display = "none";
+    imagenPredeterminada.style.display = "none";
+    imagenPrevisualizada.style.display = "block";
+    botonBorrarAfiche.style.visibility = "visible";
+    botonSubirAfiche.style.visibility = "visible";
+
     validarImagen("imageUpload", 2, (response) => {
         if (!response.error) {
-            var reader = new FileReader();
+            const reader = new FileReader();
             reader.onload = function (e) {
-                document.getElementById("imagePreview").src = e.target.result;
+                imagenPrevisualizada.src = e.target.result;
             };
             reader.readAsDataURL(
                 document.getElementById("imageUpload").files[0]
             );
 
-            let form = new FormData();
+            const form = new FormData();
             form.append(
                 "afiche",
                 document.getElementById("imageUpload").files[0]
@@ -25,49 +31,46 @@ function handleImageUpload(id) {
                 console.log(response.data);
             });
         } else {
-            document.getElementById("uploadIcon").style.display = "block";
-            document.getElementById("imagePreview").style.display = "none";
-            document.getElementById("botonBorrarAfiche").style.visibility =
-                "hidden";
-            document.getElementById("botonSubirAfiche").style.visibility =
-                "hidden";
-            document.getElementById("uploadButton").textContent =
-                "Imagen no valida vuelve a subir afiche";
-            document.getElementById("uploadButton").style.display = "block";
+            imagenPredeterminada.style.display = "block";
+            imagenPrevisualizada.style.display = "none";
+            botonBorrarAfiche.style.visibility = "hidden";
+            botonSubirAfiche.style.visibility = "hidden";
+            linkSubir.textContent = "Imagen no válida vuelve a subir afiche";
+            linkSubir.style.display = "block";
         }
     });
-}
+};
 
-function previewSponsorLogo(event) {
+const previewSponsorLogo = (event) => {
     validarImagen("validationCustomImage", 2, (response) => {
         if (!response.error) {
-            var reader = new FileReader();
-            reader.onload = function () {
-                var output = document.getElementById("sponsorPreview");
+            const reader = new FileReader();
+            reader.onload = () => {
+                let output = document.getElementById("sponsorPreview");
                 output.style.backgroundImage = "url(" + reader.result + ")";
             };
             reader.readAsDataURL(event.target.files[0]);
         } else {
-            var output = document.getElementById("sponsorPreview");
+            let output = document.getElementById("sponsorPreview");
             output.style.backgroundImage =
                 "url(" + "../image/uploading.png" + ")";
         }
         console.log(response.mensaje);
     });
-}
+};
 
-function resetModal(idModal, idForm) {
-    var output = document.getElementById("sponsorPreview");
+const resetModal = (idModal, idForm) => {
+    const output = document.getElementById("sponsorPreview");
     output.style.backgroundImage = "url(" + "../image/uploading.png" + ")";
-    let modal = document.getElementById(idModal);
-    let inputs = modal.querySelectorAll("input");
+    const modal = document.getElementById(idModal);
+    const inputs = modal.querySelectorAll("input");
     inputs.forEach((element) => (element.value = ""));
-    let form = document.getElementById(idForm);
+    const form = document.getElementById(idForm);
     form.classList.remove("was-validated");
-}
+};
 
 // Esta función se llama cuando se hace clic en el botón "Confirmar"
-async function guardarPatrocinador() {
+const guardarPatrocinador = async () => {
     let form = document.getElementById("formularioAgregarPatrocinador");
     if (form.checkValidity()) {
         // Obtén los valores del formulario
@@ -95,7 +98,7 @@ async function guardarPatrocinador() {
             });
         $("#modalAgregarPatrocinador").modal("hide");
         document.getElementById("formularioAgregarPatrocinador").reset();
-        var output = document.getElementById("sponsorPreview");
+        const output = document.getElementById("sponsorPreview");
         output.style.backgroundImage = "url(" + "../image/uploading.png" + ")";
     } else {
         form.classList.add("was-validated");
@@ -127,23 +130,21 @@ const validarImagen = (id, peso, callback) => {
     }
 };
 
-window.addEventListener("load", async () => {
-    await cargarPatrocinadores();
+window.addEventListener("load", () => {
+    cargarPatrocinadores();
     let ruta = document.getElementById("rutaImagen").textContent;
     if (ruta != "/evento/afiche.jpg") {
         console.log(ruta);
-        document.getElementById("imagePreview").src = ruta;
-        document.getElementById("uploadButton").style.display = "none";
-        document.getElementById("uploadIcon").style.display = "none";
-        document.getElementById("imagePreview").style.display = "block";
-        document.getElementById("botonBorrarAfiche").style.visibility =
-            "visible";
-        document.getElementById("botonSubirAfiche").style.visibility =
-            "visible";
+        imagenPrevisualizada.src = ruta;
+        imagenPredeterminada.style.display = "none";
+        linkSubir.style.display = "block";
+        imagenPrevisualizada.style.display = "block";
+        botonBorrarAfiche.style.visibility = "visible";
+        botonSubirAfiche.style.visibility = "visible";
     }
 });
 
-borrarAfiche = (id) => {
+const borrarAfiche = (id) => {
     axios.delete("/api/evento/afiche/" + id).then((response) => {
         document.getElementById("uploadIcon").style.display = "block";
         document.getElementById("imagePreview").style.display = "none";
@@ -190,7 +191,7 @@ async function cargarPatrocinadores() {
 
 async function getPatrocinadores() {
     const id_evento = document.getElementById("id_evento").value;
-    datos = await axios
+    let datos = await axios
         .get("/api/patrocinador/" + id_evento)
         .then((response) => {
             return response;
