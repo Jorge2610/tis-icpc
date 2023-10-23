@@ -103,20 +103,6 @@
         </footer>
 
     </div>
-    <script>
-        // Obtener el elemento que contiene el interruptor (switch)
-        const themeSwitch = document.getElementById("theme-switch");
-
-        // Escuchar eventos de cambio (por ejemplo, clic) en el interruptor
-        themeSwitch.addEventListener("change", function() {
-            if (this.checked) {
-                document.documentElement.setAttribute("data-bs-theme", "dark");
-            } else {
-                document.documentElement.setAttribute("data-bs-theme", "light");
-            }
-        });
-    </script>
-
 </body>
 
 </html>
