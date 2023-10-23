@@ -65,11 +65,6 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
-                        <!--dark mode -->
-                        <li class="nav-item">
-                            <input type="checkbox" id="theme-switch">
-                            <label for="theme-switch">Dark Mode</label>
-                        </li>
                         <!-- Authentication Links -->
                        
 

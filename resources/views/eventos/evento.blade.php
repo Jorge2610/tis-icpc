@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-md-1">
                     <button type="button" class="btn btn-light" data-bs-toggle="dropdown" title="Opciones del evento">
-                        <i class="far fa-ellipsis-h"></i>
+                        <i class="fa fa-ellipsis-v"></i>
                     </button>
                     <ul class="dropdown-menu">
                         <li>
