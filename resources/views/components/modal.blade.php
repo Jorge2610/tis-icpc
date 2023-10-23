@@ -5,7 +5,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="{{ $modalId }}Label">{{ $modalTitle }}</h5>
             </div>
-            <div class="modal-body">
+            <div class="modal-body d-flex justify-content-center">
                 {{ $modalContent }}
             </div>
             <div class="modal-footer d-flex justify-content-center">

@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-md-1">
                     <button type="button" class="btn btn-light" data-bs-toggle="dropdown" title="Opciones del evento">
-                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                        <i class="far fa-ellipsis-h"></i>
                     </button>
                     <ul class="dropdown-menu">
                         <li>
@@ -51,11 +51,11 @@
             <div hidden id="rutaImagen" value="">{{ $evento->ruta_afiche }}</div>
 
             <div class="col-md-7 border-end">
-                
+
                 <p class="descripcion-evento mx-3" style="text-align: justify">{!! nl2br($evento->descripcion) !!}</p>
 
                 <table class="table" >
-                    <caption>Tipo de eventos</caption>
+                    <caption hidden>Tipo de eventos</caption>
                     <tbody>
                         <tr>
                             <th scope="row">Tipo de evento</th>
