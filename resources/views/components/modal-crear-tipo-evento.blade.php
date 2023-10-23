@@ -8,7 +8,8 @@
                     <div class="contenedor-titulo">
                         <h5 class="modal-title" id="modalCrearTipoEventoLabel">Crear tipo de evento</h5>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="remover()"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        onclick="remover()"></button>
                 </div>
                 <div class="modal-body">
                     <form id="formularioTipoEvento" class="needs-validation" novalidate>
@@ -38,23 +39,24 @@
                                 <div class="col-md-12">
                                     <div class="row contenedor-titulo-color">
                                         <div class="contenedor-subtitulo">
-                                        <div class=" mt-3">
-                                            <label for="colorTipoEvento" class="form-label text-container">Color de
-                                                referencia</label>
-                                        </div>
+                                            <div class=" mt-3">
+                                                <label for="colorTipoEvento" class="form-label text-container">Color de
+                                                    referencia</label>
+                                            </div>
                                         </div>
                                         <div class=" mt-2 custom-col colum-col">
-                                            <input name="color" type="color" class="form-control form-control-color controlador"
-                                            id="colorTipoEvento" value="#563d7c" title="Choose your color">
+                                            <input name="color" type="color"
+                                                class="form-control form-control-color controlador" id="colorTipoEvento"
+                                                value="#563d7c" title="Choose your color">
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="modal-footer">
-                                <button type="reset" class="btn btn-secondary"
-                                    data-bs-dismiss="modal" onclick="remover()" >Cancelar</button>
-                                <button id="confirmarBoton" type="submit" class="btn btn-primary" >Confirmar</button>
+                                <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal"
+                                    onclick="remover()">Cancelar</button>
+                                <button id="confirmarBoton" type="submit" class="btn btn-primary">Confirmar</button>
                             </div>
                     </form>
                 </div>

@@ -1,16 +1,17 @@
-let fechaInscripcionInicio = document.getElementById("fechaInscripcionInicio");
-let fechaInscripcionFin = document.getElementById("fechaInscripcionFin");
-let inputGenero = document.getElementById("generoCheck");
-let inputEdad = document.getElementById("edadCheck");
-let inputCosto = document.getElementById("eventoPagoCheck");
-let form = document.getElementById("formularioCrearEvento");
+const fechaInscripcionInicio = document.getElementById("fechaInscripcionInicio");
+const fechaInscripcionFin = document.getElementById("fechaInscripcionFin");
+const inputGenero = document.getElementById("generoCheck");
+const inputEdad = document.getElementById("edadCheck");
+const inputCosto = document.getElementById("eventoPagoCheck");
+const form = document.getElementById("formularioCrearEvento");
+const fechaInicio = document.getElementById("fechaInicio");
+const fechaFin = document.getElementById("fechaFin");
+const edadMinima = document.getElementById("edadMinima");
+const edadMaxima = document.getElementById("edadMaxima");
+
 let tipoForm = 0; //0-> Crear  1->Editar
 let datosActualizados = false;
 let nombreEvento = document.getElementById("nombreDelEvento").value;
-let fechaInicio = document.getElementById("fechaInicio");
-let fechaFin = document.getElementById("fechaFin");
-let edadMinima = document.getElementById("edadMinima");
-let edadMaxima = document.getElementById("edadMaxima");
 
 //Validaciones
 const setMinDate = (input, target) => {
@@ -28,7 +29,7 @@ const validarFechas = (fechaInicio, fechaFin) => {
     datoCambiado();
 };
 
-const copiarEdadMaxima = (edadMinima, edadMaxima) => {
+const copiarEdadMaxima = () => {
     const valor = edadMinima.value;
     edadMaxima.value = valor;
     edadMaxima.min = valor;
@@ -53,22 +54,22 @@ fechaInscripcionFin.addEventListener("change", () => {
 });
 
 edadMinima.addEventListener("change", () => {
-   copiarEdadMaxima(edadMinima, edadMaxima);
+    copiarEdadMaxima();
 });
 
-function utilizarInput(indInput, check) {
+const utilizarInput = (indInput, check) => {
     let input = document.getElementById(indInput);
     input.disabled = !check;
-}
+};
 
-function mostrarInput(indInput, check) {
+const mostrarInput = (indInput, check) => {
     let input = document.getElementById(indInput);
     if (!check) {
         input.style.display = "none";
     } else {
         input.style.display = "flex";
     }
-}
+};
 
 //check
 inputGenero.addEventListener("change", () => {
@@ -111,12 +112,12 @@ const previewSponsorLogo = (event) => {
 };
 
 const resetModal = (idModal, idForm) => {
-    let output = document.getElementById("sponsorPreview");
+    const output = document.getElementById("sponsorPreview");
     output.style.backgroundImage = "url(" + "../image/uploading.png" + ")";
-    let modal = document.getElementById(idModal);
-    let inputs = modal.querySelectorAll("input");
+    const modal = document.getElementById(idModal);
+    const inputs = modal.querySelectorAll("input");
     inputs.forEach((element) => (element.value = ""));
-    let form = document.getElementById(idForm);
+    const form = document.getElementById(idForm);
     form.classList.remove("was-validated");
 };
 
@@ -125,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
     mostrarInput("genero", inputGenero.checked);
     mostrarInput("rangosDeEdad", inputEdad.checked);
     mostrarInput("eventoPago", inputCosto.checked);
-    let form = document.getElementById("formularioCrearEvento");
+    const form = document.getElementById("formularioCrearEvento");
 
     form.addEventListener("submit", function (event) {
         event.preventDefault();
@@ -136,10 +137,10 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        let formData = prepararFormData();
+        const formData = prepararFormData();
 
-        let eventoId = formData.get("evento_id");
-        let imagen = document.getElementById("imagen").value;
+        const eventoId = formData.get("evento_id");
+        const imagen = document.getElementById("imagen").value;
         formData.set("ruta_afiche", imagen);
 
         if (eventoId) {
@@ -154,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 const prepararFormData = () => {
-    let formData = new FormData(form);
+    const formData = new FormData(form);
     if (!inputEdad.checked) {
         formData.set("edad_minima", "");
         formData.set("edad_maxima", "");
@@ -212,11 +213,11 @@ const crearEvento = (formData) => {
             );
         });
 };
-function datoCambiado() {
+const datoCambiado = () => {
     if (tipoForm === 1) {
         datosActualizados = true;
     }
-}
+};
 
 //Recuperar tipos de eventos necesario para el form
 

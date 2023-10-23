@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\HelloWorld;
 use App\Http\Controllers\EventoController;
+use App\Http\Controllers\TipoEventoController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,16 +17,17 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/', [EventoController::class, 'cargarEventos']);
 
-Route::group(['prefix' => 'eventos'], function(){
+Route::group(['prefix' => 'eventos'], function () {
     Route::get('/', [EventoController::class, 'cargarEventos']);
-    Route::get('crear-evento/',[EventoController::class,'showEventForm'])->name('crear');
-    Route::get('tipos-de-evento', function () {return view('tipos-de-evento/tiposDeEvento');});
+    Route::get('crear-evento', [EventoController::class, 'showEventForm'])->name('crear');
+    Route::get('tipos-de-evento', [TipoEventoController::class, 'mostrarVistaTipoEvento'])->name('tipo-evento');
     Route::get('{nombre}', [EventoController::class, 'cargarEvento'])->name('evento.cargarEvento');
-    Route::get('editar-evento/{id}',[EventoController::class,'showEventForm'])->name('evento.editar');
+    Route::get('editar-evento/{id}', [EventoController::class, 'showEventForm'])->name('evento.editar');
 });

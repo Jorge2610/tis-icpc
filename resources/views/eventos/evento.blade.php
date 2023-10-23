@@ -27,7 +27,7 @@
                     style="cursor: pointer; position: relative;">
                     <button id="botonBorrarAfiche"type="button" class="btn btn-light btn-lg hover-button boton-borrar"
                         data-bs-toggle="modal" data-bs-target="#modalEliminarImage" data-bs-toggle="tooltip"
-                        data-bs-placement="top" title="Eliminar afiche" onclick="borrarAfiche({{$evento->id}})">
+                        data-bs-placement="top" title="Eliminar afiche" onclick="borrarAfiche({{ $evento->id }})">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
                     <button id="botonSubirAfiche" type="button"
@@ -45,16 +45,17 @@
                     <a id="uploadButton" class="boton-subir-2 text-center">Presione para subir imagen</a>
                 </div>
                 <input class="form-control" type="file" id="imageUpload" accept="image/png, image/jpeg, image/jpg"
-                    style="display: none;" onchange="handleImageUpload({{$evento->id}})">
+                    style="display: none;" onchange="subirAfiche({{ $evento->id }})">
             </div>
-            
+
             <div hidden id="rutaImagen" value="">{{ $evento->ruta_afiche }}</div>
 
             <div class="col-md-7 border-end">
-                <!-- <h2>Detalles del evento</h2>-->
-                <p class="descripcion-evento mx-3" style="text-align: justify" >{!! nl2br($evento->descripcion) !!}</p>
+                
+                <p class="descripcion-evento mx-3" style="text-align: justify">{!! nl2br($evento->descripcion) !!}</p>
 
-                <table class="table">
+                <table class="table" >
+                    <caption>Tipo de eventos</caption>
                     <tbody>
                         <tr>
                             <th scope="row">Tipo de evento</th>
@@ -151,7 +152,7 @@
 
                 <div class="row g-4 mt-3" id="contenedorPatrocinadores">
                     <!-Patrocinadores->
-                    
+
                 </div>
                 @component('components.modal')
                     @slot('modalId', 'modalBorrarPatrocinador')
@@ -161,7 +162,8 @@
                     @endslot
                     @slot('modalButton')
                         <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>
-                        <button type="button" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal" onclick="borrar1()" >Sí</button>
+                        <button type="button" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal"
+                            onclick="borrar1()">Sí</button>
                     @endslot
                 @endcomponent
             </div>

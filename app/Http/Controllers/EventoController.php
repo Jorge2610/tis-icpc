@@ -213,4 +213,6 @@ class EventoController extends Controller
         }
         return view('crear-evento.crearEvento', compact('datos'));
     }
+
+   
 }

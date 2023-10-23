@@ -2,7 +2,6 @@ const mostrarAlerta = (titulo, mensaje, tipo) => {
     let icono = "";
     let fill = "";
 
-    // Asignar el icono y el color de fondo según el tipo
     if (tipo === "success") {
         icono = "check-circle";
         fill = "#28a745";

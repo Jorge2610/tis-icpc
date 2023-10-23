@@ -72,7 +72,7 @@ class TipoEventoController extends Controller
             $tipo_evento->delete();
             return response()->json(['mensaje' => 'Eliminado exitosamente', 'error' => false]);
         } catch (QueryException $e) {
-            if($e->errorInfo[1] == 1451){
+            if ($e->errorInfo[1] == 1451) {
                 return response()->json(['mensaje' => 'El tipo de evento tiene eventos asociados', 'error' => true]);
             }
             return $e->getMessage();
@@ -83,5 +83,10 @@ class TipoEventoController extends Controller
     {
         $tipo_evento = TipoEvento::find($id);
         return $tipo_evento;
+    }
+
+    public function mostrarVistaTipoEvento()
+    {
+        return view('tipos-de-evento/tiposDeEvento');
     }
 }

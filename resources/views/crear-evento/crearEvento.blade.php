@@ -32,9 +32,8 @@
                     <div class="col-md-6">
                         <label for="tipoDelEvento" class="form-label">Tipo de evento</label>
                         <!-Cargar tipos de evento->
-                            <select name="id_tipo_evento" class="form-select" id="tipoDelEvento"
-                                onchange="datoCambiado()" aria-placeholder="Elija un tipo de evento..."
-                                data-id="{{ $datos['id_tipo_evento'] }}">
+                            <select name="id_tipo_evento" class="form-select" id="tipoDelEvento" onchange="datoCambiado()"
+                                aria-placeholder="Elija un tipo de evento..." data-id="{{ $datos['id_tipo_evento'] }}">
 
                             </select>
                             <div class="invalid-feedback">
@@ -46,8 +45,7 @@
                         <label for="gradoDelEvento" class="form-label">Grado academico requerido</label>
                         <select name="grado_academico" class="form-select" id="gradoDelEvento" onchange="datoCambiado()"
                             aria-placeholder="Elija un tipo de evento...">
-                            @foreach(['Ninguno', 'Primaria', 'Secundaria',
-                                     'Universidad', 'Licenciatura', 'Maestria', 'Doctorado'] as $grado)
+                            @foreach (['Ninguno', 'Primaria', 'Secundaria', 'Universidad', 'Licenciatura', 'Maestria', 'Doctorado'] as $grado)
                                 <option value="{{ $grado }}" @if ($datos['grado_academico'] == $grado) selected @endif>
                                     {{ $grado }}
                                 </option>
@@ -116,8 +114,7 @@
                                             <div class="input-group">
                                                 <input name="edad_minima" type="number" class="form-control"
                                                     min="0" id="edadMinima" step="1"
-                                                    value="{{ isset($datos['edad_minima'])
-                                                        ? $datos['edad_minima'] : '0' }}">
+                                                    value="{{ isset($datos['edad_minima']) ? $datos['edad_minima'] : '0' }}">
                                             </div>
                                         </div>
                                     </div>
@@ -131,8 +128,7 @@
                                             <div class="input-group">
                                                 <input name="edad_maxima" type="number" class="form-control"
                                                     id="edadMaxima" step="1"
-                                                    value="{{ isset($datos['edad_maxima'])
-                                                     ? $datos['edad_maxima'] : '0' }}">
+                                                    value="{{ isset($datos['edad_maxima']) ? $datos['edad_maxima'] : '0' }}">
                                             </div>
                                         </div>
                                     </div>
@@ -179,8 +175,7 @@
                                         <span class="input-group-text">Bs.</span>
                                         <input name="precio_inscripcion" type="number" class="form-control"
                                             min="0" id="costoEvento" step="0.5"
-                                            value="{{ isset($datos['precio_inscripcion'])
-                                                 ? $datos['precio_inscripcion'] : '0.0' }}">
+                                            value="{{ isset($datos['precio_inscripcion']) ? $datos['precio_inscripcion'] : '0.0' }}">
                                     </div>
                                 </div>
                             </div>
@@ -244,9 +239,8 @@
 
                 <div class="col-md-12 mt-5  ms-3">
                     <label for="descripcionDelEvento" class="form-label">Descripción del evento</label>
-                    <textarea name="descripcion" class="form-control" id="descripcionDelEvento" rows="8"
-                     style="resize: none;" onchange="datoCambiado()" placeholder="Ingrese una descripcion..."
-                      maxlength="2048">{{ $datos['descripcionDelEvento'] }}</textarea>
+                    <textarea name="descripcion" class="form-control" id="descripcionDelEvento" rows="8" style="resize: none;"
+                        onchange="datoCambiado()" placeholder="Ingrese una descripcion..." maxlength="2048">{{ $datos['descripcionDelEvento'] }}</textarea>
                 </div>
 
                 <div class="row mt-4 text-center">
@@ -290,8 +284,7 @@
                                 @endif
                             @endslot
                             @slot('modalButton')
-                                <button type="button" class="btn btn-secondary w-25 mx-8"
-                                 data-bs-dismiss="modal">No</button>
+                                <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>
                                 <button type="submit" class="btn btn-primary w-25 mx-8">Sí</button>
                             @endslot
                         @endcomponent
