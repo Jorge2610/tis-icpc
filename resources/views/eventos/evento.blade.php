@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-md-1">
                     <button type="button" class="btn btn-light" data-bs-toggle="dropdown" title="Opciones del evento">
-                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                        <i class="fa fa-ellipsis-v"></i>
                     </button>
                     <ul class="dropdown-menu">
                         <li>
@@ -27,7 +27,7 @@
                     style="cursor: pointer; position: relative;">
                     <button id="botonBorrarAfiche"type="button" class="btn btn-light btn-lg hover-button boton-borrar"
                         data-bs-toggle="modal" data-bs-target="#modalEliminarImage" data-bs-toggle="tooltip"
-                        data-bs-placement="top" title="Eliminar afiche">
+                        data-bs-placement="top" title="Eliminar afiche" onclick="borrarAfiche({{ $evento->id }})">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
                     <button id="botonSubirAfiche" type="button"
@@ -42,17 +42,20 @@
 
                     <img id="imagePreview" src="#" class="img-fluid mt-3 imagen-afiche" alt="Imagen del evento"
                         style="display: none;">
-                    <a id="uploadButton" class="boton-subir-2">Presione para subir imagen</a>
+                    <a id="uploadButton" class="boton-subir-2 text-center">Presione para subir imagen</a>
                 </div>
-                <input class="form-control" type="file" id="imageUpload" accept="image/png image/jpeg image/jpg"
-                    style="display: none;" onchange="handleImageUpload()">
+                <input class="form-control" type="file" id="imageUpload" accept="image/png, image/jpeg, image/jpg"
+                    style="display: none;" onchange="subirAfiche({{ $evento->id }})">
             </div>
 
-            <div class="col-md-7 border-end">
-                <!-- <h2>Detalles del evento</h2>-->
-                <p class="descripcion-evento mx-3" style="text-align: justify" >{!! nl2br($evento->descripcion) !!}</p>
+            <div hidden id="rutaImagen" value="">{{ $evento->ruta_afiche }}</div>
 
-                <table class="table">
+            <div class="col-md-7 border-end">
+
+                <p class="descripcion-evento mx-3" style="text-align: justify">{!! nl2br($evento->descripcion) !!}</p>
+
+                <table class="table" >
+                    <caption hidden>Tipo de eventos</caption>
                     <tbody>
                         <tr>
                             <th scope="row">Tipo de evento</th>
@@ -98,7 +101,7 @@
                         @if ($evento->genero != null)
                             <tr>
                                 <th scope="row">Género admitido</th>
-                                <td>{{ $evento->region }}</td>
+                                <td>{{ $evento->genero }}</td>
                             </tr>
                         @endif
                         @if ($evento->edad_minima && $evento->edad_maxima)
@@ -149,9 +152,20 @@
 
                 <div class="row g-4 mt-3" id="contenedorPatrocinadores">
                     <!-Patrocinadores->
-                    
+
                 </div>
-                <x-modal-confirmacion-eliminar-patrocinador/>
+                @component('components.modal')
+                    @slot('modalId', 'modalBorrarPatrocinador')
+                    @slot('modalTitle', 'Confirmacion')
+                    @slot('modalContent')
+                        ¿Está seguro de eliminar al patrocinador?
+                    @endslot
+                    @slot('modalButton')
+                        <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal"
+                            onclick="borrar1()">Sí</button>
+                    @endslot
+                @endcomponent
             </div>
         </div>
     </div>

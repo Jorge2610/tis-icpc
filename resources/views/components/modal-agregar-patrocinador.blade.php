@@ -16,9 +16,10 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <input name="logo" type="file" class="form-control custom-input" id="validationCustomImage"
-                                        required style="display: none;" accept="image/png image/jpeg image/jpg"
-                                        onchange="previewSponsorLogo(event)">
+                                    <input name="logo" type="file" class="form-control custom-input"
+                                        id="validationCustomImage" required style="display: none;"
+                                        accept="image/png, image/jpeg, image/jpg"
+                                        onchange="previsualizacionPatrocinador(event)">
                                     <label for="validationCustomImage" class="custom-file-upload">
                                         <div id="sponsorPreview">
                                         </div>
@@ -32,8 +33,9 @@
                                         <div class="col-md-12">
                                             <label for="validationCustomName" class="form-label">Nombre
                                                 del patrocinador *</label>
-                                                <input name="id_evento" type="hidden" id="id_evento"  value="{{ $evento->id }}">
-                                                <input name="nombre" type="text" class="form-control custom-input"
+                                            <input name="id_evento" type="hidden" id="id_evento"
+                                                value="{{ $evento->id }}">
+                                            <input name="nombre" type="text" class="form-control custom-input"
                                                 id="validationCustomName" value="" placeholder="Ingrese un nombre"
                                                 required>
                                             <div class="invalid-feedback">
@@ -56,7 +58,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary custom-btn" data-bs-dismiss="modal"
-                        onclick="resetModal('modalAgregarPatrocinador', 'formularioAgregarPatrocinador')">Cancelar</button>
+                        onclick="reiniciarModal('modalAgregarPatrocinador', 'formularioAgregarPatrocinador')">Cancelar</button>
                     <button type="button" onclick="guardarPatrocinador()" class="btn btn-primary">Confirmar</button>
                 </div>
             </div>

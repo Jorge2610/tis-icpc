@@ -3,10 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row g-5" id="tarjetasRow">
-            @php
-                //dd($eventos);
-                //$eventos = $eventos->reverse();
-            @endphp
+
             @foreach ($eventos as $evento)
                 <div class="col-md-auto">
                     <div class="tarjeta card mb-3" style="max-width: 540px;">
@@ -39,8 +36,8 @@
                                 </div>
                             </div>
                             <div class="d-flex p-3 align-self-center col-md-4">
-                                <img src="{{ URL::asset('/image/icpc.png') }}" class="img-fluid rounded-start"
-                                    alt="...">
+                                <img src="{{ URL::asset($evento->ruta_afiche == '/evento/afiche.jpg' ? '../image/aficheDefecto.png' : $evento->ruta_afiche) }}"
+                                    class="img-fluid rounded-start" alt="...">
                             </div>
                         </div>
                     </div>
@@ -48,5 +45,4 @@
             @endforeach
         </div>
     </div>
-    <script src="{{ asset('js/eventos.js') }}" defer></script>
 @endsection

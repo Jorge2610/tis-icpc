@@ -51,7 +51,6 @@ class EventoController extends Controller
             $evento->edad_maxima        = $request->edad_maxima;
             $evento->genero             = $request->genero;
             $evento->precio_inscripcion = $request->precio_inscripcion;
-            //$evento->ruta_afiche        = $request->input('ruta_afiche', 'public/evento/afiche.jpg');
             $evento->id_tipo_evento     = $request->id_tipo_evento;
             $evento->save();
             return response()->json(['mensaje' => 'Creado exitosamente', 'error' => false]);
@@ -62,11 +61,7 @@ class EventoController extends Controller
                 if ($e->errorInfo[1] == 1048) {
                     return response()->json(['mensaje' => 'No hay tipo de evento seleccionado', 'error' => true]);
                 } else {
-                    if ($e->errorInfo[1] == 1406) {
-                        return response()->json(['mensaje' => 'Campo demasiado grande', 'error' => true]);
-                    } else {
-                        return $e->getMessage();
-                    }
+                    return $e->getMessage();
                 }
             }
         }
@@ -218,4 +213,6 @@ class EventoController extends Controller
         }
         return view('crear-evento.crearEvento', compact('datos'));
     }
+
+   
 }

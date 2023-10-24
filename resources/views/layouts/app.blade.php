@@ -12,13 +12,14 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/alerta.js') }}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -32,7 +33,7 @@
 <body>
     <div id="app">
         <div id="alertsContainer" class="customAlertContainer"></div>
-        <nav class="navbar sticky-top navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar sticky-top navbar-expand-md navbar-light bg-white shadow shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="https://foundation.icpc.global/wp-content/uploads/2023/05/2023-icpc-foundation-logo-3c@300.png"
@@ -54,7 +55,8 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="{{ url('/eventos') }}">Ver eventos</a></li>
-                                <li><a class="dropdown-item" href="{{ url('/eventos/crear-evento') }}">Crear evento</a></li>
+                                <li><a class="dropdown-item" href="{{ url('/eventos/crear-evento') }}">Crear evento</a>
+                                </li>
                                 <li><a class="dropdown-item" href="{{ url('/eventos/tipos-de-evento') }}">Tipos de
                                         evento</a></li>
                             </ul>
@@ -63,6 +65,8 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+                        <!-- Authentication Links -->
+                       
 
                     </ul>
                 </div>
@@ -73,7 +77,7 @@
             @yield('content')
         </main>
 
-        <footer class="bg-light">
+        <footer class="">
             <hr class="hr" />
             <div class="container">
                 <div class="row align-items-center">
@@ -99,7 +103,6 @@
         </footer>
 
     </div>
-
 </body>
 
 </html>

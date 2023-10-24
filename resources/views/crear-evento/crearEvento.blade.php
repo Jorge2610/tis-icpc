@@ -5,9 +5,10 @@
         <form class="row g-4 needs-validation mt-1" method="POST" novalidate id="formularioCrearEvento">
             @csrf
             <input type="hidden" name="evento_id" value="{{ isset($datos['evento_id']) ? $datos['evento_id'] : '' }}">
-            <input type="hidden" id="imagen" name='imagen' value="{{isset($datos['ruta_afiche']) ? $datos['ruta_afiche'] : ''}}">
+            <input type="hidden" id="imagen" name='imagen'
+                value="{{ isset($datos['ruta_afiche']) ? $datos['ruta_afiche'] : '' }}">
             <div class="col-md-12">
-                @if(Route::currentRouteName() == 'evento.editar')
+                @if (Route::currentRouteName() == 'evento.editar')
                     <h5 id="titulo">Editar evento</h5>
                 @else
                     <h5 id="titulo">Crear evento</h5>
@@ -19,7 +20,8 @@
                 <div class="col-md-12">
                     <label for="nombreDelEvento" class="form-label">Nombre del evento *</label>
                     <input name="nombre" type="text" class="form-control" id="nombreDelEvento" onchange="datoCambiado()"
-                        placeholder="Ingrese el nombre del evento" maxlength="64" value="{{ isset($datos['nombreDelEvento'])? $datos['nombreDelEvento'] : ''}}" required>
+                        placeholder="Ingrese el nombre del evento" maxlength="64"
+                        value="{{ isset($datos['nombreDelEvento']) ? $datos['nombreDelEvento'] : '' }}" required>
                     <div class="invalid-feedback">
                         El nombre no puede estar vacio.
                     </div>
@@ -30,9 +32,9 @@
                     <div class="col-md-6">
                         <label for="tipoDelEvento" class="form-label">Tipo de evento</label>
                         <!-Cargar tipos de evento->
-                            <select name="id_tipo_evento" class="form-select" id="tipoDelEvento"
-                                aria-placeholder="Elija un tipo de evento..." data-id="{{$datos['id_tipo_evento']}}"> 
-                                
+                            <select name="id_tipo_evento" class="form-select" id="tipoDelEvento" onchange="datoCambiado()"
+                                aria-placeholder="Elija un tipo de evento..." data-id="{{ $datos['id_tipo_evento'] }}">
+
                             </select>
                             <div class="invalid-feedback">
                                 Seleccione un tipo de evento.
@@ -41,10 +43,10 @@
 
                     <div class="col-md-6">
                         <label for="gradoDelEvento" class="form-label">Grado academico requerido</label>
-                        <select name="grado_academico" class="form-select" id="gradoDelEvento"
+                        <select name="grado_academico" class="form-select" id="gradoDelEvento" onchange="datoCambiado()"
                             aria-placeholder="Elija un tipo de evento...">
-                            @foreach(['Ninguno', 'Primaria', 'Secundaria', 'Universidad', 'Licenciatura', 'Maestria', 'Doctorado'] as $grado)
-                                <option value="{{ $grado }}" @if($datos['grado_academico'] == $grado) selected @endif>
+                            @foreach (['Ninguno', 'Primaria', 'Secundaria', 'Universidad', 'Licenciatura', 'Maestria', 'Doctorado'] as $grado)
+                                <option value="{{ $grado }}" @if ($datos['grado_academico'] == $grado) selected @endif>
                                     {{ $grado }}
                                 </option>
                             @endforeach
@@ -61,7 +63,8 @@
                     <div class="col-md-6">
                         <label for="institucionDelEvento" class="form-label">Instituciones admitidas</label>
                         <input name="institucion" type="text" class="form-control" id="institucionDelEvento"
-                            placeholder="Ingrese la institución del evento" value="{{ isset($datos['institucion'])? $datos['institucion'] : '' }}">
+                            onchange="datoCambiado()" placeholder="Ingrese la institución del evento"
+                            value="{{ isset($datos['institucion']) ? $datos['institucion'] : '' }}">
                         <div class="invalid-feedback">
                             Este campo no puede estar vacio.
                         </div>
@@ -70,7 +73,8 @@
                     <div class="col-md-6">
                         <label for="regionDelEvento" class="form-label">Región</label>
                         <input name="region" type="text" class="form-control" id="regionDelEvento"
-                            placeholder="Ingrese la region del evento" maxlength="64"  value="{{ isset($datos['region'])? $datos['region']:''}}">
+                            onchange="datoCambiado()" placeholder="Ingrese la region del evento" maxlength="64"
+                            value="{{ isset($datos['region']) ? $datos['region'] : '' }}">
                     </div>
                 </div>
 
@@ -82,19 +86,23 @@
 
                     <div class="row mt-4">
                         <div class="col-md-6">
-                            <input name="evento_genero" type="checkbox" class="form-check-input border-dark" id="generoCheck" data-id="{{$datos['genero']}}" @if($datos['genero']) checked @endif>
+                            <input name="evento_genero" type="checkbox" class="form-check-input border-dark"
+                                id="generoCheck" onchange="datoCambiado()" data-id="{{ $datos['genero'] }}"
+                                @if ($datos['genero']) checked @endif>
                             <label for="genero" class="form-label">Género admitido</label>
                             <select class="form-select" name="genero" id="genero" style="display:none;">
-                            @foreach(['Femenino', 'Masculino'] as $sexo)
-                                <option value="{{ $sexo }}" @if($datos['genero'] == $sexo) selected @endif>
-                                    {{ $sexo }}
-                                </option>
-                            @endforeach
+                                @foreach (['Femenino', 'Masculino'] as $sexo)
+                                    <option value="{{ $sexo }}" @if ($datos['genero'] == $sexo) selected @endif>
+                                        {{ $sexo }}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
 
                         <div class="col-md-6">
-                            <input name="rango_edad" type="checkbox" class="form-check-input border-dark" id="edadCheck"data-id="{{$datos['edad_minima']}}" @if($datos['edad_minima']) checked @endif>
+                            <input name="rango_edad" type="checkbox" class="form-check-input border-dark" id="edadCheck"
+                                onchange="datoCambiado()" data-id="{{ $datos['edad_minima'] }}"
+                                @if ($datos['edad_minima']) checked @endif>
                             <label for="limiteDeEdad" class="form-label">Rango de edad</label>
                             <div class="row" id="rangosDeEdad" style="display: none;">
                                 <div class="col-md-6">
@@ -104,8 +112,9 @@
                                         </div>
                                         <div class="col-md-8">
                                             <div class="input-group">
-                                                <input name="edad_minima" type="number" class="form-control" min="0"
-                                                    id="edadMinima" step="1" value="{{ isset($datos['edad_minima']) ? $datos['edad_minima'] : '0' }}">
+                                                <input name="edad_minima" type="number" class="form-control"
+                                                    min="0" id="edadMinima" step="1"
+                                                    value="{{ isset($datos['edad_minima']) ? $datos['edad_minima'] : '0' }}">
                                             </div>
                                         </div>
                                     </div>
@@ -118,7 +127,8 @@
                                         <div class="col-md-8">
                                             <div class="input-group">
                                                 <input name="edad_maxima" type="number" class="form-control"
-                                                    id="edadMaxima" step="1" value="{{ isset($datos['edad_maxima']) ? $datos['edad_maxima'] : '0' }}">
+                                                    id="edadMaxima" step="1"
+                                                    value="{{ isset($datos['edad_maxima']) ? $datos['edad_maxima'] : '0' }}">
                                             </div>
                                         </div>
                                     </div>
@@ -131,13 +141,15 @@
 
                         <div class="col-md-6">
                             <input name="evento_equipos" type="checkbox" class="form-check-input border-dark"
-                                id="equipoCheck" @if($datos['evento_equipos']) checked @endif>
+                                onchange="datoCambiado()" id="equipoCheck"
+                                @if ($datos['evento_equipos']) checked @endif>
                             <label class="form-check-label" for="equipoCheck">Por equipos</label>
                         </div>
 
                         <div class="col-md-6">
                             <input name="requiere_registro" type="checkbox" class="form-check-input border-dark"
-                                id="registroCheck" @if($datos['requiere_registro']) checked @endif>
+                                onchange="datoCambiado()" id="registroCheck"
+                                @if ($datos['requiere_registro']) checked @endif>
                             <label class="form-check-label" for="registroCheck">Requiere registro</label>
                         </div>
 
@@ -147,7 +159,9 @@
 
                         <div class="col-md-6 mt-2">
                             <input name="evento_pago" type="checkbox" class="form-check-input border-dark"
-                                id="eventoPagoCheck" data-id="{{$datos['precio_inscripcion']}}" @if($datos['precio_inscripcion']) checked @endif>
+                                onchange="datoCambiado()" id="eventoPagoCheck"
+                                data-id="{{ $datos['precio_inscripcion'] }}"
+                                @if ($datos['precio_inscripcion']) checked @endif>
                             <label class="form-check-label" for="eventoPagoCheck">Evento de pago</label>
                         </div>
 
@@ -160,7 +174,8 @@
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Bs.</span>
                                         <input name="precio_inscripcion" type="number" class="form-control"
-                                            min="0" id="costoEvento" step="0.5" value="{{ isset($datos['precio_inscripcion']) ? $datos['precio_inscripcion'] : '0.0' }}">
+                                            min="0" id="costoEvento" step="0.5"
+                                            value="{{ isset($datos['precio_inscripcion']) ? $datos['precio_inscripcion'] : '0.0' }}">
                                     </div>
                                 </div>
                             </div>
@@ -184,14 +199,16 @@
 
                     <div class="col-md-4">
                         <input name="inicio_inscripcion" id="fechaInscripcionInicio" class="form-control" type="date"
-                            min="" value="{{ isset($datos['inicio_inscripcion'])? $datos['inicio_inscripcion']:'' }}"/>
+                            onchange="datoCambiado()" min=""
+                            value="{{ isset($datos['inicio_inscripcion']) ? $datos['inicio_inscripcion'] : '' }}" />
                     </div>
 
                     <div class="col-md-2">Fin</div>
 
                     <div class="col-md-4">
                         <input name="fin_inscripcion" id="fechaInscripcionFin" class="form-control" type="date"
-                        min="" value="{{ isset($datos['fin_inscripcion'])? $datos['fin_inscripcion']:'' }}"/> 
+                            onchange="datoCambiado()" min=""
+                            value="{{ isset($datos['fin_inscripcion']) ? $datos['fin_inscripcion'] : '' }}" />
                     </div>
 
                 </div>
@@ -206,14 +223,16 @@
 
                     <div class="col-md-4">
                         <input name="inicio_evento" id="fechaInicio" class="form-control" type="datetime-local"
-                            min="" value="{{ isset($datos['inicio_evento'])? $datos['inicio_evento']:'' }}" required />
+                            onchange="datoCambiado()" min=""
+                            value="{{ isset($datos['inicio_evento']) ? $datos['inicio_evento'] : '' }}" required />
                     </div>
 
                     <div class="col-md-2">Fin</div>
 
                     <div class="col-md-4">
                         <input name="fin_evento" id="fechaFin" class="form-control" type="datetime-local"
-                        min="" value="{{ isset($datos['fin_evento'])? $datos['fin_evento']:'' }}" required />
+                            onchange="datoCambiado()" min=""
+                            value="{{ isset($datos['fin_evento']) ? $datos['fin_evento'] : '' }}" required />
                     </div>
 
                 </div>
@@ -221,23 +240,54 @@
                 <div class="col-md-12 mt-5  ms-3">
                     <label for="descripcionDelEvento" class="form-label">Descripción del evento</label>
                     <textarea name="descripcion" class="form-control" id="descripcionDelEvento" rows="8" style="resize: none;"
-                        placeholder="Ingrese una descripcion...">{{ $datos['descripcionDelEvento'] }}</textarea>
+                        onchange="datoCambiado()" placeholder="Ingrese una descripcion..." maxlength="2048">{{ $datos['descripcionDelEvento'] }}</textarea>
                 </div>
 
                 <div class="row mt-4 text-center">
                     <div class="col-md-6">
                         <!-Añadir el modal de confirmacion antes de hacer el reset al form->
-                        <button type="button" class="btn btn-light text-primary" data-bs-toggle="modal" data-bs-target="#modalCancelar">
+                            <button type="button" class="btn btn-light text-primary" data-bs-toggle="modal"
+                                data-bs-target="#modalCancelar">
                                 Cancelar
                             </button>
-                            <x-modal-cancelar/>
+                            @component('components.modal')
+                                @slot('modalId', 'modalCancelar')
+                                @slot('modalTitle', 'Confirmacion')
+                                @slot('modalContent')
+                                    @if (Route::currentRouteName() == 'evento.editar')
+                                        ¿Está seguro de cancelar la edicion del evento?
+                                    @else
+                                        ¿Está seguro de cancelar el evento?
+                                    @endif
+                                @endslot
+                                @slot('modalButton')
+                                    <button type="button" class="btn btn-secondary w-25 mx-8"
+                                        data-bs-dismiss="modal">No</button>
+                                    <button type="reset" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal"
+                                        onclick="cerrar({{ Route::currentRouteName() == 'evento.editar' }})">Sí</button>
+                                @endslot
+                            @endcomponent
                     </div>
                     <div class="col-md-6">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#modalConfirmacion">
-                                Confirmar
-                            </button>
-                            <x-modal-confirmacion/>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#modalConfirmacion">
+                            Confirmar
+                        </button>
+                        @component('components.modal')
+                            @slot('modalId', 'modalConfirmacion')
+                            @slot('modalTitle', 'Confirmacion')
+                            @slot('modalContent')
+                                @if (Route::currentRouteName() == 'evento.editar')
+                                    ¿Está seguro de editar el evento?
+                                @else
+                                    ¿Está seguro de crear el evento?
+                                @endif
+                            @endslot
+                            @slot('modalButton')
+                                <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>
+                                <button type="submit" class="btn btn-primary w-25 mx-8">Sí</button>
+                            @endslot
+                        @endcomponent
                     </div>
                 </div>
 
