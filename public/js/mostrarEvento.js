@@ -163,7 +163,7 @@ const cargarPatrocinadores = async () => {
 
         const content = patrocinadores
             .map((patrocinador) => {
-                const ruta = patrocinador.enlaceWeb
+                const ruta = patrocinador.enlace_web
                     ? patrocinador.enlace_web
                     : "#";
                 return `
