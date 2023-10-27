@@ -15,7 +15,8 @@
     <script src="{{ asset('js/alerta.js') }}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="{{ asset('js/mdb.min.js') }}" defer></script>
+
+    <script src="{{ asset('js/layout.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -23,7 +24,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <!-- Styles -->
-    
+
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/crearTipoDeEvento.css') }}" rel="stylesheet">
     <link href="{{ asset('css/crearEvento.css') }}" rel="stylesheet">
@@ -34,74 +35,9 @@
 </head>
 
 <body>
-
     <div id="app">
-
+        <div id="alertsContainer" class="customAlertContainer"></div>
         <header>
-            <!-- Sidebar -->
-            <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
-                <div class="position-sticky">
-                    <div class="list-group list-group-flush mx-1 mt-3">
-
-                        <div class="accordion" id="menuLateral">
-                            <div class="accordion-item border-0">
-                                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-                                        aria-controls="panelsStayOpen-collapseOne">
-                                        TIPO DE EVENTO
-                                    </button>
-                                </h2>
-                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
-                                    aria-labelledby="panelsStayOpen-headingOne">
-                                    <div class="my-1 ms-3">
-                                        <a href="{{ url('/') }}"
-                                            class="list-group-item list-group-item-action py-2 border-0"
-                                            id="verTiposEventoSider">
-                                            Ver tipos de evento
-                                        </a>
-                                        <a href="{{ url('/crear-evento') }}"
-                                            class="list-group-item list-group-item-action py-2 border-0"
-                                            id="crearTipoEventoSider">
-                                            Crear tipo de evento
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item border-0">
-                                <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
-                                        aria-controls="panelsStayOpen-collapseTwo">
-                                        EVENTOS
-                                    </button>
-                                </h2>
-                                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show"
-                                    aria-labelledby="panelsStayOpen-headingTwo">
-                                    <div class="my-1 ms-3">
-                                        <a href="{{ url('/') }}"
-                                            class="list-group-item list-group-item-action py-2 border-0"
-                                            id="crearEventoSider">
-                                            Crear evento
-                                        </a>
-                                        <a href="{{ url('/') }}"
-                                            class="list-group-item list-group-item-action py-2 border-0"
-                                            id="asignarAficheSider">
-                                            Asignar afiche
-                                        </a>
-                                        <a href="{{ url('/') }}"
-                                            class="list-group-item list-group-item-action py-2 border-0"
-                                            id="asignarPatrocinadorSider">
-                                            Asignar patrocinador
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-            <!-- Sidebar -->
             <!-- Navbar -->
             <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm"
                 style="height: 12vh">
@@ -109,18 +45,18 @@
                 <div class="container-fluid d-flex align-middle">
 
                     <!-- Toggle button -->
-                    <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-                        data-mdb-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
-                        aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#sidebarMenu" aria-controls="sidebarMenu"
+                        aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <i class="fas fa-bars"></i>
                     </button>
 
-                    <div style="height: 10vh">
+                    <div class="ms-3" style="height: 10vh">
                         <!-- Brand -->
                         <a class="navbar-brand" href="{{ url('/') }}">
                             <img class="img"
                                 src="https://foundation.icpc.global/wp-content/uploads/2023/05/2023-icpc-foundation-logo-3c@300.png"
-                                alt="logo_pagina" loading="lazy" style="height: 100%"/>
+                                alt="logo_pagina" loading="lazy" style="height: 100%" />
                         </a>
                     </div>
 
@@ -139,6 +75,70 @@
                 <!-- Container wrapper -->
             </nav>
             <!-- Navbar -->
+            <!-- Sidebar -->
+            <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+                <div class="position-sticky">
+                    <div class="list-group list-group-flush mx-1 mt-3">
+
+                        <div class="accordion" id="menuLateral">
+                            <div class="accordion-item border-0">
+                                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                        aria-controls="panelsStayOpen-collapseOne">
+                                        TIPO DE EVENTO
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                                    aria-labelledby="panelsStayOpen-headingOne">
+                                    <div class="my-1 ms-3">
+                                        <a href="{{ url('/eventos/tipos-de-evento') }}"
+                                            class="list-group-item list-group-item-action sider-custom-bg py-2 border-0"
+                                            id="verTiposEventoSider">
+                                            Ver tipos de evento
+                                        </a>
+                                        <a href="{{ url('/') }}"
+                                            class="list-group-item list-group-item-action py-2 border-0"
+                                            id="crearTipoEventoSider">
+                                            Crear tipo de evento
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item border-0">
+                                <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                                        aria-controls="panelsStayOpen-collapseTwo">
+                                        EVENTOS
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show"
+                                    aria-labelledby="panelsStayOpen-headingTwo">
+                                    <div class="my-1 ms-3">
+                                        <a href="{{ url('/eventos/crear-evento') }}"
+                                            class="list-group-item list-group-item-action py-2 border-0"
+                                            id="crearEventoSider">
+                                            Crear evento
+                                        </a>
+                                        <a href="{{ url('/afiche/asignar') }}"
+                                            class="list-group-item list-group-item-action py-2 border-0"
+                                            id="asignarAficheSider">
+                                            Asignar afiche
+                                        </a>
+                                        <a href="{{ url('/') }}"
+                                            class="list-group-item list-group-item-action py-2 border-0"
+                                            id="asignarPatrocinadorSider">
+                                            Asignar patrocinador
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- Sidebar -->
         </header>
 
         <main style="margin-top: 14vh">
@@ -147,10 +147,10 @@
             </div>
         </main>
 
-        <footer class="bg-light border-top">
+        <footer class="bg-light border-top mt-2">
             <div class="col-md-12 d-flex align-items-center">
                 <div class="col-md-1">
-                    <a class="ms-4" href="https://www.umss.edu.bo/" target="_blank">
+                    <a class="ms-5" href="https://www.umss.edu.bo/" target="_blank">
                         <img src="{{ URL::asset('/image/logo-umss.png') }}" class="img" alt="logo_umss"
                             width="125">
                     </a>

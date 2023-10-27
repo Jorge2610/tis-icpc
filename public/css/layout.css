@@ -17,7 +17,7 @@ body {
   padding: 11vh 0 0;
   /* Height of navbar */
   width: 250px;
-  height: 80vh;
+  height: 50vh;
   z-index: 600;
 }
 
@@ -42,10 +42,6 @@ body {
   /* Scrollable contents if viewport is shorter than content. */
 }
 
-.active {
-  background-color: #366dc6 !important;
-}
-
 .accordion-button:not(.collapsed) {
   color: #0c63e4;
   background-color: transparent;
@@ -53,4 +49,25 @@ body {
 
 .accordion-button:focus {
   box-shadow: none;
+}
+
+.list-group-item:hover {
+  background-color: #e0e7f8;
+  border-radius: 5px;
+}
+
+.list-group-item.active {
+  background-color: #366dc6;
+}
+
+tr:hover > .sorting_1 {
+  background-color: #e0e7f8;
+}
+
+tr:nth-child(even):hover td {
+  background-color: #e0e7f8;
+}
+
+tr:nth-child(odd):hover td {
+  background-color: #e0e7f8;
 }
