@@ -3,7 +3,6 @@
 @section('content')
     <div class="container">
         <div class="row g-5" id="tarjetasRow">
-
             @foreach ($eventos as $evento)
                 <div class="col-md-auto">
                     <div class="tarjeta card mb-3" style="max-width: 540px;">
@@ -45,4 +44,6 @@
             @endforeach
         </div>
     </div>
+
+    <script src="{{ asset('js/eventos.js') }}" defer></script>
 @endsection

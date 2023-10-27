@@ -12,7 +12,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/alerta.js') }}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('js/mdb.min.js') }}" defer></script>
@@ -20,10 +19,9 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
     <!-- Styles -->
-    
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/crearTipoDeEvento.css') }}" rel="stylesheet">
     <link href="{{ asset('css/crearEvento.css') }}" rel="stylesheet">
@@ -35,7 +33,7 @@
 
 <body>
 
-    <div id="app">
+    <div id="app1">
 
         <header>
             <!-- Sidebar -->
@@ -102,12 +100,12 @@
                 </div>
             </nav>
             <!-- Sidebar -->
+
             <!-- Navbar -->
             <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm"
                 style="height: 12vh">
                 <!-- Container wrapper -->
-                <div class="container-fluid d-flex align-middle">
-
+                <div class="container-fluid">
                     <!-- Toggle button -->
                     <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
                         data-mdb-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
@@ -115,14 +113,11 @@
                         <i class="fas fa-bars"></i>
                     </button>
 
-                    <div style="height: 10vh">
-                        <!-- Brand -->
-                        <a class="navbar-brand" href="{{ url('/') }}">
-                            <img class="img"
-                                src="https://foundation.icpc.global/wp-content/uploads/2023/05/2023-icpc-foundation-logo-3c@300.png"
-                                alt="logo_pagina" loading="lazy" style="height: 100%"/>
-                        </a>
-                    </div>
+                    <!-- Brand -->
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        <img src="https://foundation.icpc.global/wp-content/uploads/2023/05/2023-icpc-foundation-logo-3c@300.png"
+                            height="125" alt="logo_pagina" loading="lazy" />
+                    </a>
 
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto d-flex flex-row">
@@ -148,17 +143,17 @@
         </main>
 
         <footer class="bg-light border-top">
-            <div class="col-md-12 d-flex align-items-center">
-                <div class="col-md-1">
+            <div class="row align-items-center">
+                <div class="col-1">
                     <a class="ms-4" href="https://www.umss.edu.bo/" target="_blank">
                         <img src="{{ URL::asset('/image/logo-umss.png') }}" class="img" alt="logo_umss"
                             width="125">
                     </a>
                 </div>
-                <div class="col-md-10 text-secondary text-center">
+                <div class="col-10 text-secondary text-center">
                     <h6>© 2023 - CBBA</h6>
                 </div>
-                <div class="col-md-1">
+                <div class="col-1">
                     <a class="ms-4" href="https://www.cs.umss.edu.bo/" target="_blank">
                         <img src="{{ URL::asset('/image/logo-departamento.png') }}" class="img"
                             alt="logo_departamento" width="45">
@@ -168,6 +163,7 @@
         </footer>
 
     </div>
+
 </body>
 
 </html>
