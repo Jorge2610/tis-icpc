@@ -66,11 +66,11 @@ let seleccionado;
 let idSeleccionado;
 const seleccionarEvento = (id, nombre) => {
     if (seleccionado) {
-        seleccionado.classList.remove("seleccionado");
+        seleccionado.classList.remove("table-primary");
     }
     botonSubir.disabled = false;
     seleccionado = document.getElementById(id);
-    seleccionado.classList.add("seleccionado");
+    seleccionado.classList.add("table-primary");
     idSeleccionado = id;
     eventoSeleccionado.textContent = nombre + " seleccionado";
     input.value = "";
