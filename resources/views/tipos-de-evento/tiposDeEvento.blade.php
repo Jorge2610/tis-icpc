@@ -20,6 +20,7 @@
         </div>
         <div class="row mt-3">
             <table class="table table-striped text-secondary" id="tablaTipoDeEvento">
+                <caption>Tipo de eventos</caption>
                 <thead>
                     <tr>
                         <th scope="col" class="col-md-1 ">#</th>

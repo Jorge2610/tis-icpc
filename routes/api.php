@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AficheController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TipoEventoController;
@@ -46,4 +47,11 @@ Route::group(['prefix' => 'patrocinador', 'middleware' => 'api'], function () {
     Route::post('/', [PatrocinadorController::class, 'store'])->name('patrocinadores.store');
     Route::post('/actualizar/{id}', [PatrocinadorController::class, 'update'])->name('patrocinadores.update');
     Route::delete('{id}', [PatrocinadorController::class, 'destroy'])->name('patrocinadores.destroy');
+});
+
+Route::group(['prefix' => 'afiche'], function () {
+    Route::post('/imagen', [EventoController::class, 'storageAfiche'])->name('eventos.storageAfiche');
+    Route::post('/', [AficheController::class, 'asignarAfiche'])->name('eventos.asignarAfiche');
+    Route::delete('/{id}', [EventoController::class, 'eliminarAfiche'])->name('eventos.eliminarAfiche');
+    Route::get('/{id}', [AficheController::class, 'showPorEventoId'])->name('eventos.showPorEventoId');
 });

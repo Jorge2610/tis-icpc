@@ -29,7 +29,7 @@ class EventoController extends Controller
         if (!$evento) {
             return abort(404);
         }
-        return view('eventos/evento', ['evento' => $evento]);
+        return view('eventos.evento', ['evento' => $evento]);
     }
 
     public function store(Request $request)
@@ -67,38 +67,9 @@ class EventoController extends Controller
         }
     }
 
-    public function storageAfiche(Request $request)
-    {
 
-        try {
-            if ($request->hasFile('afiche')) {
-                $ruta = $request->file('afiche')->store('public/evento');
-                return Storage::url($ruta);
-            }
-            return "error";
-        } catch (\Throwable $th) {
-            return response()->json(['error' => true]);
-        }
-    }
 
-    public function asignarAfiche(Request $request, $id)
-    {
-        try {
-            $evento = Evento::find($id);
-            if (!$evento) {
-                return response()->json(['error' => true, 'mensaje' => 'Evento no encontrado']);
-            }
-            if ($request->hasFile('afiche') && $evento->ruta_afiche) {
-                Storage::delete($evento->ruta_afiche);
-            }
-            $ruta = $this->storageAfiche($request);
-            $evento->ruta_afiche = $ruta;
-            $evento->save();
-            return response()->json(['mensaje' => 'Asignado exitosamente', 'error' => false]);
-        } catch (QueryException $e) {
-            return $e->getMessage();
-        }
-    }
+
 
     public function eliminarAfiche($id)
     {
@@ -213,6 +184,5 @@ class EventoController extends Controller
         }
         return view('crear-evento.crearEvento', compact('datos'));
     }
-
-   
+    
 }

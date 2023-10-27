@@ -31,7 +31,6 @@ class CreateEventosTable extends Migration
             $table->integer('edad_maxima')->nullable();
             $table->string('genero', 10)->nullable();
             $table->decimal('precio_inscripcion')->nullable();
-            $table->string('ruta_afiche', 128)->default('/evento/afiche.jpg');
             $table->foreignId('id_tipo_evento')->constrained('tipo_eventos')->restrictOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });

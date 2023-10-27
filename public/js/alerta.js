@@ -32,3 +32,4 @@ const mostrarAlerta = (titulo, mensaje, tipo) => {
         }
     }, 2000);
 };
+

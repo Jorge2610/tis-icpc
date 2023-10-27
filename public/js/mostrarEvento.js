@@ -116,25 +116,7 @@ const manejarRespuesta = () => {
     output.style.backgroundImage = `url(../image/uploading.png)`;
 };
 
-const validarImagen = (id, peso, callback) => {
-    const input = document.getElementById(id);
-    if (input.files.length > 0) {
-        const imagen = input.files[0];
-        const maxFileSize = peso * 1024 * 1024;
-        let mensaje = { mensaje: "", error: false };
 
-        const type = !/image\/(png|jpeg|jpg)/.test(imagen.type);
-
-        if (type || imagen.size > maxFileSize) {
-            input.value = "";
-            mensaje = { mensaje: "Archivo no válido", error: true };
-        }
-
-        if (typeof callback === "function") {
-            callback(mensaje);
-        }
-    }
-};
 
 window.addEventListener("load", () => {
     cargarPatrocinadores();

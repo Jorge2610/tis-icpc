@@ -12,4 +12,9 @@ class Evento extends Model
     {
         return $this->belongsTo(TipoEvento::class, 'id_tipo_evento');
     }
+
+    public function afiches()
+    {
+        return $this->hasMany(Afiche::class, 'id_evento');
+    }
 }
