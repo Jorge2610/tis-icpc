@@ -97,7 +97,7 @@
                                             id="verTiposEventoSider">
                                             Ver tipos de evento
                                         </a>
-                                        <a href="{{ url('/') }}"
+                                        <a href="{{ url('/eventos/crear-tipo') }}"
                                             class="list-group-item list-group-item-action py-2 border-0"
                                             id="crearTipoEventoSider">
                                             Crear tipo de evento

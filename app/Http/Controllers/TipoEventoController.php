@@ -89,4 +89,9 @@ class TipoEventoController extends Controller
     {
         return view('tipos-de-evento/tiposDeEvento');
     }
+
+    public function mostrarCrearTipo()
+    {
+        return view('tipos-de-evento/crearTiposDeEvento');
+    }
 }

@@ -78,7 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", async function (event) {
         event.preventDefault();
         form.classList.add("was-validated");
-
         if (!form.checkValidity()) {
             event.stopPropagation();
         } else {
