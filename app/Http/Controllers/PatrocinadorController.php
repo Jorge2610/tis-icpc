@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use App\Models\Patrocinador;
+use App\Models\Evento;
 use Illuminate\Support\Facades\Storage;
 
 class PatrocinadorController extends Controller
@@ -27,7 +28,7 @@ class PatrocinadorController extends Controller
             $patrocinador->enlace_web = $request->enlace_web;
             $patrocinador->id_evento = $request->id_evento;
             $patrocinador->save();
-            return response()->json(['mensaje' => 'Creado exitosamente', 'error' => false]);
+            return response()->json(['mensaje' => 'Asignado exitosamente', 'error' => false]);
         }catch(QueryException $e){
             return $e->getMessage();
         }
@@ -77,7 +78,11 @@ class PatrocinadorController extends Controller
         }
     }
 
-
+    public function vistaTablaEventos()
+    {
+        $patrocinadores =  Evento::with('patrocinadores')->get();
+        return view('patrocinador.asignarPatrocinador', ['patrocinadores' => $patrocinadores]);
+    }
 
 
 }

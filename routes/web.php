@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AficheController;
+use App\Http\Controllers\PatrocinadorController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\TipoEventoController;
 use App\Http\Controllers\HomeController;
@@ -35,4 +36,8 @@ Route::group(['prefix' => 'eventos'], function () {
 
 Route::group(['prefix' => 'afiche'], function () {
     Route::get('asignar', [AficheController::class, 'vistaTablaEventos'])->name('afiche.tablaEventos');
+});
+
+Route::group(['prefix' => 'patrocinador'], function () {
+    Route::get('asignar', [PatrocinadorController::class, 'vistaTablaEventos'])->name('patrocinador.tablaEventos');
 });

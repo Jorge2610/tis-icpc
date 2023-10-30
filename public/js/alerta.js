@@ -25,11 +25,6 @@ const mostrarAlerta = (titulo, mensaje, tipo) => {
 
     setTimeout(() => {
         document.querySelector(".alert").remove();
-        if (tipoForm === 0) {
-            window.location.href = "/eventos"; 
-        } else {
-            window.location.href = "/eventos/" + nombreEvento;
-        }
     }, 2000);
 };
 

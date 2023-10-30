@@ -60,7 +60,7 @@ body {
   background-color: #366dc6;
 }
 
-tr:hover > .sorting_1 {
+tr:hover>.sorting_1 {
   background-color: #e0e7f8;
 }
 
