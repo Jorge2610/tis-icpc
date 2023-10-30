@@ -92,12 +92,12 @@
                                 <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
                                     aria-labelledby="panelsStayOpen-headingOne">
                                     <div class="my-1 ms-3">
-                                        <a href="{{ url('/eventos/tipos-de-evento') }}"
+                                        <a href="{{ url('/admin/eventos/tipos-de-evento') }}"
                                             class="list-group-item list-group-item-action sider-custom-bg py-2 border-0"
                                             id="verTiposEventoSider">
                                             Ver tipos de evento
                                         </a>
-                                        <a href="{{ url('/eventos/crear-tipo') }}"
+                                        <a href="{{ url('/admin/eventos/crear-tipo') }}"
                                             class="list-group-item list-group-item-action py-2 border-0"
                                             id="crearTipoEventoSider">
                                             Crear tipo de evento
@@ -116,7 +116,7 @@
                                 <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show"
                                     aria-labelledby="panelsStayOpen-headingTwo">
                                     <div class="my-1 ms-3">
-                                        <a href="{{ url('/eventos/crear-evento') }}"
+                                        <a href="{{ url('/admin/eventos/crear-evento') }}"
                                             class="list-group-item list-group-item-action py-2 border-0"
                                             id="crearEventoSider">
                                             Crear evento

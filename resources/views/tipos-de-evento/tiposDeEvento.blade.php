@@ -7,11 +7,6 @@
                 <h4>Tipo de evento</h4>
             </div>
             <div class="col-md-1">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-light btn-lg" data-bs-toggle="modal"
-                    data-bs-target="#modalCrearTipoEvento">
-                    +
-                </button>
                 <x-ModalCrearTipoEvento />
             </div>
             <div class="col-md-9">

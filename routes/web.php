@@ -25,11 +25,17 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/', [EventoController::class, 'cargarEventos']);
 
+Route::group(['prefix'=> 'admin/eventos'],function () {
+    Route::get('tipos-de-evento', [TipoEventoController::class, 'mostrarVistaTipoEvento'])->name('tipo-evento');
+    Route::get('crear-evento', [EventoController::class, 'showEventForm'])->name('crear');
+    Route::get('crear-tipo', [TipoEventoController::class, 'mostrarCrearTipo'])->name('crear-tipo');
+});
+
 Route::group(['prefix' => 'eventos'], function () {
     Route::get('/', [EventoController::class, 'cargarEventos']);
-    Route::get('crear-evento', [EventoController::class, 'showEventForm'])->name('crear');
-    Route::get('tipos-de-evento', [TipoEventoController::class, 'mostrarVistaTipoEvento'])->name('tipo-evento');
-    Route::get('crear-tipo', [TipoEventoController::class, 'mostrarCrearTipo'])->name('crear-tipo');
+    //Route::get('crear-evento', [EventoController::class, 'showEventForm'])->name('crear');
+    //Route::get('tipos-de-evento', [TipoEventoController::class, 'mostrarVistaTipoEvento'])->name('tipo-evento');
+    //Route::get('crear-tipo', [TipoEventoController::class, 'mostrarCrearTipo'])->name('crear-tipo');
     Route::get('{nombre}', [EventoController::class, 'cargarEvento'])->name('evento.cargarEvento');
     Route::get('editar-evento/{id}', [EventoController::class, 'showEventForm'])->name('evento.editar');
 });
