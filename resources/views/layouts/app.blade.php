@@ -121,12 +121,12 @@
                                             id="crearEventoSider">
                                             Crear evento
                                         </a>
-                                        <a href="{{ url('/afiche/asignar') }}"
+                                        <a href="{{ url('/admin/eventos/afiche') }}"
                                             class="list-group-item list-group-item-action py-2 border-0"
                                             id="asignarAficheSider">
                                             Asignar afiche
                                         </a>
-                                        <a href="{{ url('/patrocinador/asignar') }}"
+                                        <a href="{{ url('/admin/eventos/patrocinador') }}"
                                             class="list-group-item list-group-item-action py-2 border-0"
                                             id="asignarPatrocinadorSider">
                                             Asignar patrocinador
