@@ -17,4 +17,9 @@ class Evento extends Model
     {
         return $this->hasMany(Afiche::class, 'id_evento');
     }
+
+    public function patrocinadores()
+    {
+        return $this->hasMany(Patrocinador::class, 'id_evento');
+    }
 }

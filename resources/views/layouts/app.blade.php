@@ -126,7 +126,7 @@
                                             id="asignarAficheSider">
                                             Asignar afiche
                                         </a>
-                                        <a href="{{ url('/') }}"
+                                        <a href="{{ url('/patrocinador/asignar') }}"
                                             class="list-group-item list-group-item-action py-2 border-0"
                                             id="asignarPatrocinadorSider">
                                             Asignar patrocinador
