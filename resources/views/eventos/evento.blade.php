@@ -2,53 +2,29 @@
 
 @section('content')
     <div class="container">
-        <div class="col-3">
-            <div class="row">
-                <div class="col-md-11">
-                    <h3 class="col-10 mt-0">{{ $evento->nombre }}</h3>
-                </div>
-                <div class="col-md-1">
-                    <button type="button" class="btn btn-light" data-bs-toggle="dropdown" title="Opciones del evento">
-                        <i class="fa fa-ellipsis-v"></i>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a class="dropdown-item" href="{{ route('evento.editar', ['id' => $evento->id]) }}">Editar
-                                Evento
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+        <div class="col-10">
+            <h3>{{ $evento->nombre }}</h3>
         </div>
         <div class="row mt-5">
+
             <div class="col-md-3">
-                <div class="d-flex flex-column justify-content-center align-items-center border p-3 container-image"
-                    style="cursor: pointer; position: relative;">
-                    <button id="botonBorrarAfiche"type="button" class="btn btn-light btn-lg hover-button boton-borrar"
-                        data-bs-toggle="modal" data-bs-target="#modalEliminarImage" data-bs-toggle="tooltip"
-                        data-bs-placement="top" title="Eliminar afiche" onclick="borrarAfiche({{ $evento->id }})">
-                        <i class="fa-solid fa-trash-can"></i>
-                    </button>
-                    <button id="botonSubirAfiche" type="button"
-                        class="boton-subir btn btn-light btn-lg hover-button-center " data-bs-toggle="modal"
-                        data-bs-target="#modalCambiarAfiche" data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="Cambiar afiche" onclick="document.getElementById('imageUpload').click()">
-                        <i class="fa fa-arrow-up-from-bracket fa-lg"></i>
-                    </button>
-                    <img id="uploadIcon" src="/image/uploading.png" alt="Upload Icon" class="imagen-afiche"
-                        style="width: 250px; height: 250px;" data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="Presione para subir imagen" onclick="document.getElementById('imageUpload').click()">
-
-                    <img id="imagePreview" src="#" class="img-fluid mt-3 imagen-afiche" alt="Imagen del evento"
-                        style="display: none;">
-                    <a id="uploadButton" class="boton-subir-2 text-center">Presione para subir imagen</a>
+                <div id="carousel" class="carousel slide w-100" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                    @if(count($evento->afiches) > 0)
+                        @foreach ($evento->afiches as $key => $afiche)
+                            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                <img src="{{ $afiche->ruta_afiche }}" alt="Afiche {{ $key }}" style="width:100%; max-height: 50vh">
+                            </div>
+                        @endforeach
+                    @else
+                        <!-- Si no hay afiches, muestra una imagen por defecto -->
+                        <div class="carousel-item active">
+                            <img src="{{ URL::asset('/image/aficheDefecto.png') }}" alt="Imagen por defecto" style="width:100%; min-height: 50vh;">
+                        </div>
+                    @endif
+                    </div>
                 </div>
-                <input class="form-control" type="file" id="imageUpload" accept="image/png, image/jpeg, image/jpg"
-                    style="display: none;" onchange="subirAfiche({{ $evento->id }})">
             </div>
-
-            <div hidden id="rutaImagen" value="">{{ $evento->ruta_afiche }}</div>
 
             <div class="col-md-7 border-end">
 
@@ -142,10 +118,6 @@
             <div class="col-md-2">
                 <div class="col-12 d-flex justify-content-center align-items-center">
                     <h4 class="ms-3">Patrocinadores</h4>
-                    <button type="button" class="btn btn-light btn-lg " data-bs-toggle="modal"
-                        data-bs-target="#modalAgregarPatrocinador" title="Agregar patrocinador">
-                        <i class="fa-regular fa-plus"></i>
-                    </button>
                     <x-modal-agregar-patrocinador :evento="$evento" />
                     </h4>
                 </div>
@@ -154,18 +126,6 @@
                     <!-Patrocinadores->
 
                 </div>
-                @component('components.modal')
-                    @slot('modalId', 'modalBorrarPatrocinador')
-                    @slot('modalTitle', 'Confirmacion')
-                    @slot('modalContent')
-                        ¿Está seguro de eliminar al patrocinador?
-                    @endslot
-                    @slot('modalButton')
-                        <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>
-                        <button type="button" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal"
-                            onclick="borrar1()">Sí</button>
-                    @endslot
-                @endcomponent
             </div>
         </div>
     </div>
@@ -174,3 +134,4 @@
 
     <script src="{{ asset('js/mostrarEvento.js') }}" defer></script>
 @endsection
+

@@ -84,5 +84,9 @@ class PatrocinadorController extends Controller
         return view('patrocinador.asignarPatrocinador', ['patrocinadores' => $patrocinadores]);
     }
 
-
+    public function vistaTablaEventosEliminar()
+    {
+        $patrocinadores =  Evento::with('patrocinadores')->get();
+        return view('patrocinador.eliminarPatrocinador', ['patrocinadores' => $patrocinadores]);
+    }
 }

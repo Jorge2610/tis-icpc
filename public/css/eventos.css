@@ -66,26 +66,42 @@
 }
 
 .borrar-patrocinador {
-    display: none;
-    position: absolute;
-    z-index: 100;
-    cursor: pointer;
-    border-radius: 15%;
+    border: none;
     height: 25px;
     width: 25px;
-    color: white;
+    color: black;
     font-weight: bold;
     font-size: medium;
     text-align: center;
     align-items: center;
     justify-content: center;
-    background-color: gray;
+    background-color: white;
     top: 0;
     right: 0;
 }
 
 .borrar-patrocinador:hover {
-    background-color: red;
+    color: white;
+    background-color: rgb(255, 96, 96);
+}
+
+.imagenPatrocinador,.borrar-patrocinador {
+    opacity: 0; /* Empiezan invisibles */
+    transform: translateY(20px); /* Empiezan desplazados hacia abajo */
+    animation: aparecer 3s ease-out forwards; /* Animación de aparición */
+}
+
+.imagenPatrocinador {
+    object-fit: cover; 
+    max-height: 7rem; 
+    max-width: 80%;
+}
+
+@keyframes aparecer {
+    to {
+        opacity: 1; /* Aparecen completamente visibles */
+        transform: translateY(0); /* Sin desplazamiento */
+    }
 }
 
 #imagenPatrocinador {
@@ -93,10 +109,6 @@
     background-size: contain;
     position: relative;
     display: inline-block;
-}
-
-#imagenPatrocinador:hover .borrar-patrocinador {
-    display: flex;
 }
 
 .table-hover tbody tr:hover {

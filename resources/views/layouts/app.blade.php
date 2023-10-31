@@ -131,6 +131,11 @@
                                             id="asignarPatrocinadorSider">
                                             Asignar patrocinador
                                         </a>
+                                        <a href="{{ url('admin/eventos/patrocinador/eliminar') }}"
+                                            class="list-group-item list-group-item-action py-2 border-0"
+                                            id="asignarPatrocinadorSider">
+                                            Eliminar patrocinador
+                                        </a>
                                     </div>
                                 </div>
                             </div>
