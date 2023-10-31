@@ -20,7 +20,7 @@ class AficheSeeder extends Seeder
         for ($i = 0; $i < 100; $i++) {
             $currentDateTime = now();
             DB::table('afiches')->insert([
-                'ruta_afiche' => $faker->imageUrl(),
+                'ruta_imagen' => $faker->imageUrl(),
                 'id_evento' => $faker->numberBetween(1, 50),
                 'created_at' => $currentDateTime,
                 'updated_at' => $currentDateTime

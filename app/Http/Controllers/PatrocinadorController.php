@@ -24,7 +24,7 @@ class PatrocinadorController extends Controller
         try{
             $patrocinador = new Patrocinador();
             $patrocinador->nombre = $request->nombre;
-            $patrocinador->ruta_logo = $this->storeImage($request);
+            $patrocinador->ruta_imagen = $this->storeImage($request);
             $patrocinador->enlace_web = $request->enlace_web;
             $patrocinador->id_evento = $request->id_evento;
             $patrocinador->save();
@@ -55,8 +55,8 @@ class PatrocinadorController extends Controller
             $patrocinador = Patrocinador::find($id);
             $patrocinador->nombre = $request->nombre;
             if($request->hasFile('logo')){
-                Storage::delete($patrocinador->ruta_logo);
-                $patrocinador->ruta_logo = $this->storeImage($request);
+                Storage::delete($patrocinador->ruta_imagen);
+                $patrocinador->ruta_imagen = $this->storeImage($request);
             }
             $patrocinador->enlace_web = $request->enlace_web;
             $patrocinador->id_evento = $request->id_evento;
@@ -70,7 +70,7 @@ class PatrocinadorController extends Controller
     public function destroy($id){
         try{
             $patrocinador = Patrocinador::find($id);
-            Storage::delete($patrocinador->ruta_logo);
+            Storage::delete($patrocinador->ruta_imagen);
             $patrocinador->delete();
             return response()->json(['mensaje' => 'Eliminado exitosamente', 'error' => false]);
         }catch(QueryException $e){

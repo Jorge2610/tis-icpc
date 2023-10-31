@@ -5,7 +5,7 @@
         <div class="row g-5" id="tarjetasRow">
             @foreach ($eventos as $evento)
                 <div class="col-md-auto">
-                    <div class="tarjeta card mb-3" style="max-width: 540px;">
+                    <div class="tarjeta card mb-3" style="max-width: 540px; min-height: 250px">
                         <div class="row g-0">
                             <div class="col-md-8">
                                 <div class="card-body">
@@ -35,7 +35,8 @@
                                 </div>
                             </div>
                             <div class="d-flex p-3 align-self-center col-md-4">
-                                <img src="{{ URL::asset($evento->ruta_afiche == '/evento/afiche.jpg' ? '../image/aficheDefecto.png' : $evento->ruta_afiche) }}"
+                                
+                                <img src="{{ URL::asset($evento->afiches->count() > 0 ? $evento->afiches->first()->ruta_imagen: '../image/aficheDefecto.png') }}"
                                     class="img-fluid rounded-start" alt="...">
                             </div>
                         </div>

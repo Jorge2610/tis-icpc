@@ -5,25 +5,13 @@
         <div class="col-10">
             <h3>{{ $evento->nombre }}</h3>
         </div>
-        <div class="row mt-5">
+        <div class="row mt-5 g-5 gap-2">
 
             <div class="col-md-3">
-                <div id="carousel" class="carousel slide w-100" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                    @if(count($evento->afiches) > 0)
-                        @foreach ($evento->afiches as $key => $afiche)
-                            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                <img src="{{ $afiche->ruta_afiche }}" alt="Afiche {{ $key }}" style="width:100%; max-height: 50vh">
-                            </div>
-                        @endforeach
-                    @else
-                        <!-- Si no hay afiches, muestra una imagen por defecto -->
-                        <div class="carousel-item active">
-                            <img src="{{ URL::asset('/image/aficheDefecto.png') }}" alt="Imagen por defecto" style="width:100%; min-height: 50vh;">
-                        </div>
-                    @endif
-                    </div>
+                <div class="container">
+                    <x-carrusel :evento="$evento" />
                 </div>
+                
             </div>
 
             <div class="col-md-7 border-end">

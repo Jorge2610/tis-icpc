@@ -45,7 +45,7 @@ class AficheController extends Controller
     {
         try {
             $afiche = new Afiche();
-            $afiche->ruta_afiche = $this->storageAfiche($request);
+            $afiche->ruta_imagen = $this->storageAfiche($request);
             $afiche->id_evento = $request->id_evento;
             $afiche->save();
             return response()->json(['mensaje' => 'Asignado exitosamente', 'error' => false]);
@@ -58,8 +58,7 @@ class AficheController extends Controller
     {
         try {
             $afiche = Afiche::find($id);
-            $afiche->ruta_afiche = "/afiche.jpg";
-            Storage::delete($afiche->ruta_afiche);
+            Storage::delete($afiche->ruta_imagen);
             $afiche->delete();
             return response()->json(['mensaje' => 'Eliminado exitosamente', 'error' => false]);
         } catch (QueryException $e) {
@@ -71,7 +70,8 @@ class AficheController extends Controller
     {
         try {
             $afiche = Afiche::find($id);
-            $afiche->ruta_afiche = $this->storageAfiche($request);
+            Storage::delete($afiche->ruta_imagen);
+            $afiche->ruta_imagen = $this->storageAfiche($request);
             $afiche->save();
             return response()->json(['mensaje' => 'Actualizado exitosamente', 'error' => false]);
         } catch (QueryException $e) {
@@ -83,5 +83,10 @@ class AficheController extends Controller
     {
         $afiches =  Evento::with('afiches')->get();
         return view('afiche.asignarAfiche', ['afiches' => $afiches]);
+    }
+
+    public function editarAfiche(){
+        $afiches = Evento::with('afiches')->get();
+        return view('afiche.editar',['afiches' => $afiches]);
     }
 }
