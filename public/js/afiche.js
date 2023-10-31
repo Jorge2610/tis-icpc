@@ -80,7 +80,7 @@ const seleccionarEvento = (id, nombre) => {
 };
 
 function previsualizarImagen(event) {
-    validarImagen(input, 1, (mensaje) => {
+    validarImagen(input, 5, (mensaje) => {
         if (!mensaje.error) {
             const file = event.target.files[0];
             const reader = new FileReader();

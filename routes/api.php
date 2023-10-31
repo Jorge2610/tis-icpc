@@ -50,8 +50,9 @@ Route::group(['prefix' => 'patrocinador', 'middleware' => 'api'], function () {
 });
 
 Route::group(['prefix' => 'afiche'], function () {
-    Route::post('/imagen', [EventoController::class, 'storageAfiche'])->name('eventos.storageAfiche');
+    Route::post('/imagen', [AficheController::class, 'storageAfiche'])->name('eventos.storageAfiche');
     Route::post('/', [AficheController::class, 'asignarAfiche'])->name('eventos.asignarAfiche');
-    Route::delete('/{id}', [EventoController::class, 'eliminarAfiche'])->name('eventos.eliminarAfiche');
+    Route::post('{id}', [AficheController::class, 'update'])->name('eventos.update');
+    Route::delete('/{id}', [AficheController::class, 'eliminarAfiche'])->name('eventos.eliminarAfiche');
     Route::get('/{id}', [AficheController::class, 'showPorEventoId'])->name('eventos.showPorEventoId');
 });

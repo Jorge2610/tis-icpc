@@ -69,21 +69,6 @@ class EventoController extends Controller
 
 
 
-
-
-    public function eliminarAfiche($id)
-    {
-        try {
-            $evento = Evento::find($id);
-            Storage::delete($evento->ruta_afiche);
-            $evento->ruta_afiche = "/evento/afiche.jpg";
-            $evento->save();
-            return response()->json(['mensaje' => 'Eliminado exitosamente', 'error' => false]);
-        } catch (QueryException $e) {
-            return $e->getMessage();
-        }
-    }
-
     public function update(Request $request, $id)
     {
         try {

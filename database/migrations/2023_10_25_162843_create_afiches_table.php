@@ -15,7 +15,7 @@ class CreateAfichesTable extends Migration
     {
         Schema::create('afiches', function (Blueprint $table) {
             $table->id();
-            $table->string('ruta_afiche', 128);
+            $table->string('ruta_imagen', 128);
             $table->foreignId('id_evento')->constrained('eventos')->restrictOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });

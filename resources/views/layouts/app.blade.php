@@ -126,6 +126,11 @@
                                             id="asignarAficheSider">
                                             Asignar afiche
                                         </a>
+                                        <a href="{{ url('/afiche/editar') }}"
+                                            class="list-group-item list-group-item-action py-2 border-0"
+                                            id="asignarAficheSider">
+                                            Gestor de afiche
+                                        </a>
                                         <a href="{{ url('/') }}"
                                             class="list-group-item list-group-item-action py-2 border-0"
                                             id="asignarPatrocinadorSider">
