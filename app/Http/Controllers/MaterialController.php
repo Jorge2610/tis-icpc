@@ -16,6 +16,7 @@ class MaterialController extends Controller
         return $materiales;
     }
 
+
     public function eventosConMaterial()
     {
         $eventos = Evento::with('materiales')->get();
@@ -23,6 +24,12 @@ class MaterialController extends Controller
         return view('material.eventos', ['eventos' => $eventos]);
     }
 
+    public function show($id)
+    {
+        $material = Material::find($id);
+        return $material;
+    }
+    
     public function store(Request $request)
     {
         try {
@@ -43,6 +50,20 @@ class MaterialController extends Controller
             $material = Material::find($id);
             $material->delete();
             return response()->json(['mensaje' => 'Eliminado exitosamente', 'error' => false]);
+        } catch (QueryException $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            $material = Material::find($id);
+            $material->nombre = $request->input('nombre');
+            $material->enlace = $request->input('enlace');
+            $material->id_evento = $request->input('id_evento');
+            $material->save();
+            return response()->json(['mensaje' => 'Actualizado exitosamente', 'error' => false]);
         } catch (QueryException $e) {
             return $e->getMessage();
         }
