@@ -22,4 +22,9 @@ class Evento extends Model
     {
         return $this->hasMany(Patrocinador::class, 'id_evento');
     }
+
+    public function materiales()
+    {
+        return $this->hasMany(Material::class, 'id_evento');
+    }
 }
