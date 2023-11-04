@@ -17,19 +17,18 @@
                         </tr>
                     </thead>
                     <tbody id="datosTabla">
-                        <!-- @php $contador = 1 @endphp
-                        @foreach ($material as $material)
-                            <tr onclick="seleccionarEvento({{ $material->id }}, '{{ $material->nombre }}', event)" 
-                                id="{{ $material->id }}">
+                        @php $contador = 1 @endphp
+                        @foreach ($materiales as $material)
+                        <tr onclick="seleccionarEvento({{ $material->id_material }}, '{{ $material->titulo }}', event)" id="{{ $material->id_material }}">
                                 <th scope="row">{{ $contador++ }}</th>
                                 <td>{{ $material->nombre }}</td>
                                 <td class="text-center">{{ $material->tipoEvento->nombre }}</td>
                                 <td class="text-center">{{ date('d-m-Y', strtotime($material->created_at)) }}</td>
-                                <td class="text-center" id="contadorMaterial{{ $material->id }}">
+                                <td class="text-center" id="contadorMateriales{{ $material->id }}">
                                     {{ $material->materiales->count() }}</td>
 
                             </tr>
-                        @endforeach -->
+                        @endforeach
                     </tbody>
                 </table>
             </div>

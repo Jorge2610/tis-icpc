@@ -20,8 +20,7 @@ class MaterialController extends Controller
     public function eventosConMaterial()
     {
         $eventos = Evento::with('materiales')->get();
-        //cambiar tu vista aqui Yanina!!! 
-        return view('material.eventos', ['eventos' => $eventos]);
+        return view('subirMaterial.eventos', ['eventos' => $eventos]);
     }
 
     public function show($id)

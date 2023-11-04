@@ -1,11 +1,10 @@
 let tablaDeTipos;
 let tablaInicializada = false;
 
-const nombrePatrocinador = document.getElementById("nombreMaterial");
-const urlPatricinador = document.getElementById("urlMaterial");
+const tituloMaterial = document.getElementById("tituloMaterial");
+const urlMaterial = document.getElementById("urlMaterial");
 const cancelar = document.getElementById("asignarMaterialCancelar");
 const asignar = document.getElementById("asignarMaterialAsignar");
-const eventoSeleccionado = document.getElementById("tituloMaterial");
 
 const dataTableOptions = {
     pageLength: 10,
@@ -46,6 +45,7 @@ window.addEventListener("load", () => {
         asignar.disabled = true;
     }
 });
+
 let seleccionado;
 let idSeleccionado;
 const seleccionarEvento = (id, nombre) => {
