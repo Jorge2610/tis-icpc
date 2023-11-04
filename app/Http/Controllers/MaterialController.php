@@ -34,7 +34,7 @@ class MaterialController extends Controller
     {
         try {
             $material = new Material();
-            $material->nombre = $request->input('nombre');
+            $material->titulo = $request->input('titulo');
             $material->enlace = $request->input('enlace');
             $material->id_evento = $request->input('id_evento');
             $material->save();
@@ -59,7 +59,7 @@ class MaterialController extends Controller
     {
         try {
             $material = Material::find($id);
-            $material->nombre = $request->input('nombre');
+            $material->titulo = $request->input('titulo');
             $material->enlace = $request->input('enlace');
             $material->id_evento = $request->input('id_evento');
             $material->save();

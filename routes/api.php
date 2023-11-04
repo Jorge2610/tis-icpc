@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TipoEventoController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\PatrocinadorController;
+use App\Http\Controllers\MaterialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,9 +59,9 @@ Route::group(['prefix' => 'afiche'], function () {
 });
 
 Route::group(['prefix' => 'material'], function () {
-    Route::get('/', [MaterialController::class, 'index'])->name('materiales.index');
+    Route::get('', [MaterialController::class, 'index'])->name('materiales.index');
     Route::get('{id}', [MaterialController::class, 'show'])->name('materiales.show');
     Route::post('/', [MaterialController::class, 'store'])->name('materiales.store');
-    Route::post('actualizar/{id}', [MaterialController::class, 'update'])->name('materiales.update');
+    Route::post('{id}', [MaterialController::class, 'update'])->name('materiales.update');
     Route::delete('{id}', [MaterialController::class, 'destroy'])->name('materiales.destroy');
 });
