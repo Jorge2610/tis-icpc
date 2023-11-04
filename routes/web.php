@@ -33,6 +33,9 @@ Route::group(['prefix'=> 'admin/eventos'],function () {
     Route::get('afiche', [AficheController::class, 'vistaTablaEventos'])->name('afiche.tablaEventos');
     Route::get('patrocinador', [PatrocinadorController::class, 'vistaTablaEventos'])->name('patrocinador.tablaEventos');
     Route::get('patrocinador/eliminar', [PatrocinadorController::class, 'vistaTablaEventosEliminar'])->name('patrocinador.tablaEventosEliminar');
+    Route::get('material', function(){
+        return view('eventos.subirMaterial');
+    })->name('material.tablaEventos');
 });
 
 Route::group(['prefix' => 'eventos'], function () {
