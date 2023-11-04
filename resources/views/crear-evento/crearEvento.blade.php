@@ -61,20 +61,33 @@
                 <div class="row mt-4">
 
                     <div class="col-md-6">
-                        <label for="institucionDelEvento" class="form-label">Instituciones admitidas</label>
-                        <input name="institucion" type="text" class="form-control" id="institucionDelEvento"
-                            onchange="datoCambiado()" placeholder="Ingrese la institución del evento"
-                            value="{{ isset($datos['institucion']) ? $datos['institucion'] : '' }}">
-                        <div class="invalid-feedback">
-                            Este campo no puede estar vacio.
+                        <label  class="form-label">Instituciones admitidas</label>
+                        <div>
+                        <button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary dropdown-toggle" style="padding: 5px;"data-bs-toggle="dropdown" aria-expanded="false">
+                             Intituciones Admitidas
+                        </button>
+                        <ul class="dropdown-menu " aria-labelledby="btnGroupDrop1" style="padding: 20px;">
+                            @foreach (['TODAS', 'UMSA', 'UPSA','UCB','UPB','UNIFRANZ'] as $institucion)
+                                <li>
+                                    <input class="form-check-input institucion" type="checkbox" value="{{$institucion}}" id="flexCheckChecked" >
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        {{$institucion}}
+                                    </label>
+                                </li>
+                            @endforeach
+                        </ul>
                         </div>
                     </div>
 
                     <div class="col-md-6">
-                        <label for="regionDelEvento" class="form-label">Región</label>
-                        <input name="region" type="text" class="form-control" id="regionDelEvento"
-                            onchange="datoCambiado()" placeholder="Ingrese la region del evento" maxlength="64"
-                            value="{{ isset($datos['region']) ? $datos['region'] : '' }}">
+                        <label for="select-region" class="form-label">Región</label>
+                        <select class="form-select" name="region" id="select-region" >
+                            @foreach (['Departamental', 'Nacional', 'Internacional'] as $regionDato)
+                                <option value="{{ $regionDato }}" @if ($datos['region'] == $regionDato||'Departamental'==$regionDato) selected @endif>
+                                    {{ $regionDato }}
+                                </option>
+                            @endforeach
+                        </select>    
                     </div>
                 </div>
 

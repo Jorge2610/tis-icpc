@@ -82,7 +82,7 @@ inputCosto.addEventListener("change", () => {
     mostrarInput("eventoPago", inputCosto.checked);
 });
 
-form.addEventListener("submit", (event) => {
+/*form.addEventListener("submit", (event) => {
     if (tipoForm === 0 || datosActualizados) {
         if (!form.checkValidity()) {
             event.preventDefault();
@@ -90,26 +90,10 @@ form.addEventListener("submit", (event) => {
         }
         form.classList.add("was-validated");
     }
-});
+});*/
 
 //FUNCIONES
-const previewAfiche = (event) => {
-    let reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
-    reader.onloadend = () => {
-        let img = document.getElementById("afiche");
-        img.setAttribute("src", reader.result);
-    };
-};
 
-const previewSponsorLogo = (event) => {
-    let reader = new FileReader();
-    reader.onload = (reader) => {
-        let output = document.getElementById("sponsorPreview");
-        output.style.backgroundImage = `url('${reader.result}')`;
-    };
-    reader.readAsDataURL(event.target.files[0]);
-};
 
 const resetModal = (idModal, idForm) => {
     const output = document.getElementById("sponsorPreview");
@@ -122,7 +106,7 @@ const resetModal = (idModal, idForm) => {
 };
 
 //Guardar evento
-document.addEventListener("DOMContentLoaded", () => {
+/*document.addEventListener("DOMContentLoaded", () => {
     mostrarInput("genero", inputGenero.checked);
     mostrarInput("rangosDeEdad", inputEdad.checked);
     mostrarInput("eventoPago", inputCosto.checked);
@@ -153,8 +137,9 @@ document.addEventListener("DOMContentLoaded", () => {
         form.classList.remove("was-validated");
         form.reset();
     });
-});
+});*/
 const prepararFormData = () => {
+    document.getElementById("select-region").disabled=false;
     const formData = new FormData(form);
     if (!inputEdad.checked) {
         formData.set("edad_minima", "");
@@ -174,9 +159,11 @@ const editarEvento = (formData, eventoId) => {
         window.location.href =
             "/eventos/" + document.getElementById("nombreDelEvento").value;
     }
-
+    for (let [campo, valor] of formData) {
+        console.log(`${campo}: ${valor}`);
+    }
     nombreEvento = document.getElementById("nombreDelEvento").value;
-
+    
     axios
         .post("/api/evento/actualizar/" + eventoId, formData)
         .then(function (response) {
@@ -224,6 +211,8 @@ const datoCambiado = () => {
 window.addEventListener("load", () => {
     if (document.getElementById("nombreDelEvento").value != "") {
         tipoForm = 1;
+        document.getElementById("select-region").disabled=true;
+
     }
     axios
         .get("/api/tipo-evento")
@@ -255,4 +244,62 @@ const cerrar = (edicion) => {
     document
         .getElementById("formularioCrearEvento")
         .classList.remove("was-validated");
+};
+
+//agragar validacion a los inputs
+form.querySelectorAll(".form-control, .form-select").forEach(Element=>{
+    Element.addEventListener("change",()=>{
+        if(Element.hasAttribute("required") && Element.value===""){
+            Element.classList.remove("is-valid");
+            Element.classList.add("is-invalid");
+        }
+        else{
+            Element.classList.remove("is-invalid");
+            Element.classList.add("is-valid");
+        }
+    })
+});
+form.addEventListener("submit",(event)=>{
+    event.preventDefault();
+    form.querySelectorAll(".form-control, .form-select").forEach(Element=>{
+        Element.dispatchEvent(new Event("change"));
+    })
+    let aux="";
+    form.querySelectorAll(".institucion").forEach(Element=>{
+        if(Element.checked){
+            aux= Element.value+", "+aux;
+        }
+    })
+    console.log(aux);
+    if(!validar()){
+        $("#modalConfirmacion").modal("hide");
+    }
+    else{
+        const formData = prepararFormData();
+
+        const eventoId = formData.get("evento_id");
+        const imagen = document.getElementById("imagen").value;
+        formData.set("ruta_afiche", imagen);
+        formData.set("institucion", aux);
+        if (eventoId) {
+            editarEvento(formData, eventoId);
+        } else {
+            crearEvento(formData);
+        }
+
+        $("#modalConfirmacion").modal("hide");
+        form.classList.remove("was-validated");
+        form.reset();
+    }
+
+})
+
+const validar=()=>{
+    console.log(form.querySelector(".is-invalid"));
+    if(form.querySelector(".is-invalid")===null){
+        return true;
+    }
+    else{
+        return false;
+    }
 };
