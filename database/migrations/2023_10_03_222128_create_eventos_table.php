@@ -31,6 +31,7 @@ class CreateEventosTable extends Migration
             $table->integer('edad_maxima')->nullable();
             $table->string('genero', 10)->nullable();
             $table->decimal('precio_inscripcion')->nullable();
+            $table->tinyInteger('estado')->nullable()->default(0);
             $table->foreignId('id_tipo_evento')->constrained('tipo_eventos')->restrictOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
