@@ -158,12 +158,12 @@
         </header>
 
         <main style="margin-top: 14vh">
-            <div class="border-start border-2">
+            <div class="border-start border-2" style="min-height: 77vh;">
                 @yield('content')
             </div>
         </main>
 
-        <footer class="bg-light border-top mt-2">
+        <footer class="bg-light border-top mt-2" style="margin-top: auto;">
             <div class="col-md-12 d-flex align-items-center">
                 <div class="col-md-1">
                     <a class="ms-5" href="https://www.umss.edu.bo/" target="_blank">
