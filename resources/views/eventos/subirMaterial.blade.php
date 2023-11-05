@@ -12,7 +12,7 @@
                             <th scope="col" class="col-sm-4 col-md-4">Nombre del evento</th>
                             <th scope="col" class="col-sm-0 col-md-3 text-center">Tipo de evento</th>
                             <th scope="col" class="col-sm-3 col-md-2 text-center">Fecha de creación</th>
-                            <th scope="col" class="col-sm-3 col-md-2 text-center font-sm">Cantidad de patrocinadores</th>
+                            <th scope="col" class="col-sm-3 col-md-2 text-center font-sm">Cantidad de recursos</th>
 
                         </tr>
                     </thead>
@@ -38,7 +38,7 @@
                     <form class="needs-validation" novalidate id="formularioAgregarMaterial">
                         <div class="col-md-12 mt-2">
                             <div class="text-center">
-                            <label class="form-label fs-4" style="font-weight: bold;">Agregar Material</label>
+                            <label class="form-label fs-4" style="font-weight: bold;">Agregar recurso</label>
                             </div>
                             <label for="tituloMaterial" class="form-label">Titulo</label>
                             <input name="id_material" type="hidden" id="id_material">

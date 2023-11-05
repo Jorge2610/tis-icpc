@@ -145,7 +145,7 @@
                                         <a href="{{ url('/admin/eventos/material') }}"
                                             class="list-group-item list-group-item-action py-2 border-0"
                                             id="subirMaterialSider">
-                                            Subir Material
+                                            Subir recurso
                                         </a>
                                     </div>
                                 </div>
