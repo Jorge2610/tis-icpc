@@ -17,7 +17,7 @@ class EventoSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             $currentDateTime = now();
             DB::table('eventos')->insert([
                 'nombre' => "evento " . ($i + 1),
@@ -35,7 +35,9 @@ class EventoSeeder extends Seeder
                 'edad_maxima' => $faker->numberBetween(1, 100),
                 'genero' => $faker->randomElement(['Femenino', 'Masculino', '']),
                 'precio_inscripcion' => $faker->numberBetween(10, 100),
+                'estado' => $faker->boolean(80) ? 0 : $faker->numberBetween(1, 2),
                 'id_tipo_evento' => $faker->numberBetween(1, 10),
+
                 'created_at' => $currentDateTime,
                 'updated_at' => $currentDateTime
             ]);

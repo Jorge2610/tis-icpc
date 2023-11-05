@@ -1,12 +1,12 @@
 <div id="carrusel" class="carousel slide mt-5" data-bs-ride="carousel" data-bs-interval="100000">
-    <div class="carousel-indicators" id="indicadores">
-        @if ($evento->afiches !== null)
+    @if ($evento->afiches !== null && count($evento->afiches) > 1)
+        <div class="carousel-indicators" id="indicadores">
             @foreach ($evento->afiches as $afiche)
                 <button type="button"  data-bs-target="#carrusel" data-bs-slide-to="{{ $loop->index }}"
                     class="{{ $loop->first ? 'active' : '' }}"></button>
             @endforeach
-        @endif
-    </div>
+        </div>
+    @endif
     <div class="carousel-inner" id="carruselInner">
         @if ($evento->afiches !== null)
             @foreach ($evento->afiches as $afiche)
@@ -16,7 +16,7 @@
             @endforeach
         @endif
     </div>
-    @if ($evento->afiches !== null)
+    @if ($evento->afiches !== null && count($evento->afiches) > 1)
         <button class="carousel-control-prev" type="button" data-bs-target="#carrusel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
