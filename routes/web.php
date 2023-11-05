@@ -5,6 +5,7 @@ use App\Http\Controllers\PatrocinadorController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\TipoEventoController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MaterialController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,16 +27,14 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/', [EventoController::class, 'cargarEventos']);
 
-Route::group(['prefix'=> 'admin/eventos'],function () {
+Route::group(['prefix' => 'admin/eventos'], function () {
     Route::get('tipos-de-evento', [TipoEventoController::class, 'mostrarVistaTipoEvento'])->name('tipo-evento');
     Route::get('crear-evento', [EventoController::class, 'showEventForm'])->name('crear');
     Route::get('crear-tipo', [TipoEventoController::class, 'mostrarCrearTipo'])->name('crear-tipo');
     Route::get('afiche', [AficheController::class, 'vistaTablaEventos'])->name('afiche.tablaEventos');
     Route::get('patrocinador', [PatrocinadorController::class, 'vistaTablaEventos'])->name('patrocinador.tablaEventos');
     Route::get('patrocinador/eliminar', [PatrocinadorController::class, 'vistaTablaEventosEliminar'])->name('patrocinador.tablaEventosEliminar');
-    Route::get('material', function(){
-        return view('eventos.subirMaterial');
-    })->name('material.tablaEventos');
+    Route::get('material', [MaterialController::class, 'eventosConMaterial'])->name('material.tablaEventos');
 });
 
 Route::group(['prefix' => 'eventos'], function () {
@@ -49,5 +48,5 @@ Route::group(['prefix' => 'eventos'], function () {
 
 Route::group(['prefix' => 'afiche'], function () {
     Route::get('asignar', [AficheController::class, 'vistaTablaEventos'])->name('afiche.tablaEventos');
-    Route::get('editar',[AficheController::class, 'editarAfiche'])->name('afiche.editar');
+    Route::get('editar', [AficheController::class, 'editarAfiche'])->name('afiche.editar');
 });
