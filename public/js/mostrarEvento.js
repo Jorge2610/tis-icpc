@@ -17,7 +17,7 @@ const cargarPatrocinadores = async () => {
             <div class="col-12 col-md-12 d-flex justify-content-center">
                 <div id="imagenPatrocinador">
                     <a href="${ruta}" target="_blank">
-                        <img id="imagenPatrocinador" src="${patrocinador.ruta_logo}" title="${patrocinador.nombre}"
+                        <img id="imagenPatrocinador" src="${patrocinador.ruta_imagen}" title="${patrocinador.nombre}"
                             alt="Imagen del patrocinador" style="object-fit: cover; max-height: 7rem; max-width: 100%;">
                     </a>
                 </div>
