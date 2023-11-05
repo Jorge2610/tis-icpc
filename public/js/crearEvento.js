@@ -37,7 +37,8 @@ const copiarEdadMaxima = () => {
 };
 
 fechaInicio.addEventListener("change", () => {
-    setMinDate(fechaFin, fechaInicio);
+    //setMinDate(fechaFin, fechaInicio);
+    setMinDate(fechaInicio,fechaFin);
     validarFechas(fechaInicio, fechaFin);
 });
 
@@ -46,7 +47,8 @@ fechaFin.addEventListener("change", () => {
 });
 
 fechaInscripcionInicio.addEventListener("change", () => {
-    setMinDate(fechaInscripcionFin, fechaInscripcionInicio);
+    setMinDate(fechaInscripcionInicio, fechaInscripcionFin);
+   // setMinDate(fechaInscripcionFin, fechaInscripcionInicio);
     validarFechas(fechaInscripcionInicio, fechaInscripcionFin);
 });
 
@@ -360,7 +362,11 @@ fechaInicio.addEventListener("change",()=>{
 })
 
 fechaInscripcionFin.addEventListener("change",()=>{
-    if(fechaInscripcionFin.value()>fechaFin.value){
-        console("hola");
+    let fech = fechaFin.value.split('T')[0];
+    console.log(fech);
+    if(fechaInscripcionFin.value>fech && fech!==""){
+        fechaInscripcionFin.classList.remove("is-valid");
+        fechaInscripcionFin.classList.add("is-invalid");
     }
+
 })
