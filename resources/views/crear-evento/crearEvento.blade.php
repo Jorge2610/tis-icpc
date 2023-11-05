@@ -15,14 +15,14 @@
                 @endif
             </div>
 
-            <div class="col-md-5 border-end">
+            <div class="col-md-7 border-end">
 
                 <div class="col-md-12">
                     <label for="nombreDelEvento" class="form-label">Nombre del evento *</label>
                     <input name="nombre" type="text" class="form-control" id="nombreDelEvento" onchange="datoCambiado()"
                         placeholder="Ingrese el nombre del evento" maxlength="64"
                         value="{{ isset($datos['nombreDelEvento']) ? $datos['nombreDelEvento'] : '' }}" required>
-                    <div class="invalid-feedback">
+                    <div class="invalid-feedback" >
                         El nombre no puede estar vacio.
                     </div>
                 </div>
@@ -43,17 +43,20 @@
 
                     <div class="col-md-6">
                         <label for="gradoDelEvento" class="form-label">Grado academico requerido</label>
-                        <select name="grado_academico" class="form-select" id="gradoDelEvento" onchange="datoCambiado()"
-                            aria-placeholder="Elija un tipo de evento...">
+                        <button id="boton-instituciones" type="button" class="btn dropdown-toggle" style="padding: 5px; border: solid 1px black;"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                             Grado academico requerido
+                        </button>
+                        <ul class="dropdown-menu " aria-labelledby="boton-instituciones" style="padding: 10px;">
                             @foreach (['Ninguno', 'Primaria', 'Secundaria', 'Universidad', 'Licenciatura', 'Maestria', 'Doctorado'] as $grado)
-                                <option value="{{ $grado }}" @if ($datos['grado_academico'] == $grado) selected @endif>
-                                    {{ $grado }}
-                                </option>
+                                <li>
+                                    <input class="form-check-input grado-requerido" type="checkbox" value="{{$grado}}" id="flexCheckChecked" >
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        {{$grado}}
+                                    </label>
+                                </li>
                             @endforeach
-                        </select>
-                        <div class="invalid-feedback">
-                            Este campo no puede estar vacio.
-                        </div>
+                        </ul>
                     </div>
 
                 </div>
@@ -63,14 +66,16 @@
                     <div class="col-md-6">
                         <label  class="form-label">Instituciones admitidas</label>
                         <div>
-                        <button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary dropdown-toggle" style="padding: 5px;"data-bs-toggle="dropdown" aria-expanded="false">
+                        <button id="btnGroupDrop1" type="button" class="btn dropdown-toggle" style="padding: 5px; border: solid 1px black;"
+                        data-bs-toggle="dropdown" aria-expanded="false">
                              Intituciones Admitidas
                         </button>
-                        <ul class="dropdown-menu " aria-labelledby="btnGroupDrop1" style="padding: 20px;">
+                        <ul class="dropdown-menu " aria-labelledby="btnGroupDrop1" style="padding: 10px;">
                             @foreach (['TODAS', 'UMSA', 'UPSA','UCB','UPB','UNIFRANZ'] as $institucion)
                                 <li>
-                                    <input class="form-check-input institucion" type="checkbox" value="{{$institucion}}" id="flexCheckChecked" >
-                                    <label class="form-check-label" for="flexCheckChecked">
+                                    <input class="form-check-input institucion" type="checkbox" value="{{$institucion}}"
+                                     id="check-institucion-{{$institucion}}" >
+                                    <label class="form-check-label" for="check-institucion-{{$institucion}}">
                                         {{$institucion}}
                                     </label>
                                 </li>
@@ -117,6 +122,9 @@
                                 onchange="datoCambiado()" data-id="{{ $datos['edad_minima'] }}"
                                 @if ($datos['edad_minima']) checked @endif>
                             <label for="limiteDeEdad" class="form-label">Rango de edad</label>
+                            <div class="invalid-feedback">
+                                colocar min y max
+                            </div>
                             <div class="row" id="rangosDeEdad" style="display: none;">
                                 <div class="col-md-6">
                                     <div class="row " id="rangoMin">
@@ -125,7 +133,7 @@
                                         </div>
                                         <div class="col-md-8">
                                             <div class="input-group">
-                                                <input name="edad_minima" type="number" class="form-control"
+                                                <input name="edad_minima" type="number" class="form-control input-edad"
                                                     min="0" id="edadMinima" step="1"
                                                     value="{{ isset($datos['edad_minima']) ? $datos['edad_minima'] : '0' }}">
                                             </div>
@@ -139,8 +147,8 @@
                                         </div>
                                         <div class="col-md-8">
                                             <div class="input-group">
-                                                <input name="edad_maxima" type="number" class="form-control"
-                                                    id="edadMaxima" step="1"
+                                                <input name="edad_maxima" type="number" class="form-control input-edad"
+                                                    id="edadMaxima" step="1" min="0"
                                                     value="{{ isset($datos['edad_maxima']) ? $datos['edad_maxima'] : '0' }}">
                                             </div>
                                         </div>
@@ -200,7 +208,7 @@
 
             </div>
 
-            <div class="col-md-7">
+            <div class="col-md-5">
 
                 <div class="col-md-12 ms-3">
                     <h6>Periodo de inscripción</h6>

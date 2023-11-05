@@ -8,6 +8,7 @@ const fechaInicio = document.getElementById("fechaInicio");
 const fechaFin = document.getElementById("fechaFin");
 const edadMinima = document.getElementById("edadMinima");
 const edadMaxima = document.getElementById("edadMaxima");
+const chekcTodas = document.getElementById("check-institucion-TODAS");
 
 let tipoForm = 0; //0-> Crear  1->Editar
 let datosActualizados = false;
@@ -53,8 +54,19 @@ fechaInscripcionFin.addEventListener("change", () => {
     validarFechas(fechaInscripcionInicio, fechaInscripcionFin);
 });
 
+edadMaxima.addEventListener("change",()=>{
+    console.log(edadMaxima.min);
+    if(edadMaxima.value<edadMaxima.min){
+        edadMaxima.value=edadMaxima.min;
+    }
+    validarEdad();
+})
 edadMinima.addEventListener("change", () => {
-    copiarEdadMaxima();
+    if(edadMinima.value<edadMinima.min){
+        edadMinima.value=0;
+    }
+    edadMaxima.min=edadMinima.value;
+    validarEdad();
 });
 
 const utilizarInput = (indInput, check) => {
@@ -211,8 +223,7 @@ const datoCambiado = () => {
 window.addEventListener("load", () => {
     if (document.getElementById("nombreDelEvento").value != "") {
         tipoForm = 1;
-        document.getElementById("select-region").disabled=true;
-
+    //    document.getElementById("select-region").disabled=true;
     }
     axios
         .get("/api/tipo-evento")
@@ -235,6 +246,9 @@ window.addEventListener("load", () => {
         .catch(function (error) {
             console.error(error);
         });
+    chekcTodas.classList.remove("institucion");
+    console.log(edadMaxima.value=="");
+    console.log(edadMinima.value);
 });
 
 const cerrar = (edicion) => {
@@ -249,38 +263,47 @@ const cerrar = (edicion) => {
 //agragar validacion a los inputs
 form.querySelectorAll(".form-control, .form-select").forEach(Element=>{
     Element.addEventListener("change",()=>{
-        if(Element.hasAttribute("required") && Element.value===""){
-            Element.classList.remove("is-valid");
-            Element.classList.add("is-invalid");
-        }
-        else{
-            Element.classList.remove("is-invalid");
-            Element.classList.add("is-valid");
+        if(!Element.classList.contains("input-edad")){
+            if(Element.hasAttribute("required") && Element.value===""){
+                Element.classList.remove("is-valid");
+                Element.classList.add("is-invalid");
+            }
+            else{
+                Element.classList.remove("is-invalid");
+                Element.classList.add("is-valid");
+            }
         }
     })
 });
 form.addEventListener("submit",(event)=>{
+    validarEdad();
     event.preventDefault();
     form.querySelectorAll(".form-control, .form-select").forEach(Element=>{
         Element.dispatchEvent(new Event("change"));
     })
-    let aux="";
-    form.querySelectorAll(".institucion").forEach(Element=>{
-        if(Element.checked){
-            aux= Element.value+", "+aux;
-        }
-    })
-    console.log(aux);
     if(!validar()){
         $("#modalConfirmacion").modal("hide");
     }
     else{
+        let aux="";
+        form.querySelectorAll(".institucion").forEach(Element=>{
+            if(Element.checked){
+                aux= Element.value+", "+aux;
+            }
+        })
+        let insti="";
+        form.querySelectorAll(".grado-requerido").forEach(Element=>{
+            if(Element.checked){
+                insti= Element.value+", "+insti;
+            }
+        })
         const formData = prepararFormData();
 
         const eventoId = formData.get("evento_id");
         const imagen = document.getElementById("imagen").value;
         formData.set("ruta_afiche", imagen);
         formData.set("institucion", aux);
+        formData.set("grado_academico",insti);
         if (eventoId) {
             editarEvento(formData, eventoId);
         } else {
@@ -295,11 +318,44 @@ form.addEventListener("submit",(event)=>{
 })
 
 const validar=()=>{
-    console.log(form.querySelector(".is-invalid"));
     if(form.querySelector(".is-invalid")===null){
         return true;
     }
     else{
         return false;
+    }
+};
+
+chekcTodas.addEventListener("change",()=>{
+    document.querySelectorAll(".institucion").forEach(Element=>{
+        if(chekcTodas.checked){
+            Element.checked=true;
+        }
+        else{
+            Element.checked=false;
+        }
+    })
+});
+
+document.querySelectorAll(".institucion").forEach(Element=>{
+    Element.addEventListener("change",()=>{
+        let bandera=true;
+        document.querySelectorAll(".institucion").forEach(Element=>{
+            if(!Element.checked){
+                bandera=false;
+            }
+        })
+        chekcTodas.checked=bandera;
+    })
+})
+
+const validarEdad=()=>{
+    if(edadMaxima.value===""&& edadMinima.value==="" &&inputEdad.checked){
+        inputEdad.classList.remove("is-valid");
+        inputEdad.classList.add("is-invalid");
+    }
+    else{
+        inputEdad.classList.add("is-valid");
+        inputEdad.classList.remove("is-invalid");
     }
 };

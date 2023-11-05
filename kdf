@@ -1,0 +1,773 @@
+[33mcommit 54629bb05c9d3ac413f94ddc8f34074fe67b5027[m[33m ([m[1;36mHEAD -> [m[1;32mcrear-evento[m[33m, [m[1;31morigin/crear-evento[m[33m, [m[1;32mdevelop[m[33m)[m
+Merge: dbcef17 031bae9
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Tue Oct 31 01:33:57 2023 -0400
+
+    evento y eventos subido
+
+[33mcommit 031bae9426a2908b00923a1d451872fbc1a7405d[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Tue Oct 31 01:07:30 2023 -0400
+
+    Gestor de afiche hecho
+
+[33mcommit dbcef17cb6f5432f2bc36b2206484af77a0ab0ea[m
+Author: JesusGuti <jesusgonzales0968@gmail.com>
+Date:   Mon Oct 30 21:59:33 2023 -0400
+
+    Carrousel y Eliminar Patrocinador
+
+[33mcommit 1cd0e7d04b5fa319f9ce60ffe873034c7582dc8d[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Sun Oct 29 22:24:47 2023 -0400
+
+    Rutas actualizadas
+
+[33mcommit 521c5c245f483fb3c8aa5f9f270e7a06ce4dabc3[m
+Merge: 8973f8a 7a97da9
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Sun Oct 29 22:07:43 2023 -0400
+
+    Merge branch 'asignar-patrocinador' into develop
+
+[33mcommit 7a97da93d25fa18b49395895bb14eb8f1b4508d4[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Sun Oct 29 22:06:46 2023 -0400
+
+    Asignar patrocinador terminado
+
+[33mcommit 8973f8a558168f026ccaf35f7b1942f1cf1ffaab[m
+Author: Rickybk <doriflolo@gmail.com>
+Date:   Sun Oct 29 20:03:43 2023 -0400
+
+    "Crear la ruta /admin"
+
+[33mcommit bfe3a41d188459ed3eb6c73daf52db2659813012[m
+Author: Rickybk <doriflolo@gmail.com>
+Date:   Sun Oct 29 19:40:37 2023 -0400
+
+    [HU: 1] Crear tipo de evento - Carry over
+
+[33mcommit ef6551378e2c511bcd240b762d31605872be5364[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Fri Oct 27 11:50:09 2023 -0400
+
+    seleccion de eventos color de fondo solucionado
+
+[33mcommit 08d247fbc361cba2b45c5562dda4078c9672c3b4[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Fri Oct 27 08:33:25 2023 -0400
+
+    Nuevo layout integrado + table hovers bg
+
+[33mcommit b23e2419736cef9094245ea654266476c8853467[m
+Merge: a898131 eec4a8f
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Fri Oct 27 01:41:58 2023 -0400
+
+    Merge branch 'nuevo-layout' into develop
+
+[33mcommit eec4a8f8372d229a5336e86b0d16a3897d3b645d[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Fri Oct 27 01:33:23 2023 -0400
+
+    nuevo layout
+
+[33mcommit a898131c9fcfb5dca425e4c9846cf030de5302df[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Fri Oct 27 00:38:32 2023 -0400
+
+    Asignar afiche a un evento por IvanP.
+
+[33mcommit 5691238457b38a9127e2caab71a04518780b4f6a[m[33m ([m[1;33mtag: 1.0[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Mon Oct 23 22:18:41 2023 -0400
+
+    ruta patrocinador solucionado
+
+[33mcommit 18f62010f2823ec09220341463afd90953832973[m
+Merge: c604489 7cfa072
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Mon Oct 23 21:57:21 2023 -0400
+
+    version 1er sprint
+
+[33mcommit 7cfa072785171f37e9d25f1408536a87323b2d8e[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Mon Oct 23 01:54:56 2023 -0400
+
+    Refactoring done
+
+[33mcommit 2e2a603dcb6459e63beac9063671cb0c39ed674b[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Mon Oct 23 01:54:25 2023 -0400
+
+    Refactoring done
+
+[33mcommit 37a1c1e7c15c3f6fe2fda4369a82f992e90be41b[m
+Merge: c01907a 1313bdb
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Mon Oct 23 01:51:43 2023 -0400
+
+    refactoring
+
+[33mcommit c01907a817e695fe0e623c33269e33b569912d64[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Mon Oct 23 01:01:25 2023 -0400
+
+    Refactoring completo
+
+[33mcommit 1313bdbca5e54139a79f8fb6c381949941708849[m
+Author: JesusGuti <jesusgonzales0968@gmail.com>
+Date:   Sun Oct 22 10:16:16 2023 -0400
+
+    Modal de confirmación generico para las vistas
+
+[33mcommit ebf3ee1b63532a91497a5a75c81643fcf6391d3c[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Sun Oct 22 00:36:32 2023 -0400
+
+    Codigo refactorizado
+
+[33mcommit 8662ff0690d05408484686fb4d95e5007a3a7fb6[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Sat Oct 21 22:14:58 2023 -0400
+
+    refactoring 1.0
+
+[33mcommit 7515bcb73bb270169ed9b0b513fc90468705dcfe[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Wed Oct 18 03:24:19 2023 -0400
+
+    Fix mostrar evento update
+
+[33mcommit 8c5ee5667bab1da9a37b45b9d8cc14de1a7cf614[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Wed Oct 18 02:57:29 2023 -0400
+
+    Limite de caracteres de descripcion
+
+[33mcommit a030f8f9a6c9de72b7b60093b5583f976108b098[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Wed Oct 18 02:46:42 2023 -0400
+
+    patrocinador archivos
+
+[33mcommit be9ece80e38a7decc07b37d6c6dd63e3c3234a1b[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Wed Oct 18 02:42:46 2023 -0400
+
+    afiche completo
+
+[33mcommit c604489ca1cdfc7d525820d2f195561287b877a9[m
+Merge: fdcaf82 5157469
+Author: Dorian Flores Lopez <doriflolo@gmail.com>
+Date:   Wed Oct 18 00:04:28 2023 -0400
+
+    Merge pull request #3 from Jorge2610/develop
+    
+    develop -> main
+
+[33mcommit 5157469dee48dcf11ee474dff854a9212cadfaef[m
+Merge: cb8e6e1 1198c5c
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Wed Oct 18 00:02:09 2023 -0400
+
+    Merge branch 'develop' of https://github.com/Jorge2610/tis-icpc into develop
+
+[33mcommit cb8e6e125cf0098aa041d563cc5a18542b9c9026[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Wed Oct 18 00:02:00 2023 -0400
+
+    texto descripcion
+
+[33mcommit 1198c5c5412f419b35dca96ed114fa1114ccfffb[m[33m ([m[1;31morigin/modal-borrar-patrocinador[m[33m, [m[1;32mmodal-borrar-patrocinador[m[33m)[m
+Merge: a77404e 8a753d7
+Author: josue rodriguez blanco <josuebrandon99@gmail.com>
+Date:   Tue Oct 17 23:32:10 2023 -0400
+
+    mege de develop
+
+[33mcommit a77404ecdf40422962b3d2fa3edc703b9025023c[m
+Author: josue rodriguez blanco <josuebrandon99@gmail.com>
+Date:   Tue Oct 17 23:27:23 2023 -0400
+
+    borrar patrocinador
+
+[33mcommit 8a753d7f25c45b81f714e5ea3bd6e71fbb282ddb[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Tue Oct 17 22:23:53 2023 -0400
+
+    Afiche hecho
+
+[33mcommit aaad2e80c29b2fcbea6f3c9d253b5e4be3ff81b9[m
+Merge: ab90401 5d0f3ea
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Tue Oct 17 22:12:09 2023 -0400
+
+    Merge branch 'BotonesAficheIvan' into develop
+
+[33mcommit 5d0f3eae9273d7fe903ed190814f919f740652fd[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Tue Oct 17 22:11:45 2023 -0400
+
+    Botones afiche
+
+[33mcommit ab904016b3d67acdb8adb71e5d3de9681ad403c8[m
+Author: josue rodriguez blanco <josuebrandon99@gmail.com>
+Date:   Tue Oct 17 21:39:26 2023 -0400
+
+    validacion de patrocinador
+
+[33mcommit 03e7f45bd7889bcc056074276691fbfd4d04a1e5[m
+Merge: 41ca9ac 3fefe3b
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Tue Oct 17 20:14:44 2023 -0400
+
+    Merge branch 'develop' of https://github.com/Jorge2610/tis-icpc into develop
+
+[33mcommit 41ca9aca3e1b1f3f30e4baaa1aa5b9df5ebac339[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Tue Oct 17 20:14:40 2023 -0400
+
+    Cosas de patrocinador
+
+[33mcommit 3fefe3bbb7ef365735ff75f529af27d9d7bac91f[m
+Author: nnpqo <yaninapaolaquispeorellana@gmail.com>
+Date:   Tue Oct 17 19:25:22 2023 -0400
+
+    saltos de linea de descripcion
+
+[33mcommit 338dd220ef6965a22d32ec749164d996b86d4fd7[m
+Author: nnpqo <yaninapaolaquispeorellana@gmail.com>
+Date:   Tue Oct 17 19:09:08 2023 -0400
+
+    arreglado el placeholder de region en crear evento
+
+[33mcommit 687c83fb0ebaa1e0f2b8060a437c3bce2bbc125d[m[33m ([m[1;31morigin/editar-color[m[33m)[m
+Author: nnpqo <yaninapaolaquispeorellana@gmail.com>
+Date:   Tue Oct 17 19:05:34 2023 -0400
+
+    circular de color
+
+[33mcommit 9620f8891f6c97e6c81082d80a85beb549c7a864[m
+Author: Rickybk <doriflolo@gmail.com>
+Date:   Tue Oct 17 18:02:21 2023 -0400
+
+    "Agregar patrocinadores Backend"
+
+[33mcommit 44fb2f7871bef39bd97ae97333a2e8ebcbbaa70e[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Tue Oct 17 17:36:00 2023 -0400
+
+    Paso de datos al componente agr-patr
+
+[33mcommit 28866f34b581dda1afa0eaa22ca623a6b954f960[m
+Merge: 02294b3 14582a8
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Tue Oct 17 17:15:14 2023 -0400
+
+    git vista-borrar-patrocinador into develop
+
+[33mcommit 14582a82240e976f326e80c163a945b6a1ae0010[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Tue Oct 17 16:58:01 2023 -0400
+
+    crearEvento
+
+[33mcommit 02294b34a11a798e33706bad0bf0acdcd5f9da0f[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Tue Oct 17 16:47:16 2023 -0400
+
+    Control de update, fechas, navegacion
+
+[33mcommit ca35ad882c69668f765f16939f39a6e1eadf5588[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Tue Oct 17 16:14:18 2023 -0400
+
+    borrar hecho
+
+[33mcommit c312f64ff49e834532d4463abee28b7039139fef[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Tue Oct 17 13:36:13 2023 -0400
+
+    Eventos ordenados por update + minor fix en editar evento
+
+[33mcommit f495483c4795f2346dcfd93214f5b8f8ad2fdc83[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Tue Oct 17 11:23:33 2023 -0400
+
+    Fix tipo-evento vacio al crear un evento
+
+[33mcommit 4256099a3cff02e97d68bce2122fa38c05f60426[m
+Author: JesusGuti <jesusgonzales0968@gmail.com>
+Date:   Tue Oct 17 03:42:50 2023 -0400
+
+    Editar evento Done
+
+[33mcommit 83f053b1b9864cce7066cd28b2e15ee31456281f[m
+Merge: 0afc3f1 f2881f1
+Author: JesusGuti <jesusgonzales0968@gmail.com>
+Date:   Tue Oct 17 03:10:48 2023 -0400
+
+    Merge branch 'feature/edit-event' into develop
+
+[33mcommit 0afc3f1d20832957575fff3b6292cff269dc32bb[m
+Author: JesusGuti <jesusgonzales0968@gmail.com>
+Date:   Tue Oct 17 02:41:49 2023 -0400
+
+    3 puntos
+
+[33mcommit 6db3aee8cafc3dabcf4c41bb04e178e283c59bed[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Tue Oct 17 02:07:12 2023 -0400
+
+    Modal agregar patrocinador integrado
+
+[33mcommit 69caa827343f8e31b416be18024b0ca7f7423f94[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Tue Oct 17 02:00:28 2023 -0400
+
+    Mostrar evento
+
+[33mcommit b653f676c1a9225baecc7be491739a9a92b9a8c5[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Tue Oct 17 01:22:40 2023 -0400
+
+    arreglado la tabla de tipos de eventos
+
+[33mcommit 011466d9a233b86b5128961da0291bd64939d6eb[m
+Merge: d83b5fd bc3bbcc
+Author: nnpqo <yaninapaolaquispeorellana@gmail.com>
+Date:   Tue Oct 17 00:32:27 2023 -0400
+
+    cambios en tipo de evento
+
+[33mcommit d83b5fd31318f8280518f3881f4c59a6e4f855ca[m
+Author: nnpqo <yaninapaolaquispeorellana@gmail.com>
+Date:   Tue Oct 17 00:28:26 2023 -0400
+
+    cambios en tipo evento
+
+[33mcommit bc3bbccaf0510c49f9f1850afeb768c15c61c800[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Mon Oct 16 23:45:08 2023 -0400
+
+    Pagina eventos
+
+[33mcommit 90f8dd35a516e8df00770d30171afdd096ef6845[m
+Merge: 523080b e0f0330
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Mon Oct 16 22:45:01 2023 -0400
+
+    Merge branch 'develop' of https://github.com/Jorge2610/tis-icpc into develop
+
+[33mcommit 523080baa4e632172e38144459d8da0668d1f90b[m
+Merge: 15b7ed9 31f02e1
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Mon Oct 16 22:39:35 2023 -0400
+
+    Merge branch 'vista-eventos' into develop
+
+[33mcommit e0f03304a5d0b393d06237d87baf3d1b304e01ef[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Mon Oct 16 22:38:44 2023 -0400
+
+    get eventos con tipo de eventos
+
+[33mcommit 31f02e141034fcb4071a3123c427c204eb1a13e3[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Mon Oct 16 21:54:34 2023 -0400
+
+    Vista Eventos
+
+[33mcommit 15b7ed90504583d3aaf10a0fe799f2ea428cf06f[m
+Merge: 62307ec adc8ea6
+Author: Dorian Flores Lopez <doriflolo@gmail.com>
+Date:   Mon Oct 16 21:47:25 2023 -0400
+
+    Merge pull request #2 from Jorge2610/back
+    
+    Logica Listar Eventos
+
+[33mcommit adc8ea6f72161164d2cf2ef0b6b0bab4f8db52d7[m
+Author: Rickybk <doriflolo@gmail.com>
+Date:   Mon Oct 16 21:46:22 2023 -0400
+
+    Logica Listar Eventos
+
+[33mcommit f2881f124f5fc19e34500d0c13d8f963e7323665[m[33m ([m[1;31morigin/feature/edit-event[m[33m)[m
+Author: JesusGuti <jesusgonzales0968@gmail.com>
+Date:   Mon Oct 16 21:01:20 2023 -0400
+
+    Recuperando inputs ocultos
+
+[33mcommit 12e1c4d9319fa30172c3732c419ada3d8b21d710[m
+Author: JesusGuti <jesusgonzales0968@gmail.com>
+Date:   Mon Oct 16 20:35:28 2023 -0400
+
+    Editar funcionando
+
+[33mcommit 62307ec30b3e24ec336b86388e1c8c8d04c93551[m[33m ([m[1;31morigin/navegacion-botones[m[33m)[m
+Author: josue rodriguez blanco <josuebrandon99@gmail.com>
+Date:   Mon Oct 16 18:21:56 2023 -0400
+
+    subiendo validacion de botones
+
+[33mcommit eb80aa8e1c09362aa16795383f9353f0155e6665[m
+Merge: b222952 3d1559a
+Author: josue rodriguez blanco <josuebrandon99@gmail.com>
+Date:   Mon Oct 16 17:15:00 2023 -0400
+
+    merge comprobando-creartipoEvento to develop
+
+[33mcommit 3d1559a86e9bdb8fc7a14b1b726cc31836f50568[m[33m ([m[1;31morigin/comprobando-creartipoEvento[m[33m)[m
+Author: josue rodriguez blanco <josuebrandon99@gmail.com>
+Date:   Mon Oct 16 17:09:57 2023 -0400
+
+    solucinando modal
+
+[33mcommit b222952cd3cd48d131a5283ff88a599e2b930a80[m
+Merge: 4091a86 4545d6f
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Mon Oct 16 17:04:12 2023 -0400
+
+    Merge branch 'develop' of https://github.com/Jorge2610/tis-icpc into develop
+
+[33mcommit 4091a86b20d69f924f64f35b75e9038660b7afa2[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Mon Oct 16 17:03:53 2023 -0400
+
+    Margen y espaciado vista crearEvento
+
+[33mcommit 4545d6f9f51c063a3a79569c83ffcbb364c536cb[m
+Merge: 4817f5c fb10f19
+Author: JesusGuti <jesusgonzales0968@gmail.com>
+Date:   Mon Oct 16 16:57:00 2023 -0400
+
+    Merge branch 'feature/modales-crear' into develop
+
+[33mcommit fb10f194abb6a118fd6c5badb5e15549bf81e081[m[33m ([m[1;31morigin/feature/modales-crear[m[33m)[m
+Author: JesusGuti <jesusgonzales0968@gmail.com>
+Date:   Mon Oct 16 16:43:12 2023 -0400
+
+    Con alertas done
+
+[33mcommit 86be190e4601a51190c64539a02cbc83caeda307[m
+Author: JesusGuti <jesusgonzales0968@gmail.com>
+Date:   Mon Oct 16 16:30:21 2023 -0400
+
+    modales de confirmacion hechos
+
+[33mcommit 4817f5cadc2d84529ffdbe66b2e03ac9f94ed737[m
+Merge: ab22329 175f6f8
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Mon Oct 16 16:26:29 2023 -0400
+
+    Merge branch 'develop' of https://github.com/Jorge2610/tis-icpc into develop
+
+[33mcommit ab2232922519516fbe4b0f0ff4cd697bdc460639[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Mon Oct 16 16:26:25 2023 -0400
+
+    Minor fix - validacion de edad
+
+[33mcommit 175f6f842d00ea4bea204319c2834e884da0f9e4[m
+Merge: 73f0097 1bc148c
+Author: josue rodriguez blanco <josuebrandon99@gmail.com>
+Date:   Mon Oct 16 16:18:53 2023 -0400
+
+    Merge branch 'input-date' into develop
+
+[33mcommit 1bc148c8f7e71ea8189b8c9a4d9481f4ca3303c1[m
+Author: josue rodriguez blanco <josuebrandon99@gmail.com>
+Date:   Mon Oct 16 16:18:07 2023 -0400
+
+    validacion input datetime
+
+[33mcommit 73f009723631fd599733b7fc88102822afa52a57[m
+Author: Rickybk <doriflolo@gmail.com>
+Date:   Mon Oct 16 15:51:29 2023 -0400
+
+    Se detuvo el trackeo del .env
+
+[33mcommit 39fd8754928d787bbe3eb9cbd6e2aff4db37df63[m
+Merge: 565002e 735a017
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Mon Oct 16 15:39:56 2023 -0400
+
+    Merge branch 'feature/modelos-sprint1-done' into develop
+
+[33mcommit 735a017357d708678a067bd5ac2086ac28ace157[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Mon Oct 16 14:53:47 2023 -0400
+
+    nombre de rutas
+
+[33mcommit 470c4e0a6f3d0e49f582ed5e1a909c0914af4ae9[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Mon Oct 16 14:50:16 2023 -0400
+
+    modelos done
+
+[33mcommit 565002e230cff3f02625a079442f9ebb2a859d28[m
+Author: Dorian Flores Lopez <doriflolo@gmail.com>
+Date:   Mon Oct 16 02:34:12 2023 -0400
+
+    Update .env
+    
+    set default .env credentials
+
+[33mcommit 5fd76f3087218d3250414113c03d2956bfcfcbab[m
+Merge: cab554e 1e36e45
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Mon Oct 16 02:29:15 2023 -0400
+
+    merge patrocinadores into develop
+
+[33mcommit 1e36e45ea05232e016dd1e6fee025731b8c602f5[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Mon Oct 16 02:24:41 2023 -0400
+
+    modelo patrocinador crud done
+
+[33mcommit cab554ee2d4d8906a436e4d68840a77c6d6f6957[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Sun Oct 15 18:27:30 2023 -0400
+
+    Validacion de edad
+
+[33mcommit 3bfa042d3fd76372982b72d7f8a679109a520fd9[m
+Author: josue rodriguez blanco <josuebrandon99@gmail.com>
+Date:   Sun Oct 15 18:20:55 2023 -0400
+
+    enviar formulario completo
+
+[33mcommit 665a7eccc9743b34cd66ab4ccd83f94ff59f0a99[m
+Merge: 666746b 57ac9eb
+Author: Dorian Flores Lopez <doriflolo@gmail.com>
+Date:   Sat Oct 14 21:21:04 2023 -0400
+
+    Merge pull request #1 from Jorge2610/backend
+    
+    "crear evento + seleccionar tipo evento"
+
+[33mcommit 57ac9eb4d4163cc2764f54880a0453ccd1de6c75[m
+Author: Rickybk <doriflolo@gmail.com>
+Date:   Sat Oct 14 21:16:50 2023 -0400
+
+    "crear evento + seleccionar tipo evento"
+
+[33mcommit 666746b8f5ec3a8ac8ee238d7e03ab0063de7b8f[m
+Merge: 1bb68f3 c0ab59e
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Sat Oct 14 19:07:12 2023 -0400
+
+    Merge branch 'develop' of https://github.com/Jorge2610/tis-icpc into develop
+
+[33mcommit 1bb68f3386f57fe8efb86084f58c15c3a385b402[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Sat Oct 14 19:05:45 2023 -0400
+
+    modelos-controladores-tipoEvento-Evento-Afiche
+
+[33mcommit 00bfe0f9b5079ad4920c32b64dc809ee858bce89[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Sat Oct 14 14:54:49 2023 -0400
+
+    tipo eventos y eventos realizados
+
+[33mcommit c0ab59e0744f36cbe5e9dd7700fa7a0360aa0a3f[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Fri Oct 13 22:32:26 2023 -0400
+
+    Crear evento form terminado.
+
+[33mcommit 3246a423d7d2d6d7f4ab7e267d15749f2e9baabc[m
+Author: josue rodriguez blanco <josuebrandon99@gmail.com>
+Date:   Fri Oct 13 21:16:56 2023 -0400
+
+    agredando informacion a descripción
+
+[33mcommit 633f8351b73e27574032b39ab066b76f897fc8e2[m
+Author: josue rodriguez blanco <josuebrandon99@gmail.com>
+Date:   Fri Oct 13 20:51:38 2023 -0400
+
+    validacion de evento
+
+[33mcommit 61fd5be28c310263a058d6bc2e96e109dfd33670[m
+Author: josue rodriguez blanco <josuebrandon99@gmail.com>
+Date:   Fri Oct 13 18:49:36 2023 -0400
+
+    verificando valores maximo en crear tipo de evento
+
+[33mcommit 906b84682814b81acd5dd80a71017014438acd0f[m
+Author: josue rodriguez blanco <josuebrandon99@gmail.com>
+Date:   Fri Oct 13 13:07:19 2023 -0400
+
+    funcionalidad de de inputs validar
+
+[33mcommit 74948fa8dfceb0331a7720742a63a2338f62d33b[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Wed Oct 11 22:51:00 2023 -0400
+
+    Rework vistas + CRUD de tipo de evento.
+
+[33mcommit bf3f58cccf86869b8a339fa9f736f24ac32107f0[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Sat Oct 7 20:20:34 2023 -0400
+
+    Correciones menores y Refactoring
+
+[33mcommit 64054a25155975c4f5230cffaa0009889a33e982[m
+Author: nnpqo <yaninapaolaquispeorellana@gmail.com>
+Date:   Fri Oct 6 23:31:34 2023 -0400
+
+    correccion de nombres de ids
+
+[33mcommit e652e17493bf6758a4c85fe17cdeb4737e4068bc[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Fri Oct 6 00:03:48 2023 -0400
+
+    vistas y controlador integrados
+
+[33mcommit 7333ddc8c47d92a60cf320a99b6f999a87b19b04[m
+Merge: 0217d1c e616a02
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Thu Oct 5 23:58:56 2023 -0400
+
+    Merge branch 'Vista-principal-de-la-pagina' into develop
+
+[33mcommit e616a025e4f70f9ba68da057d9a2ab1000065b32[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Thu Oct 5 23:54:31 2023 -0400
+
+    Integracion de vistas HU 4 y HU 5.
+
+[33mcommit 5c3d4a9c677a336b04120eba9dffda9105d0b4db[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Thu Oct 5 23:25:00 2023 -0400
+
+    Integracion patrocinador v0.1
+
+[33mcommit 0217d1c2cfb610b376ea97d3ae4af16b5e9181ec[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Thu Oct 5 22:48:11 2023 -0400
+
+    model-controller-Evento por IvanP
+
+[33mcommit 151b8049a235b372ffbe12bcba6f85c136dbddd0[m
+Author: JesusGuti <jesusgonzales0968@gmail.com>
+Date:   Thu Oct 5 16:11:04 2023 -0400
+
+    alertas con ajax
+
+[33mcommit f883d37381b65cac9661e4a6b2aaca0443b64ff2[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Wed Oct 4 20:21:32 2023 -0400
+
+    Vista basica (sin ajax) de un tipo de evento
+
+[33mcommit 3d1e8263aca952dbd75054d9a5c67aa9407d4506[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Wed Oct 4 19:44:12 2023 -0400
+
+    Fix separador vista de eventos
+
+[33mcommit 7e6d1428aa0a6da867169dc1a047ff92bf4891db[m
+Merge: d29bc9a 951cd29
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Wed Oct 4 19:39:28 2023 -0400
+
+    Merge branch 'Vista-principal-de-la-pagina' of https://github.com/Jorge2610/tis-icpc into Vista-principal-de-la-pagina
+
+[33mcommit d29bc9af038a978786b8292d3a832c5189d0c98c[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Wed Oct 4 19:39:21 2023 -0400
+
+    Vista HU 3
+
+[33mcommit 951cd290f6c8bb50be266cd7434c3c04716c8f2b[m
+Author: nnpqo <yaninapaolaquispeorellana@gmail.com>
+Date:   Wed Oct 4 10:40:38 2023 -0400
+
+    espaciado
+
+[33mcommit 46f2dffb0ff3dba6fd8de289126441ae396cc962[m
+Author: nnpqo <yaninapaolaquispeorellana@gmail.com>
+Date:   Wed Oct 4 10:35:42 2023 -0400
+
+    cambios del text area y los 3 puntos del input
+
+[33mcommit c24950ced45f6e9b61c27dac03e2447671d0079b[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Tue Oct 3 22:47:06 2023 -0400
+
+    Selector de colores
+
+[33mcommit ed4344436b9eb33315f2c262d886280e0f3bd103[m
+Merge: 25288e3 e233bcf
+Author: nnpqo <yaninapaolaquispeorellana@gmail.com>
+Date:   Tue Oct 3 22:36:09 2023 -0400
+
+    Merge branch 'Vista-principal-de-la-pagina' of https://github.com/Jorge2610/tis-icpc into Vista-principal-de-la-pagina
+
+[33mcommit 25288e37c7cd5794531f43f5df1f97bad224cf2f[m
+Author: nnpqo <yaninapaolaquispeorellana@gmail.com>
+Date:   Tue Oct 3 22:28:19 2023 -0400
+
+    carpetas de css y js
+
+[33mcommit 3bf6c90111448f256a750cbd89dedcd07ce12bd6[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Tue Oct 3 22:25:08 2023 -0400
+
+    modelo y controlador tipoEvento
+
+[33mcommit e233bcf050897b04a96e9e476d9bdf59b77d3e3f[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Tue Oct 3 22:06:02 2023 -0400
+
+    Fix separator
+
+[33mcommit dca898f33e43943592311cea663d9bfe75416b8b[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Tue Oct 3 21:52:03 2023 -0400
+
+    Integracion del modal en la pagina de evento
+
+[33mcommit c55badc57419c8ae9c3c831e8fec2f27164fd890[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Mon Oct 2 20:58:40 2023 -0400
+
+    Estructura inicial de la pagina
+
+[33mcommit fdcaf82cf4194824dfc90b0558e9e7de65fc90d9[m[33m ([m[1;32mmain[m[33m)[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Sun Oct 1 21:52:36 2023 -0400
+
+    Dependecias solucionadas
+
+[33mcommit eb9d4f52be88a3e6da86783992471178fd1c40f3[m
+Author: Ivan Palacios <ivpalacios47@gmail.com>
+Date:   Sun Oct 1 21:33:56 2023 -0400
+
+    Boostrap instalacion
+
+[33mcommit 74c493bf454844430ec8af25232c45371c0eb96b[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Fri Sep 29 21:45:37 2023 -0400
+
+    Entorno
+
+[33mcommit 18eacdc557a1c3815c45a080271248a63263cff2[m
+Author: Jorge2610 <jorge261093@gmail.com>
+Date:   Fri Sep 29 21:19:28 2023 -0400
+
+    Archivos del proyecto
+
+[33mcommit 6d995bec59ac22397ef5d12db446b7835ad17b6d[m
+Author: Jorge2610 <91907920+Jorge2610@users.noreply.github.com>
+Date:   Fri Sep 29 20:31:47 2023 -0400
+
+    Initial commit
