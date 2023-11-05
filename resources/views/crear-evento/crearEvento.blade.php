@@ -15,7 +15,7 @@
                 @endif
             </div>
 
-            <div class="col-md-7 border-end">
+            <div class="col-md-6 border-end">
 
                 <div class="col-md-12">
                     <label for="nombreDelEvento" class="form-label">Nombre del evento *</label>
@@ -128,10 +128,10 @@
                             <div class="row" id="rangosDeEdad" style="display: none;">
                                 <div class="col-md-6">
                                     <div class="row " id="rangoMin">
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <label for="edadMinima" class="form-label">Min</label>
                                         </div>
-                                        <div class="col-md-8">
+                                        <div class="col-md-9">
                                             <div class="input-group">
                                                 <input name="edad_minima" type="number" class="form-control input-edad"
                                                     min="0" id="edadMinima" step="1"
@@ -142,10 +142,10 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="row " id="rangoMax">
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <label for="edadMaxima" class="form-label">Max</label>
                                         </div>
-                                        <div class="col-md-8">
+                                        <div class="col-md-9">
                                             <div class="input-group">
                                                 <input name="edad_maxima" type="number" class="form-control input-edad"
                                                     id="edadMaxima" step="1" min="0"
@@ -208,7 +208,7 @@
 
             </div>
 
-            <div class="col-md-5">
+            <div class="col-md-6">
 
                 <div class="col-md-12 ms-3">
                     <h6>Periodo de inscripción</h6>
