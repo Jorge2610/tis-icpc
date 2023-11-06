@@ -33,7 +33,7 @@
                         <label for="tipoDelEvento" class="form-label">Tipo de evento</label>
                         <!-Cargar tipos de evento->
                             <select name="id_tipo_evento" class="form-select" id="tipoDelEvento" onchange="datoCambiado()"
-                                aria-placeholder="Elija un tipo de evento..." data-id="{{ $datos['id_tipo_evento'] }}">
+                                aria-placeholder="Elija un tipo de evento..." data-id="{{ $datos['id_tipo_evento'] }}" required>
 
                             </select>
                             <div class="invalid-feedback">
@@ -43,15 +43,15 @@
 
                     <div class="col-md-6">
                         <label for="gradoDelEvento" class="form-label">Grado academico requerido</label>
-                        <button id="boton-instituciones" type="button" class="btn dropdown-toggle" style="padding: 5px; border: solid 1px black;"
+                        <button id="boton-grado" type="button" class="btn dropdown-toggle" style="padding: 5px; border: solid 1px black;"
                         data-bs-toggle="dropdown" aria-expanded="false">
                              Grado academico requerido
                         </button>
-                        <ul class="dropdown-menu " aria-labelledby="boton-instituciones" style="padding: 10px;">
-                            @foreach (['Ninguno', 'Primaria', 'Secundaria', 'Universidad', 'Licenciatura', 'Maestria', 'Doctorado'] as $grado)
+                        <ul class="dropdown-menu " aria-labelledby="boton-grado" style="padding: 10px;">
+                            @foreach (['Todas', 'Primaria', 'Secundaria', 'Universidad', 'Licenciatura', 'Maestria', 'Doctorado'] as $grado)
                                 <li>
-                                    <input class="form-check-input grado-requerido" type="checkbox" value="{{$grado}}" id="flexCheckChecked" >
-                                    <label class="form-check-label" for="flexCheckChecked">
+                                    <input class="form-check-input grado-requerido" type="checkbox" value="{{$grado}}" id="input-grado-{{$grado}}" >
+                                    <label class="form-check-label" for="input-grado-{{$grado}}">
                                         {{$grado}}
                                     </label>
                                 </li>
@@ -122,9 +122,6 @@
                                 onchange="datoCambiado()" data-id="{{ $datos['edad_minima'] }}"
                                 @if ($datos['edad_minima']) checked @endif>
                             <label for="limiteDeEdad" class="form-label">Rango de edad</label>
-                            <div class="invalid-feedback">
-                                colocar min y max
-                            </div>
                             <div class="row" id="rangosDeEdad" style="display: none;">
                                 <div class="col-md-6">
                                     <div class="row " id="rangoMin">
