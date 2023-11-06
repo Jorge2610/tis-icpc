@@ -4,17 +4,17 @@
     <div class="container">
         <div class="col-10">
             <h3>{{ $evento->nombre }}</h3>
+            
         </div>
         <div class="row mt-5 g-5 gap-2">
 
             <div class="col-md-3">
-                <div class="container">
+
                     <x-carrusel :evento="$evento" />
-                </div>
-                
+                                
             </div>
 
-            <div class="col-md-7 border-end">
+            <div class="col-md-6 border-end">
 
                 <p class="descripcion-evento mx-3" style="text-align: justify">{!! nl2br($evento->descripcion) !!}</p>
 

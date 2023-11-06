@@ -81,12 +81,12 @@ class AficheController extends Controller
 
     public function vistaTablaEventos()
     {
-        $afiches =  Evento::with('afiches')->get();
+        $afiches =  Evento::where('estado', 0)->with('afiches')->get();
         return view('afiche.asignarAfiche', ['afiches' => $afiches]);
     }
 
     public function editarAfiche(){
-        $afiches = Evento::with('afiches')->get();
+        $afiches = Evento::where('estado', 0)->with('afiches')->get();
         return view('afiche.editar',['afiches' => $afiches]);
     }
 }

@@ -18,14 +18,14 @@
                     </thead>
                     <tbody id="datosTabla">
                         @php $contador = 1 @endphp
-                        @foreach ($materiales as $material)
-                        <tr onclick="seleccionarEvento({{ $material->id }}, '{{ $material->titulo }}', event)" id="{{ $material->id }}">
+                        @foreach ($recursos as $recurso)
+                        <tr onclick="seleccionarEvento({{ $recurso->id }}, '{{ $recurso->titulo }}', event)" id="{{ $recurso->id }}">
                                 <th scope="row">{{ $contador++ }}</th>
-                                <td>{{ $material->nombre }}</td>
-                                <td class="text-center">{{ $material->tipoEvento->nombre }}</td>
-                                <td class="text-center">{{ date('d-m-Y', strtotime($material->created_at)) }}</td>
-                                <td class="text-center" id="contadorMateriales{{ $material->id }}">
-                                    {{ $material->materiales->count() }}</td>
+                                <td>{{ $recurso->nombre }}</td>
+                                <td class="text-center">{{ $recurso->tipoEvento->nombre }}</td>
+                                <td class="text-center">{{ date('d-m-Y', strtotime($recurso->created_at)) }}</td>
+                                <td class="text-center" id="contadorrecursos{{ $recurso->id }}">
+                                    {{ $recurso->recursos->count() }}</td>
 
                             </tr>
                         @endforeach
@@ -35,14 +35,14 @@
             <div class="col-sm-12 col-md-4">
                 <div
                     class="container d-flex flex-column justify-content-center align-items-center border p-3">
-                    <form class="needs-validation" novalidate id="formularioAgregarMaterial">
+                    <form class="needs-validation" novalidate id="formularioAgregarRecurso">
                         <div class="col-md-12 mt-2">
                             <div class="text-center">
                             <label class="form-label fs-4" style="font-weight: bold;">Agregar recurso</label>
                             </div>
-                            <label for="tituloMaterial" class="form-label">Titulo</label>
+                            <label for="tituloRecurso" class="form-label">Titulo</label>
                             <input name="id_evento" type="hidden" id="id_evento">
-                            <input name="titulo" type="text" class="form-control custom-input" id="tituloMaterial"
+                            <input name="titulo" type="text" class="form-control custom-input" id="titulorecurso"
                                 value="" placeholder="Ingrese un titulo" required>
                             <div class="invalid-feedback">
                                 El nombre no puede estar vacio.
@@ -50,16 +50,16 @@
                         </div>
 
                         <div class="col-md-12 mt-2">
-                            <label for="urlMaterial" class="form-label">Enlace al material</label>
-                            <input name="enlace" type="text" class="form-control custom-input" id="urlMaterial"
+                            <label for="urlRecurso" class="form-label">Enlace al recurso</label>
+                            <input name="enlace" type="text" class="form-control custom-input" id="urlRecurso"
                                 value="" pattern="www\..+\..+|http://www\..+\..+|https://www\..+\..+" placeholder="https://www.ejemplo.com">
                         </div>
                     </form>
                     <div class="d-flex justify-content-center mt-3">
                         <button type="button" class="btn btn-light" onclick="resetInputs()"
-                            id="asignarMaterialCancelar">Cancelar</button>
+                            id="asignarRecursoCancelar">Cancelar</button>
                         <button type="button" class="btn btn-primary" onclick="validarDatos()"
-                            id="asignarMaterialAsignar">Asignar</button>
+                            id="asignarRecursoAsignar">Asignar</button>
                     </div>
                 </div>
             </div>
@@ -70,5 +70,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-    <script src="{{ asset('js/subirMaterial.js') }}" defer></script>
+    <script src="{{ asset('js/subirRecurso.js') }}" defer></script>
 @endsection

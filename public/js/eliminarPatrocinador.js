@@ -69,7 +69,7 @@ const cargarPatrocinadores = async () => {
             <div class="col-12 col-md-12 d-flex justify-content-center">
                 <div id="imagenPatrocinador">
                     <a href="${ruta}" target="_blank" style="color:transparent;">
-                        <img id="imagenPatrocinador" src="${patrocinador.ruta_logo}" title="${patrocinador.nombre}"
+                        <img id="imagenPatrocinador" src="${patrocinador.ruta_imagen}" title="${patrocinador.nombre}"
                             alt="Imagen del patrocinador" class="imagenPatrocinador">
                     </a>
                     <button class="borrar-patrocinador" data-bs-toggle="modal" data-bs-whateve="${patrocinador.id}" 

@@ -11,13 +11,13 @@ class EventoController extends Controller
 {
     public function index()
     {
-        $eventos = Evento::with('tipoEvento')->get();
+        $eventos = Evento::where('estado', 0)->get();
         return $eventos;
     }
 
     public function cargarEventos()
     {
-        $eventos = Evento::with('tipoEvento', 'afiches')
+        $eventos = Evento::where('estado', 0)->with('tipoEvento', 'afiches')
             ->orderBy('updated_at', 'desc')
             ->get();
         return view('eventos.eventos', ['eventos' => $eventos]);
@@ -25,7 +25,7 @@ class EventoController extends Controller
 
     public function cargarEvento(String $nombre)
     {
-        $evento = Evento::with('afiches')->where('nombre', $nombre)->first();
+        $evento = Evento::where('estado', 0)->with('afiches')->where('nombre', $nombre)->first();
         if (!$evento) {
             return abort(404);
         }
@@ -169,5 +169,27 @@ class EventoController extends Controller
         }
         return view('crear-evento.crearEvento', compact('datos'));
     }
-    
+
+    public function cancelar($id)
+    {
+        $evento = Evento::find($id);
+        $evento->estado = 1;
+        $evento->save();
+        return response()->json(['mensaje' => 'Cancelado exitosamente', 'error' => false]);
+    }
+
+    public function anular($id)
+    {
+        $evento = Evento::find($id);
+        $evento->estado = 2;
+        $evento->save();
+        return response()->json(['mensaje' => 'Anulado exitosamente', 'error' => false]);
+    }
+
+    public function eventosValidos(){
+        $eventos = Evento::where('estado', 0)->get();
+        //Pones tu vista aqui Jorgee!!!!!!!!!!!!!!!
+        return view('eventos.eventosValidos', ['eventos' => $eventos]);
+    }
+
 }

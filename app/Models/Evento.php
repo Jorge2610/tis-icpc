@@ -23,8 +23,8 @@ class Evento extends Model
         return $this->hasMany(Patrocinador::class, 'id_evento');
     }
 
-    public function materiales()
+    public function recursos()
     {
-        return $this->hasMany(Material::class, 'id_evento');
+        return $this->hasMany(Recurso::class, 'id_evento');
     }
 }

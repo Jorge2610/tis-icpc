@@ -1,10 +1,10 @@
 let tablaDeTipos;
 let tablaInicializada = false;
 
-const tituloMaterial = document.getElementById("tituloMaterial");
-const urlMaterial = document.getElementById("urlMaterial");
-const cancelar = document.getElementById("asignarMaterialCancelar");
-const asignar = document.getElementById("asignarMaterialAsignar");
+const tituloRecurso = document.getElementById("tituloRecurso");
+const urlRecurso = document.getElementById("urlRecurso");
+const cancelar = document.getElementById("asignarRecursoCancelar");
+const asignar = document.getElementById("asignarRecursoAsignar");
 
 const dataTableOptions = {
     pageLength: 10,
@@ -39,8 +39,8 @@ window.addEventListener("load", () => {
     initDataTable();
     if (!seleccionado) {
         eventoSeleccionado.textContent = "Selecciona un evento";
-        tituloMaterial.disabled = true;
-        urlMaterial.disabled = true;
+        tituloRecurso.disabled = true;
+        urlRecurso.disabled = true;
         cancelar.disabled = true;
         asignar.disabled = true;
     }
@@ -53,8 +53,8 @@ const seleccionarEvento = (id, nombre) => {
     if (seleccionado) {
         seleccionado.classList.remove("table-primary");
     }
-    tituloMaterial.disabled = false;
-    urlMaterial.disabled = false;
+    tituloRecurso.disabled = false;
+    urlRecurso.disabled = false;
     cancelar.disabled = false;
     asignar.disabled = false;
     seleccionado = document.getElementById(id);
@@ -65,9 +65,9 @@ const seleccionarEvento = (id, nombre) => {
 };
 
 const validarDatos = () => {
-    let form = document.getElementById("formularioAgregarMaterial");
+    const form = crearFormData();
     if (form.checkValidity()) {
-        axios.post("/api/material", form).then((response) => {
+        axios.post("/api/recurso", form).then((response) => {
             mostrarAlerta(
                 "Éxito",
                 response.data.mensaje,
@@ -79,16 +79,17 @@ const validarDatos = () => {
 
 const crearFormData = () => {
     const formData = new FormData();
-    formData.append("titulo", tituloMaterial.value);
-    formData.append("enlace", urlMaterial.value);
+    formData.append("titulo", tituloRecurso.value);
+    formData.append("enlace", urlRecurso.value);
     formData.append("id_evento", idSeleccionado);
-    asignarMaterial(formData);
+    asignarRecurso(formData);
+    return formData;
 };
 
 const resetInputs = () => {
-    let form = document.getElementById("formularioAgregarMaterial");
+    let form = document.getElementById("formularioAgregarRecurso");
     form.classList.remove("was-validated");
-    tituloMaterial.value = "";
-    urlMaterial.value = "";
+    tituloRecurso.value = "";
+    urlRecurso.value = "";
     input.value = "";
 };
