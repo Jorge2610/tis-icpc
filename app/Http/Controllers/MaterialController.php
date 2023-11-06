@@ -4,41 +4,40 @@ namespace App\Http\Controllers;
 
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
-use App\Models\Material;
+use App\Models\Recurso;
 
 use App\Models\Evento;
 
-class MaterialController extends Controller
+class RecursoController extends Controller
 {
     public function index()
     {
-        $materiales = Material::all();
-        return $materiales;
+        $recursos = Recurso::all();
+        return $recursos;
     }
 
 
-    public function eventosConMaterial()
+    public function eventosConRecurso()
     {
-        $eventos = Evento::with('materiales')->get();
-        //cambiar tu vista aqui Yanina!!! 
-        return view('material.eventos', ['eventos' => $eventos]);
+        $eventos = Evento::with('Recursoes')->get();
+        return view('recurso.eventos', ['eventos' => $eventos]);
     }
 
     public function show($id)
     {
-        $material = Material::find($id);
-        return $material;
+        $recurso = Recurso::find($id);
+        return $recurso;
     }
     
     public function store(Request $request)
     {
         try {
-            $material = new Material();
-            $material->titulo = $request->input('titulo');
-            $material->enlace = $request->input('enlace');
-            $material->id_evento = $request->input('id_evento');
-            $material->save();
-            return response()->json(['mensaje' => 'Material asignado correctamente', 'error' => false]);
+            $recurso = new Recurso();
+            $recurso->titulo = $request->input('titulo');
+            $recurso->enlace = $request->input('enlace');
+            $recurso->id_evento = $request->input('id_evento');
+            $recurso->save();
+            return response()->json(['mensaje' => 'Recurso asignado correctamente', 'error' => false]);
         } catch (QueryException $e) {
             return $e->getMessage();
         }
@@ -47,8 +46,8 @@ class MaterialController extends Controller
     public function destroy($id)
     {
         try {
-            $material = Material::find($id);
-            $material->delete();
+            $recurso = Recurso::find($id);
+            $recurso->delete();
             return response()->json(['mensaje' => 'Eliminado exitosamente', 'error' => false]);
         } catch (QueryException $e) {
             return $e->getMessage();
@@ -58,11 +57,11 @@ class MaterialController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $material = Material::find($id);
-            $material->titulo = $request->input('titulo');
-            $material->enlace = $request->input('enlace');
-            $material->id_evento = $request->input('id_evento');
-            $material->save();
+            $recurso = Recurso::find($id);
+            $recurso->titulo = $request->input('titulo');
+            $recurso->enlace = $request->input('enlace');
+            $recurso->id_evento = $request->input('id_evento');
+            $recurso->save();
             return response()->json(['mensaje' => 'Actualizado exitosamente', 'error' => false]);
         } catch (QueryException $e) {
             return $e->getMessage();
