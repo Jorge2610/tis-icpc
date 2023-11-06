@@ -19,7 +19,7 @@
                     <tbody id="datosTabla">
                         @php $contador = 1 @endphp
                         @foreach ($materiales as $material)
-                        <tr onclick="seleccionarEvento({{ $material->id_material }}, '{{ $material->titulo }}', event)" id="{{ $material->id_material }}">
+                        <tr onclick="seleccionarEvento({{ $material->id }}, '{{ $material->titulo }}', event)" id="{{ $material->id }}">
                                 <th scope="row">{{ $contador++ }}</th>
                                 <td>{{ $material->nombre }}</td>
                                 <td class="text-center">{{ $material->tipoEvento->nombre }}</td>
