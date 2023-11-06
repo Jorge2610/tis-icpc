@@ -51,7 +51,8 @@ class TipoEventoController extends Controller
             $tipo_evento->descripcion = $request->descripcion;
             $tipo_evento->color = $request->color;
             $tipo_evento->save();
-            return response()->json(['mensaje' => 'Actualizado exitosamente', 'error' => false]);
+            return redirect()->route('tipo-evento')->with('success', 'Tipo de evento actualizado exitosamente');
+            //return response()->json(['mensaje' => 'Actualizado exitosamente', 'error' => false]);
         } catch (QueryException $e) {
             if ($e->errorInfo[1] == 1062) {
                 return response()->json(['mensaje' => 'El tipo de evento ya existe', 'error' => true]);
@@ -87,11 +88,18 @@ class TipoEventoController extends Controller
 
     public function mostrarVistaTipoEvento()
     {
-        return view('tipos-de-evento/tiposDeEvento');
+        $tiposDeEventos =  TipoEvento::all();
+        return view('tipos-de-evento/tiposDeEvento', ['tiposDeEventos' => $tiposDeEventos]);
     }
 
     public function mostrarCrearTipo()
     {
         return view('tipos-de-evento/crearTiposDeEvento');
+    }
+
+    public function cargarTipoEvento($id)
+    {
+        $tipoEvento = TipoEvento::find($id);
+        return view('tipos-de-evento/editarTiposDeEvento', compact('tipoEvento'));
     }
 }
