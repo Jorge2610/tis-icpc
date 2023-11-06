@@ -39,40 +39,56 @@ const initDataTable = async () => {
 
 const setEventoId = (id) => {
     idEvento = id;
-}
+};
 
 const cancelarEvento = async () => {
     let formData = crearFormDataCancelar();
-    guardarForm("/api/evento/cancelar/" + idEvento, formData, "Error al cancelar el evento")
+    guardarForm(
+        `/api/evento/cancelar/${idEvento}`,
+        formData,
+        "Error al cancelar el evento"
+    );
     resetModalCancelar();
     //window.location.href = "/admin/eventos/cancelar-evento";
-}
+};
 
 const crearFormDataCancelar = () => {
     const formData = new FormData();
-    formData.append("motivo", document.getElementById("motivoCancelacion").value);
+    formData.append(
+        "motivo",
+        document.getElementById("motivoCancelacion").value
+    );
     return formData;
-}
+};
 
 const anularEvento = async () => {
     let formData = crearFormDataAnular();
     if (validarAnulacion()) {
-        guardarForm("/api/evento/anular/" + idEvento, formData, "Error al anular el evento")
+        guardarForm(
+            `/api/evento/anular/${idEvento}`,
+            formData,
+            "Error al anular el evento"
+        );
         resetModalAnular();
     }
-}
+};
 
 const crearFormDataAnular = () => {
     const formData = new FormData();
     formData.append("motivo", document.getElementById("motivoAnulacion").value);
-    formData.append("descripcion", document.getElementById("descripcionAnulacion").value);
+    formData.append(
+        "descripcion",
+        document.getElementById("descripcionAnulacion").value
+    );
     let archivos = [];
-    Array.from(document.getElementById("archivosRespaldo").files).forEach(file => {  
-        archivos.push(file);
-    });
-    formData.append("archivos", archivos);
+    Array.from(document.getElementById("archivosRespaldo").files).forEach(
+        (file) => {
+            archivos.push(file);
+        }
+    );
+    formData.append("respaldos", archivos);
     return formData;
-}
+};
 
 const validarAnulacion = () => {
     let form = document.getElementById("formularioAnulacion");
@@ -82,28 +98,27 @@ const validarAnulacion = () => {
     }
     form.classList.add("was-validated");
     return false;
-}
+};
 
 const guardarForm = async (ruta, formData, msgError) => {
-    await axios.post(ruta, formData).then((response) => {
-        mostrarAlerta(
-            "Éxito",
-            response.data.mensaje,
-            response.error ? "danger" : "success"
-        );
-    }).catch((error) => {
-        mostrarAlerta(
-            "Fracaso",
-            msgError,
-            "danger"
-        );
-    });
-}
+    await axios
+        .post(ruta, formData)
+        .then((response) => {
+            mostrarAlerta(
+                "Éxito",
+                response.data.mensaje,
+                response.error ? "danger" : "success"
+            );
+        })
+        .catch((error) => {
+            mostrarAlerta("Fracaso", msgError, "danger");
+        });
+};
 
 const resetModalCancelar = () => {
     $("#modalCancelar").modal("hide");
     document.getElementById("motivoCancelacion").value = "";
-}
+};
 
 const resetModalAnular = () => {
     $("#modalAnular").modal("hide");
@@ -111,4 +126,4 @@ const resetModalAnular = () => {
     document.getElementById("descripcionAnulacion").value = "";
     document.getElementById("archivosRespaldo").value = "";
     document.getElementById("contrasenia").value = "";
-}
+};

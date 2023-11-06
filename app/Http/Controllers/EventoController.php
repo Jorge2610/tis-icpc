@@ -172,7 +172,7 @@ class EventoController extends Controller
         return view('crear-evento.crearEvento', compact('datos'));
     }
 
-    public function cancelar($id, Request $request)
+    public function cancelar(Request $request, $id)
     {
         $evento = Evento::find($id);
         $evento->estado = 1;
@@ -184,7 +184,7 @@ class EventoController extends Controller
         return response()->json(['mensaje' => 'Cancelado exitosamente', 'error' => false]);
     }
 
-    public function anular($id, Request $request)
+    public function anular(Request $request, $id)
     {
         $evento = Evento::find($id);
         $evento->estado = 2;
@@ -192,7 +192,7 @@ class EventoController extends Controller
         $anulado = new Anulado();
         $anulado->motivo = $request->motivo;
         $anulado->descripcion = $request->descripcion;
-        $anulado->archivos = $this->subirRespaldos($request);
+        $anulado->archivos = $this->subirRespaldo($request);
         $anulado->id_evento = $id;
         $anulado->save();
         return response()->json(['mensaje' => 'Anulado exitosamente', 'error' => false]);
@@ -201,20 +201,14 @@ class EventoController extends Controller
     public function eventosValidos()
     {
         $eventos = Evento::where('estado', 0)->get();
-        //Pones tu vista aqui Jorgee!!!!!!!!!!!!!!!
         return view('eventos.cancelarEvento', ['eventos' => $eventos]);
     }
 
-    public function subirRespaldos(Request $request)
+    public function subirRespaldo(Request $request)
     {
-        $respaldos = $request->files;
-        $response = "";
-        foreach ($respaldos as $respaldo) {
-            $respaldo->storeAs('respaldos', $respaldo->getClientOriginalName());
-            $url = Storage::url($respaldo);
-            $response += ";".$url;
+        if ($request->hasFile('archivo')) {
+            $archivo = $request->file('archivo')->store('/public/respaldos');
+            return Storage::url($archivo);
         }
-        return $response;
     }
-
 }
