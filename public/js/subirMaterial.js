@@ -49,7 +49,7 @@ window.addEventListener("load", () => {
 let seleccionado;
 let idSeleccionado;
 const seleccionarEvento = (id, nombre) => {
-    console.log(id + " " + nombre)
+    console.log(id + " " + nombre);
     if (seleccionado) {
         seleccionado.classList.remove("table-primary");
     }
@@ -64,16 +64,18 @@ const seleccionarEvento = (id, nombre) => {
     input.value = "";
 };
 
-
 const validarDatos = () => {
     let form = document.getElementById("formularioAgregarMaterial");
-    if (form.checkValidity() && input.files[0] != undefined) {
-        form.classList.remove("was-validated");
-        crearFormData();
-        return;
+    if (form.checkValidity()) {
+        axios.post("/api/material", form).then((response) => {
+            mostrarAlerta(
+                "Éxito",
+                response.data.mensaje,
+                response.error ? "danger" : "success"
+            );
+        });
     }
-    form.classList.add("was-validated");
-}
+};
 
 const crearFormData = () => {
     const formData = new FormData();
@@ -81,7 +83,7 @@ const crearFormData = () => {
     formData.append("enlace", urlMaterial.value);
     formData.append("id_evento", idSeleccionado);
     asignarMaterial(formData);
-}
+};
 
 const resetInputs = () => {
     let form = document.getElementById("formularioAgregarMaterial");
@@ -89,4 +91,4 @@ const resetInputs = () => {
     tituloMaterial.value = "";
     urlMaterial.value = "";
     input.value = "";
-}
+};
