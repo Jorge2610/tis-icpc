@@ -139,7 +139,6 @@
                                         </a>
                                         <a href="{{ url('/admin/eventos/patrocinador') }}"
                                         
-                                       
                                             class="list-group-item list-group-item-action py-2 border-0"
                                             id="asignarPatrocinadorSider">
                                             Asignar patrocinador
@@ -148,6 +147,11 @@
                                             class="list-group-item list-group-item-action py-2 border-0"
                                             id="asignarPatrocinadorSider">
                                             Eliminar patrocinador
+                                        </a>
+                                        <a href="{{ url('/admin/eventos/material') }}"
+                                            class="list-group-item list-group-item-action py-2 border-0"
+                                            id="subirMaterialSider">
+                                            Subir recurso
                                         </a>
                                     </div>
                                 </div>

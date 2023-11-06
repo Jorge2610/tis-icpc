@@ -63,7 +63,7 @@ Route::group(['prefix' => 'afiche'], function () {
 Route::group(['prefix' => 'recurso'], function () {
     Route::get('', [RecursoController::class, 'index'])->name('recurso.index');
     Route::get('{id}', [RecursoController::class, 'show'])->name('recurso.show');
-    Route::post('/', [RecursoController::class, 'store'])->name('recurso.store');
+    Route::post('', [RecursoController::class, 'store'])->name('recurso.store');
     Route::post('{id}', [RecursoController::class, 'update'])->name('recurso.update');
     Route::delete('{id}', [RecursoController::class, 'destroy'])->name('recurso.destroy');
 });
