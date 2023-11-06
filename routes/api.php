@@ -1,12 +1,11 @@
 <?php
-
 use App\Http\Controllers\AficheController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TipoEventoController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\PatrocinadorController;
-use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\RecursoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +41,7 @@ Route::group(['prefix' => 'evento'], function () {
     Route::delete('/afiche/{id}', [EventoController::class, 'eliminarAfiche'])->name('eventos.eliminarAfiche');
     Route::post('/cancelar/{id}', [EventoController::class, 'cancelar'])->name('eventos.cancelar');
     Route::post('/anular/{id}', [EventoController::class, 'anular'])->name('eventos.anular');
+    Route::post('/respaldos', [EventoController::class, 'subirRespaldos'])->name('eventos.subirRespaldos');
 });
 
 Route::group(['prefix' => 'patrocinador', 'middleware' => 'api'], function () {

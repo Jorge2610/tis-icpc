@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use App\Models\Evento;
+use App\Models\Anulado;
+use App\Models\Cancelado;
 use Illuminate\Support\Facades\Storage;
 
 class EventoController extends Controller
@@ -170,26 +172,49 @@ class EventoController extends Controller
         return view('crear-evento.crearEvento', compact('datos'));
     }
 
-    public function cancelar($id)
+    public function cancelar($id, Request $request)
     {
         $evento = Evento::find($id);
         $evento->estado = 1;
         $evento->save();
+        $cancelado = new Cancelado();
+        $cancelado->motivo = $request->motivo;
+        $cancelado->id_evento = $id;
+        $cancelado->save();
         return response()->json(['mensaje' => 'Cancelado exitosamente', 'error' => false]);
     }
 
-    public function anular($id)
+    public function anular($id, Request $request)
     {
         $evento = Evento::find($id);
         $evento->estado = 2;
         $evento->save();
+        $anulado = new Anulado();
+        $anulado->motivo = $request->motivo;
+        $anulado->descripcion = $request->descripcion;
+        $anulado->archivos = $this->subirRespaldos($request);
+        $anulado->id_evento = $id;
+        $anulado->save();
         return response()->json(['mensaje' => 'Anulado exitosamente', 'error' => false]);
     }
 
-    public function eventosValidos(){
+    public function eventosValidos()
+    {
         $eventos = Evento::where('estado', 0)->get();
         //Pones tu vista aqui Jorgee!!!!!!!!!!!!!!!
         return view('eventos.eventosValidos', ['eventos' => $eventos]);
+    }
+
+    public function subirRespaldos(Request $request)
+    {
+        $respaldos = $request->files;
+        $response = "";
+        foreach ($respaldos as $respaldo) {
+            $respaldo->storeAs('respaldos', $respaldo->getClientOriginalName());
+            $url = Storage::url($respaldo);
+            $response += ";".$url;
+        }
+        return $response;
     }
 
 }
