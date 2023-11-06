@@ -5,6 +5,7 @@ const tituloRecurso = document.getElementById("tituloRecurso");
 const urlRecurso = document.getElementById("urlRecurso");
 const cancelar = document.getElementById("asignarRecursoCancelar");
 const asignar = document.getElementById("asignarRecursoAsignar");
+const eventoSeleccionado = document.getElementById("nombreEvento");
 
 const dataTableOptions = {
     pageLength: 10,
@@ -61,35 +62,46 @@ const seleccionarEvento = (id, nombre) => {
     seleccionado.classList.add("table-primary");
     idSeleccionado = id;
     eventoSeleccionado.textContent = nombre;
-    input.value = "";
 };
 
 const validarDatos = () => {
-    const form = crearFormData();
+    const form = document.getElementById("formularioAgregarRecurso");
     if (form.checkValidity()) {
-        axios.post("/api/recurso", form).then((response) => {
+        form.classList.remove("was-validated");
+        console.log("valido");
+        crearFormData(form);
+    }
+    form.classList.add("was-validated");
+};
+
+const crearFormData = (form) => {
+    const formData = new FormData(form);
+    formData.append("id_evento", idSeleccionado);
+    axios
+        .post("/api/recurso", formData)
+        .then((response) => {
             mostrarAlerta(
                 "Éxito",
                 response.data.mensaje,
                 response.error ? "danger" : "success"
             );
+            resetInputs();
+            sumarContador();
+        })
+        .catch((err) => {
+            console.error(err);
         });
-    }
 };
 
-const crearFormData = () => {
-    const formData = new FormData();
-    formData.append("titulo", tituloRecurso.value);
-    formData.append("enlace", urlRecurso.value);
-    formData.append("id_evento", idSeleccionado);
-    asignarRecurso(formData);
-    return formData;
+const sumarContador = async () => {
+    const contadorRecursos = document.getElementById(
+        `contadorRecursos${idSeleccionado}`
+    );
+    contadorRecursos.textContent = parseInt(contadorRecursos.textContent) + 1;
 };
-
 const resetInputs = () => {
     let form = document.getElementById("formularioAgregarRecurso");
     form.classList.remove("was-validated");
     tituloRecurso.value = "";
     urlRecurso.value = "";
-    input.value = "";
 };

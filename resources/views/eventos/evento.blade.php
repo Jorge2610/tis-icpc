@@ -4,21 +4,19 @@
     <div class="container">
         <div class="col-10">
             <h3>{{ $evento->nombre }}</h3>
-            
+
         </div>
         <div class="row mt-5 g-5 gap-2">
 
             <div class="col-md-3">
-
-                    <x-carrusel :evento="$evento" />
-                                
+                <x-carrusel :evento="$evento" />
             </div>
 
             <div class="col-md-6 border-end">
 
                 <p class="descripcion-evento mx-3" style="text-align: justify">{!! nl2br($evento->descripcion) !!}</p>
 
-                <table class="table" >
+                <table class="table">
                     <caption hidden>Tipo de eventos</caption>
                     <tbody>
                         <tr>
@@ -122,4 +120,3 @@
 
     <script src="{{ asset('js/mostrarEvento.js') }}" defer></script>
 @endsection
-

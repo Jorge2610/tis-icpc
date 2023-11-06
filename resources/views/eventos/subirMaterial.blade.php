@@ -13,36 +13,32 @@
                             <th scope="col" class="col-sm-0 col-md-3 text-center">Tipo de evento</th>
                             <th scope="col" class="col-sm-3 col-md-2 text-center">Fecha de creación</th>
                             <th scope="col" class="col-sm-3 col-md-2 text-center font-sm">Cantidad de recursos</th>
-
                         </tr>
                     </thead>
                     <tbody id="datosTabla">
                         @php $contador = 1 @endphp
                         @foreach ($recursos as $recurso)
-                        <tr onclick="seleccionarEvento({{ $recurso->id }}, '{{ $recurso->titulo }}', event)" id="{{ $recurso->id }}">
+                            <tr onclick="seleccionarEvento({{ $recurso->id }}, '{{ $recurso->nombre }}', event)"
+                                id="{{ $recurso->id }}">
                                 <th scope="row">{{ $contador++ }}</th>
                                 <td>{{ $recurso->nombre }}</td>
                                 <td class="text-center">{{ $recurso->tipoEvento->nombre }}</td>
                                 <td class="text-center">{{ date('d-m-Y', strtotime($recurso->created_at)) }}</td>
-                                <td class="text-center" id="contadorrecursos{{ $recurso->id }}">
+                                <td class="text-center" id="contadorRecursos{{ $recurso->id }}">
                                     {{ $recurso->recursos->count() }}</td>
-
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
             <div class="col-sm-12 col-md-4">
-                <div
-                    class="container d-flex flex-column justify-content-center align-items-center border p-3">
+                <div class="container d-flex flex-column justify-content-center align-items-center border p-3">
+                    <h5 id="nombreEvento"></h5>
                     <form class="needs-validation" novalidate id="formularioAgregarRecurso">
                         <div class="col-md-12 mt-2">
-                            <div class="text-center">
-                            <label class="form-label fs-4" style="font-weight: bold;">Agregar recurso</label>
-                            </div>
+                            <h4 class="text-center fw-bold">Asignar recurso</h4>
                             <label for="tituloRecurso" class="form-label">Titulo</label>
-                            <input name="id_evento" type="hidden" id="id_evento">
-                            <input name="titulo" type="text" class="form-control custom-input" id="titulorecurso"
+                            <input name="titulo" type="text" class="form-control custom-input" id="tituloRecurso"
                                 value="" placeholder="Ingrese un titulo" required>
                             <div class="invalid-feedback">
                                 El nombre no puede estar vacio.
@@ -52,10 +48,11 @@
                         <div class="col-md-12 mt-2">
                             <label for="urlRecurso" class="form-label">Enlace al recurso</label>
                             <input name="enlace" type="text" class="form-control custom-input" id="urlRecurso"
-                                value="" pattern="www\..+\..+|http://www\..+\..+|https://www\..+\..+" placeholder="https://www.ejemplo.com">
+                                value="" pattern="www\..+\..+|http://www\..+\..+|https://www\..+\..+"
+                                placeholder="https://www.ejemplo.com" required>
                         </div>
                     </form>
-                    <div class="d-flex justify-content-center mt-3">
+                    <div class="d-flex justify-content-center mt-3 gap-3">
                         <button type="button" class="btn btn-light" onclick="resetInputs()"
                             id="asignarRecursoCancelar">Cancelar</button>
                         <button type="button" class="btn btn-primary" onclick="validarDatos()"
