@@ -1,0 +1,33 @@
+.div-patrocinador {
+     align-items: center;
+     text-align: center; /* Alinea el contenido al centro */
+     margin-top: 10px; /* Ajusta el margen superior según sea necesario */
+ }
+ @keyframes aparecer {
+    to {
+        opacity: 1; /* Aparecen completamente visibles */
+
+    }
+}
+.imagenPatrocinador, .borrar-patrocinador{
+   opacity: 0;
+   transform: translateY(1px);
+   animation: aparecer 2s ease-out forwards;
+}
+
+ .imagenPatrocinador {
+     object-fit: cover; 
+     max-height: 7rem;
+     max-width: 100%;
+ }
+ 
+ #imagenPatrocinador {
+     background-repeat: no-repeat;
+     background-size: contain;
+     position: relative;
+     display: inline-block;
+ }
+
+ .borrar-patrocinador{
+     margin: 10px;
+ }

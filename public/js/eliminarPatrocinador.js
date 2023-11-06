@@ -67,15 +67,13 @@ const cargarPatrocinadores = async () => {
                     : "#";
                 return `
             <div class="col-12 col-md-12 d-flex justify-content-center">
-                <div id="imagenPatrocinador">
+                <div id="divPatrocinador" class="div-patrocinador">
                     <a href="${ruta}" target="_blank" style="color:transparent;">
                         <img id="imagenPatrocinador" src="${patrocinador.ruta_imagen}" title="${patrocinador.nombre}"
                             alt="Imagen del patrocinador" class="imagenPatrocinador">
                     </a>
-                    <button class="borrar-patrocinador" data-bs-toggle="modal" data-bs-whateve="${patrocinador.id}" 
-                        data-bs-target="#modalBorrarPatrocinador" onclick="borrarPatrocinador(${patrocinador.id})">
-                        <i class="fa-solid fa-trash-can"></i>
-                    </button>
+                    <a href="#" class="btn btn-danger btn-sm borrar-patrocinador" data-bs-toggle="modal" data-bs-whateve="${patrocinador.id}"
+                    data-bs-target="#modalBorrarPatrocinador" onclick="borrarPatrocinador(${patrocinador.id})">Eliminar</a>
                 </div>
             </div>
         `;
@@ -113,10 +111,20 @@ const getPatrocinadores = async () => {
              `/api/patrocinador/${modalBorrar.getAttribute("idpatrocinador")}`
          )
          .then((response) => {
+            mostrarAlerta(
+                "Éxito",
+                response.data.mensaje,
+                response.error ? "danger" : "success"
+            );
             return response;
          })
          .catch((error) => {
-             return error;
+            mostrarAlerta(
+                "Error",
+                response.data.mensaje,
+                response.error ? "danger" : "success"
+            ); 
+            return error;
          });
      await cargarPatrocinadores();
      updateNroPatrocinadores();

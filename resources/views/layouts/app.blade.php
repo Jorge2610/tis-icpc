@@ -32,6 +32,7 @@
     <link href="{{ asset('css/eventos.css') }}" rel="stylesheet">
     <link href="{{ asset('css/mostrar-evento.css') }}" rel="stylesheet">
     <link href="{{ asset('css/layout.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/patrocinador.css') }}" rel="stylesheet">
 </head>
 
 <body>
