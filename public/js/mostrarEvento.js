@@ -44,4 +44,3 @@ const getPatrocinadores = async () => {
         });
     return datos;
 };
-

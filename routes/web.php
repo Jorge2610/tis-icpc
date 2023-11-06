@@ -29,6 +29,7 @@ Route::get('/', [EventoController::class, 'cargarEventos']);
 Route::group(['prefix'=> 'admin/eventos'],function () {
     Route::get('tipos-de-evento', [TipoEventoController::class, 'mostrarVistaTipoEvento'])->name('tipo-evento');
     Route::get('crear-evento', [EventoController::class, 'showEventForm'])->name('crear');
+    Route::get('cancelar-evento', [EventoController::class, 'eventosValidos'])->name('cancelar-evento');
     Route::get('crear-tipo', [TipoEventoController::class, 'mostrarCrearTipo'])->name('crear-tipo');
     Route::get('afiche', [AficheController::class, 'vistaTablaEventos'])->name('afiche.tablaEventos');
     Route::get('patrocinador', [PatrocinadorController::class, 'vistaTablaEventos'])->name('patrocinador.tablaEventos');

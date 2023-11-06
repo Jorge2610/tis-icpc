@@ -15,7 +15,7 @@ const dataTableOptions = {
     lengthMenu: [5, 10, 15, 20],
     destroy: true,
     language: {
-        lengthMenu: "Mostrar _MENU_ entradas",
+        lengthMenu: "Mostrar _MENU_ eventos",
         zeroRecords: "Ningún tipo de evento encontrado",
         info: "Mostrando de _START_ a _END_ de un total de _TOTAL_ registros",
         infoEmpty: "Ningún usuario encontrado",
@@ -132,7 +132,6 @@ const crearFormData = () => {
 }
 
 const asignarPatrocinador = async (formData) => {
-    console.log(formData);
     await axios.post("/api/patrocinador", formData).then((response) => {
         mostrarAlerta(
             "Éxito",
@@ -149,32 +148,6 @@ const updateNroPatrocinadores = () => {
     let valor = parseInt(casilla.textContent);
     casilla.textContent = valor + 1;
 }
-
-const asignarAfiche = async () => {
-    if (idSeleccionado) {
-        const form = new FormData();
-        form.append("afiche", input.files[0]);
-        form.append("id_evento", idSeleccionado);
-        await axios.post("/api/afiche", form).then((response) => {
-            mostrarAlerta(
-                "Éxito",
-                response.data.mensaje,
-                response.error ? "danger" : "success"
-            );
-            cargarAfiche()
-        });
-    }
-
-};
-
-const cargarAfiche = async () => {
-    await axios.get(`/api/afiche/${idSeleccionado}`).then((response) => {
-        document.getElementById(`contadorAfiches${idSeleccionado}`).textContent = response.data.length;
-        imagenPreview.src = "/image/uploading.png";
-        botonSubir.style.display = "block";
-        contenedorAsignar.style.display = "none";
-    });
-};
 
 const resetInputs = () => {
     let form = document.getElementById("formularioAgregarPatrocinador");
