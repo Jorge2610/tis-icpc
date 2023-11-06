@@ -49,8 +49,8 @@ const cancelarEvento = async () => {
         "Error al cancelar el evento"
     );
     resetModalCancelar();
-    //window.location.href = "/admin/eventos/cancelar-evento";
-};
+    recargarEventos();
+}
 
 const crearFormDataCancelar = () => {
     const formData = new FormData();
@@ -70,23 +70,15 @@ const anularEvento = async () => {
             "Error al anular el evento"
         );
         resetModalAnular();
+        recargarEventos();
     }
 };
 
 const crearFormDataAnular = () => {
     const formData = new FormData();
     formData.append("motivo", document.getElementById("motivoAnulacion").value);
-    formData.append(
-        "descripcion",
-        document.getElementById("descripcionAnulacion").value
-    );
-    let archivos = [];
-    Array.from(document.getElementById("archivosRespaldo").files).forEach(
-        (file) => {
-            archivos.push(file);
-        }
-    );
-    formData.append("respaldos", archivos);
+    formData.append("descripcion", document.getElementById("descripcionAnulacion").value);
+    formData.append("archivos", document.getElementById("archivosRespaldo").files[0]);
     return formData;
 };
 
@@ -126,4 +118,10 @@ const resetModalAnular = () => {
     document.getElementById("descripcionAnulacion").value = "";
     document.getElementById("archivosRespaldo").value = "";
     document.getElementById("contrasenia").value = "";
-};
+}
+
+const recargarEventos = () => {
+    setTimeout(() => {
+        window.location.href = "/admin/eventos/cancelar-evento";
+    }, 1800);
+}
