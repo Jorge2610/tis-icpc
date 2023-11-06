@@ -95,9 +95,9 @@
                                                         Motivo de la
                                                         anulación *
                                                     </label>
-                                                    <input type="text" class="form-control"
-                                                        id="motivoAnulacion" placeholder="Ingrese el motivo de la anulación"
-                                                        value="" required maxlength="64">
+                                                    <input type="text" class="form-control" id="motivoAnulacion"
+                                                        placeholder="Ingrese el motivo de la anulación" value=""
+                                                        required maxlength="64">
                                                     <div class="invalid-feedback">
                                                         El motivo de anulacion no puede estar vacio.
                                                     </div>
@@ -114,18 +114,17 @@
 
                                                 <div class="row mt-2">
                                                     <label for="archivosRespaldo" class="form-label">
-                                                        Subir archivos
+                                                        Subir archivo de respaldo
                                                     </label>
-                                                    <input type="file" class="form-control"
-                                                        id="archivosRespaldo" multiple maxlength="5">
+                                                    <input type="file" class="form-control" id="archivosRespaldo">
                                                 </div>
 
                                                 <div class="row mt-2">
                                                     <label for="contrasenia" class="form-label">
                                                         Contraseña *
                                                     </label>
-                                                    <input type="password" class="form-control"
-                                                        id="contrasenia" placeholder="Ingrese su contraseña" pattern="" required>
+                                                    <input type="password" class="form-control" id="contrasenia"
+                                                        placeholder="Ingrese su contraseña" pattern="" required>
                                                     <div class="invalid-feedback">
                                                         Contraseña incorrecta.
                                                     </div>
