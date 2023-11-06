@@ -202,7 +202,7 @@ class EventoController extends Controller
     {
         $eventos = Evento::where('estado', 0)->get();
         //Pones tu vista aqui Jorgee!!!!!!!!!!!!!!!
-        return view('eventos.eventosValidos', ['eventos' => $eventos]);
+        return view('eventos.cancelarEvento', ['eventos' => $eventos]);
     }
 
     public function subirRespaldos(Request $request)

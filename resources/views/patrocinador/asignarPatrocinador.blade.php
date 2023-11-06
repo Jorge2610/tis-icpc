@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="container">
+        <div class="row mb-2">
+            <h4>Asignar patrocinador a un evento</h4>
+        </div>
         <div class="row g-5">
             <div class="col-sm-12 col-md-8">
                 <table class="table table-responsive table-striped text-secondary table-hover cursor" id="tablaEvento">
@@ -63,7 +66,7 @@
 
                         <div class="col-md-12 mt-2">
                             <label for="urlPatrocinador" class="form-label">Enlace
-                                a la pagina web del patrocinador</label>
+                                a la página web del patrocinador</label>
                             <input name="enlace_web" type="text" class="form-control custom-input" id="urlPatrocinador"
                                 value="" pattern="www\..+\..+|http://www\..+\..+|https://www\..+\..+" placeholder="https://www.ejemplo.com">
                         </div>
