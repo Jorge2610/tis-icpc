@@ -42,7 +42,43 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label for="gradoDelEvento" class="form-label">Grado academico requerido</label>
+
+                    <label for="select-region" class="form-label">Región</label>
+                        <select class="form-select" name="region" id="select-region" >
+                            @foreach (['Departamental', 'Nacional', 'Internacional'] as $regionDato)
+                                <option value="{{ $regionDato }}" @if ($datos['region'] == $regionDato||'Departamental'==$regionDato) selected @endif>
+                                    {{ $regionDato }}
+                                </option>
+                            @endforeach
+                        </select> 
+                    </div>
+
+                </div>
+
+                <div class="row mt-4">
+
+                    <div class="col-md-6">
+                        <div>
+                        <button id="btnGroupDrop1" type="button" class="btn dropdown-toggle" style="padding: 5px; border: solid 1px black;"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                             Intituciones Admitidas
+                        </button>
+                        <ul class="dropdown-menu " aria-labelledby="btnGroupDrop1" style="padding: 10px;">
+                            @foreach (['TODAS','UMSS', 'UMSA', 'UPSA','UCB','UPB','UNIFRANZ'] as $institucion)
+                                <li>
+                                    <input class="form-check-input institucion" type="checkbox" value="{{$institucion}}"
+                                     id="check-institucion-{{$institucion}}" >
+                                    <label class="form-check-label" for="check-institucion-{{$institucion}}">
+                                        {{$institucion}}
+                                    </label>
+                                </li>
+                            @endforeach
+                        </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        
                         <button id="boton-grado" type="button" class="btn dropdown-toggle" style="padding: 5px; border: solid 1px black;"
                         data-bs-toggle="dropdown" aria-expanded="false">
                              Grado academico requerido
@@ -57,42 +93,6 @@
                                 </li>
                             @endforeach
                         </ul>
-                    </div>
-
-                </div>
-
-                <div class="row mt-4">
-
-                    <div class="col-md-6">
-                        <label  class="form-label">Instituciones admitidas</label>
-                        <div>
-                        <button id="btnGroupDrop1" type="button" class="btn dropdown-toggle" style="padding: 5px; border: solid 1px black;"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                             Intituciones Admitidas
-                        </button>
-                        <ul class="dropdown-menu " aria-labelledby="btnGroupDrop1" style="padding: 10px;">
-                            @foreach (['TODAS', 'UMSA', 'UPSA','UCB','UPB','UNIFRANZ'] as $institucion)
-                                <li>
-                                    <input class="form-check-input institucion" type="checkbox" value="{{$institucion}}"
-                                     id="check-institucion-{{$institucion}}" >
-                                    <label class="form-check-label" for="check-institucion-{{$institucion}}">
-                                        {{$institucion}}
-                                    </label>
-                                </li>
-                            @endforeach
-                        </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="select-region" class="form-label">Región</label>
-                        <select class="form-select" name="region" id="select-region" >
-                            @foreach (['Departamental', 'Nacional', 'Internacional'] as $regionDato)
-                                <option value="{{ $regionDato }}" @if ($datos['region'] == $regionDato||'Departamental'==$regionDato) selected @endif>
-                                    {{ $regionDato }}
-                                </option>
-                            @endforeach
-                        </select>    
                     </div>
                 </div>
 
@@ -192,7 +192,7 @@
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Bs.</span>
                                         <input name="precio_inscripcion" type="number" class="form-control"
-                                            min="0" id="costoEvento" step="0.5"
+                                            min="1" id="costoEvento" step="0.5"
                                             value="{{ isset($datos['precio_inscripcion']) ? $datos['precio_inscripcion'] : '0.0' }}">
                                     </div>
                                 </div>

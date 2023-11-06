@@ -195,13 +195,13 @@ form.addEventListener("submit",(event)=>{
         let aux="";
         form.querySelectorAll(".institucion").forEach(Element=>{
             if(Element.checked){
-                aux= Element.value+", "+aux;
+                aux= Element.value+"-"+aux;
             }
         })
         let insti="";
         form.querySelectorAll(".grado-requerido").forEach(Element=>{
             if(Element.checked){
-                insti= Element.value+", "+insti;
+                insti= Element.value+"- "+insti;
             }
         })
         const formData = prepararFormData();
@@ -325,12 +325,16 @@ fechaInscripcionInicio.addEventListener("change",()=>{
 })
 
 fechaInscripcionFin.addEventListener("change",()=>{
-    let fech = fechaFin.value.split('T')[0];
-    if(fechaInscripcionFin.value>fech && fech!==""){
+
+    if(fechaInscripcionInicio.value!=="" && fechaInscripcionFin.value===""){
         fechaInscripcionFin.classList.remove("is-valid");
         fechaInscripcionFin.classList.add("is-invalid");
     }
-    if(fechaInscripcionFin.value<fechaInscripcionFin.min&&fechaInscripcionFin!==""){
+    if(fechaInscripcionFin.value>fechaInscripcionFin.max && fechaInscripcionFin.max!==""){
+        fechaInscripcionFin.classList.remove("is-valid");
+        fechaInscripcionFin.classList.add("is-invalid");
+    }
+    if(fechaInscripcionFin.value<fechaInscripcionFin.min&&fechaInscripcionFin.value!==""){
         fechaInscripcionFin.classList.remove("is-valid");
         fechaInscripcionFin.classList.add("is-invalid");
     }
@@ -351,8 +355,7 @@ costo.addEventListener("change",()=>{
 })
 
 fechaInicio.addEventListener("change", () => {
-    if(fechaInicio.value<fechaInicio.min && fechaInicio.value!==""){
-        console.log("porque???"+fechaInicio.value+fechaInicio.value<fechaInicio.min)
+    if(fechaInicio.value<fechaInicio.min && fechaInicio.value!==""&&fechaInicio.value!=""){
         fechaInicio.classList.add("is-invalid");
         fechaInicio.classList.remove("is-valid");
     }
@@ -369,6 +372,8 @@ fechaFin.addEventListener("change", () => {
     if(fechaFin.value<fechaFin.min && fechaFin.value!==""){
         fechaFin.classList.remove("is-valid");
         fechaFin.classList.add("is-invalid");
+    }else{
+        fechaInscripcionFin.max=fechaFin.value.split('T')[0];;
     }
 });
 
