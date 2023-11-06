@@ -40,6 +40,8 @@ Route::group(['prefix' => 'evento'], function () {
     Route::post('/afiche', [EventoController::class, 'storageAfiche'])->name('eventos.storageAfiche');
     Route::post('/afiche/{id}', [EventoController::class, 'asignarAfiche'])->name('eventos.asignarAfiche');
     Route::delete('/afiche/{id}', [EventoController::class, 'eliminarAfiche'])->name('eventos.eliminarAfiche');
+    Route::post('/cancelar/{id}', [EventoController::class, 'cancelar'])->name('eventos.cancelar');
+    Route::post('/anular/{id}', [EventoController::class, 'anular'])->name('eventos.anular');
 });
 
 Route::group(['prefix' => 'patrocinador', 'middleware' => 'api'], function () {
@@ -58,10 +60,10 @@ Route::group(['prefix' => 'afiche'], function () {
     Route::get('/{id}', [AficheController::class, 'showPorEventoId'])->name('eventos.showPorEventoId');
 });
 
-Route::group(['prefix' => 'material'], function () {
-    Route::get('', [MaterialController::class, 'index'])->name('materiales.index');
-    Route::get('{id}', [MaterialController::class, 'show'])->name('materiales.show');
-    Route::post('/', [MaterialController::class, 'store'])->name('materiales.store');
-    Route::post('{id}', [MaterialController::class, 'update'])->name('materiales.update');
-    Route::delete('{id}', [MaterialController::class, 'destroy'])->name('materiales.destroy');
+Route::group(['prefix' => 'recurso'], function () {
+    Route::get('', [RecursoController::class, 'index'])->name('recurso.index');
+    Route::get('{id}', [RecursoController::class, 'show'])->name('recurso.show');
+    Route::post('/', [RecursoController::class, 'store'])->name('recurso.store');
+    Route::post('{id}', [RecursoController::class, 'update'])->name('recurso.update');
+    Route::delete('{id}', [RecursoController::class, 'destroy'])->name('recurso.destroy');
 });

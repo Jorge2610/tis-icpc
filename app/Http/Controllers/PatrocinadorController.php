@@ -10,18 +10,21 @@ use Illuminate\Support\Facades\Storage;
 
 class PatrocinadorController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $patrocinadores = Patrocinador::all();
         return $patrocinadores;
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $patrocinador = Patrocinador::find($id);
         return $patrocinador;
     }
 
-    public function store(Request $request){
-        try{
+    public function store(Request $request)
+    {
+        try {
             $patrocinador = new Patrocinador();
             $patrocinador->nombre = $request->nombre;
             $patrocinador->ruta_imagen = $this->storeImage($request);
@@ -29,32 +32,35 @@ class PatrocinadorController extends Controller
             $patrocinador->id_evento = $request->id_evento;
             $patrocinador->save();
             return response()->json(['mensaje' => 'Asignado exitosamente', 'error' => false]);
-        }catch(QueryException $e){
+        } catch (QueryException $e) {
             return $e->getMessage();
         }
     }
 
-    public function storeImage(Request $request){
-        try{
+    public function storeImage(Request $request)
+    {
+        try {
             if ($request->hasFile('logo')) {
                 $ruta = $request->file('logo')->store('public/patrocinadores');
                 return Storage::url($ruta);
             }
-        }catch(QueryException $e){
+        } catch (QueryException $e) {
             return $e->getMessage();
         }
     }
 
-    public function showPatrocinadorbyEvento($id){
+    public function showPatrocinadorbyEvento($id)
+    {
         $patrocinadores = Patrocinador::where('id_evento', $id)->get();
         return $patrocinadores;
     }
 
-    public function update(Request $request, $id){
-        try{
+    public function update(Request $request, $id)
+    {
+        try {
             $patrocinador = Patrocinador::find($id);
             $patrocinador->nombre = $request->nombre;
-            if($request->hasFile('logo')){
+            if ($request->hasFile('logo')) {
                 Storage::delete($patrocinador->ruta_imagen);
                 $patrocinador->ruta_imagen = $this->storeImage($request);
             }
@@ -62,31 +68,32 @@ class PatrocinadorController extends Controller
             $patrocinador->id_evento = $request->id_evento;
             $patrocinador->save();
             return response()->json(['mensaje' => 'Actualizado exitosamente', 'error' => false]);
-        }catch(QueryException $e){
+        } catch (QueryException $e) {
             return $e->getMessage();
         }
     }
 
-    public function destroy($id){
-        try{
+    public function destroy($id)
+    {
+        try {
             $patrocinador = Patrocinador::find($id);
             Storage::delete($patrocinador->ruta_imagen);
             $patrocinador->delete();
             return response()->json(['mensaje' => 'Eliminado exitosamente', 'error' => false]);
-        }catch(QueryException $e){
+        } catch (QueryException $e) {
             return $e->getMessage();
         }
     }
 
     public function vistaTablaEventos()
     {
-        $patrocinadores =  Evento::with('patrocinadores')->get();
+        $patrocinadores =  Evento::where('estado', 0)->with('patrocinadores')->get();
         return view('patrocinador.asignarPatrocinador', ['patrocinadores' => $patrocinadores]);
     }
 
     public function vistaTablaEventosEliminar()
     {
-        $patrocinadores =  Evento::with('patrocinadores')->get();
+        $patrocinadores =  Evento::where('estado', 0)->with('patrocinadores')->get();
         return view('patrocinador.eliminarPatrocinador', ['patrocinadores' => $patrocinadores]);
     }
 }
