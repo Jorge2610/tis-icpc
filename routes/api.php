@@ -33,7 +33,7 @@ Route::group(['prefix' => 'tipo-evento'], function () {
 Route::group(['prefix' => 'evento'], function () {
     Route::get('/', [EventoController::class, 'index'])->name('eventos.index');
     Route::get('{id}', [EventoController::class, 'show'])->name('eventos.show');
-    Route::post('/', [EventoController::class, 'store'])->name('eventos.store');
+    Route::post('', [EventoController::class, 'store'])->name('eventos.store');
     Route::post('actualizar/{id}', [EventoController::class, 'update'])->name('eventos.update');
     Route::delete('{id}', [EventoController::class, 'destroy'])->name('eventos.destroy');
     Route::post('/afiche', [EventoController::class, 'storageAfiche'])->name('eventos.storageAfiche');

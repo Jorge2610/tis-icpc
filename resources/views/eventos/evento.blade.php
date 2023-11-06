@@ -25,7 +25,7 @@
                         </tr>
                         <tr>
                             <th scope="row">Grado académico requerido</th>
-                            <td>{{ $evento->grado_academico }}</td>
+                            <td>{{ $evento->grado_academico == null ? 'Ninguno' : $evento->grado_academico }}</td>
                         </tr>
                         @if ($evento->inicio_inscripcion != null && $evento->fin_inscripcion != null)
                             <tr>
