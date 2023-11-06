@@ -41,7 +41,7 @@
                             <label class="form-label fs-4" style="font-weight: bold;">Agregar recurso</label>
                             </div>
                             <label for="tituloMaterial" class="form-label">Titulo</label>
-                            <input name="id_material" type="hidden" id="id_material">
+                            <input name="id_evento" type="hidden" id="id_evento">
                             <input name="titulo" type="text" class="form-control custom-input" id="tituloMaterial"
                                 value="" placeholder="Ingrese un titulo" required>
                             <div class="invalid-feedback">
@@ -51,7 +51,7 @@
 
                         <div class="col-md-12 mt-2">
                             <label for="urlMaterial" class="form-label">Enlace al material</label>
-                            <input name="enlace_web" type="text" class="form-control custom-input" id="urlMaterial"
+                            <input name="enlace" type="text" class="form-control custom-input" id="urlMaterial"
                                 value="" pattern="www\..+\..+|http://www\..+\..+|https://www\..+\..+" placeholder="https://www.ejemplo.com">
                         </div>
                     </form>
