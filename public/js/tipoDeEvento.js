@@ -33,7 +33,6 @@ const initDataTable = async () => {
     if (tablaInicializada) {
         tablaDeTipos.destroy();
     }
-    //await cargarTiposDeEvento();
     tablaDeTipos = $("#tablaTipoDeEvento").DataTable(dataTableOptions);
     tablaInicializada = true;
 };
@@ -115,6 +114,7 @@ async function eliminarTipoEvento(id) {
 
 window.addEventListener("load", async () => {
     await initDataTable();
+
 });
 
 document.addEventListener("DOMContentLoaded", () => {
