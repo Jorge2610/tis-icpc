@@ -98,7 +98,7 @@ function editarTipoEvento(id) {
                         response.data.mensaje,
                         response.data.error ? "danger" : "success"
                     );
-                    window.location.href = '/admin/tipos-de-evento'; // Reemplaza esto con la URL de redirección deseada
+                    recargarEventos(); // Reemplaza esto con la URL de redirección deseada
                 } else {
                     // Manejar errores, por ejemplo, mostrar un mensaje de error.
                     //alert(response.data.mensaje);
