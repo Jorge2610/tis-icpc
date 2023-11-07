@@ -102,4 +102,9 @@ class TipoEventoController extends Controller
         $tipoEvento = TipoEvento::find($id);
         return view('tipos-de-evento/editarTiposDeEvento', compact('tipoEvento'));
     }
+
+    public function administrarTipoEvento(){
+        $tiposDeEventos =  TipoEvento::all();
+        return view('tipos-de-evento/administrarTiposDeEvento', ['tiposDeEventos' => $tiposDeEventos]);
+    }
 }
