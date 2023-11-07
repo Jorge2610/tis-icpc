@@ -13,10 +13,10 @@
                         <tr>
                             <th scope="col" class="col-sm-2 col-md-1">#</th>
                             <th scope="col" class="col-sm-4 col-md-4">Nombre del evento</th>
-                            <th scope="col" class="col-sm-0 col-md-3 text-center">Tipo de evento</th>
-                            <th scope="col" class="col-sm-3 col-md-2 text-center">Fecha de creación</th>
-                            <th scope="col" class="col-sm-3 col-md-2 text-center font-sm">Acción</th>
-
+                            <th scope="col" class="col-sm-1 col-md-2 text-center">Tipo de evento</th>
+                            <th scope="col" class="col-sm-2 col-md-2 text-center">Fecha de inscripción</th>
+                            <th scope="col" class="col-sm-2 col-md-2 text-center">Fecha del evento</th>
+                            <th scope="col" class="col-sm-1 col-md-1 text-center font-sm">Acción</th>
                         </tr>
                     </thead>
                     <tbody id="datosTabla">
@@ -32,7 +32,8 @@
                                 <th scope="row">{{ $contador++ }}</th>
                                 <td>{{ $evento->nombre }}</td>
                                 <td class="text-center">{{ $evento->tipoEvento->nombre }}</td>
-                                <td class="text-center">{{ date('d-m-Y', strtotime($evento->created_at)) }}</td>
+                                <td class="text-center">{{ date('d-m-Y', strtotime($evento->inicio_inscripcion)) }}</td>
+                                <td class="text-center">{{ date('d-m-Y', strtotime($evento->incio_evento)) }}</td>
                                 <td class="text-center">
                                     <button type="button" class="btn btn-danger btn-sm"
                                         onclick="setEventoId({{ $evento->id }})" id="botonAccion" style="width: 8vh"
