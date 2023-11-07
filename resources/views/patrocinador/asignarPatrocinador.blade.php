@@ -39,7 +39,10 @@
             <div class="col-sm-12 col-md-4">
                 <div
                     class="container d-flex flex-column justify-content-center align-items-center border p-3 container-image">
-                    <h5 id="nombreEvento"></h5>
+                    <div class="col-12 d-flex justify-content-center align-items-center">
+                        <h4>Asignar patrocinador</h4>
+                    </div>
+                    <h5 id="nombreEvento" class="text-center fw-bold"></h5>
                     <div class="d-flex justify-content-center">
 
                         <img src="{{ asset('/image/uploading.png') }}" alt="image" id = "imagePreview"
@@ -67,8 +70,8 @@
                         <div class="col-md-12 mt-2">
                             <label for="urlPatrocinador" class="form-label">Enlace
                                 a la página web del patrocinador</label>
-                            <input name="enlace_web" type="text" class="form-control custom-input" id="urlPatrocinador"
-                                value="" pattern="www\..+\..+|http://www\..+\..+|https://www\..+\..+" placeholder="https://www.ejemplo.com">
+                            <input name="enlace_web" type="url" class="form-control custom-input" id="urlPatrocinador"
+                                value="" placeholder="https://www.ejemplo.com">
                         </div>
                     </form>
                     <div class="d-flex justify-content-center mt-3">

@@ -50,7 +50,6 @@ window.addEventListener("load", () => {
 let seleccionado;
 let idSeleccionado;
 const seleccionarEvento = (id, nombre) => {
-    console.log(id + " " + nombre);
     if (seleccionado) {
         seleccionado.classList.remove("table-primary");
     }
@@ -68,7 +67,6 @@ const validarDatos = () => {
     const form = document.getElementById("formularioAgregarRecurso");
     if (form.checkValidity()) {
         form.classList.remove("was-validated");
-        console.log("valido");
         crearFormData(form);
     }
     form.classList.add("was-validated");

@@ -103,6 +103,11 @@
                                             id="crearTipoEventoSider">
                                             Crear tipo de evento
                                         </a>
+                                        <a href="{{ url('/admin/tipo-de-eventos') }}"
+                                            class="list-group-item list-group-item-action py-2 border-0"
+                                            id="crearTipoEventoSider">
+                                            Administrar tipo de evento
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -140,7 +145,7 @@
                                         <a href="{{ url('/afiche/editar') }}"
                                             class="list-group-item list-group-item-action py-2 border-0"
                                             id="asignarAficheSider">
-                                            Gestor de afiche
+                                            Administrar afiches
                                         </a>
                                         <a href="{{ url('/admin/eventos/patrocinador') }}"
                                         

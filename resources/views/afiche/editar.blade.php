@@ -35,8 +35,11 @@
             </div>
             <div class="col-sm-12 col-md-4">
                 <div class="container ">
-                    <h5 id="nombreEvento"></h5>
-                    <div class="row" id="contenedorAsignar">
+                    <div class="col-12 d-flex justify-content-center align-items-center">
+                        <h4>Afiches</h4>
+                    </div>
+                    <h5 id="nombreEvento" class="text-center fw-bold"></h5>
+                    <div class="row gap-2 mt-2 d-flex justify-content-center" id="contenedorAsignar">
 
                     </div>
                     @component('components.modal')

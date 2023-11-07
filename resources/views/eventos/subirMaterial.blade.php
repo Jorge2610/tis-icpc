@@ -33,23 +33,24 @@
             </div>
             <div class="col-sm-12 col-md-4">
                 <div class="container d-flex flex-column justify-content-center align-items-center border p-3">
-                    <h5 id="nombreEvento"></h5>
+                    <div class="col-12 d-flex justify-content-center align-items-center">
+                        <h4>Asignar recurso</h4>
+                    </div>
+                    <h5 id="nombreEvento" class="text-center fw-bold"></h5>
                     <form class="needs-validation" novalidate id="formularioAgregarRecurso">
                         <div class="col-md-12 mt-2">
-                            <h4 class="text-center fw-bold">Asignar recurso</h4>
                             <label for="tituloRecurso" class="form-label">Titulo</label>
                             <input name="titulo" type="text" class="form-control custom-input" id="tituloRecurso"
                                 value="" placeholder="Ingrese un titulo" required>
                             <div class="invalid-feedback">
-                                El nombre no puede estar vacio.
+                                El titulo no puede estar vacio.
                             </div>
                         </div>
 
                         <div class="col-md-12 mt-2">
                             <label for="urlRecurso" class="form-label">Enlace al recurso</label>
-                            <input name="enlace" type="text" class="form-control custom-input" id="urlRecurso"
-                                value="" pattern="www\..+\..+|http://www\..+\..+|https://www\..+\..+"
-                                placeholder="https://www.ejemplo.com" required>
+                            <input name="enlace" type="url" class="form-control custom-input" id="urlRecurso"
+                                value="" placeholder="https://www.ejemplo.com" required>
                         </div>
                     </form>
                     <div class="d-flex justify-content-center mt-3 gap-3">

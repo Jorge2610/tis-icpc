@@ -26,6 +26,3 @@ function enviarDatosFormulario() {
 
 document.addEventListener("DOMContentLoaded", enviarDatosFormulario);
 
-function test(id){
-    console.log(id);
-}
