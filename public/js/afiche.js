@@ -72,7 +72,7 @@ const seleccionarEvento = (id, nombre) => {
     seleccionado = document.getElementById(id);
     seleccionado.classList.add("table-primary");
     idSeleccionado = id;
-    eventoSeleccionado.textContent = nombre + " seleccionado";
+    eventoSeleccionado.textContent = nombre;
     input.value = "";
     imagenPreview.src = "/image/uploading.png";
     botonSubir.style.display = "block";

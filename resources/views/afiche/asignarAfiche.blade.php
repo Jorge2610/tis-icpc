@@ -19,12 +19,14 @@
                     <tbody id="datosTabla">
                         @php $contador = 1 @endphp
                         @foreach ($afiches as $afiche)
-                            <tr onclick="seleccionarEvento({{ $afiche->id }}, '{{ $afiche->nombre }}', event)" id="{{ $afiche->id }}">
+                            <tr onclick="seleccionarEvento({{ $afiche->id }}, '{{ $afiche->nombre }}', event)"
+                                id="{{ $afiche->id }}">
                                 <th scope="row">{{ $contador++ }}</th>
                                 <td>{{ $afiche->nombre }}</td>
                                 <td class="text-center">{{ $afiche->tipoEvento->nombre }}</td>
                                 <td class="text-center">{{ date('d-m-Y', strtotime($afiche->created_at)) }}</td>
-                                <td class="text-center" id="contadorAfiches{{$afiche->id}}">{{ $afiche->afiches->count() }}</td>
+                                <td class="text-center" id="contadorAfiches{{ $afiche->id }}">
+                                    {{ $afiche->afiches->count() }}</td>
 
                             </tr>
                         @endforeach
@@ -34,7 +36,10 @@
             <div class="col-sm-12 col-md-4">
                 <div
                     class="container d-flex flex-column justify-content-center align-items-center border p-3 container-image">
-                    <h5 id="nombreEvento"></h5>
+                    <div class="col-12 d-flex justify-content-center align-items-center">
+                        <h4>Asignar afiche</h4>
+                    </div>
+                    <h5 id="nombreEvento" class="text-center fw-bold"></h5>
                     <div class="d-flex justify-content-center">
 
                         <img src="{{ asset('/image/uploading.png') }}" alt="image" id = "imagePreview"
@@ -46,11 +51,13 @@
 
                         <button type="button" class="btn btn-primary btn-lg hover-button" id="botonSubirAfiche"
                             onclick="document.getElementById('imageUpload').click()">Subir</button>
-                        
+
                     </div>
                     <div id="contenedorAsignar" style="display: none">
-                        <button type="button" class="btn btn-light btn-lg hover-button" onclick="document.getElementById('imageUpload').click()">Cambiar</button>
-                        <button type="button" class="btn btn-primary btn-lg hover-button" onclick="asignarAfiche()">Asignar</button>
+                        <button type="button" class="btn btn-light btn-lg hover-button"
+                            onclick="document.getElementById('imageUpload').click()">Cambiar</button>
+                        <button type="button" class="btn btn-primary btn-lg hover-button"
+                            onclick="asignarAfiche()">Asignar</button>
                     </div>
                 </div>
             </div>

@@ -51,8 +51,7 @@ const seleccionarEvento = (afiche) => {
     seleccionado = document.getElementById(afiche.id);
     seleccionado.classList.add("table-primary");
     idEvento = afiche.id;
-    eventoSeleccionado.textContent = afiche.nombre + " seleccionado";
-    console.log(afiche);
+    eventoSeleccionado.textContent = afiche.nombre;
     cambiarEvento(afiche);
 };
 
@@ -62,7 +61,7 @@ const cambiarEvento = (evento) => {
         <div class="card" style="width: 10rem;">
             <img src="${afiche.ruta_imagen}" class="card-img-top" alt="Afiche" id="imagenAfichepreview${afiche.id}">
             <div class="card-body d-flex justify-content-around gap-2">
-                <input type="file" id="imageUpload${afiche.id}" style="display: none;" onchange="previsualizarImagen(event, ${afiche.id})">
+                <input type="file" id="imageUpload${afiche.id}" style="display: none;" onchange="previsualizarImagen(event, ${afiche.id})" accept="image/jpeg, image/png, image/jpg">
                 <a href="#" class="btn btn-primary btn-sm" onclick="document.getElementById('imageUpload${afiche.id}').click()">Cambiar</a>
                 <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                 data-bs-target="#modalEliminarAfiche" onclick="seleccionarAfiche(${afiche.id})">Eliminar</a>
@@ -166,22 +165,23 @@ const seleccionarAfiche = (id) => {
 };
 const eliminarAfiche = async () => {
     if (aficheSeleccion) {
-        await axios.delete(`/api/afiche/${aficheSeleccion}`).then((response) => {
-            mostrarAlerta(
-                "Éxito",
-                response.data.mensaje,
-                response.error ? "danger" : "success"
-            );
-            cargarAfiche();
-        });
+        await axios
+            .delete(`/api/afiche/${aficheSeleccion}`)
+            .then((response) => {
+                mostrarAlerta(
+                    "Éxito",
+                    response.data.mensaje,
+                    response.error ? "danger" : "success"
+                );
+                cargarAfiche();
+            });
     }
 };
 
 const cargarAfiche = async () => {
-    console.log(idEvento);
     await axios.get(`/api/afiche/${idEvento}`).then((response) => {
         document.getElementById(`contadorAfiches${idEvento}`).textContent =
             response.data.length;
-            document.getElementById(`tarjetaAfiche${aficheSeleccion}`).remove();	
+        document.getElementById(`tarjetaAfiche${aficheSeleccion}`).remove();
     });
 };

@@ -73,7 +73,6 @@ const validarImagen = (input, peso, callback) => {
 let seleccionado;
 let idSeleccionado;
 const seleccionarEvento = (id, nombre) => {
-    console.log(id + " " + nombre)
     if (seleccionado) {
         seleccionado.classList.remove("table-primary");
     }

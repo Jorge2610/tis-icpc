@@ -37,7 +37,7 @@ const initDataTable = async () => {
 window.addEventListener("load", () => {
     initDataTable();
     if (!seleccionado) {
-
+        eventoSeleccionado.textContent = "Selecciona un evento";
     }
 });
 
@@ -50,7 +50,7 @@ const seleccionarEvento = (id, nombre) => {
     seleccionado = document.getElementById(id);
     seleccionado.classList.add("table-primary");
     idSeleccionado = id;
-    console.log(idSeleccionado)
+    eventoSeleccionado.textContent = nombre;
     cargarPatrocinadores();
 };
 

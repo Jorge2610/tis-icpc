@@ -90,62 +90,45 @@ function llenarFormularioTipoEvento(nombre, descripcion, color) {
 }
 
 
-//Editar evento
+
 function editarTipoEvento(id) {
-    // Obtener el formulario
     const formularioTipoEvento = document.getElementById('formularioTipoEvento');
-    console.log(id);
-    console.log(formularioTipoEvento);
-    // Agregar un manejador de eventos al formulario
     formularioTipoEvento.addEventListener('submit', (event) => {
         event.preventDefault();
         const formData = new FormData(formularioTipoEvento);
         axios.post(`/tipo-evento/actualizar/${id}`, formData)
             .then((response) => {
                 if (response.data.error === false) {
-                    // El tipo de evento se actualizó con éxito, puedes redirigir o mostrar un mensaje de éxito.
-                    window.location.href = '/admin/tipos-de-evento'; // Reemplaza esto con la URL de redirección deseada
+                    window.location.href = '/admin/tipos-de-evento';
                 } else {
-                    // Manejar errores, por ejemplo, mostrar un mensaje de error.
                     alert(response.data.mensaje);
                 }
             })
             .catch((error) => {
-                // Manejar errores de la solicitud Axios
                 console.error(error);
             });
     });
 }
 
-//Borrar tipo de evento
 async function eliminarTipoEvento(id) {
-    // Aquí utilizamos Axios para enviar una solicitud de eliminación al servidor
     axios.delete(`/api/tipo-evento/${id}`)
         .then(response => {
             if (!response.data.error) {
-                // Si la eliminación es exitosa, mostramos un mensaje de éxito en el modal
-                $('#modalEliminarTipoEvento'+id).modal('hide'); // Cerrar el modal
+                $('#modalEliminarTipoEvento'+id).modal('hide'); 
                 mostrarAlerta(
                     "Éxito",
                     response.data.mensaje,
                     response.data.error ? "danger" : "success"
                 );
-                //$('#modalMensaje').text('Tipo de evento eliminado exitosamente.');
-                //$('#modalExito').modal('show');
                 cargarTiposDeEvento();
-                //window.location.reload();
-                console.log("Exito");
             } else {
-                // Si hay un error, mostramos un mensaje de error en el modal
-                console.log("Error " + response.data.error);
-                $('#modalEliminarTipoEvento'+id).modal('hide'); // Cerrar el modal
+                $('#modalEliminarTipoEvento'+id).modal('hide'); 
                 $('#modalMensaje').text('Error: ' + response.data.mensaje);
                 $('#modalError').modal('show');
             }
         })
         .catch(error => {
             console.error(error);
-            // Manejar cualquier error de la solicitud Axios
         });
 }
 
