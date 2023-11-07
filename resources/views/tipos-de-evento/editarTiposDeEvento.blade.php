@@ -6,6 +6,20 @@
     <div class="row justify-content-center">
         <div class="col-md-5" style="min-height: 500px">
             <h2 class="text-center">Editar tipo de evento</h2>
+
+            <!-- Muestra alertas -->
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+
+
             <form id="formularioTipoEvento" class="needs-validation" novalidate method="POST" action="{{ route('tipo-eventos.update', ['id' => $tipoEvento->id]) }}">
                 @csrf
                 <div class="container">
@@ -44,7 +58,7 @@
                         </div>
                     </div>
                     <div class="text-center my-5">
-                        <button type="reset" class="btn btn-secondary mx-5">Cancelar</button>
+                        <a href="/admin/tipo-de-eventos" class="btn btn-secondary mx-5">Cancelar</a>
                         <button id="confirmarBoton" type="submit" class="btn btn-primary mx-5">Editar</button>
                     </div>
                 </div>

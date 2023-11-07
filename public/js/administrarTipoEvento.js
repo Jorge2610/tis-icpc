@@ -55,13 +55,19 @@ const cargarTiposDeEvento = async () => {
                 <tr>
                     <th scope='row'>${index + 1}</th>
                     <td>${element.nombre}</td>
-                    <td class="text-center">${element.descripcion}</td>
                     <td class="container-color">
                         <div class="color-cell" style="background-color:${element.color};"></div>
                     </td>
                     <td class="text-center">Yo</td>
                     <td class="text-center">${fechaFormateada}</td>
-                    
+                    <td class="text-center">
+                        <button type="button" class="btn btn-primary btn-sm" onclick="editarTipoEvento(${element.id})">
+                            <i class="bi bi-pencil-fill"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="eliminarTipoEvento(${element.id})">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
                 </tr>
             `;
         }).join("");
