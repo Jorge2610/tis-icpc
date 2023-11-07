@@ -127,15 +127,15 @@
                                             id="crearEventoSider">
                                             Crear evento
                                         </a>
-                                        <a href="{{ url('/admin/eventos/cancelar-evento') }}"
-                                            class="list-group-item list-group-item-action py-2 border-0"
-                                            id="cancelarEventoSider">
-                                            Cancelar evento
-                                        </a>
                                         <a href="{{ url('/editarEvento/') }}"
                                             class="list-group-item list-group-item-action py-2 border-0"
                                             id="cancelarEventoSider">
                                             Editar evento
+                                        </a>
+                                        <a href="{{ url('/admin/eventos/cancelar-evento') }}"
+                                            class="list-group-item list-group-item-action py-2 border-0"
+                                            id="cancelarEventoSider">
+                                            Cancelar evento
                                         </a>
                                         <a href="{{ url('/admin/eventos/afiche') }}"
                                             class="list-group-item list-group-item-action py-2 border-0"
@@ -145,7 +145,7 @@
                                         <a href="{{ url('/afiche/editar') }}"
                                             class="list-group-item list-group-item-action py-2 border-0"
                                             id="asignarAficheSider">
-                                            Administrar afiches
+                                            Administrar afiche
                                         </a>
                                         <a href="{{ url('/admin/eventos/patrocinador') }}"
                                         

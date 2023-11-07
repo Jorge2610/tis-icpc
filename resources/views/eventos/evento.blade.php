@@ -68,10 +68,12 @@
                             <td>{{ $evento->genero }}</td>
                         </tr>
                     @endif
-                    @if ($evento->edad_minima && $evento->edad_maxima)
+                    @if ($evento->edad_minima || $evento->edad_maxima)
                         <tr>
                             <th scope="row">Límite de edad</th>
-                            <td>Desde los {{ $evento->edad_minima }} hasta los {{ $evento->edad_maxima }} años.</td>
+                            <td>{{ $evento->edad_minima ? 'Desde los ' . $evento->edad_minima . ' años' : '' }}
+                                {{ $evento->edad_maxima ? ($evento->edad_minima ? 'h' : 'H') . 'asta los ' . $evento->edad_maxima . ' años' : '' }}
+                            </td>
                         </tr>
                     @endif
                     <tr>

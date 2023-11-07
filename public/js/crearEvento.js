@@ -123,7 +123,7 @@ const crearEvento = (formData) => {
                 "danger"
             );
         });
-    window.location.href ="/eventos/"+ document.getElementById("nombreDelEvento").value;
+    //window.location.href ="/eventos/"+ document.getElementById("nombreDelEvento").value;
 };
 const datoCambiado = () => {
     if (tipoForm === 1) {

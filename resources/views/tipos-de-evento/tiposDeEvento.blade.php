@@ -20,9 +20,9 @@
                     <tr>
                         <th scope="col" class="col-md-1 ">#</th>
                         <th scope="col" class="col-md-3">Nombre del tipo de evento</th>
-                        <th scope="col" class="col-md-2 text-center">Descripcion</th>
-                        <th scope="col" class="col-md-2 text-center">Color de referencia</th> 
-                        <th scope="col" class="col-md-2 text-center">Creador</th>
+                        <th scope="col" class="col-md-2 text-center">Descripción</th>
+                        <th scope="col" class="col-md-2 text-center">Color de referencia</th>
+                        <th scope="col" class="col-md-2 text-center">Autor</th>
                         <th scope="col" class="col-md-3 text-center">Fecha de creación</th>
                     </tr>
                 </thead>
@@ -37,7 +37,7 @@
                         <tr>
                             <th scope='row'>{{ $contador++ }}</th>
                             <td>{{ $tipoDeEvento->nombre }}</td>
-                            <td title="{{ $tipoDeEvento->descripcion }}"> 
+                            <td title="{{ $tipoDeEvento->descripcion }}">
                                 <span class="d-inline-block text-truncate" style="max-width: 150px;">
                                     {{ $tipoDeEvento->descripcion }}
                                 </span>
@@ -47,7 +47,7 @@
                             </td>
                             <td class="text-center">Yo</td>
                             <td class="text-center">{{ $fechaFormateada }}</td>
-                            
+
                         </tr>
                     @endforeach
                 </tbody>

@@ -38,7 +38,7 @@
                                     </div>
                                     <div class=" mt-2 custom-col colum-col">
                                         <input name="color" type="color"
-                                            class="form-control form-control-color controlador" id="colorTipoEvento"
+                                            class="form-control-color controlador" id="colorTipoEvento"
                                             value="#563d7c" title="Choose your color">
                                     </div>
                                 </div>
