@@ -51,8 +51,8 @@ class TipoEventoController extends Controller
             $tipo_evento->descripcion = $request->descripcion;
             $tipo_evento->color = $request->color;
             $tipo_evento->save();
-            return redirect()->route('tipo-evento')->with('success', 'Tipo de evento actualizado exitosamente');
-            //return response()->json(['mensaje' => 'Actualizado exitosamente', 'error' => false]);
+            //return redirect()->route('tipo-evento')->with('success', 'Tipo de evento actualizado exitosamente');
+            return response()->json(['mensaje' => 'Actualizado exitosamente', 'error' => false]);
         } catch (QueryException $e) {
             if ($e->errorInfo[1] == 1062) {
                 return response()->json(['mensaje' => 'El tipo de evento ya existe', 'error' => true]);

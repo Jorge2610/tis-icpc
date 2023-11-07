@@ -87,15 +87,21 @@ function editarTipoEvento(id) {
     // Agregar un manejador de eventos al formulario
     formularioTipoEvento.addEventListener('submit', (event) => {
         event.preventDefault();
+        formularioTipoEvento.classList.add("was-validated");
         const formData = new FormData(formularioTipoEvento);
-        axios.post(`/tipo-evento/actualizar/${id}`, formData)
+        axios.post(`/api/tipo-evento/actualizar/${id}`, formData)
             .then((response) => {
                 if (response.data.error === false) {
                     // El tipo de evento se actualizó con éxito, puedes redirigir o mostrar un mensaje de éxito.
-                    window.location.href = '/admin/tipos-de-evento'; // Reemplaza esto con la URL de redirección deseada
+                    mostrarAlerta(
+                        "Éxito",
+                        response.data.mensaje,
+                        response.data.error ? "danger" : "success"
+                    );
+                    recargarEventos(); // Reemplaza esto con la URL de redirección deseada
                 } else {
                     // Manejar errores, por ejemplo, mostrar un mensaje de error.
-                    alert(response.data.mensaje);
+                    //alert(response.data.mensaje);
                 }
             })
             .catch((error) => {
@@ -141,32 +147,6 @@ window.addEventListener("load", async () => {
     await initDataTable();
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("formularioTipoEvento");
-    form.addEventListener("submit", async function (event) {
-        event.preventDefault();
-        form.classList.add("was-validated");
-        if (!form.checkValidity()) {
-            event.stopPropagation();
-        } else {
-            const formData = new FormData(this);
-            try {
-                const response = await axios.post("/api/tipo-evento", formData);
-                mostrarAlerta(
-                    "Éxito",
-                    response.data.mensaje,
-                    response.data.error ? "danger" : "success"
-                );
-                form.classList.remove("was-validated");
-                form.reset();
-                $("#modalCrearTipoEvento").modal("hide");
-                initDataTable();
-            } catch (error) {
-                mostrarAlerta("Error", "Hubo un error al guardar el tipo de evento", "danger");
-            }
-        }
-    });
-});
 
 const recargarEventos = () => {
     setTimeout(() => {
