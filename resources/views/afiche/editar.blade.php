@@ -36,7 +36,7 @@
             <div class="col-sm-12 col-md-4">
                 <div class="container ">
                     <h5 id="nombreEvento"></h5>
-                    <div class="row" id="contenedorAsignar">
+                    <div class="row gap-3" id="contenedorAsignar">
 
                     </div>
                     @component('components.modal')
