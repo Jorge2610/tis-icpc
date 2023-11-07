@@ -531,4 +531,5 @@ const iniciarEditar=()=>{
     }else{
         fechasMin();
     }
+    fechaInscripcionFin.max=fechaFin.value.split("T")[0];
 }
