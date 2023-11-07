@@ -36,7 +36,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 mt-3">
-                            <label for="detalleTipoEvento" class="form-label">Descripción del evento</label>
+                            <label for="detalleTipoEvento" class="form-label">Descripción del tipo de evento</label>
                             <textarea name="descripcion" class="form-control" id="detalleTipoEvento" rows="6" style="resize: none;"
                                 placeholder="Ingrese una descripción..." maxlength="500">{{ $tipoEvento->descripcion }}</textarea>
                         </div>
@@ -58,7 +58,7 @@
                         </div>
                     </div>
                     <div class="text-center my-5">
-                        <a href="/admin/tipo-de-eventos" class="btn btn-secondary mx-5">Cancelar</a>
+                        <a href="/admin/tipos-de-evento" class="btn btn-secondary mx-5">Cancelar</a>
                         <button id="confirmarBoton" type="submit" class="btn btn-primary mx-5">Editar</button>
                     </div>
                 </div>
