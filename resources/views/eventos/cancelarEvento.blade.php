@@ -33,7 +33,7 @@
                                 <td>{{ $evento->nombre }}</td>
                                 <td class="text-center">{{ $evento->tipoEvento->nombre }}</td>
                                 <td class="text-center">{{ date('d-m-Y', strtotime($evento->inicio_inscripcion)) }}</td>
-                                <td class="text-center">{{ date('d-m-Y', strtotime($evento->incio_evento)) }}</td>
+                                <td class="text-center">{{ date('d-m-Y', strtotime($evento->inicio_evento)) }}</td>
                                 <td class="text-center">
                                     <button type="button" class="btn btn-danger btn-sm"
                                         onclick="setEventoId({{ $evento->id }})" id="botonAccion" style="width: 8vh"

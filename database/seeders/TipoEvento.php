@@ -17,14 +17,14 @@ class TipoEvento extends Seeder
     {
         $faker = Faker::create();
 
-        for ($i = 0; $i < 10; $i++) {
-            $currentDateTime = now();
+        for ($i = 0; $i < 20; $i++) {
+            $currentDateTime = $faker->dateTimeBetween('-1 year', 'now');
             DB::table('tipo_eventos')->insert([
                 'nombre' => "tipo evento " . ($i+1),
                 'descripcion' => $faker->paragraph(1),
                 'color' => $faker->hexColor(),
                 'created_at' => $currentDateTime,
-                'updated_at' => $currentDateTime
+                'updated_at' => $faker->dateTimeBetween($currentDateTime, 'now'),
             ]);
         }
     }

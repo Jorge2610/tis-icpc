@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Afiche;
+use App\Models\Patrocinador;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,7 +19,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             TipoEvento::class,
             EventoSeeder::class,
-            AficheSeeder::class
+            AficheSeeder::class,
+            PatrocinadorSeed::class,
+            RecursoSeed::class
         ]);
     }
 }
