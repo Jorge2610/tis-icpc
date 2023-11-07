@@ -392,7 +392,7 @@ fechaFin.addEventListener("change", () => {
 
 edadMaxima.addEventListener("change", () => {
     let ambos = edadMaxima.value === "" && edadMinima.value === "";
-    if (edadMaxima.value < edadMaxima.min && edadMaxima.value !== "") {
+    if (parseInt(edadMaxima.value) < parseInt(edadMaxima.min) && edadMaxima.value !== "") {
         edadMaxima.classList.add("is-invalid");
         edadMaxima.classList.remove("is-valid");
     } else {
@@ -415,19 +415,20 @@ edadMaxima.addEventListener("change", () => {
 });
 edadMinima.addEventListener("change", () => {
     let ambos = edadMaxima.value === "" && edadMinima.value === "";
-    if (edadMinima.value < edadMinima.min && edadMinima.value !== "") {
+
+    if (parseInt(edadMinima.value) < parseInt(edadMinima.min) && edadMinima.value !== "") {
         edadMinima.classList.add("is-invalid");
         edadMinima.classList.remove("is-valid");
     } else {
-        if (ambos && inputEdad.checked) {
-            edadMinima.classList.add("is-invalid");
-            edadMinima.classList.remove("is-valid");
-        } else {
-            edadMinima.classList.remove("is-invalid");
-            edadMinima.classList.add("is-valid");
-        }
+        if(edadMinima.value !== ""){}
+            edadMaxima.min = edadMinima.value;
     }
-    edadMaxima.min = edadMinima.value;
+    
+    if (ambos && inputEdad.checked) {
+        edadMinima.classList.add("is-invalid");
+        edadMinima.classList.remove("is-valid");
+    }
+
     if (boolMinEdad && boolMaxEdad && boolcheckEdad) {
         boolMaxEdad = false;
         boolcheckEdad = false;

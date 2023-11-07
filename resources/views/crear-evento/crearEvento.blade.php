@@ -134,7 +134,7 @@
                                         <div class="col-md-9">
                                             <div class="input-group">
                                                 <input name="edad_minima" type="number" class="form-control input-edad fecha-editar"
-                                                    min="0" id="edadMinima" step="1"
+                                                    min="10" id="edadMinima" step="1"
                                                     value="{{ isset($datos['edad_minima']) ? $datos['edad_minima'] : '' }}">
                                             </div>
                                         </div>
@@ -148,7 +148,7 @@
                                         <div class="col-md-9">
                                             <div class="input-group">
                                                 <input name="edad_maxima" type="number" class="form-control input-edad fecha-editar"
-                                                    id="edadMaxima" step="1" min="0"
+                                                    id="edadMaxima" step="1" min="10"
                                                     value="{{ isset($datos['edad_maxima']) ? $datos['edad_maxima'] : '' }}">
                                             </div>
                                         </div>
