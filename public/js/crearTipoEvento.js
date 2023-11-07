@@ -1,4 +1,4 @@
-function enviarDatosFormulario() {
+function crearTipoEvento() {
     const form = document.getElementById("formularioTipoEvento");
     form.addEventListener("submit", async function (event) {
         event.preventDefault();
@@ -8,6 +8,7 @@ function enviarDatosFormulario() {
             event.stopPropagation();
         } else {
             const formData = new FormData(this);
+            console.log("Se esta creando algo");
             try {
                 const response = await axios.post("/api/tipo-evento", formData);
                 mostrarAlerta(
@@ -24,5 +25,5 @@ function enviarDatosFormulario() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", enviarDatosFormulario);
+document.addEventListener("DOMContentLoaded", crearTipoEvento);
 

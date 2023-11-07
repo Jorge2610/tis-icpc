@@ -59,12 +59,12 @@
                     </div>
                     <div class="text-center my-5">
                         <a href="/admin/tipos-de-evento" class="btn btn-secondary mx-5">Cancelar</a>
-                        <button id="confirmarBoton" type="submit" class="btn btn-primary mx-5">Editar</button>
+                        <button id="confirmarBoton" onclick="editarTipoEvento({{ $tipoEvento->id }})" class="btn btn-primary mx-5">Editar</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
-{{-- <script src="{{ asset('js/crearTipoEvento.js') }}" defer></script> --}}
+<script src="{{ asset('js/administrarTipoEvento.js') }}" defer></script>
 @endsection

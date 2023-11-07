@@ -88,14 +88,14 @@ function editarTipoEvento(id) {
     formularioTipoEvento.addEventListener('submit', (event) => {
         event.preventDefault();
         const formData = new FormData(formularioTipoEvento);
-        axios.post(`/tipo-evento/actualizar/${id}`, formData)
+        axios.post(`/api/tipo-evento/actualizar/${id}`, formData)
             .then((response) => {
                 if (response.data.error === false) {
                     // El tipo de evento se actualizó con éxito, puedes redirigir o mostrar un mensaje de éxito.
                     window.location.href = '/admin/tipos-de-evento'; // Reemplaza esto con la URL de redirección deseada
                 } else {
                     // Manejar errores, por ejemplo, mostrar un mensaje de error.
-                    alert(response.data.mensaje);
+                    //alert(response.data.mensaje);
                 }
             })
             .catch((error) => {
