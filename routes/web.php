@@ -28,7 +28,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/', [EventoController::class, 'cargarEventos']);
 
-Route::group(['prefix' => 'admin/tipo-de-eventos'], function(){
+Route::group(['prefix' => 'admin/tipos-de-evento'], function(){
     Route::get('/', [TipoEventoController::class, 'administrarTipoEvento'])->name('administrar.tipo-evento');
 });
 

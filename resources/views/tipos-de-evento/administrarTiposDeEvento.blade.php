@@ -22,7 +22,8 @@
                         <th scope="col" class="col-md-2">Nombre del tipo de evento</th>
                         <th scope="col" class="col-md-2 text-center">Color de referencia</th>
                         <th scope="col" class="col-md-2 text-center">Creador</th>
-                        <th scope="col" class="col-md-3 text-center">Fecha de creación</th>
+                        <th scope="col" class="col-md-2 text-center">Fecha de creación</th>
+                        <th scope="col" class="col-md-3 text-center">Eventos asociados</th>
                         <th scope="col" class="col-md-3 text-center">Acción</th>
                     </tr>
                 </thead>
@@ -31,9 +32,9 @@
                         $contador = 1;
                     @endphp
                     @foreach ($tiposDeEventos as $tipoDeEvento)
-                        @php
+                        {{-- @php
                             $fechaFormateada = date('d-m-Y', strtotime($tipoDeEvento->created_at));
-                        @endphp
+                        @endphp --}}
                         <tr>
                             <th scope='row'>{{ $contador++ }}</th>
                             <td>{{ $tipoDeEvento->nombre }}</td>
@@ -41,20 +42,21 @@
                                 <div class="color-cell" style="background-color:{{ $tipoDeEvento->color }};"></div>
                             </td>
                             <td class="text-center">Yo</td>
-                            <td class="text-center">{{ $fechaFormateada }}</td>
+                            <td class="text-center">{{ date('d-m-Y', strtotime($tipoDeEvento->created_at)) }}</td>
+                            <td class="text-center">{{ $tipoDeEvento->eventos->count() }}</td>
                             <td class="text-center">
-                                {{-- <button type="button" class="btn btn-primary btn-sm">
+                                <button type="button" class="btn btn-primary btn-sm"
+                                    onclick="window.location.href='eventos/editar-tipo-evento/{{ $tipoDeEvento->id }}'"
+                                    {{ $tipoDeEvento->eventos->count() > 0 ? 'disabled' : '' }}>
                                     <i class="bi bi-pencil-fill"></i>
-                                </button> --}}
-                                <a href="eventos/editar-tipo-evento/{{ $tipoDeEvento->id }}" class="btn btn-primary btn-sm">
-                                    <i class="bi bi-pencil-fill"></i>
-                                </a>                                
+                                </button>
                                 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#modalEliminarTipoEvento{{ $tipoDeEvento->id }}">
+                                    data-bs-target="#modalEliminarTipoEvento{{ $tipoDeEvento->id }}"
+                                    {{ $tipoDeEvento->eventos->count() > 0 ? 'disabled' : '' }}>
                                     <i class="bi bi-trash"></i>
                                 </button>
                                 @component('components.modal')
-                                    @slot('modalId', 'modalEliminarTipoEvento'. $tipoDeEvento->id)
+                                    @slot('modalId', 'modalEliminarTipoEvento' . $tipoDeEvento->id)
                                     @slot('modalTitle', 'Eliminar tipo de evento')
                                     @slot('modalContent')
                                         Esta seguro que quiere eliminar este tipo de evento?
