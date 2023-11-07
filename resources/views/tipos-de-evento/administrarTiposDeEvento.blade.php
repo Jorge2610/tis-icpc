@@ -21,7 +21,7 @@
                         <th scope="col" class="col-md-1 ">#</th>
                         <th scope="col" class="col-md-2">Nombre del tipo de evento</th>
                         <th scope="col" class="col-md-2 text-center">Color de referencia</th>
-                        <th scope="col" class="col-md-2 text-center">Creador</th>
+                        <th scope="col" class="col-md-2 text-center">Autor</th>
                         <th scope="col" class="col-md-2 text-center">Fecha de creación</th>
                         <th scope="col" class="col-md-3 text-center">Eventos asociados</th>
                         <th scope="col" class="col-md-3 text-center">Acción</th>

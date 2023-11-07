@@ -33,7 +33,7 @@
                                 <td class="text-center">{{ date('d-m-Y', strtotime($evento->inicio_evento)) }}</td>
                                 <td class="text-center">
                                     <button type="button" class="btn btn-danger btn-sm"
-                                        onclick="setEventoId({{ $evento->id }})" id="botonAccion" style="width: 8vh"
+                                        onclick="setEventoId({{ $evento->id }})" id="botonAccion" style="min-width: 80px;"
                                         data-bs-toggle="modal"
                                         data-bs-target="{{ strtotime($evento->inicio_inscripcion) > time() ? '#modalCancelar' : '#modalAnular' }}">
                                         {{ strtotime($evento->inicio_inscripcion) > time() ? 'Cancelar' : 'Anular' }}
