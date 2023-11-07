@@ -103,7 +103,7 @@
                                             id="crearTipoEventoSider">
                                             Crear tipo de evento
                                         </a>
-                                        <a href="{{ url('/admin/tipo-de-eventos') }}"
+                                        <a href="{{ url('/admin/tipos-de-evento') }}"
                                             class="list-group-item list-group-item-action py-2 border-0"
                                             id="crearTipoEventoSider">
                                             Administrar tipo de evento

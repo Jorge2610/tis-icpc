@@ -120,12 +120,12 @@ async function eliminarTipoEvento(id) {
                 );
                 //$('#modalMensaje').text('Tipo de evento eliminado exitosamente.');
                 //$('#modalExito').modal('show');
-                cargarTiposDeEvento();
+                // cargarTiposDeEvento();
                 //window.location.reload();
-                console.log("Exito");
+                recargarEventos();
+
             } else {
                 // Si hay un error, mostramos un mensaje de error en el modal
-                console.log("Error " + response.data.error);
                 $('#modalEliminarTipoEvento'+id).modal('hide'); // Cerrar el modal
                 $('#modalMensaje').text('Error: ' + response.data.mensaje);
                 $('#modalError').modal('show');
@@ -167,3 +167,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+const recargarEventos = () => {
+    setTimeout(() => {
+        window.location.href = "/admin/tipos-de-evento";
+    }, 1800);
+}

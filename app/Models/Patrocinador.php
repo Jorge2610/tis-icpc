@@ -10,4 +10,9 @@ class Patrocinador extends Model
     use HasFactory;
 
     protected $table = 'patrocinadores';
+
+    public function evento()
+    {
+        return $this->belongsTo(Evento::class, 'id_evento');
+    }
 }

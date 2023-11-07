@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class TipoEvento extends Model
 {
     use HasFactory;
-    public function evento()
+    public function eventos()
     {
         return $this->hasMany(Evento::class, 'id_tipo_evento');
     }

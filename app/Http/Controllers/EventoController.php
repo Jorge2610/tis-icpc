@@ -27,7 +27,7 @@ class EventoController extends Controller
 
     public function cargarEvento(String $nombre)
     {
-        $evento = Evento::where('estado', 0)->with('afiches')->where('nombre', $nombre)->first();
+        $evento = Evento::where('estado', 0)->with('afiches', 'patrocinadores', 'recursos')->where('nombre', $nombre)->first();
         if (!$evento) {
             return abort(404);
         }
