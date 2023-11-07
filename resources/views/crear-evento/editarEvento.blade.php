@@ -1,26 +1,60 @@
 @extends('layouts.app')
 
 @section('content')
-<table class="table table-striped table-hover">
-<thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Fecha De Inicio</th>
-      <th scope="col">Accion</th>
-    </tr>
-  </thead>
-  <tbody>
-
-  @foreach ($eventos as $key => $evento)
-    <tr>
-        <th scope="row"> {{$key +1}}</th>
-        <td>{{$evento->nombre}}</th>
-        <td>{{$evento->inicio_evento}}</th>
-        <td><a href="{{ route('evento.editar', ['id' => $evento->id]) }}">editar</a></th>
-    </tr>
-  @endforeach
-    
-  </tbody>
-</table>
-@endsection
+<div class="container">
+        <div class="row mb-2">
+            <h4>Editar Evento</h4>
+        </div>
+        <div class="row g-5">
+          <div class="col-sm-12">
+            <table class="table table-responsive table-striped text-secondary  cursor" id="tablaEvento">
+                    <caption>Eventos</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="col-sm-2 col-md-1">#</th>
+                            <th scope="col" class="col-sm-4 col-md-4">Nombre del evento</th>
+                            <th scope="col" class="col-sm-0 col-md-3 text-center">Tipo de evento</th>
+                            <th scope="col" class="col-sm-3 col-md-2 text-center">Fecha de creación</th>
+                            <th scope="col" class="col-sm-3 col-md-2 text-center font-sm">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="datosTabla">
+                        @php $contador = 1 @endphp
+                        @foreach ($eventos as $evento)
+                            @php
+                                $cancelar = 1;
+                                if (date('d-m-Y', strtotime($evento->inicio_inscripcion)) < date('d-m-Y')) {
+                                    $cancelar = 0;
+                                }
+                            @endphp
+                            <tr id="{{ $evento->id }}">
+                                <th scope="row">{{ $contador++ }}</th>
+                                <td>{{ $evento->nombre }}</td>
+                                <td class="text-center">{{ $evento->tipoEvento->nombre }}</td>
+                                <td class="text-center">{{ date('d-m-Y', strtotime($evento->created_at)) }}</td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-primary btn-sm"
+                                    onclick="redireccionarEditar('{{ route('evento.editar', ['id' => $evento->id]) }}')"
+                                    @if(strtotime($evento->inicio_evento) <= time()) disabled @endif> 
+                                      <i class="fa-solid fa-pencil"></i>
+                                    </button>
+                                    
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+      </div>          
+    </div>
+</div>
+<script>
+    function redireccionarEditar( url) {
+        window.location.href = url;
+    }
+</script>
+<link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="{{ asset('js/cancelarEvento.js') }}" defer></script>
+ @endsection

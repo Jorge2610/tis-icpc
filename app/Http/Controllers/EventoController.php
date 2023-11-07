@@ -211,4 +211,11 @@ class EventoController extends Controller
             return Storage::url($archivo);
         }
     }
+
+    public function showEditEventForm(){
+        $eventos = Evento::with('tipoEvento')
+        ->orderBy('updated_at', 'desc')
+        ->get();
+        return view('crear-evento.editarEvento',['eventos' => $eventos]);
+    }
 }

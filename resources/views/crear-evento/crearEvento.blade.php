@@ -19,7 +19,7 @@
 
                 <div class="col-md-12">
                     <label for="nombreDelEvento" class="form-label">Nombre del evento *</label>
-                    <input name="nombre" type="text" class="form-control" id="nombreDelEvento" onchange="datoCambiado()"
+                    <input name="nombre" type="text" class="form-control fecha-editar" id="nombreDelEvento" onchange="datoCambiado()"
                         placeholder="Ingrese el nombre del evento" maxlength="64"
                         value="{{ isset($datos['nombreDelEvento']) ? $datos['nombreDelEvento'] : '' }}" required>
                     <div class="invalid-feedback" >
@@ -32,7 +32,7 @@
                     <div class="col-md-6">
                         <label for="tipoDelEvento" class="form-label">Tipo de evento</label>
                         <!-Cargar tipos de evento->
-                            <select name="id_tipo_evento" class="form-select" id="tipoDelEvento" onchange="datoCambiado()"
+                            <select name="id_tipo_evento" class="form-select fecha-editar" id="tipoDelEvento" onchange="datoCambiado()"
                                 aria-placeholder="Elija un tipo de evento..." data-id="{{ $datos['id_tipo_evento'] }}" required>
 
                             </select>
@@ -45,10 +45,13 @@
 
                     <label for="select-region" class="form-label">Región</label>
                         <select class="form-select" name="region" id="select-region" >
-                            @foreach (['Departamental', 'Nacional', 'Internacional'] as $regionDato)
-                                <option value="{{ $regionDato }}" @if ($datos['region'] == $regionDato||'Departamental'==$regionDato) selected @endif>
+                            @foreach (['Internacional','Nacional','Departamental'] as $regionDato)
+                                <option value="{{ $regionDato }}" @if ($datos['region'] == $regionDato||'Departamental'==$regionDato) selected @endif >
                                     {{ $regionDato }}
                                 </option>
+                                @if($datos['region'] == $regionDato && date('Y-m-d') >= $datos['inicio_inscripcion'])
+                                    @break;
+                                @endif
                             @endforeach
                         </select> 
                     </div>
@@ -61,11 +64,11 @@
                         <div>
                         <button id="btnGroupDrop1" type="button" class="btn dropdown-toggle" style="padding: 5px; border: solid 1px black;"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                             Intituciones Admitidas
+                             Instituciones Admitidas
                         </button>
-                        <ul class="dropdown-menu " aria-labelledby="btnGroupDrop1" style="padding: 10px;">
+                        <ul class="dropdown-menu " id="ul-institucion" aria-labelledby="btnGroupDrop1" style="padding: 10px;" data-institucion="{{$datos['institucion']}}">
                             @foreach (['TODAS','UMSS', 'UMSA', 'UPSA','UCB','UPB','UNIFRANZ'] as $institucion)
-                                <li>
+                                <li @if($institucion=="Todas") id="todas-institucion" @endif>
                                     <input class="form-check-input institucion" type="checkbox" value="{{$institucion}}"
                                      id="check-institucion-{{$institucion}}" >
                                     <label class="form-check-label" for="check-institucion-{{$institucion}}">
@@ -81,11 +84,11 @@
                         
                         <button id="boton-grado" type="button" class="btn dropdown-toggle" style="padding: 5px; border: solid 1px black;"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                             Grado academico requerido
+                             Grado académico requerido
                         </button>
-                        <ul class="dropdown-menu " aria-labelledby="boton-grado" style="padding: 10px;">
+                        <ul class="dropdown-menu" id="ul-grado" aria-labelledby="boton-grado" style="padding: 10px;" data-grado="{{$datos['grado_academico']}}">
                             @foreach (['Todas', 'Primaria', 'Secundaria', 'Universidad', 'Licenciatura', 'Maestria', 'Doctorado'] as $grado)
-                                <li>
+                                <li @if($grado=="Todas") id="todas-grado" @endif>
                                     <input class="form-check-input grado-requerido" type="checkbox" value="{{$grado}}" id="input-grado-{{$grado}}" >
                                     <label class="form-check-label" for="input-grado-{{$grado}}">
                                         {{$grado}}
@@ -107,8 +110,8 @@
                             <input name="evento_genero" type="checkbox" class="form-check-input border-dark"
                                 id="generoCheck" onchange="datoCambiado()" data-id="{{ $datos['genero'] }}"
                                 @if ($datos['genero']) checked @endif>
-                            <label for="genero" class="form-label">Género admitido</label>
-                            <select class="form-select" name="genero" id="genero" style="display:none;">
+                            <label for="genero" class="form-check-label">Género admitido</label>
+                            <select class="form-select fecha-editar" name="genero" id="genero" style="display:none;">
                                 @foreach (['Femenino', 'Masculino'] as $sexo)
                                     <option value="{{ $sexo }}" @if ($datos['genero'] == $sexo) selected @endif>
                                         {{ $sexo }}
@@ -118,10 +121,10 @@
                         </div>
 
                         <div class="col-md-6">
-                            <input name="rango_edad" type="checkbox" class="form-check-input border-dark" id="edadCheck"
+                            <input name="rango_edad" type="checkbox" class="form-check-input border-dark fecha-editar" id="edadCheck"
                                 onchange="datoCambiado()" data-id="{{ $datos['edad_minima'] }}"
                                 @if ($datos['edad_minima']) checked @endif>
-                            <label for="limiteDeEdad" class="form-label">Rango de edad</label>
+                            <label for="limiteDeEdad" class="form-check-label">Rango de edad</label>
                             <div class="row" id="rangosDeEdad" style="display: none;">
                                 <div class="col-md-6">
                                     <div class="row " id="rangoMin">
@@ -130,9 +133,9 @@
                                         </div>
                                         <div class="col-md-9">
                                             <div class="input-group">
-                                                <input name="edad_minima" type="number" class="form-control input-edad"
+                                                <input name="edad_minima" type="number" class="form-control input-edad fecha-editar"
                                                     min="0" id="edadMinima" step="1"
-                                                    value="{{ isset($datos['edad_minima']) ? $datos['edad_minima'] : '0' }}">
+                                                    value="{{ isset($datos['edad_minima']) ? $datos['edad_minima'] : '' }}">
                                             </div>
                                         </div>
                                     </div>
@@ -144,9 +147,9 @@
                                         </div>
                                         <div class="col-md-9">
                                             <div class="input-group">
-                                                <input name="edad_maxima" type="number" class="form-control input-edad"
+                                                <input name="edad_maxima" type="number" class="form-control input-edad fecha-editar"
                                                     id="edadMaxima" step="1" min="0"
-                                                    value="{{ isset($datos['edad_maxima']) ? $datos['edad_maxima'] : '0' }}">
+                                                    value="{{ isset($datos['edad_maxima']) ? $datos['edad_maxima'] : '' }}">
                                             </div>
                                         </div>
                                     </div>
@@ -158,14 +161,14 @@
                     <div class="row mt-4">
 
                         <div class="col-md-6">
-                            <input name="evento_equipos" type="checkbox" class="form-check-input border-dark"
+                            <input name="evento_equipos" type="checkbox" class="form-check-input border-dark fecha-editar"
                                 onchange="datoCambiado()" id="equipoCheck"
                                 @if ($datos['evento_equipos']) checked @endif>
-                            <label class="form-check-label" for="equipoCheck">Por equipos</label>
+                            <label class="form-check-label " for="equipoCheck">Por equipos</label>
                         </div>
 
                         <div class="col-md-6">
-                            <input name="requiere_registro" type="checkbox" class="form-check-input border-dark"
+                            <input name="requiere_registro" type="checkbox" class="form-check-input border-dark fecha-editar"
                                 onchange="datoCambiado()" id="registroCheck"
                                 @if ($datos['requiere_registro']) checked @endif>
                             <label class="form-check-label" for="registroCheck">Requiere registro</label>
@@ -176,7 +179,7 @@
                     <div class="row mt-4">
 
                         <div class="col-md-6 mt-2">
-                            <input name="evento_pago" type="checkbox" class="form-check-input border-dark"
+                            <input name="evento_pago" type="checkbox" class="form-check-input border-dark fecha-editar"
                                 onchange="datoCambiado()" id="eventoPagoCheck"
                                 data-id="{{ $datos['precio_inscripcion'] }}"
                                 @if ($datos['precio_inscripcion']) checked @endif>
@@ -191,7 +194,7 @@
                                 <div class="col-md-8">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Bs.</span>
-                                        <input name="precio_inscripcion" type="number" class="form-control"
+                                        <input name="precio_inscripcion" type="number" class="form-control fecha-editar"
                                             min="1" id="costoEvento" step="0.5"
                                             value="{{ isset($datos['precio_inscripcion']) ? $datos['precio_inscripcion'] : '0.0' }}">
                                     </div>
@@ -216,7 +219,7 @@
                     <div class="col-md-2">Inicio</div>
 
                     <div class="col-md-4">
-                        <input name="inicio_inscripcion" id="fechaInscripcionInicio" class="form-control" type="date"
+                        <input name="inicio_inscripcion" id="fechaInscripcionInicio" class="form-control fecha-editar" type="date"
                             onchange="datoCambiado()" min=""
                             value="{{ isset($datos['inicio_inscripcion']) ? $datos['inicio_inscripcion'] : '' }}" />
                     </div>
