@@ -61,7 +61,6 @@ const cargarTiposDeEvento = async () => {
                     </td>
                     <td class="text-center">Yo</td>
                     <td class="text-center">${fechaFormateada}</td>
-                    
                 </tr>
             `;
         }).join("");
@@ -71,19 +70,6 @@ const cargarTiposDeEvento = async () => {
         alert(error);
     }
 };
-
-//Llenado de formulario test
-function llenarFormularioTipoEvento(nombre, descripcion, color) {
-    const nombreTipoEvento = document.getElementById("nombreTipoEvento");
-    const detalleTipoEvento = document.getElementById("detalleTipoEvento");
-    const colorTipoEvento = document.getElementById("colorTipoEvento");
-
-    nombreTipoEvento.value = nombre;
-    detalleTipoEvento.value = descripcion;
-    colorTipoEvento.value = color;
-}
-
-
 
 function editarTipoEvento(id) {
     const formularioTipoEvento = document.getElementById('formularioTipoEvento');
