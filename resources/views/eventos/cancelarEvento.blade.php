@@ -20,14 +20,11 @@
                         </tr>
                     </thead>
                     <tbody id="datosTabla">
-                        @php $contador = 1 @endphp
+                        @php
+                            $contador = 1;
+                            date_default_timezone_set('America/Caracas');
+                        @endphp
                         @foreach ($eventos as $evento)
-                            @php
-                                $cancelar = 1;
-                                if (date('d-m-Y', strtotime($evento->inicio_inscripcion)) < date('d-m-Y')) {
-                                    $cancelar = 0;
-                                }
-                            @endphp
                             <tr id="{{ $evento->id }}">
                                 <th scope="row">{{ $contador++ }}</th>
                                 <td>{{ $evento->nombre }}</td>
@@ -38,8 +35,8 @@
                                     <button type="button" class="btn btn-danger btn-sm"
                                         onclick="setEventoId({{ $evento->id }})" id="botonAccion" style="width: 8vh"
                                         data-bs-toggle="modal"
-                                        data-bs-target="{{ $cancelar === 1 ? '#modalCancelar' : '#modalAnular' }}">
-                                        {{ $cancelar === 1 ? 'Cancelar' : 'Anular' }}
+                                        data-bs-target="{{ strtotime($evento->inicio_inscripcion) > time() ? '#modalCancelar' : '#modalAnular' }}">
+                                        {{ strtotime($evento->inicio_inscripcion) > time() ? 'Cancelar' : 'Anular' }}
                                     </button>
                                 </td>
                             </tr>
@@ -151,5 +148,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
     <script src="{{ asset('js/cancelarEvento.js') }}" defer></script>
 @endsection

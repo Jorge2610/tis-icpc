@@ -7,6 +7,7 @@ const dataTableOptions = {
     pageLength: 10,
     lengthMenu: [5, 10, 15, 20],
     destroy: true,
+    order: [[3, 'desc']],
     language: {
         lengthMenu: "Mostrar _MENU_ eventos",
         zeroRecords: "Ningún tipo de evento encontrado",
@@ -33,6 +34,7 @@ const initDataTable = async () => {
     if (tablaInicializada) {
         tablaDeTipos.destroy();
     }
+    DataTable.datetime('DD-MM-YYYY');
     tablaDeTipos = $("#tablaEvento").DataTable(dataTableOptions);
     tablaInicializada = true;
 };
