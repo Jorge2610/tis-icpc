@@ -140,7 +140,7 @@
                                         <a href="{{ url('/afiche/editar') }}"
                                             class="list-group-item list-group-item-action py-2 border-0"
                                             id="asignarAficheSider">
-                                            Gestor de afiche
+                                            Administrar afiches
                                         </a>
                                         <a href="{{ url('/admin/eventos/patrocinador') }}"
                                         

@@ -45,6 +45,4 @@
             @endforeach
         </div>
     </div>
-
-    <script src="{{ asset('js/eventos.js') }}" defer></script>
 @endsection

@@ -19,12 +19,14 @@
                     <tbody id="datosTabla">
                         @php $contador = 1 @endphp
                         @foreach ($patrocinadores as $patrocinador)
-                            <tr onclick="seleccionarEvento({{ $patrocinador->id }}, '{{ $patrocinador->nombre }}', event)" id="{{ $patrocinador->id }}">
+                            <tr onclick="seleccionarEvento({{ $patrocinador->id }}, '{{ $patrocinador->nombre }}', event)"
+                                id="{{ $patrocinador->id }}">
                                 <th scope="row">{{ $contador++ }}</th>
                                 <td>{{ $patrocinador->nombre }}</td>
                                 <td class="text-center">{{ $patrocinador->tipoEvento->nombre }}</td>
                                 <td class="text-center">{{ date('d-m-Y', strtotime($patrocinador->created_at)) }}</td>
-                                <td class="text-center" id="contadorPatrocinadores{{$patrocinador->id}}">{{ $patrocinador->patrocinadores->count() }}</td>
+                                <td class="text-center" id="contadorPatrocinadores{{ $patrocinador->id }}">
+                                    {{ $patrocinador->patrocinadores->count() }}</td>
 
                             </tr>
                         @endforeach
@@ -33,27 +35,26 @@
             </div>
 
             <div class="col-sm-12 col-md-3">
-                    <div class="col-12 d-flex justify-content-center align-items-center">
-                        <h4>Patrocinadores</h4>
-                        </h4>
-                    </div>
+                <div class="col-12 d-flex justify-content-center align-items-center">
+                    <h4>Patrocinadores</h4>
+                </div>
+                <h5 id="nombreEvento" class="text-center fw-bold col-md-12"></h5>
+                <div class="row g-4 mt-3" id="contenedorPatrocinadores">
+                    <!-Patrocinadores->
 
-                    <div class="row g-4 mt-3" id="contenedorPatrocinadores">
-                        <!-Patrocinadores->
-
-                    </div>
-                    @component('components.modal')
-                        @slot('modalId', 'modalBorrarPatrocinador')
-                        @slot('modalTitle', 'Confirmacion')
-                        @slot('modalContent')
-                            ¿Está seguro de eliminar al patrocinador?
-                        @endslot
-                        @slot('modalButton')
-                            <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>
-                            <button type="button" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal"
-                                onclick="borrar1()">Sí</button>
-                        @endslot
-                    @endcomponent
+                </div>
+                @component('components.modal')
+                    @slot('modalId', 'modalBorrarPatrocinador')
+                    @slot('modalTitle', 'Confirmacion')
+                    @slot('modalContent')
+                        ¿Está seguro de eliminar al patrocinador?
+                    @endslot
+                    @slot('modalButton')
+                        <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal"
+                            onclick="borrar1()">Sí</button>
+                    @endslot
+                @endcomponent
             </div>
         </div>
     </div>

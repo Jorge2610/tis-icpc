@@ -81,7 +81,6 @@ const editarEvento = (formData, eventoId) => {
             "/eventos/" + document.getElementById("nombreDelEvento").value;
     }
     for (let [campo, valor] of formData) {
-        console.log(`${campo}: ${valor}`);
     }
     nombreEvento = document.getElementById("nombreDelEvento").value;
 
@@ -131,7 +130,6 @@ const datoCambiado = () => {
 
 window.addEventListener("load", () => {
     fechasMin();
-    console.log(new Date().toISOString().split(".")[0]);
     if (document.getElementById("nombreDelEvento").value != "") {
         tipoForm = 1;
         //    document.getElementById("select-region").disabled=true;
@@ -277,7 +275,6 @@ const fechasMin = () => {
     let fechaLocal = new Date();
     fechaLocal.setHours(fechaLocal.getHours() - 4);
     let laFecha = fechaLocal.toISOString().substring(0, 16);
-    console.log(laFecha);
     fechaInicio.min = laFecha;
     fechaFin.min = laFecha;
     fechaInscripcionInicio.min = laFecha.split("T")[0];
@@ -408,7 +405,6 @@ edadMaxima.addEventListener("change", () => {
 });
 edadMinima.addEventListener("change", () => {
     let ambos = edadMaxima.value === "" && edadMinima.value === "";
-    console.log("ambos son" + ambos);
     if (edadMinima.value < edadMinima.min && edadMinima.value !== "") {
         edadMinima.classList.add("is-invalid");
         edadMinima.classList.remove("is-valid");
