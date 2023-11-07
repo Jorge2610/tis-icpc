@@ -135,7 +135,7 @@
                                         <a href="{{ url('/editarEvento/') }}"
                                             class="list-group-item list-group-item-action py-2 border-0"
                                             id="cancelarEventoSider">
-                                            Editar Evento
+                                            Editar evento
                                         </a>
                                         <a href="{{ url('/admin/eventos/afiche') }}"
                                             class="list-group-item list-group-item-action py-2 border-0"
