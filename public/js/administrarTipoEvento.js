@@ -87,6 +87,7 @@ function editarTipoEvento(id) {
     // Agregar un manejador de eventos al formulario
     formularioTipoEvento.addEventListener('submit', (event) => {
         event.preventDefault();
+        formularioTipoEvento.classList.add("was-validated");
         const formData = new FormData(formularioTipoEvento);
         axios.post(`/api/tipo-evento/actualizar/${id}`, formData)
             .then((response) => {
