@@ -52,5 +52,5 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('js/crearTipoEvento.js') }}" defer></script>
+    <script src="{{ asset('js/TipoDeEvento/crearTipoEvento.js') }}" defer></script>
 @endsection

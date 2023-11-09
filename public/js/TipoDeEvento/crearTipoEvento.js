@@ -8,7 +8,6 @@ function crearTipoEvento() {
             event.stopPropagation();
         } else {
             const formData = new FormData(this);
-            console.log("Se esta creando algo");
             try {
                 const response = await axios.post("/api/tipo-evento", formData);
                 mostrarAlerta(

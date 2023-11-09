@@ -45,11 +45,49 @@
                             <td class="text-center">{{ date('d-m-Y', strtotime($tipoDeEvento->created_at)) }}</td>
                             <td class="text-center">{{ $tipoDeEvento->eventos->count() }}</td>
                             <td class="text-center">
-                                    <button type="button" class="btn btn-primary btn-sm"
-                                        onclick="window.location.href='/admin/tipos-de-evento/editar-tipo-evento/{{ $tipoDeEvento->id }}'"
+                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#modalEliminarTipoEvento{{ $tipoDeEvento->id }}"
                                         {{ $tipoDeEvento->eventos->count() > 0 ? 'disabled' : '' }}>
-                                        <i class="bi bi-pencil-fill"></i>
+                                        <i class="bi bi-trash"></i>
                                     </button>
+                                    @component('components.modal')
+                                        @slot('modalId', 'modalEliminarTipoEvento' . $tipoDeEvento->id)
+                                        @slot('modalTitle', 'Eliminar tipo de evento')
+                                        @slot('modalContent')
+                                            Esta seguro que quiere eliminar este tipo de evento?
+                                        @endslot
+                                        @slot('modalButton')
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="button" class="btn btn-danger"
+                                                onclick="eliminarTipoEvento({{ $tipoDeEvento->id }})">Aceptar</button>
+                                        @endslot
+                                    @endcomponent
+                                    @component('components.modal')
+                                        @slot('modalId', 'modalExito')
+                                        @slot('modalTitle', 'Éxito')
+                                        @slot('modalContent')
+                                            <div id="modalMensajeExito">
+                                                Eliminado satisfactoriamente!
+                                            </div>
+                                        @endslot
+                                        @slot('modalButton')
+                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+                                        @endslot
+                                    @endcomponent
+
+                                    <!-- Modal de Error -->
+                                    @component('components.modal')
+                                        @slot('modalId', 'modalError')
+                                        @slot('modalTitle', 'Error')
+                                        @slot('modalContent')
+                                            <div id="modalMensajeError">El tipo de evento que quieres eliminar tiene
+                                                eventos asociados a el!
+                                            </div>
+                                        @endslot
+                                        @slot('modalButton')
+                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+                                        @endslot
+                                    @endcomponent
                             </td>
                         </tr>
                     @endforeach
@@ -63,5 +101,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-    <script src="{{ asset('js/TipoDeEvento/editarTipoEvento.js') }}" defer></script>
+    <script src="{{ asset('js/TipoDeEvento/eliminarTipoEvento.js') }}" defer></script>
 @endsection

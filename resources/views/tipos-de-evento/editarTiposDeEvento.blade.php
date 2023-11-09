@@ -66,5 +66,5 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('js/administrarTipoEvento.js') }}" defer></script>
+<script src="{{ asset('js/TipoDeEvento/administrarTipoEvento.js') }}" defer></script>
 @endsection

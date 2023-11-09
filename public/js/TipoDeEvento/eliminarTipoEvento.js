@@ -60,10 +60,8 @@ const cargarTiposDeEvento = async () => {
                     </td>
                     <td class="text-center">Yo</td>
                     <td class="text-center">${fechaFormateada}</td>
+                    <td class="text-center">{{ $tipoDeEvento->eventos->count() }}</td>
                     <td class="text-center">
-                        <button type="button" class="btn btn-primary btn-sm" onclick="editarTipoEvento(${element.id})">
-                            <i class="bi bi-pencil-fill"></i>
-                        </button>
                         <button type="button" class="btn btn-danger btn-sm" onclick="eliminarTipoEvento(${element.id})">
                             <i class="bi bi-trash"></i>
                         </button>
@@ -77,39 +75,6 @@ const cargarTiposDeEvento = async () => {
         alert(error);
     }
 };
-
-//Editar evento
-function editarTipoEvento(id) {
-    // Obtener el formulario
-    const formularioTipoEvento = document.getElementById('formularioTipoEvento');
-    console.log(id);
-    console.log(formularioTipoEvento);
-    // Agregar un manejador de eventos al formulario
-    formularioTipoEvento.addEventListener('submit', (event) => {
-        event.preventDefault();
-        formularioTipoEvento.classList.add("was-validated");
-        const formData = new FormData(formularioTipoEvento);
-        axios.post(`/api/tipo-evento/actualizar/${id}`, formData)
-            .then((response) => {
-                if (response.data.error === false) {
-                    // El tipo de evento se actualizó con éxito, puedes redirigir o mostrar un mensaje de éxito.
-                    mostrarAlerta(
-                        "Éxito",
-                        response.data.mensaje,
-                        response.data.error ? "danger" : "success"
-                    );
-                    recargarEventos(); // Reemplaza esto con la URL de redirección deseada
-                } else {
-                    // Manejar errores, por ejemplo, mostrar un mensaje de error.
-                    //alert(response.data.mensaje);
-                }
-            })
-            .catch((error) => {
-                // Manejar errores de la solicitud Axios
-                console.error(error);
-            });
-    });
-}
 
 //Borrar tipo de evento
 async function eliminarTipoEvento(id) {
@@ -126,7 +91,7 @@ async function eliminarTipoEvento(id) {
                 );
                 //$('#modalMensaje').text('Tipo de evento eliminado exitosamente.');
                 //$('#modalExito').modal('show');
-                // cargarTiposDeEvento();
+                //cargarTiposDeEvento();
                 //window.location.reload();
                 recargarEventos();
 
@@ -147,9 +112,8 @@ window.addEventListener("load", async () => {
     await initDataTable();
 });
 
-
 const recargarEventos = () => {
-    setTimeout(() => {
-        window.location.href = "/admin/tipos-de-evento";
-    }, 1800);
-}
+     setTimeout(() => {
+         window.location.href = "/admin/tipos-de-evento";
+     }, 1800);
+ }
