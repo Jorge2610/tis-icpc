@@ -64,7 +64,7 @@
                         <div>
                         <button id="btnGroupDrop1" type="button" class="btn dropdown-toggle" style="padding: 5px; border: solid 1px black;"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                             Instituciones Admitidas
+                             Instituciones admitidas
                         </button>
                         <ul class="dropdown-menu " id="ul-institucion" aria-labelledby="btnGroupDrop1" style="padding: 10px;" data-institucion="{{$datos['institucion']}}">
                             @foreach (['TODAS','UMSS', 'UMSA', 'UPSA','UCB','UPB','UNIFRANZ'] as $institucion)
@@ -210,29 +210,7 @@
 
             <div class="col-md-6">
 
-                <div class="col-md-12 ms-3">
-                    <h6>Periodo de inscripción</h6>
-                </div>
-
-                <div class="row mt-3 ms-3">
-
-                    <div class="col-md-2">Inicio</div>
-
-                    <div class="col-md-4">
-                        <input name="inicio_inscripcion" id="fechaInscripcionInicio" class="form-control fecha-editar" type="date"
-                            onchange="datoCambiado()" min=""
-                            value="{{ isset($datos['inicio_inscripcion']) ? $datos['inicio_inscripcion'] : '' }}" />
-                    </div>
-
-                    <div class="col-md-2">Fin</div>
-
-                    <div class="col-md-4">
-                        <input name="fin_inscripcion" id="fechaInscripcionFin" class="form-control" type="date"
-                            onchange="datoCambiado()" min=""
-                            value="{{ isset($datos['fin_inscripcion']) ? $datos['fin_inscripcion'] : '' }}" />
-                    </div>
-
-                </div>
+                
 
                 <div class="col-md-12 mt-4  ms-3">
                     <h6>Duracion del evento *</h6>
