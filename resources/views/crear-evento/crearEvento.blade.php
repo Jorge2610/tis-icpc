@@ -320,5 +320,5 @@
 
     </div>
 
-    <script src="{{ asset('js/crearEvento.js') }}" defer></script>
+    <script src="{{ asset('js/Evento/crearEvento.js') }}" defer></script>
 @endsection

@@ -17,48 +17,43 @@
                         </tr>
                     </thead>
                     <tbody id="datosTabla">
-                        @php $contador = 1 @endphp
+                        @php
+                            $contador = 1;
+                        @endphp
                         @foreach ($afiches as $afiche)
-                            <tr onclick="seleccionarEvento({{ $afiche->id }}, '{{ $afiche->nombre }}', event)"
-                                id="{{ $afiche->id }}">
+                            <tr onclick="seleccionarEvento({{ $afiche }})" id="{{ $afiche->id }}">
                                 <th scope="row">{{ $contador++ }}</th>
                                 <td>{{ $afiche->nombre }}</td>
                                 <td class="text-center">{{ $afiche->tipoEvento->nombre }}</td>
                                 <td class="text-center">{{ date('d-m-Y', strtotime($afiche->created_at)) }}</td>
                                 <td class="text-center" id="contadorAfiches{{ $afiche->id }}">
                                     {{ $afiche->afiches->count() }}</td>
-
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
             <div class="col-sm-12 col-md-4">
-                <div
-                    class="container d-flex flex-column justify-content-center align-items-center border p-3 container-image">
+                <div class="container ">
                     <div class="col-12 d-flex justify-content-center align-items-center">
-                        <h4>Asignar afiche</h4>
+                        <h4>Afiches</h4>
                     </div>
                     <h5 id="nombreEvento" class="text-center fw-bold"></h5>
-                    <div class="d-flex justify-content-center">
-
-                        <img src="{{ asset('/image/uploading.png') }}" alt="image" id = "imagePreview"
-                            class="rounded mx-auto d-block img-thumbnail">
-                        <input type="file" id="imageUpload" class="d-none" accept="image/jpeg, image/png, image/jpg"
-                            onchange="previsualizarImagen(event)">
-                    </div>
-                    <div class="d-flex justify-content-center mt-5">
-
-                        <button type="button" class="btn btn-primary btn-lg hover-button" id="botonSubirAfiche"
-                            onclick="document.getElementById('imageUpload').click()">Subir</button>
+                    <div class="row gap-2 mt-2 d-flex justify-content-center" id="contenedorAsignar">
 
                     </div>
-                    <div id="contenedorAsignar" style="display: none">
-                        <button type="button" class="btn btn-light btn-lg hover-button"
-                            onclick="document.getElementById('imageUpload').click()">Cambiar</button>
-                        <button type="button" class="btn btn-primary btn-lg hover-button"
-                            onclick="asignarAfiche()">Asignar</button>
-                    </div>
+
+                    @component('components.modal')
+                        @slot('modalId', 'modalEliminarAfiche')
+                        @slot('modalTitle', 'Confirmacion')
+                        @slot('modalContent')
+                            ¿Estas seguro de eliminar el afiche?
+                        @endslot
+                        @slot('modalButton')
+                            <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>
+                            <button type="reset" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal" onclick="eliminarAfiche()">Sí</button>
+                        @endslot
+                    @endcomponent
                 </div>
             </div>
         </div>
@@ -67,6 +62,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
-    <script src="{{ asset('js/Afiche/afiche.js') }}" defer></script>
+    <script src="{{ asset('js/Afiche/eliminarAfiche.js') }}" defer></script>
 @endsection

@@ -53,18 +53,6 @@
                             <button type="reset" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal" onclick="cambiarAfiche()">Sí</button>
                         @endslot
                     @endcomponent
-
-                    @component('components.modal')
-                        @slot('modalId', 'modalEliminarAfiche')
-                        @slot('modalTitle', 'Confirmacion')
-                        @slot('modalContent')
-                            ¿Estas seguro de eliminar el afiche?
-                        @endslot
-                        @slot('modalButton')
-                            <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>
-                            <button type="reset" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal" onclick="eliminarAfiche()">Sí</button>
-                        @endslot
-                    @endcomponent
                 </div>
             </div>
         </div>
@@ -77,5 +65,5 @@
         integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
-    <script src="{{ asset('js/editarAfiche.js') }}" defer></script>
+    <script src="{{ asset('js/Afiche/editarAfiche.js') }}" defer></script>
 @endsection

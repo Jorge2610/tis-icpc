@@ -87,6 +87,11 @@ class AficheController extends Controller
 
     public function editarAfiche(){
         $afiches = Evento::where('estado', 0)->with('afiches')->get();
-        return view('afiche.editar',['afiches' => $afiches]);
+        return view('afiche.editarAfiche',['afiches' => $afiches]);
+    }
+
+    public function eliminarAficheVista(){
+        $afiches = Evento::where('estado', 0)->with('afiches')->get();
+        return view('afiche.eliminarAfiche',['afiches' => $afiches]);
     }
 }

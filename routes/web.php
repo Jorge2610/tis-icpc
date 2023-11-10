@@ -57,6 +57,7 @@ Route::group(['prefix' => 'eventos'], function () {
 Route::group(['prefix' => 'afiche'], function () {
     Route::get('asignar', [AficheController::class, 'vistaTablaEventos'])->name('afiche.tablaEventos');
     Route::get('editar', [AficheController::class, 'editarAfiche'])->name('afiche.editar');
+    Route::get('eliminar', [AficheController::class, 'eliminarAficheVista'])->name('afiche.eliminar');
 });
 
 Route::get('editarEvento',[EventoController::class, 'showEditEventForm']);
