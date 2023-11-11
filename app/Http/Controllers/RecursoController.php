@@ -37,7 +37,7 @@ class RecursoController extends Controller
             $recurso->enlace = $request->input('enlace');
             $recurso->id_evento = $request->input('id_evento');
             $recurso->save();
-            return response()->json(['mensaje' => 'Recurso asignado correctamente', 'error' => false]);
+            return response()->json(['mensaje' => 'Sitio asignado correctamente', 'error' => false]);
         } catch (QueryException $e) {
             return $e->getMessage();
         }
