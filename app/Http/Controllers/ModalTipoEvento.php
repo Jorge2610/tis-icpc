@@ -16,4 +16,3 @@ class ModalTipoEvento extends Controller
         return response()->json(['mensaje' => 'Creado exitosamente']);
     }
 }
-

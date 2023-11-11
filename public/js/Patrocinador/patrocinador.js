@@ -14,7 +14,7 @@ const dataTableOptions = {
     pageLength: 10,
     lengthMenu: [5, 10, 15, 20],
     destroy: true,
-    order: [[3, 'desc']],
+    order: [[3, "desc"]],
     language: {
         lengthMenu: "Mostrar _MENU_ eventos",
         zeroRecords: "Ningún tipo de evento encontrado",
@@ -36,7 +36,7 @@ const initDataTable = async () => {
     if (tablaInicializada) {
         tablaDeTipos.destroy();
     }
-    DataTable.datetime('DD-MM-YYYY');
+    DataTable.datetime("DD-MM-YYYY");
     tablaDeTipos = $("#tablaEvento").DataTable(dataTableOptions);
     tablaInicializada = true;
 };
@@ -121,7 +121,7 @@ const validarDatos = () => {
         botonSubir.classList.add("btn-outline-danger");
     }
     form.classList.add("was-validated");
-}
+};
 
 const crearFormData = () => {
     const formData = new FormData();
@@ -130,7 +130,7 @@ const crearFormData = () => {
     formData.append("logo", input.files[0]);
     formData.append("id_evento", idSeleccionado);
     asignarPatrocinador(formData);
-}
+};
 
 const asignarPatrocinador = async (formData) => {
     await axios.post("/api/patrocinador", formData).then((response) => {
@@ -145,10 +145,12 @@ const asignarPatrocinador = async (formData) => {
 };
 
 const updateNroPatrocinadores = () => {
-    let casilla = document.getElementById(`contadorPatrocinadores${idSeleccionado}`);
+    let casilla = document.getElementById(
+        `contadorPatrocinadores${idSeleccionado}`
+    );
     let valor = parseInt(casilla.textContent);
     casilla.textContent = valor + 1;
-}
+};
 
 const resetInputs = () => {
     let form = document.getElementById("formularioAgregarPatrocinador");
@@ -159,4 +161,4 @@ const resetInputs = () => {
     urlPatricinador.value = "";
     input.value = "";
     imagenPreview.src = "/image/uploading.png";
-}
+};

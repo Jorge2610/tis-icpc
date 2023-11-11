@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\AficheController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;

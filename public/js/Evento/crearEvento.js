@@ -1,4 +1,3 @@
-
 const inputGenero = document.getElementById("generoCheck");
 const inputEdad = document.getElementById("edadCheck");
 const inputCosto = document.getElementById("eventoPagoCheck");
@@ -57,10 +56,10 @@ const resetModal = (idModal, idForm) => {
     form.classList.remove("was-validated");
 };
 const prepararFormData = () => {
-    if(tipoForm=="1"){
-        document.querySelectorAll(".fecha-editar").forEach(Element=>{
-            Element.disabled=false;
-        })
+    if (tipoForm == "1") {
+        document.querySelectorAll(".fecha-editar").forEach((Element) => {
+            Element.disabled = false;
+        });
     }
     document.getElementById("select-region").disabled = false;
     const formData = new FormData(form);
@@ -134,7 +133,7 @@ window.addEventListener("load", () => {
     if (document.getElementById("nombreDelEvento").value != "") {
         tipoForm = 1;
         iniciarEditar();
-    }else{
+    } else {
         fechasMin();
     }
     axios
@@ -158,15 +157,13 @@ window.addEventListener("load", () => {
         .catch(function (error) {
             console.error(error);
         });
-    
 });
 
 const cerrar = (edicion) => {
-    if (tipoForm==1) {
+    if (tipoForm == 1) {
         window.location.href = "/editarEvento/";
-    }
-    else{
-        window.location.href = "/eventos/" 
+    } else {
+        window.location.href = "/eventos/";
     }
 };
 
@@ -211,12 +208,14 @@ form.addEventListener("submit", (event) => {
         formData.set("grado_academico", insti.slice(0, -1));
         if (eventoId) {
             editarEvento(formData, eventoId);
-            window.location.href ="/eventos/"+nombreEvento;
+            window.location.href = "/eventos/" + nombreEvento;
         } else {
-                crearEvento(formData);
-            form.querySelectorAll(".form-control, .form-select").forEach((Element) => {
-                Element.classList.remove("is-valid");
-            }); 
+            crearEvento(formData);
+            form.querySelectorAll(".form-control, .form-select").forEach(
+                (Element) => {
+                    Element.classList.remove("is-valid");
+                }
+            );
         }
 
         $("#modalConfirmacion").modal("hide");
@@ -226,22 +225,18 @@ form.addEventListener("submit", (event) => {
 });
 
 const validar = () => {
-    if (form.querySelector(".is-invalid") === null) {
-        return true;
-    } else {
-        return false;
-    }
+    return form.querySelector(".is-invalid") === null;
 };
 
 chekcTodas.addEventListener("change", () => {
     document.querySelectorAll(".institucion").forEach((Element) => {
-        if(!Element.disabled){
+        if (!Element.disabled) {
             if (chekcTodas.checked) {
                 Element.checked = true;
             } else {
                 Element.checked = false;
             }
-        }       
+        }
     });
 });
 
@@ -249,12 +244,11 @@ document.querySelectorAll(".institucion").forEach((Element) => {
     Element.addEventListener("change", () => {
         let bandera = true;
         document.querySelectorAll(".institucion").forEach((Element) => {
-            if(!Element.disabled){
+            if (!Element.disabled) {
                 if (!Element.checked) {
                     bandera = false;
                 }
             }
-           
         });
         chekcTodas.checked = bandera;
     });
@@ -290,7 +284,7 @@ const fechasMin = () => {
     fechaFin.min = laFecha;
 };
 
-validarCosto = () => {
+const validarCosto = () => {
     if (boolCosto) {
         boolCosto = false;
         costo.dispatchEvent(new Event("change"));
@@ -305,7 +299,6 @@ validarCosto = () => {
         inputCosto.classList.add("is-valid");
     }
 };
-
 
 costo.addEventListener("change", () => {
     if ((costo.value < costo.min || costo.value == "") && inputCosto.checked) {
@@ -331,7 +324,6 @@ fechaInicio.addEventListener("change", () => {
     } else {
         fechaFin.min = fechaInicio.value;
         fechaFin.dispatchEvent(new Event("change"));
-
     }
 });
 
@@ -344,18 +336,20 @@ fechaFin.addEventListener("change", () => {
 
 edadMaxima.addEventListener("change", () => {
     let ambos = edadMaxima.value === "" && edadMinima.value === "";
-    if (parseInt(edadMaxima.value) < parseInt(edadMaxima.min) && edadMaxima.value !== "") {
+    if (
+        parseInt(edadMaxima.value) < parseInt(edadMaxima.min) &&
+        edadMaxima.value !== ""
+    ) {
+        edadMaxima.classList.add("is-invalid");
+        edadMaxima.classList.remove("is-valid");
+    } else if (ambos && inputEdad.checked) {
         edadMaxima.classList.add("is-invalid");
         edadMaxima.classList.remove("is-valid");
     } else {
-        if (ambos && inputEdad.checked) {
-            edadMaxima.classList.add("is-invalid");
-            edadMaxima.classList.remove("is-valid");
-        } else {
-            edadMaxima.classList.remove("is-invalid");
-            edadMaxima.classList.add("is-valid");
-        }
+        edadMaxima.classList.remove("is-invalid");
+        edadMaxima.classList.add("is-valid");
     }
+    
     if (boolMinEdad && boolMaxEdad && boolcheckEdad) {
         boolMinEdad = false;
         boolcheckEdad = false;
@@ -368,14 +362,19 @@ edadMaxima.addEventListener("change", () => {
 edadMinima.addEventListener("change", () => {
     let ambos = edadMaxima.value === "" && edadMinima.value === "";
 
-    if (parseInt(edadMinima.value) < parseInt(edadMinima.min) && edadMinima.value !== "") {
+    if (
+        parseInt(edadMinima.value) < parseInt(edadMinima.min) &&
+        edadMinima.value !== ""
+    ) {
         edadMinima.classList.add("is-invalid");
         edadMinima.classList.remove("is-valid");
     } else {
-        if(edadMinima.value !== ""){}
-            edadMaxima.min = edadMinima.value;
+        if (edadMinima.value !== "") {
+          // TODO
+        }
+        edadMaxima.min = edadMinima.value;
     }
-    
+
     if (ambos && inputEdad.checked) {
         edadMinima.classList.add("is-invalid");
         edadMinima.classList.remove("is-valid");
@@ -399,7 +398,7 @@ inputEdad.addEventListener("change", () => {
 
 checkTodasRango.addEventListener("change", () => {
     document.querySelectorAll(".grado-requerido").forEach((Element) => {
-        if(!Element.disabled){
+        if (!Element.disabled) {
             if (checkTodasRango.checked) {
                 Element.checked = true;
             } else {
@@ -413,7 +412,7 @@ document.querySelectorAll(".grado-requerido").forEach((Element) => {
     Element.addEventListener("change", () => {
         let bandera = true;
         document.querySelectorAll(".grado-requerido").forEach((Element) => {
-            if(!Element.disabled){
+            if (!Element.disabled) {
                 if (!Element.checked) {
                     bandera = false;
                 }
@@ -425,61 +424,60 @@ document.querySelectorAll(".grado-requerido").forEach((Element) => {
 
 //iniciar editar un evento
 
-const iniciarEditar=()=>{
-
+const iniciarEditar = () => {
     mostrarInput("genero", inputGenero.checked);
     mostrarInput("rangosDeEdad", inputEdad.checked);
     mostrarInput("eventoPago", inputCosto.checked);
     let fechaLocal = new Date();
     fechaLocal.setHours(fechaLocal.getHours() - 4);
     let laFecha = fechaLocal.toISOString().substring(0, 16);
-    let f1=new Date(fechaInicio.value);
-    let fl1=new Date(laFecha);
-    let fl2=new Date(laFecha.split("T")[0]);
+    let f1 = new Date(fechaInicio.value);
+    let fl1 = new Date(laFecha);
 
+    let boolGrado = true;
+    let boolInstitucion = true;
 
-    let boolGrado=true;
-    let boolInstitucion=true;
+    const instituciones = document
+        .getElementById("ul-institucion")
+        .getAttribute("data-institucion");
+    document.querySelectorAll(".institucion").forEach((Element) => {
+        if (instituciones.includes(Element.value)) {
+            Element.checked = true;
+            Element.classList.add("fecha-editar");
+        } else {
+            boolInstitucion = false;
+        }
+    });
 
-    const instituciones=document.getElementById("ul-institucion").getAttribute("data-institucion");
-        document.querySelectorAll(".institucion").forEach(Element=>{
-            if(instituciones.includes(Element.value)){
-                Element.checked=true;
-                Element.classList.add("fecha-editar");  
-            }else{
-                boolInstitucion=false;
-            }
-    })
+    const grados = document
+        .getElementById("ul-grado")
+        .getAttribute("data-grado");
+    document.querySelectorAll(".grado-requerido").forEach((Element) => {
+        if (grados.includes(Element.value)) {
+            Element.checked = true;
+            Element.classList.add("fecha-editar");
+        } else {
+            boolGrado = false;
+        }
+    });
+    checkTodasRango.checked = boolGrado;
+    chekcTodas.checked = boolInstitucion;
 
-    const grados =document.getElementById("ul-grado").getAttribute("data-grado");
-        document.querySelectorAll(".grado-requerido").forEach(Element=>{
-            if(grados.includes(Element.value)){
-                Element.checked=true;
-                Element.classList.add("fecha-editar");
-            }else{
-                boolGrado=false;
-            }
+    if (f1 <= fl1) {
+        checkTodasRango.disabled = boolGrado;
+        chekcTodas.disabled = boolGrado;
 
-    })
-    checkTodasRango.checked=boolGrado;
-    chekcTodas.checked=boolInstitucion;
-
-    if(f1<=fl1){
-        checkTodasRango.disabled=boolGrado;
-        chekcTodas.disabled=boolGrado;
-
-        if(!inputGenero.checked){
+        if (!inputGenero.checked) {
             inputGenero.classList.add("fecha-editar");
         }
         document.getElementById("ul-institucion").classList.add("fecha-editar");
         document.getElementById("todas-grado").classList.add("fecha-editar");
-        
-        document.querySelectorAll(".fecha-editar").forEach(Element=>{
-            Element.disabled=true;
-        })
-        fechaFin.min=fechaInicio.value;
-    }else{
+
+        document.querySelectorAll(".fecha-editar").forEach((Element) => {
+            Element.disabled = true;
+        });
+        fechaFin.min = fechaInicio.value;
+    } else {
         fechasMin();
     }
-
-}
+};

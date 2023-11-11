@@ -14,7 +14,7 @@
 //                     ? patrocinador.enlace_web
 //                     : "#";
 //                 return `
-            
+
 //         `;
 //             })
 //             .join("");

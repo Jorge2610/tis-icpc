@@ -1,6 +1,8 @@
 window.addEventListener("load", () => {
     let url = window.location.href;
-    let items = document.getElementById("menuLateral").getElementsByClassName("accordion-item");
+    let items = document
+        .getElementById("menuLateral")
+        .getElementsByClassName("accordion-item");
     for (let item of items) {
         let opciones = item.getElementsByTagName("a");
         let boton = item.getElementsByTagName("button");

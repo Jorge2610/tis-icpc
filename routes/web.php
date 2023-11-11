@@ -28,7 +28,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/', [EventoController::class, 'cargarEventos']);
 
-Route::group(['prefix' => 'admin/tipos-de-evento'], function(){
+Route::group(['prefix' => 'admin/tipos-de-evento'], function () {
     Route::get('/', [TipoEventoController::class, 'mostrarVistaTipoEvento'])->name('tipo-evento');
     Route::get('crear-tipo', [TipoEventoController::class, 'mostrarCrearTipo'])->name('crear-tipo');
     Route::get('editar-tipo', [TipoEventoController::class, 'administrarTipoEvento'])->name('editar.tipo-evento');
@@ -60,4 +60,4 @@ Route::group(['prefix' => 'afiche'], function () {
     Route::get('eliminar', [AficheController::class, 'eliminarAficheVista'])->name('afiche.eliminar');
 });
 
-Route::get('editarEvento',[EventoController::class, 'showEditEventForm']);
+Route::get('editarEvento', [EventoController::class, 'showEditEventForm']);

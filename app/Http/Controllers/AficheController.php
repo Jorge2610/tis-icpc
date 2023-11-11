@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Storage;
 
 class AficheController extends Controller
 {
-    //
-
     public function index()
     {
         $afiches = Afiche::all();
@@ -58,7 +56,7 @@ class AficheController extends Controller
     {
         try {
             $afiche = Afiche::find($id);
-            Storage::delete($afiche->ruta_imagen);
+            Storage::delete(storage_path($afiche->ruta_imagen));
             $afiche->delete();
             return response()->json(['mensaje' => 'Eliminado exitosamente', 'error' => false]);
         } catch (QueryException $e) {
@@ -70,7 +68,7 @@ class AficheController extends Controller
     {
         try {
             $afiche = Afiche::find($id);
-            Storage::delete($afiche->ruta_imagen);
+            Storage::delete(storage_path($afiche->ruta_imagen));
             $afiche->ruta_imagen = $this->storageAfiche($request);
             $afiche->save();
             return response()->json(['mensaje' => 'Actualizado exitosamente', 'error' => false]);
@@ -85,13 +83,15 @@ class AficheController extends Controller
         return view('afiche.asignarAfiche', ['afiches' => $afiches]);
     }
 
-    public function editarAfiche(){
+    public function editarAfiche()
+    {
         $afiches = Evento::where('estado', 0)->with('afiches')->get();
-        return view('afiche.editarAfiche',['afiches' => $afiches]);
+        return view('afiche.editarAfiche', ['afiches' => $afiches]);
     }
 
-    public function eliminarAficheVista(){
+    public function eliminarAficheVista()
+    {
         $afiches = Evento::where('estado', 0)->with('afiches')->get();
-        return view('afiche.eliminarAfiche',['afiches' => $afiches]);
+        return view('afiche.eliminarAfiche', ['afiches' => $afiches]);
     }
 }

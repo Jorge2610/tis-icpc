@@ -11,7 +11,7 @@ const dataTableOptions = {
     pageLength: 10,
     lengthMenu: [5, 10, 15, 20],
     destroy: true,
-    order: [[3, 'desc']],
+    order: [[3, "desc"]],
     language: {
         lengthMenu: "Mostrar _MENU_ entradas",
         zeroRecords: "Ningún tipo de evento encontrado",
@@ -33,7 +33,7 @@ const initDataTable = async () => {
     if (tablaInicializada) {
         tablaDeTipos.destroy();
     }
-    DataTable.datetime('DD-MM-YYYY');
+    DataTable.datetime("DD-MM-YYYY");
     tablaDeTipos = $("#tablaEvento").DataTable(dataTableOptions);
     tablaInicializada = true;
 };
@@ -110,15 +110,16 @@ const asignarAfiche = async () => {
                 response.data.mensaje,
                 response.error ? "danger" : "success"
             );
-            cargarAfiche()
+            cargarAfiche();
         });
     }
-    
 };
 
 const cargarAfiche = async () => {
     await axios.get(`/api/afiche/${idSeleccionado}`).then((response) => {
-        document.getElementById(`contadorAfiches${idSeleccionado}`).textContent = response.data.length;
+        document.getElementById(
+            `contadorAfiches${idSeleccionado}`
+        ).textContent = response.data.length;
         imagenPreview.src = "/image/uploading.png";
         botonSubir.style.display = "block";
         contenedorAsignar.style.display = "none";

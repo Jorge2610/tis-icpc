@@ -22,4 +22,3 @@ const mostrarAlerta = (titulo, mensaje, tipo) => {
         document.querySelector(".alert").remove();
     }, 2000);
 };
-

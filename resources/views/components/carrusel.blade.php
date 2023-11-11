@@ -2,7 +2,7 @@
     @if ($evento->afiches !== null && count($evento->afiches) > 1)
         <div class="carousel-indicators" id="indicadores">
             @foreach ($evento->afiches as $afiche)
-                <button type="button"  data-bs-target="#carrusel" data-bs-slide-to="{{ $loop->index }}"
+                <button type="button" data-bs-target="#carrusel" data-bs-slide-to="{{ $loop->index }}"
                     class="{{ $loop->first ? 'active' : '' }}"></button>
             @endforeach
         </div>

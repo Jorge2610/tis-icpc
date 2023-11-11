@@ -35,8 +35,8 @@
                                 </div>
                             </div>
                             <div class="d-flex p-3 align-self-center col-md-4">
-                                
-                                <img src="{{ URL::asset($evento->afiches->count() > 0 ? $evento->afiches->first()->ruta_imagen: '../image/aficheDefecto.png') }}"
+
+                                <img src="{{ URL::asset($evento->afiches->count() > 0 ? $evento->afiches->first()->ruta_imagen : '../image/aficheDefecto.png') }}"
                                     class="img-fluid rounded-start" alt="...">
                             </div>
                         </div>

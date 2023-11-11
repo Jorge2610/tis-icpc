@@ -51,7 +51,8 @@
                         @endslot
                         @slot('modalButton')
                             <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>
-                            <button type="reset" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal" onclick="eliminarAfiche()">Sí</button>
+                            <button type="reset" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal"
+                                onclick="eliminarAfiche()">Sí</button>
                         @endslot
                     @endcomponent
                 </div>

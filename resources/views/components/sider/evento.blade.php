@@ -5,8 +5,7 @@
             EVENTO
         </button>
     </h2>
-    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
-        aria-labelledby="panelsStayOpen-headingTwo">
+    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
         <div class="my-1 ms-3">
             <a href="{{ url('/admin/eventos/crear-evento') }}"
                 class="list-group-item list-group-item-action py-2 border-0" id="crearEventoSider">

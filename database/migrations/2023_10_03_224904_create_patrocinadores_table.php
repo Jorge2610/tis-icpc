@@ -15,9 +15,9 @@ class CreatePatrocinadoresTable extends Migration
     {
         Schema::create('patrocinadores', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre',64);
-            $table->string('ruta_imagen',128)->nullable();
-            $table->string('enlace_web',128)->nullable();
+            $table->string('nombre', 64);
+            $table->string('ruta_imagen', 128)->nullable();
+            $table->string('enlace_web', 128)->nullable();
             $table->foreignId('id_evento')->constrained('eventos')->restrictOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });

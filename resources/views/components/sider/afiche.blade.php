@@ -15,7 +15,11 @@
             </a>
             <a href="{{ url('/afiche/editar') }}" class="list-group-item list-group-item-action py-2 border-0"
                 id="asignarAficheSider">
-                Administrar afiche
+                Cambiar afiche
+            </a>
+            <a href="{{ url('/afiche/eliminar') }}" class="list-group-item list-group-item-action py-2 border-0"
+                id="asignarAficheSider">
+                Eliminar afiche
             </a>
         </div>
     </div>

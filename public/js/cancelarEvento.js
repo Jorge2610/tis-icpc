@@ -7,7 +7,7 @@ const dataTableOptions = {
     pageLength: 10,
     lengthMenu: [5, 10, 15, 20],
     destroy: true,
-    order: [[3, 'desc']],
+    order: [[3, "desc"]],
     language: {
         lengthMenu: "Mostrar _MENU_ eventos",
         zeroRecords: "Ningún tipo de evento encontrado",
@@ -34,7 +34,7 @@ const initDataTable = async () => {
     if (tablaInicializada) {
         tablaDeTipos.destroy();
     }
-    DataTable.datetime('DD-MM-YYYY');
+    DataTable.datetime("DD-MM-YYYY");
     tablaDeTipos = $("#tablaEvento").DataTable(dataTableOptions);
     tablaInicializada = true;
 };
@@ -52,7 +52,7 @@ const cancelarEvento = async () => {
     );
     resetModalCancelar();
     recargarEventos();
-}
+};
 
 const crearFormDataCancelar = () => {
     const formData = new FormData();
@@ -79,8 +79,14 @@ const anularEvento = async () => {
 const crearFormDataAnular = () => {
     const formData = new FormData();
     formData.append("motivo", document.getElementById("motivoAnulacion").value);
-    formData.append("descripcion", document.getElementById("descripcionAnulacion").value);
-    formData.append("archivos", document.getElementById("archivosRespaldo").files[0]);
+    formData.append(
+        "descripcion",
+        document.getElementById("descripcionAnulacion").value
+    );
+    formData.append(
+        "archivos",
+        document.getElementById("archivosRespaldo").files[0]
+    );
     return formData;
 };
 
@@ -120,10 +126,10 @@ const resetModalAnular = () => {
     document.getElementById("descripcionAnulacion").value = "";
     document.getElementById("archivosRespaldo").value = "";
     document.getElementById("contrasenia").value = "";
-}
+};
 
 const recargarEventos = () => {
     setTimeout(() => {
         window.location.href = "/admin/eventos/cancelar-evento";
     }, 1800);
-}
+};

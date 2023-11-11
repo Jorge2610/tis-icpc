@@ -49,8 +49,10 @@
                             ¿Estas seguro de cambiar el afiche?
                         @endslot
                         @slot('modalButton')
-                            <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal" onclick="cancelarSubidaAfiche()">No</button>
-                            <button type="reset" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal" onclick="cambiarAfiche()">Sí</button>
+                            <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal"
+                                onclick="cancelarSubidaAfiche()">No</button>
+                            <button type="reset" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal"
+                                onclick="cambiarAfiche()">Sí</button>
                         @endslot
                     @endcomponent
                 </div>
@@ -61,6 +63,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
     <script src="{{ asset('js/Afiche/editarAfiche.js') }}" defer></script>
 @endsection

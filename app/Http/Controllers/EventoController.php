@@ -212,10 +212,11 @@ class EventoController extends Controller
         }
     }
 
-    public function showEditEventForm(){
+    public function showEditEventForm()
+    {
         $eventos = Evento::with('tipoEvento')
-        ->orderBy('updated_at', 'desc')
-        ->get();
-        return view('crear-evento.editarEvento',['eventos' => $eventos]);
+            ->orderBy('updated_at', 'desc')
+            ->get();
+        return view('crear-evento.editarEvento', ['eventos' => $eventos]);
     }
 }

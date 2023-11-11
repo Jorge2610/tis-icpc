@@ -28,7 +28,7 @@ class RecursoController extends Controller
         $recurso = Recurso::find($id);
         return $recurso;
     }
-    
+
     public function store(Request $request)
     {
         try {

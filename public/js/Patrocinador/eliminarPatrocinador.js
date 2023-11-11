@@ -1,7 +1,6 @@
 let tablaDeTipos;
 let tablaInicializada = false;
 
-
 const contenedorAsignar = document.getElementById("contenedorAsignar");
 const eventoSeleccionado = document.getElementById("nombreEvento");
 
@@ -9,7 +8,7 @@ const dataTableOptions = {
     pageLength: 10,
     lengthMenu: [5, 10, 15, 20],
     destroy: true,
-    order: [[3, 'desc']],
+    order: [[3, "desc"]],
     language: {
         lengthMenu: "Mostrar _MENU_ entradas",
         zeroRecords: "Ningún tipo de evento encontrado",
@@ -31,7 +30,7 @@ const initDataTable = async () => {
     if (tablaInicializada) {
         tablaDeTipos.destroy();
     }
-    DataTable.datetime('DD-MM-YYYY');
+    DataTable.datetime("DD-MM-YYYY");
     tablaDeTipos = $("#tablaEvento").DataTable(dataTableOptions);
     tablaInicializada = true;
 };
@@ -101,39 +100,41 @@ const getPatrocinadores = async () => {
     return datos;
 };
 
- const borrarPatrocinador = (id) => {
-     const modalBorrar = document.getElementById("modalBorrarPatrocinador");
-     modalBorrar.setAttribute("idpatrocinador", id);
- };
+const borrarPatrocinador = (id) => {
+    const modalBorrar = document.getElementById("modalBorrarPatrocinador");
+    modalBorrar.setAttribute("idpatrocinador", id);
+};
 
- const borrar1 = async () => {
-     const modalBorrar = document.getElementById("modalBorrarPatrocinador");
-     await axios
-         .delete(
-             `/api/patrocinador/${modalBorrar.getAttribute("idpatrocinador")}`
-         )
-         .then((response) => {
+const borrar1 = async () => {
+    const modalBorrar = document.getElementById("modalBorrarPatrocinador");
+    await axios
+        .delete(
+            `/api/patrocinador/${modalBorrar.getAttribute("idpatrocinador")}`
+        )
+        .then((response) => {
             mostrarAlerta(
                 "Éxito",
                 response.data.mensaje,
                 response.error ? "danger" : "success"
             );
             return response;
-         })
-         .catch((error) => {
+        })
+        .catch((error) => {
             mostrarAlerta(
                 "Error",
                 response.data.mensaje,
                 response.error ? "danger" : "success"
-            ); 
+            );
             return error;
-         });
-     await cargarPatrocinadores();
-     updateNroPatrocinadores();
- };
+        });
+    await cargarPatrocinadores();
+    updateNroPatrocinadores();
+};
 
- const updateNroPatrocinadores = () => {
-    let casilla = document.getElementById(`contadorPatrocinadores${idSeleccionado}`);
+const updateNroPatrocinadores = () => {
+    let casilla = document.getElementById(
+        `contadorPatrocinadores${idSeleccionado}`
+    );
     let valor = parseInt(casilla.textContent);
     casilla.textContent = valor - 1;
-}
+};
