@@ -15,10 +15,11 @@ body {
   bottom: 0px;
   left: 0;
   padding: 11vh 0 0;
-  /* Height of navbar */
   width: 250px;
-  height: 50vh;
+  max-height: 86vh;
   z-index: 600;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 @media (max-width: 991.98px) {
