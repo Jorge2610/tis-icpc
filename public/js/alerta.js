@@ -16,9 +16,14 @@ const mostrarAlerta = (titulo, mensaje, tipo) => {
       </div>
     `;
 
-    document.getElementById("alertsContainer").innerHTML = alerta;
 
-    setTimeout(() => {
-        document.querySelector(".alert").remove();
+    const alertsContainer = document.getElementById("alertsContainer");
+    alertsContainer.innerHTML = alerta;
+    alertsContainer.style.display = 'block';
+
+    setTimeout(function () {
+      alertsContainer.style.display = 'none';
     }, 2000);
+    alertsContainer.innerHTML = alerta;
 };
+

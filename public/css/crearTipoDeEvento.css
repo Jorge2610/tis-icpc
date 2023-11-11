@@ -52,10 +52,11 @@
     overflow: hidden;
 }
 
+/**Para la posicion de la alerta**/
 .customAlertContainer {
     position: fixed;
     top: 15%; 
-    left: 40%;
+    left: 45%;
     z-index: 1000; 
     align-items: center;
 }

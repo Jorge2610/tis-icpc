@@ -7,17 +7,25 @@
     </h2>
     <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
         <div class="my-1 ms-3">
-            <a href="{{ url('/admin/eventos/tipos-de-evento') }}"
-                class="list-group-item list-group-item-action sider-custom-bg py-2 border-0" id="verTiposEventoSider">
+            <a href="{{ url('/admin/tipos-de-evento') }}"
+                class="list-group-item list-group-item-action sider-custom-bg py-2 border-0"
+                id="verTiposEventoSider">
                 Ver tipos de evento
             </a>
-            <a href="{{ url('/admin/eventos/crear-tipo') }}"
-                class="list-group-item list-group-item-action py-2 border-0" id="crearTipoEventoSider">
+            <a href="{{ url('/admin/tipos-de-evento/crear-tipo') }}"
+                class="list-group-item list-group-item-action py-2 border-0"
+                id="crearTipoEventoSider">
                 Crear tipo de evento
             </a>
-            <a href="{{ url('/admin/tipos-de-evento') }}" class="list-group-item list-group-item-action py-2 border-0"
+            <a href="{{ url('/admin/tipos-de-evento/editar-tipo') }}"
+                class="list-group-item list-group-item-action py-2 border-0"
                 id="crearTipoEventoSider">
-                Administrar tipo de evento
+                Editar tipo de evento
+            </a>
+            <a href="{{ url('/admin/tipos-de-evento/eliminar-tipo') }}"
+                class="list-group-item list-group-item-action py-2 border-0"
+                id="crearTipoEventoSider">
+                Eliminar tipo de evento
             </a>
         </div>
     </div>
