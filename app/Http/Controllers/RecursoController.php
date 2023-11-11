@@ -20,7 +20,7 @@ class RecursoController extends Controller
     public function eventosConRecurso()
     {
         $eventos = Evento::where('estado', 0)->with('recursos')->get();
-        return view('eventos.subirMaterial', ['recursos' => $eventos]);
+        return view('eventos.subirSitio', ['recursos' => $eventos]);
     }
 
     public function show($id)
