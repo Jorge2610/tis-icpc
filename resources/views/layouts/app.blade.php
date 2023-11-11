@@ -80,102 +80,12 @@
             <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
                 <div class="position-sticky">
                     <div class="list-group list-group-flush mx-1 mt-3">
-
-                        <div class="accordion" id="menuLateral">
-                            <div class="accordion-item border-0">
-                                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-                                        aria-controls="panelsStayOpen-collapseOne">
-                                        TIPO DE EVENTO
-                                    </button>
-                                </h2>
-                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
-                                    aria-labelledby="panelsStayOpen-headingOne">
-                                    <div class="my-1 ms-3">
-                                        <a href="{{ url('/admin/tipos-de-evento') }}"
-                                            class="list-group-item list-group-item-action sider-custom-bg py-2 border-0"
-                                            id="verTiposEventoSider">
-                                            Ver tipos de evento
-                                        </a>
-                                        <a href="{{ url('/admin/tipos-de-evento/crear-tipo') }}"
-                                            class="list-group-item list-group-item-action py-2 border-0"
-                                            id="crearTipoEventoSider">
-                                            Crear tipo de evento
-                                        </a>
-                                        <a href="{{ url('/admin/tipos-de-evento/editar-tipo') }}"
-                                            class="list-group-item list-group-item-action py-2 border-0"
-                                            id="crearTipoEventoSider">
-                                            Editar tipo de evento
-                                        </a>
-                                        <a href="{{ url('/admin/tipos-de-evento/eliminar-tipo') }}"
-                                            class="list-group-item list-group-item-action py-2 border-0"
-                                            id="crearTipoEventoSider">
-                                            Eliminar tipo de evento
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item border-0">
-                                <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
-                                        aria-controls="panelsStayOpen-collapseTwo">
-                                        EVENTOS
-                                    </button>
-                                </h2>
-                                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show"
-                                    aria-labelledby="panelsStayOpen-headingTwo">
-                                    <div class="my-1 ms-3">
-                                        <a href="{{ url('/admin/eventos/crear-evento') }}"
-                                            class="list-group-item list-group-item-action py-2 border-0"
-                                            id="crearEventoSider">
-                                            Crear evento
-                                        </a>
-                                        <a href="{{ url('/editarEvento/') }}"
-                                            class="list-group-item list-group-item-action py-2 border-0"
-                                            id="cancelarEventoSider">
-                                            Editar evento
-                                        </a>
-                                        <a href="{{ url('/admin/eventos/cancelar-evento') }}"
-                                            class="list-group-item list-group-item-action py-2 border-0"
-                                            id="cancelarEventoSider">
-                                            Cancelar evento
-                                        </a>
-                                        <a href="{{ url('/admin/eventos/afiche') }}"
-                                            class="list-group-item list-group-item-action py-2 border-0"
-                                            id="asignarAficheSider">
-                                            Asignar afiche
-                                        </a>
-                                        <a href="{{ url('/afiche/editar') }}"
-                                            class="list-group-item list-group-item-action py-2 border-0"
-                                            id="asignarAficheSider">
-                                            Editar afiche
-                                        </a>
-                                        <a href="{{ url('/afiche/eliminar') }}"
-                                            class="list-group-item list-group-item-action py-2 border-0"
-                                            id="asignarAficheSider">
-                                            Eliminar afiche
-                                        </a>
-                                        <a href="{{ url('/admin/eventos/patrocinador') }}"
-                                        
-                                            class="list-group-item list-group-item-action py-2 border-0"
-                                            id="asignarPatrocinadorSider">
-                                            Asignar patrocinador
-                                        </a>
-                                        <a href="{{ url('admin/eventos/patrocinador/eliminar') }}"
-                                            class="list-group-item list-group-item-action py-2 border-0"
-                                            id="asignarPatrocinadorSider">
-                                            Eliminar patrocinador
-                                        </a>
-                                        <a href="{{ url('/admin/eventos/recurso') }}"
-                                            class="list-group-item list-group-item-action py-2 border-0"
-                                            id="subirMaterialSider">
-                                            Subir recurso
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="accordion" id="menuLateral" >
+                            <x-sider.tipo-evento/>
+                            <x-sider.evento/>
+                            <x-sider.afiche/>
+                            <x-sider.patrocinador/>
+                            <x-sider.sitios-interes/>
                         </div>
                     </div>
                 </div>
