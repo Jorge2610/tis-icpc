@@ -3,6 +3,7 @@ let tablaInicializada = false;
 let formulario = document.getElementById("formularioTipoEvento");
 
 const dataTableOptions = {
+    order: [[0,"desc"]],
     pageLength: 10,
     lengthMenu: [5, 10, 15, 20],
     destroy: true,
@@ -52,7 +53,6 @@ const cargarTiposDeEvento = async () => {
 
             return `
                 <tr>
-                    <th scope='row'>${index + 1}</th>
                     <td>${element.nombre}</td>
                     <td class="text-center">${element.descripcion}</td>
                     <td class="container-color">
