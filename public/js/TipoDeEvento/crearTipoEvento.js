@@ -17,6 +17,7 @@ function crearTipoEvento() {
                 );
                 form.classList.remove("was-validated");
                 form.reset();
+                window.location.href = "/admin/tipos-de-evento";
             } catch (error) {
                 mostrarAlerta("Error", "Hubo un error al guardar el tipo de evento", "danger");
             }
