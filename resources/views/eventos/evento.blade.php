@@ -114,7 +114,7 @@
                 <div class="row mb-5 d-flex">
                     @foreach ($evento->recursos as $recurso)
                         <a href="{{ $recurso->enlace }}" class="text-decoration-none text-primary fs-6 mt-2 text-truncate"
-                            title="{{ $recurso->titulo }}" target="_blank"> {{ $recurso->titulo }}</a>
+                            title="{{ $recurso->enlace }}" target="_blank"> {{ $recurso->titulo }}</a>
                     @endforeach
 
                 </div>
@@ -133,7 +133,7 @@
                     <div class="col-12 col-md-12 d-flex justify-content-center">
                         <div id="imagenPatrocinador">
                             <a href="{{ $patrocinador->patrocinadores->enlace_web }}" class="text-decoration-none"
-                                title="{{ $patrocinador->patrocinadores->enlace_web }}" target="_blank">
+                                title="{{ $patrocinador->patrocinadores->nombre }}" target="_blank">
                                 <img id="imagenPatrocinador" src="{{ $patrocinador->patrocinadores->ruta_imagen }}"
                                     alt="Imagen del patrocinador"
                                     style="object-fit: cover; max-height: 7rem; max-width: 100%;">
