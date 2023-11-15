@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePatrocinadoresTable extends Migration
+class CreateEventoPatrocinadorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreatePatrocinadoresTable extends Migration
      */
     public function up()
     {
-        Schema::create('patrocinadores', function (Blueprint $table) {
+        Schema::create('evento_patrocinadores', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 64);
-            $table->string('ruta_imagen', 128)->nullable();
-            $table->string('enlace_web', 128)->nullable();
+            $table->foreignId('id_evento')->constrained('eventos')->restrictOnDelete()->cascadeOnUpdate();
+            $table->foreignId('id_patrocinador')->constrained('patrocinadores')->restrictOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreatePatrocinadoresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('patrocinadores');
+        Schema::dropIfExists('evento_patrocinadores');
     }
 }

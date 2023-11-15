@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
             EventoSeeder::class,
             AficheSeeder::class,
             PatrocinadorSeed::class,
-            RecursoSeed::class
+            RecursoSeed::class,
+            EventoPatrocinadorSeeder::class
         ]);
     }
 }

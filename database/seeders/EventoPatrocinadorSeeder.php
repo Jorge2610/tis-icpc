@@ -4,9 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Faker\Factory as Faker;
 
-class PatrocinadorSeed extends Seeder
+class EventoPatrocinadorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,14 +14,13 @@ class PatrocinadorSeed extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
+        $faker = \Faker\Factory::create();
 
         for ($i = 0; $i < 200; $i++) {
             $currentDateTime = $faker->dateTimeBetween('-1 year', 'now');
-            DB::table('patrocinadores')->insert([
-                'nombre' => $faker->name(),
-                'ruta_imagen' => $faker->imageUrl(),
-                'enlace_web' => $faker->url(),
+            DB::table('evento_patrocinadores')->insert([
+                'id_evento' => $faker->numberBetween(1, 100),
+                'id_patrocinador' => $faker->numberBetween(1, 200),
                 'created_at' => $currentDateTime,
                 'updated_at' => $faker->dateTimeBetween($currentDateTime, 'now'),
             ]);

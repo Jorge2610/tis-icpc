@@ -29,7 +29,6 @@ class PatrocinadorController extends Controller
             $patrocinador->nombre = $request->nombre;
             $patrocinador->ruta_imagen = $this->storeImage($request);
             $patrocinador->enlace_web = $request->enlace_web;
-            $patrocinador->id_evento = $request->id_evento;
             $patrocinador->save();
             return response()->json(['mensaje' => 'Asignado exitosamente', 'error' => false]);
         } catch (QueryException $e) {
@@ -49,11 +48,6 @@ class PatrocinadorController extends Controller
         }
     }
 
-    public function showPatrocinadorbyEvento($id)
-    {
-        $patrocinadores = Patrocinador::where('id_evento', $id)->get();
-        return $patrocinadores;
-    }
 
     public function update(Request $request, $id)
     {
@@ -65,7 +59,6 @@ class PatrocinadorController extends Controller
                 $patrocinador->ruta_imagen = $this->storeImage($request);
             }
             $patrocinador->enlace_web = $request->enlace_web;
-            $patrocinador->id_evento = $request->id_evento;
             $patrocinador->save();
             return response()->json(['mensaje' => 'Actualizado exitosamente', 'error' => false]);
         } catch (QueryException $e) {

@@ -119,7 +119,8 @@
 
                 </div>
             @endif
-            @if ($evento->patrocinadores->count() > 0)
+
+            @if ($evento->eventoPatrocinador->count() > 0)
                 <div class="col-12 d-flex justify-content-center align-items-center ">
                     <div class="col-12 align-items-left">
                         <h4 class="">Patrocinadores: </h4>
@@ -128,12 +129,12 @@
             @endif
 
             <div class="row g-4 mt-1">
-                @foreach ($evento->patrocinadores as $patrocinador)
+                @foreach ($evento->eventoPatrocinador as $patrocinador)
                     <div class="col-12 col-md-12 d-flex justify-content-center">
                         <div id="imagenPatrocinador">
-                            <a href="{{ $patrocinador->enlace_web }}" class="text-decoration-none"
-                                title="{{ $patrocinador->enlace_web }}" target="_blank">
-                                <img id="imagenPatrocinador" src="{{ $patrocinador->ruta_imagen }}"
+                            <a href="{{ $patrocinador->patrocinadores->enlace_web }}" class="text-decoration-none"
+                                title="{{ $patrocinador->patrocinadores->enlace_web }}" target="_blank">
+                                <img id="imagenPatrocinador" src="{{ $patrocinador->patrocinadores->ruta_imagen }}"
                                     alt="Imagen del patrocinador"
                                     style="object-fit: cover; max-height: 7rem; max-width: 100%;">
                             </a>

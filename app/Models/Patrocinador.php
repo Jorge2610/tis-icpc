@@ -11,8 +11,8 @@ class Patrocinador extends Model
 
     protected $table = 'patrocinadores';
 
-    public function evento()
+    public function eventoPatrocinador()
     {
-        return $this->belongsTo(Evento::class, 'id_evento');
+        return $this->hasMany(EventoPatrocinador::class, 'id_patrocinador');
     }
 }
