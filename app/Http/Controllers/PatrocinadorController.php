@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use App\Models\Patrocinador;
 use App\Models\Evento;
+use App\Models\EventoPatrocinador;
 use Illuminate\Support\Facades\Storage;
 
 class PatrocinadorController extends Controller
@@ -78,15 +79,39 @@ class PatrocinadorController extends Controller
         }
     }
 
+    public function asignarPatrocinador(Request $request)
+    {
+        try {
+            $patrocinador = new EventoPatrocinador();
+            $patrocinador->id_evento = $request->id_evento;
+            $patrocinador->id_patrocinador = $request->id_patrocinador;
+            $patrocinador->save();
+            return response()->json(['mensaje' => 'Asignado exitosamente', 'error' => false]);
+        } catch (QueryException $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function quitarPatrocinador($id)
+    {
+        try {
+            $patrocinador = EventoPatrocinador::find($id);
+            $patrocinador->delete();
+            return response()->json(['mensaje' => 'Eliminado exitosamente', 'error' => false]);
+        } catch (QueryException $e) {
+            return $e->getMessage();
+        }
+    }
+
     public function vistaTablaEventos()
     {
-        $patrocinadores =  Evento::where('estado', 0)->with('patrocinadores')->get();
+        $patrocinadores =  Evento::where('estado', 0)->with('eventoPatrocinadores')->get();
         return view('patrocinador.asignarPatrocinador', ['patrocinadores' => $patrocinadores]);
     }
 
     public function vistaTablaEventosEliminar()
     {
-        $patrocinadores =  Evento::where('estado', 0)->with('patrocinadores')->get();
+        $patrocinadores =  Evento::where('estado', 0)->with('eventoPatrocinadores')->get();
         return view('patrocinador.eliminarPatrocinador', ['patrocinadores' => $patrocinadores]);
     }
 }
