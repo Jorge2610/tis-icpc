@@ -29,7 +29,7 @@
                                 <td class="text-center">
                                     <button type="button" class="btn btn-primary btn-sm"
                                         onclick="redireccionarEditar('{{ route('evento.editar', ['id' => $evento->id]) }}')"
-                                        @if (strtotime($evento->inicio_evento) <= time()) disabled @endif>
+                                        @if (strtotime($evento->fin_evento) <= time()) disabled @endif>
                                         <i class="fa-solid fa-pencil"></i>
                                     </button>
 
