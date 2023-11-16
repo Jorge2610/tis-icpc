@@ -1,4 +1,4 @@
-let tablaDeTipos;
+let tablaDePatrocinadores;
 let tablaInicializada = false;
 
 const input = document.getElementById("imageUpload");
@@ -6,9 +6,8 @@ const imagenPreview = document.getElementById("imagePreview");
 const botonSubir = document.getElementById("botonSubirLogoPatrocinador");
 const nombrePatrocinador = document.getElementById("nombrePatricinador");
 const urlPatricinador = document.getElementById("urlPatrocinador");
-const cancelar = document.getElementById("asignarPatrocinadorCancelar");
-const asignar = document.getElementById("asignarPatrocinadorAsignar");
-const eventoSeleccionado = document.getElementById("nombreEvento");
+const cancelar = document.getElementById("crearPatrocinadorCancelar");
+const asignar = document.getElementById("crearPatrocinadorCrear");
 
 const dataTableOptions = {
     pageLength: 10,
@@ -16,11 +15,11 @@ const dataTableOptions = {
     destroy: true,
     order: [[3, "desc"]],
     language: {
-        lengthMenu: "Mostrar _MENU_ eventos",
-        zeroRecords: "Ningún tipo de evento encontrado",
-        info: "Mostrando de _START_ a _END_ de un total de _TOTAL_ registros",
-        infoEmpty: "Ningún usuario encontrado",
-        infoFiltered: "(filtrados desde _MAX_ registros totales)",
+        lengthMenu: "Mostrar _MENU_ patrocinadores",
+        zeroRecords: "Ningún patrociandor encontrado",
+        info: "Mostrando de _START_ a _END_ de un total de _TOTAL_ patrocinadores",
+        infoEmpty: "Ningún patrocinador encontrado",
+        infoFiltered: "(filtrados desde _MAX_ patrocinadores en total)",
         search: "Buscar:",
         loadingRecords: "Cargando...",
         paginate: {
@@ -34,23 +33,15 @@ const dataTableOptions = {
 
 const initDataTable = async () => {
     if (tablaInicializada) {
-        tablaDeTipos.destroy();
+        tablaDePatrocinadores.destroy();
     }
     DataTable.datetime("DD-MM-YYYY");
-    tablaDeTipos = $("#tablaEvento").DataTable(dataTableOptions);
+    tablaDePatrocinadores = $("#tablaEvento").DataTable(dataTableOptions);
     tablaInicializada = true;
 };
 
 window.addEventListener("load", () => {
     initDataTable();
-    if (!seleccionado) {
-        eventoSeleccionado.textContent = "Selecciona un evento";
-        botonSubir.disabled = true;
-        nombrePatrocinador.disabled = true;
-        urlPatricinador.disabled = true;
-        cancelar.disabled = true;
-        asignar.disabled = true;
-    }
 });
 
 const validarImagen = (input, peso, callback) => {
@@ -70,26 +61,6 @@ const validarImagen = (input, peso, callback) => {
             callback(mensaje);
         }
     }
-};
-
-let seleccionado;
-let idSeleccionado;
-const seleccionarEvento = (id, nombre) => {
-    if (seleccionado) {
-        seleccionado.classList.remove("table-primary");
-    }
-    botonSubir.disabled = false;
-    nombrePatrocinador.disabled = false;
-    urlPatricinador.disabled = false;
-    cancelar.disabled = false;
-    asignar.disabled = false;
-    seleccionado = document.getElementById(id);
-    seleccionado.classList.add("table-primary");
-    idSeleccionado = id;
-    eventoSeleccionado.textContent = nombre;
-    input.value = "";
-    imagenPreview.src = "/image/uploading.png";
-    botonSubir.style.display = "block";
 };
 
 function previsualizarImagen(event) {
@@ -128,35 +99,28 @@ const crearFormData = () => {
     formData.append("nombre", nombrePatrocinador.value);
     formData.append("enlace_web", urlPatricinador.value);
     formData.append("logo", input.files[0]);
-    formData.append("id_evento", idSeleccionado);
-    asignarPatrocinador(formData);
+    crearPatrocinador(formData);
 };
 
-const asignarPatrocinador = async (formData) => {
+const crearPatrocinador = async (formData) => {
     await axios.post("/api/patrocinador", formData).then((response) => {
         mostrarAlerta(
             "Éxito",
             response.data.mensaje,
             response.error ? "danger" : "success"
         );
-        updateNroPatrocinadores();
         resetInputs();
+        updateTablaPatrocinadores();
     });
 };
 
-const updateNroPatrocinadores = () => {
-    let casilla = document.getElementById(
-        `contadorPatrocinadores${idSeleccionado}`
-    );
-    let valor = parseInt(casilla.textContent);
-    casilla.textContent = valor + 1;
+const updateTablaPatrocinadores = () => {
+    setTimeout(() => {
+        window.location.href = "/admin/eventos/patrocinador";
+    }, 1700);
 };
 
 const resetInputs = () => {
-    let form = document.getElementById("formularioAgregarPatrocinador");
-    botonSubir.classList.remove("btn-outline-danger");
-    botonSubir.classList.add("btn-light", "text-primary");
-    form.classList.remove("was-validated");
     nombrePatrocinador.value = "";
     urlPatricinador.value = "";
     input.value = "";

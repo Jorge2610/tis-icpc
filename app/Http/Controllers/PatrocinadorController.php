@@ -31,7 +31,7 @@ class PatrocinadorController extends Controller
             $patrocinador->ruta_imagen = $this->storeImage($request);
             $patrocinador->enlace_web = $request->enlace_web;
             $patrocinador->save();
-            return response()->json(['mensaje' => 'Asignado exitosamente', 'error' => false]);
+            return response()->json(['mensaje' => 'Creado exitosamente', 'error' => false]);
         } catch (QueryException $e) {
             return $e->getMessage();
         }
@@ -101,6 +101,18 @@ class PatrocinadorController extends Controller
         } catch (QueryException $e) {
             return $e->getMessage();
         }
+    }
+
+    public function vistaCrearPatrocinador()
+    {
+        $patrocinadores =  Patrocinador::all();
+        return view('patrocinador.crearPatrocinador', ['patrocinadores' => $patrocinadores]);
+    }
+
+    public function vistaEliminarPatrocinador()
+    {
+        $patrocinadores = Patrocinador::with('eventoPatrocinador.eventos')->get();
+        return view('patrocinador.eliminarPatrocinador', ['patrocinadores' => $patrocinadores]);
     }
 
     public function vistaTablaEventos()

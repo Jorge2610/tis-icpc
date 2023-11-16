@@ -40,8 +40,6 @@ Route::group(['prefix' => 'admin/eventos'], function () {
     Route::get('crear-evento', [EventoController::class, 'showEventForm'])->name('crear');
     Route::get('cancelar-evento', [EventoController::class, 'eventosValidos'])->name('cancelar-evento');
     Route::get('afiche', [AficheController::class, 'vistaTablaEventos'])->name('afiche.tablaEventos');
-    Route::get('patrocinador', [PatrocinadorController::class, 'vistaTablaEventos'])->name('patrocinador.tablaEventos');
-    Route::get('patrocinador/eliminar', [PatrocinadorController::class, 'vistaTablaEventosEliminar'])->name('patrocinador.tablaEventosEliminar');
     Route::get('recurso', [RecursoController::class, 'eventosConRecurso'])->name('material.tablaEventos');
 });
 
@@ -58,6 +56,12 @@ Route::group(['prefix' => 'afiche'], function () {
     Route::get('asignar', [AficheController::class, 'vistaTablaEventos'])->name('afiche.tablaEventos');
     Route::get('editar', [AficheController::class, 'editarAfiche'])->name('afiche.editar');
     Route::get('eliminar', [AficheController::class, 'eliminarAficheVista'])->name('afiche.eliminar');
+});
+
+Route::group(['prefix' => 'admin/patrocinador'], function () {
+    Route::get('/', [PatrocinadorController::class, 'vistaCrearPatrocinador'])->name('patrocinador.crearPatrocinador');
+    Route::get('/eliminar', [PatrocinadorController::class, 'vistaEliminarPatrocinador'])->name('patrocinador.eliminarPatrocinador');
+    Route::get('/asignar', [PatrocinadorController::class, 'vistaTablaEventos'])->name('patrocinador.tablaEventos');
 });
 
 Route::get('editarEvento', [EventoController::class, 'showEditEventForm']);

@@ -1,64 +1,54 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container 70vh">
+    <div class="container">
+        <div class="row mb-2">
+            <h4>Patrocinadores</h4>
+        </div>
         <div class="row g-5">
-            <div class="col-sm-12 col-md-9">
-                <table class="table table-responsive table-striped text-secondary table-hover cursor" id="tablaEvento">
-                    <caption>eventos</caption>
+            <div class="col-sm-12 col-md-12">
+                <table class="table table-responsive table-striped text-secondary" id="tablaEvento">
                     <thead>
                         <tr>
-                            <th scope="col" class="col-sm-2 col-md-1">#</th>
-                            <th scope="col" class="col-sm-4 col-md-4">Nombre del evento</th>
-                            <th scope="col" class="col-sm-0 col-md-3 text-center">Tipo de evento</th>
-                            <th scope="col" class="col-sm-3 col-md-2 text-center">Fecha de creación</th>
-                            <th scope="col" class="col-sm-3 col-md-2 text-center font-sm">Cantidad de patrocinadores</th>
-
+                            <th scope="col" class="col-sm-3 col-md-3">Nombre del patrocinador</th>
+                            <th scope="col" class="col-sm-3 col-md-3">Enlace web</th>
+                            <th scope="col" class="col-sm-3 col-md-3">Imagen</th>
+                            <th scope="col" class="col-sm-1 col-md-1">Fecha de creación</th>
+                            <th scope="col" class="col-sm-1 col-md-1">Eventos asociados</th>
+                            <th scope="col" class="col-sm-1 col-md-1">Acción</th>
                         </tr>
                     </thead>
                     <tbody id="datosTabla">
-                        @php $contador = 1 @endphp
                         @foreach ($patrocinadores as $patrocinador)
-                            <tr onclick="seleccionarEvento({{ $patrocinador->id }}, '{{ $patrocinador->nombre }}', event)"
-                                id="{{ $patrocinador->id }}">
-                                <th scope="row">{{ $contador++ }}</th>
+                            <tr id="{{ $patrocinador->id }}">
                                 <td>{{ $patrocinador->nombre }}</td>
-                                <td class="text-center">{{ $patrocinador->tipoEvento->nombre }}</td>
-                                <td class="text-center">{{ date('d-m-Y', strtotime($patrocinador->created_at)) }}</td>
-                                <td class="text-center" id="contadorPatrocinadores{{ $patrocinador->id }}">
-                                    {{ $patrocinador->patrocinadores->count() }}</td>
-
+                                <td>
+                                    <a class="d-inline-block text-truncate" href="{{ $patrocinador->enlace_web }}"
+                                        target="_blank" style="max-width: 250px;" title="{{ $patrocinador->enlace_web }}">
+                                        {{ $patrocinador->enlace_web }}
+                                    </a>
+                                </td>
+                                <td><a href="{{ $patrocinador->ruta_imagen }}"
+                                        target="_blank">{{ $patrocinador->nombre }}</a></td>
+                                <td>{{ date('d-m-Y', strtotime($patrocinador->created_at)) }}</td>
+                                <td class="text-center">{{ $patrocinador->eventoPatrocinador->count() }}</td>
+                                <td class="text-center">
+                                    <button onclick="eliminarPatrocinador({{ $patrocinador->id }})"
+                                        title="Eliminar patrocinador" type="button" class="btn btn-danger btn-sm"
+                                        {{ $patrocinador->eventoPatrocinador->count() > 0 ? 'disabled' : '' }}>
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-
-            <div class="col-sm-12 col-md-3">
-                <div class="col-12 d-flex justify-content-center align-items-center">
-                    <h4>Patrocinadores</h4>
-                </div>
-                <h5 id="nombreEvento" class="text-center fw-bold col-md-12"></h5>
-                <div class="row g-4 mt-3" id="contenedorPatrocinadores">
-                    <!-Patrocinadores->
-
-                </div>
-                @component('components.modal')
-                    @slot('modalId', 'modalBorrarPatrocinador')
-                    @slot('modalTitle', 'Confirmacion')
-                    @slot('modalContent')
-                        ¿Está seguro de eliminar al patrocinador?
-                    @endslot
-                    @slot('modalButton')
-                        <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>
-                        <button type="button" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal"
-                            onclick="borrar1()">Sí</button>
-                    @endslot
-                @endcomponent
-            </div>
         </div>
     </div>
+
     <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>

@@ -51,7 +51,7 @@ Route::group(['prefix' => 'patrocinador', 'middleware' => 'api'], function () {
     Route::post('/', [PatrocinadorController::class, 'store'])->name('patrocinadores.store');
     Route::delete('{id}', [PatrocinadorController::class, 'destroy'])->name('patrocinadores.destroy');
     Route::post('/asignar/{id}', [PatrocinadorController::class, 'asignarPatrocinador'])->name('patrocinadores.asignar');
-    Route::post('/quitar/{id}', [PatrocinadorController::class, 'quitarPatrocinador'])->name('patrocinadores.quitar');
+    Route::delete('/quitar/{id}', [PatrocinadorController::class, 'quitarPatrocinador'])->name('patrocinadores.quitar');
 });
 
 Route::group(['prefix' => 'afiche'], function () {

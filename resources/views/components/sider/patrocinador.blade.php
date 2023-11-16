@@ -9,11 +9,11 @@
     <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse"
         aria-labelledby="panelsStayOpen-headingFour">
         <div class="my-1 ms-3">
-            <a href="{{ url('/admin/eventos/patrocinador') }}"
+            <a href="{{ url('/admin/patrocinador') }}"
                 class="list-group-item list-group-item-action py-2 border-0" id="asignarPatrocinadorSider">
-                Asignar patrocinador
+                Crear patrocinador
             </a>
-            <a href="{{ url('admin/eventos/patrocinador/eliminar') }}"
+            <a href="{{ url('admin/patrocinador/eliminar') }}"
                 class="list-group-item list-group-item-action py-2 border-0" id="asignarPatrocinadorSider">
                 Eliminar patrocinador
             </a>
