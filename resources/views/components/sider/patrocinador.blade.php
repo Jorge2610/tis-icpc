@@ -21,6 +21,10 @@
                 class="list-group-item list-group-item-action py-2 border-0" id="asignarPatrocinadorSider">
                 Asignar patrocinador
             </a>
+            <a href="{{ url('admin/patrocinador/quitar') }}"
+                class="list-group-item list-group-item-action py-2 border-0" id="quitarPatrocinadorSider">
+                Quitar patrocinador
+            </a>
         </div>
     </div>
 </div>

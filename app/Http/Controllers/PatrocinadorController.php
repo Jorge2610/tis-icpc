@@ -23,6 +23,12 @@ class PatrocinadorController extends Controller
         return $eventos;
     }
 
+    public function showEventoWhithPatrocinadores($id)
+    {
+        $evento = EventoPatrocinador::where('id_evento', $id)->with('patrocinadores')->get();
+        return $evento;
+    }
+
     public function store(Request $request)
     {
         try {
@@ -97,7 +103,7 @@ class PatrocinadorController extends Controller
         try {
             $patrocinador = EventoPatrocinador::find($id);
             $patrocinador->delete();
-            return response()->json(['mensaje' => 'Eliminado exitosamente', 'error' => false]);
+            return response()->json(['mensaje' => 'Quitado exitosamente', 'error' => false]);
         } catch (QueryException $e) {
             return $e->getMessage();
         }
@@ -122,9 +128,9 @@ class PatrocinadorController extends Controller
         return view('patrocinador.asignarPatrocinador', ['eventos' => $eventos, 'patrocinadores' => $patrocinadores]);
     }
 
-    public function vistaTablaEventosEliminar()
+    public function vistaQuitarPatrocinador()
     {
-        $patrocinadores =  Evento::where('estado', 0)->with('eventoPatrocinadores')->get();
-        return view('patrocinador.eliminarPatrocinador', ['patrocinadores' => $patrocinadores]);
+        $eventos =  Evento::where('estado', 0)->with('eventoPatrocinador.patrocinadores')->orderBy('eventos.created_at', 'desc')->get();
+        return view('patrocinador.quitarPatrocinador', ['eventos' => $eventos]);
     }
 }
