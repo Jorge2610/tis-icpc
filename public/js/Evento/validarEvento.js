@@ -67,9 +67,14 @@ costo.addEventListener("change", () => {
     if ((costo.value < costo.min || costo.value == "") && inputCosto.checked) {
         isValid(costo,false)
     }
+    else{
+        validarCosto();
+        isValid(costo,true) 
+    }
     if (boolCosto) {
         boolCosto = false;
         validarCosto();
+
     } else {
         boolCosto = true;
     }
@@ -121,10 +126,9 @@ edadMinima.addEventListener("change", () => {
     if (parseInt(edadMinima.value) < parseInt(edadMinima.min) && edadMinima.value !== "") {
         isValid(edadMinima,false);
     } else {
-        if(edadMinima.value !== ""){}
+            isValid(edadMinima,true);
             edadMaxima.min = edadMinima.value;
     }
-    
     if (ambos && inputEdad.checked) {
         isValid(edadMinima,false);
     }

@@ -163,11 +163,14 @@ form.addEventListener("submit", (event) => {
         if (!crear) {
             editarEvento(formData);
            // window.location.href ="/eventos/"+nombreEvento.value;
+           setTimeout(()=>{
+                window.location.href = "/editarEvento";
+           },1800);
         } else {
-                crearEvento(formData);
-                setTimeout(() => {
-                    location.reload();
-                }, 1800);
+            crearEvento(formData);
+            setTimeout(() => {
+                location.reload();
+            }, 1800);  
         }
         $("#modalConfirmacion").modal("hide");
         form.reset();
