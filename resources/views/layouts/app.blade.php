@@ -86,6 +86,7 @@
                             <x-sider.afiche/>
                             <x-sider.patrocinador/>
                             <x-sider.sitios-interes/>
+                            <x-sider.tipo-actividad/>
                         </div>
                     </div>
                 </div>
