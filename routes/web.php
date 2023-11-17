@@ -6,6 +6,7 @@ use App\Http\Controllers\EventoController;
 use App\Http\Controllers\TipoEventoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RecursoController;
+use App\Http\Controllers\ActividadController;
 use App\Models\Recurso;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -62,6 +63,11 @@ Route::group(['prefix' => 'admin/patrocinador'], function () {
     Route::get('/', [PatrocinadorController::class, 'vistaCrearPatrocinador'])->name('patrocinador.crearPatrocinador');
     Route::get('/eliminar', [PatrocinadorController::class, 'vistaEliminarPatrocinador'])->name('patrocinador.eliminarPatrocinador');
     Route::get('/asignar', [PatrocinadorController::class, 'vistaTablaEventos'])->name('patrocinador.tablaEventos');
+});
+
+Route::group(['prefix' => 'admin/actividad'], function () {
+    Route::get('/', [ActividadController::class, 'vistaTablaActividades'])->name('actividad.crearActividad');
+    Route::get('crear-actividad/{id}',[ActividadController::class,'crearActividad'])->name('actividad.formCrearActividad');
 });
 
 Route::get('editarEvento', [EventoController::class, 'showEditEventForm']);

@@ -7,6 +7,7 @@ use App\Http\Controllers\TipoEventoController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\PatrocinadorController;
 use App\Http\Controllers\RecursoController;
+use App\Http\Controllers\ActividadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,4 +69,12 @@ Route::group(['prefix' => 'recurso'], function () {
     Route::post('', [RecursoController::class, 'store'])->name('recurso.store');
     Route::post('{id}', [RecursoController::class, 'update'])->name('recurso.update');
     Route::delete('{id}', [RecursoController::class, 'destroy'])->name('recurso.destroy');
+});
+
+Route::group(['prefix' => 'actividad'], function () {
+    Route::get('', [ActividadController::class, 'index'])->name('actividad.index');
+    Route::get('{id}', [ActividadController::class, 'show'])->name('actividad.show');
+    Route::post('', [ActividadController::class, 'store'])->name('actividad.store');
+    Route::post('{id}', [ActividadController::class, 'update'])->name('actividad.update');
+    Route::delete('{id}', [ActividadController::class, 'destroy'])->name('actividad.destroy');
 });

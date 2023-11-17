@@ -27,4 +27,8 @@ class Evento extends Model
     {
         return $this->hasMany(EventoPatrocinador::class, 'id_evento');
     }
+
+    public function actividades(){
+        return $this->hasMany(Actividad::class,'id_evento');
+    }
 }
