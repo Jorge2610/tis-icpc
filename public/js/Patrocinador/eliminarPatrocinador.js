@@ -46,6 +46,7 @@ window.addEventListener("load", () => {
 
 const eliminarPatrocinador = async (id) => {
     await axios.delete("/api/patrocinador/" + id).then((response) => {
+        $('#modalEliminarPatrocinador' + id).modal('hide');
         mostrarAlerta(
             "Éxito",
             response.data.mensaje,

@@ -1,26 +1,21 @@
 let tablaDeTipos;
 let tablaInicializada = false;
 
-const input = document.getElementById("imageUpload");
-const imagenPreview = document.getElementById("imagePreview");
-const botonSubir = document.getElementById("botonSubirLogoPatrocinador");
-const nombrePatrocinador = document.getElementById("nombrePatricinador");
-const urlPatricinador = document.getElementById("urlPatrocinador");
-const cancelar = document.getElementById("asignarPatrocinadorCancelar");
-const asignar = document.getElementById("asignarPatrocinadorAsignar");
 const eventoSeleccionado = document.getElementById("nombreEvento");
+let patrocinadores;
 
 const dataTableOptions = {
     pageLength: 10,
     lengthMenu: [5, 10, 15, 20],
     destroy: true,
-    order: [[3, "desc"]],
+    order:[2, 'desc'],
+    ordering: true,
     language: {
         lengthMenu: "Mostrar _MENU_ eventos",
-        zeroRecords: "Ningún tipo de evento encontrado",
-        info: "Mostrando de _START_ a _END_ de un total de _TOTAL_ registros",
-        infoEmpty: "Ningún usuario encontrado",
-        infoFiltered: "(filtrados desde _MAX_ registros totales)",
+        zeroRecords: "Ningún evento encontrado",
+        info: "Mostrando de _START_ a _END_ de un total de _TOTAL_ eventos",
+        infoEmpty: "Ningún evento encontrado",
+        infoFiltered: "(filtrados desde _MAX_ eventos totales)",
         search: "Buscar:",
         loadingRecords: "Cargando...",
         paginate: {
@@ -45,102 +40,91 @@ window.addEventListener("load", () => {
     initDataTable();
     if (!seleccionado) {
         eventoSeleccionado.textContent = "Selecciona un evento";
-        botonSubir.disabled = true;
-        nombrePatrocinador.disabled = true;
-        urlPatricinador.disabled = true;
-        cancelar.disabled = true;
-        asignar.disabled = true;
     }
+    getPatrocinadores();
 });
 
-const validarImagen = (input, peso, callback) => {
-    if (input.files.length > 0) {
-        const imagen = input.files[0];
-        const maxFileSize = peso * 1024 * 1024;
-        let mensaje = { mensaje: "", error: false };
-
-        const type = !/image\/(png|jpeg|jpg)/.test(imagen.type);
-
-        if (type || imagen.size > maxFileSize) {
-            input.value = "";
-            mensaje = { mensaje: "Archivo no válido", error: true };
-        }
-
-        if (typeof callback === "function") {
-            callback(mensaje);
-        }
-    }
+const getPatrocinadores = async () => {
+    let datos = await axios.get("/api/patrocinador").then((response) => {
+        return response.data;
+    });
+    patrocinadores = await datos;
 };
 
 let seleccionado;
 let idSeleccionado;
-const seleccionarEvento = (id, nombre) => {
+const seleccionarEvento = async (id, nombre) => {
     if (seleccionado) {
         seleccionado.classList.remove("table-primary");
     }
-    botonSubir.disabled = false;
-    nombrePatrocinador.disabled = false;
-    urlPatricinador.disabled = false;
-    cancelar.disabled = false;
-    asignar.disabled = false;
     seleccionado = document.getElementById(id);
     seleccionado.classList.add("table-primary");
     idSeleccionado = id;
     eventoSeleccionado.textContent = nombre;
-    input.value = "";
-    imagenPreview.src = "/image/uploading.png";
-    botonSubir.style.display = "block";
+    cargarPatrocinadores();  
 };
 
-function previsualizarImagen(event) {
-    validarImagen(input, 2, (mensaje) => {
-        if (!mensaje.error) {
-            const file = event.target.files[0];
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                imagenPreview.src = e.target.result;
-                botonSubir.classList.remove("btn-outline-danger");
-                botonSubir.classList.add("btn-light", "text-primary");
-            };
-            reader.readAsDataURL(file);
+const cargarPatrocinadores = async () => {
+    let patrocinadoresEvento = await getPatrocinadoresEvento(idSeleccionado);
+    mostrarPatrocinadores(patrocinadoresEvento);
+};
+
+const getPatrocinadoresEvento = async (id) => {
+    let data = await axios.get("/api/patrocinador/" + id).then((response) => {
+        return response.data;
+    });
+    return data;
+};
+
+const mostrarPatrocinadores = (patrocinadoresEvento) => {
+    let patrocinadoresNoAsigandos = getNoAsignados(patrocinadoresEvento);
+    let div = document.getElementById('divPatrocinadores');
+    let content = "";
+    patrocinadoresNoAsigandos.map((patrocinador) => {
+        content += `
+            <div class="col text-center">
+                <div class="card" style="height: 13rem">
+                    <img src="${patrocinador.ruta_imagen}" class="img-fluid rounded"
+                        alt="logoPatrocinador">
+                    <div class="card-body">
+                        <h6 class="card-title text-truncate" title="${patrocinador.nombre}">
+                            ${patrocinador.nombre}
+                        </h6>
+                        <button class="btn btn-primary btn-sm" onclick="asignarPatrocinador(${patrocinador.id})">Asignar</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+    div.innerHTML = content;
+};
+
+const getNoAsignados = (patrocinadoresEvento) => {
+    let patrocinadoresNoAsignados = [];
+    let indice = 0;
+    patrocinadores.map((patrocinador) => {
+        if (indice < patrocinadoresEvento.length && patrocinadoresEvento[indice].id_patrocinador === patrocinador.id) {
+            indice++;
         } else {
-            mostrarAlerta("Error", mensaje.mensaje, "danger");
+            patrocinadoresNoAsignados.push(patrocinador);
         }
     });
-}
-
-const validarDatos = () => {
-    let form = document.getElementById("formularioAgregarPatrocinador");
-    if (form.checkValidity() && input.files[0] != undefined) {
-        form.classList.remove("was-validated");
-        crearFormData();
-        return;
-    }
-    if (input.files[0] === undefined) {
-        botonSubir.classList.remove("btn-light", "text-primary");
-        botonSubir.classList.add("btn-outline-danger");
-    }
-    form.classList.add("was-validated");
+    return patrocinadoresNoAsignados;
 };
 
-const crearFormData = () => {
-    const formData = new FormData();
-    formData.append("nombre", nombrePatrocinador.value);
-    formData.append("enlace_web", urlPatricinador.value);
-    formData.append("logo", input.files[0]);
-    formData.append("id_evento", idSeleccionado);
-    asignarPatrocinador(formData);
-};
-
-const asignarPatrocinador = async (formData) => {
-    await axios.post("/api/patrocinador", formData).then((response) => {
+const asignarPatrocinador = async (idPatrocinador) => {
+    console.log(idPatrocinador);
+    let formData = new FormData();
+    formData.append('id_evento', idSeleccionado);
+    formData.append('id_patrocinador', idPatrocinador);
+    let data = await axios.post("/api/patrocinador/asignar", formData).then((response) => {
         mostrarAlerta(
             "Éxito",
             response.data.mensaje,
             response.error ? "danger" : "success"
         );
         updateNroPatrocinadores();
-        resetInputs();
+        cargarPatrocinadores();
     });
 };
 
@@ -152,13 +136,11 @@ const updateNroPatrocinadores = () => {
     casilla.textContent = valor + 1;
 };
 
-const resetInputs = () => {
-    let form = document.getElementById("formularioAgregarPatrocinador");
-    botonSubir.classList.remove("btn-outline-danger");
-    botonSubir.classList.add("btn-light", "text-primary");
-    form.classList.remove("was-validated");
-    nombrePatrocinador.value = "";
-    urlPatricinador.value = "";
-    input.value = "";
-    imagenPreview.src = "/image/uploading.png";
-};
+const resize_ob = new ResizeObserver(function (entries) {
+    let rect = entries[0].contentRect;
+    let height = rect.height;
+    vh = parseInt((height / window.innerHeight) * 78) + 1;
+    document.getElementById("divPatrocinadores").style.height = vh + "vh";
+});
+
+resize_ob.observe(document.getElementById("tablaEventos"));

@@ -116,13 +116,17 @@ const crearPatrocinador = async (formData) => {
 
 const updateTablaPatrocinadores = () => {
     setTimeout(() => {
-        window.location.href = "/admin/eventos/patrocinador";
+        window.location.href = "/admin/patrocinador";
     }, 1700);
 };
 
 const resetInputs = () => {
+    document.getElementById("formularioAgregarPatrocinador").classList.remove("was-validated");
+    botonSubir.classList.remove("btn-outline-danger");
+    botonSubir.classList.add("btn-light", "text-primary");
     nombrePatrocinador.value = "";
     urlPatricinador.value = "";
     input.value = "";
     imagenPreview.src = "/image/uploading.png";
+
 };

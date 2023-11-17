@@ -13,14 +13,14 @@ class PatrocinadorController extends Controller
 {
     public function index()
     {
-        $patrocinadores = Patrocinador::all();
+        $patrocinadores =  Patrocinador::all();
         return $patrocinadores;
     }
 
-    public function show($id)
+    public function showPatrocinadorbyEvento($id)
     {
-        $patrocinador = Patrocinador::find($id);
-        return $patrocinador;
+        $eventos =  EventoPatrocinador::where('id_evento', $id)->orderby('id_patrocinador', 'asc')->get();
+        return $eventos;
     }
 
     public function store(Request $request)
@@ -105,7 +105,7 @@ class PatrocinadorController extends Controller
 
     public function vistaCrearPatrocinador()
     {
-        $patrocinadores =  Patrocinador::all();
+        $patrocinadores =  Patrocinador::orderBy('created_at', 'desc')->get();
         return view('patrocinador.crearPatrocinador', ['patrocinadores' => $patrocinadores]);
     }
 
@@ -115,10 +115,11 @@ class PatrocinadorController extends Controller
         return view('patrocinador.eliminarPatrocinador', ['patrocinadores' => $patrocinadores]);
     }
 
-    public function vistaTablaEventos()
+    public function vistaAsignarPatrocinador()
     {
-        $patrocinadores =  Evento::where('estado', 0)->with('eventoPatrocinadores')->get();
-        return view('patrocinador.asignarPatrocinador', ['patrocinadores' => $patrocinadores]);
+        $eventos =  Evento::where('estado', 0)->with('eventoPatrocinador.patrocinadores')->orderBy('eventos.created_at', 'desc')->get();
+        $patrocinadores =  Patrocinador::all();
+        return view('patrocinador.asignarPatrocinador', ['eventos' => $eventos, 'patrocinadores' => $patrocinadores]);
     }
 
     public function vistaTablaEventosEliminar()

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row mb-2">
-            <h4>Patrocinadores</h4>
+            <h4>Eliminar patrocinador</h4>
         </div>
         <div class="row g-5">
             <div class="col-sm-12 col-md-12">
@@ -33,11 +33,24 @@
                                 <td>{{ date('d-m-Y', strtotime($patrocinador->created_at)) }}</td>
                                 <td class="text-center">{{ $patrocinador->eventoPatrocinador->count() }}</td>
                                 <td class="text-center">
-                                    <button onclick="eliminarPatrocinador({{ $patrocinador->id }})"
+                                    <button data-bs-toggle="modal"
+                                        data-bs-target="#modalEliminarPatrocinador{{ $patrocinador->id }}"
                                         title="Eliminar patrocinador" type="button" class="btn btn-danger btn-sm"
                                         {{ $patrocinador->eventoPatrocinador->count() > 0 ? 'disabled' : '' }}>
                                         <i class="bi bi-trash"></i>
                                     </button>
+                                    @component('components.modal')
+                                        @slot('modalId', 'modalEliminarPatrocinador' . $patrocinador->id)
+                                        @slot('modalTitle', 'Eliminar patrocinador')
+                                        @slot('modalContent')
+                                            ¿Esta seguro que quiere eliminar este patrocinador?
+                                        @endslot
+                                        @slot('modalButton')
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                            <button type="button" class="btn btn-danger"
+                                                onclick="eliminarPatrocinador({{ $patrocinador->id }})">Sí</button>
+                                        @endslot
+                                    @endcomponent
                                 </td>
                             </tr>
                         @endforeach

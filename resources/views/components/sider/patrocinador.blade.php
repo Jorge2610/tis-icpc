@@ -10,12 +10,16 @@
         aria-labelledby="panelsStayOpen-headingFour">
         <div class="my-1 ms-3">
             <a href="{{ url('/admin/patrocinador') }}"
-                class="list-group-item list-group-item-action py-2 border-0" id="asignarPatrocinadorSider">
+                class="list-group-item list-group-item-action py-2 border-0" id="crearPatrocinadorSider">
                 Crear patrocinador
             </a>
             <a href="{{ url('admin/patrocinador/eliminar') }}"
-                class="list-group-item list-group-item-action py-2 border-0" id="asignarPatrocinadorSider">
+                class="list-group-item list-group-item-action py-2 border-0" id="eliminarPatrocinadorSider">
                 Eliminar patrocinador
+            </a>
+            <a href="{{ url('admin/patrocinador/asignar') }}"
+                class="list-group-item list-group-item-action py-2 border-0" id="asignarPatrocinadorSider">
+                Asignar patrocinador
             </a>
         </div>
     </div>
