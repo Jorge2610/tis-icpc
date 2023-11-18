@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
     <div class="container">
         <form class="row g-4 needs-validation mt-1" method="POST" novalidate id="formularioCrearEvento">
@@ -14,9 +13,7 @@
                     <h5 id="titulo">Crear evento</h5>
                 @endif
             </div>
-
             <div class="col-md-6 border-end">
-
                 <div class="col-md-12">
                     <label for="nombreDelEvento" class="form-label">Nombre del evento *</label>
                     <input name="nombre" type="text" class="form-control fecha-editar" id="nombreDelEvento"
@@ -26,26 +23,21 @@
                         El nombre no puede estar vacio.
                     </div>
                 </div>
-
                 <div class="row mt-4">
-
                     <div class="col-md-6">
                         <label for="tipoDelEvento" class="form-label">Tipo de evento</label>
                         <!-Cargar tipos de evento->
                             <select name="id_tipo_evento" class="form-select fecha-editar" id="tipoDelEvento"
                                 onchange="datoCambiado()" aria-placeholder="Elija un tipo de evento..."
                                 data-id="{{ $datos['id_tipo_evento'] }}" required>
-
                             </select>
                             <div class="invalid-feedback">
                                 Seleccione un tipo de evento.
                             </div>
                     </div>
-
                     <div class="col-md-6">
-
                         <label for="select-region" class="form-label">Región</label>
-                        <select class="form-select" name="region" id="select-region">
+                        <select class="form-select" name="region" id="select-region" required>
                             @foreach (['Internacional', 'Nacional', 'Departamental'] as $regionDato)
                                 <option value="{{ $regionDato }}" @if ($datos['region'] == $regionDato || 'Departamental' == $regionDato) selected @endif>
                                     {{ $regionDato }}
@@ -56,44 +48,36 @@
                         @endforeach
                     </select>
                 </div>
-
             </div>
-
             <div class="row mt-4">
-
-                <div class="col-md-6">
-                    <div>
-                        <button id="btnGroupDrop1" type="button" class="btn dropdown-toggle"
-                            style="padding: 5px; border: solid 1px black;" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Instituciones admitidas
-                        </button>
-                        <ul class="dropdown-menu " id="ul-institucion" aria-labelledby="btnGroupDrop1"
-                            style="padding: 10px;" data-institucion="{{ $datos['institucion'] }}">
-                            @foreach (['TODAS', 'UMSS', 'UMSA', 'UPSA', 'UCB', 'UPB', 'UNIFRANZ'] as $institucion)
-                                <li @if ($institucion == 'Todas') id="todas-institucion" @endif>
-                                    <input class="form-check-input institucion" type="checkbox"
-                                        value="{{ $institucion }}" id="check-institucion-{{ $institucion }}">
-                                    <label class="form-check-label" for="check-institucion-{{ $institucion }}">
-                                        {{ $institucion }}
-                                    </label>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
+                <div class="col-lg-6 col-md-12 mb-3 ">
+                    <button id="btnGroupDrop1" type="button" class="btn dropdown-toggle w-100 text-start ps-3 pt-2 pb-2 "
+                        style ="border-color: rgb(207, 207, 207)" data-bs-toggle="dropdown" aria-expanded="false">
+                        Instituciones admitidas
+                    </button>
+                    <ul class="dropdown-menu p-3 col-lg-2 col-md-4" id="ul-institucion" aria-labelledby="btnGroupDrop1"
+                        data-institucion="{{ $datos['institucion'] }}">
+                        @foreach (['TODAS', 'UMSS', 'UMSA', 'UPSA', 'UCB', 'UPB', 'UNIFRANZ'] as $institucion)
+                            <li @if ($institucion == 'Todas') id="todas-institucion" @endif>
+                                <input class="form-check-input institucion border-dark" type="checkbox"
+                                    value="{{ $institucion }}" id="check-institucion-{{ $institucion }}">
+                                <label class="form-check-label" for="check-institucion-{{ $institucion }}">
+                                    {{ $institucion }}
+                                </label>
+                            </li>
+                        @endforeach
+                    </ul>
                 </div>
-
-                <div class="col-md-6">
-
-                    <button id="boton-grado" type="button" class="btn dropdown-toggle"
-                        style="padding: 5px; border: solid 1px black;" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="col-lg-6 col-md-12">
+                    <button id="boton-grado" type="button" class="btn dropdown-toggle w-100 text-start ps-3 pt-2 pb-2"
+                        style ="border-color: rgb(207, 207, 207)" data-bs-toggle="dropdown" aria-expanded="false">
                         Grado académico requerido
                     </button>
-                    <ul class="dropdown-menu" id="ul-grado" aria-labelledby="boton-grado" style="padding: 10px;"
+                    <ul class="dropdown-menu p-3 col-lg-2 col-md-4" id="ul-grado" aria-labelledby="boton-grado"
                         data-grado="{{ $datos['grado_academico'] }}">
                         @foreach (['Todas', 'Primaria', 'Secundaria', 'Universidad', 'Licenciatura', 'Maestria', 'Doctorado'] as $grado)
                             <li @if ($grado == 'Todas') id="todas-grado" @endif>
-                                <input class="form-check-input grado-requerido" type="checkbox"
+                                <input class="form-check-input grado-requerido border-dark" type="checkbox"
                                     value="{{ $grado }}" id="input-grado-{{ $grado }}">
                                 <label class="form-check-label" for="input-grado-{{ $grado }}">
                                     {{ $grado }}
@@ -104,7 +88,7 @@
                 </div>
             </div>
 
-            <div class="col-md-12 mt-5">
+            <div class="col-md-12 mt-3">
                 Configuración del evento
             </div>
 
@@ -225,17 +209,17 @@
 
             <div class="row mt-3 ms-3">
 
-                <div class="col-md-2">Inicio</div>
+                <div class="col-md-1 col-sm-3 align-self-center">Inicio:</div>
 
-                <div class="col-md-4">
-                    <input name="inicio_evento" id="fechaInicio" class="form-control" type="datetime-local"
-                        onchange="datoCambiado()" min=""
+                <div class="col-lg-12 col-md-12 col-sm-9">
+                    <input name="inicio_evento" id="fechaInicio" class="form-control fecha-editar"
+                        type="datetime-local" onchange="datoCambiado()" min=""
                         value="{{ isset($datos['inicio_evento']) ? $datos['inicio_evento'] : '' }}" required />
                 </div>
 
-                <div class="col-md-2">Fin</div>
+                <div class="col-md-1 col-sm-3 align-self-center">Fin:</div>
 
-                <div class="col-md-4">
+                <div class="col-lg-12 col-md-12 col-sm-9">
                     <input name="fin_evento" id="fechaFin" class="form-control" type="datetime-local"
                         onchange="datoCambiado()" min=""
                         value="{{ isset($datos['fin_evento']) ? $datos['fin_evento'] : '' }}" required />
@@ -270,7 +254,7 @@
                                 <button type="button" class="btn btn-secondary w-25 mx-8"
                                     data-bs-dismiss="modal">No</button>
                                 <button type="reset" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal"
-                                    onclick="cerrar({{ Route::currentRouteName() == 'evento.editar' }})">Sí</button>
+                                    onclick="cerrar()">Sí</button>
                             @endslot
                         @endcomponent
                 </div>
@@ -304,6 +288,6 @@
     <div class="col-12 mt-4"></div>
 
 </div>
-
 <script src="{{ asset('js/Evento/crearEvento.js') }}" defer></script>
+<script src="{{ asset('js/Evento/validarEvento.js') }}" defer></script>
 @endsection

@@ -116,7 +116,7 @@ const crearPatrocinador = async (formData) => {
 
 const updateTablaPatrocinadores = () => {
     setTimeout(() => {
-        window.location.href = "/admin/patrocinador";
+       // window.location.href = "/admin/patrocinador";
     }, 1700);
 };
 
