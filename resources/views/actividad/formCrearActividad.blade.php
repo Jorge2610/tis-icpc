@@ -3,11 +3,13 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-5" style="min-height: 500px">
+            <div class="col-md-6" style="min-height: 500px">
                 <h2 class="text-center">Crear actividad</h2>
                 <form id="formularioActividad" class="needs-validation" novalidate>
                     @csrf
-                    <input type="hidden" name="evento_id" value="{{$id}}">
+                    <input type="hidden" name="evento_id" value="{{$evento->id}}">
+                    <input type="hidden" id="fecha_evento_inicio" value="{{$evento->inicio_evento}}">
+                    <input type="hidden" id="fecha_evento_fin" value="{{$evento->fin_evento}}">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
@@ -22,8 +24,23 @@
                         </div>
 
                         <div class="row">
+                            <div class="col-md-12">
+                                <label for="tipoDeActividad" class="form-label">Tipo de actividad</label>
+                                <!-Cargar tipos de actividad->
+                                <select name="id_tipo_actividad" class="form-select fecha-editar" id="tipoDeActividad"
+                                    onchange="datoCambiado()" aria-placeholder="Elija un tipo de actividad..."
+                                required>
+
+                                </select>
+                                <div class="invalid-feedback">
+                                    Seleccione un tipo de actividad.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
                             <div class="col-md-12 mt-4 ">
-                                <h6>Duracion de la actividad *</h6>
+                                <label class="form-label">Duración de la actividad *</label>
                             </div>
                             
                             <div class="row mt-3">
@@ -31,15 +48,19 @@
                                 <div class="col-md-1">Inicio</div>
 
                                 <div class="col-md-5">
-                                    <input name="inicio_evento" id="fechaInicio" class="form-control" type="datetime-local"
-                                        onchange="datoCambiado()" min="" required />
+                                    <input name="inicio_evento" id="fechaInicio" class="form-control" type="datetime-local" min="{{$evento->inicio_evento}}" max="{{$evento->fin_evento}}" required />
+                                    <div id="mensajeFechaInicio" class="invalid-feedback">
+                                        
+                                    </div>
                                 </div>
 
                                 <div class="col-md-1">Fin</div>
 
                                 <div class="col-md-5">
-                                    <input name="fin_evento" id="fechaFin" class="form-control" type="datetime-local"
-                                        onchange="datoCambiado()" min="" required />
+                                    <input name="fin_evento" id="fechaFin" class="form-control" type="datetime-local" min="{{$evento->inicio_evento}}" max="{{$evento->fin_evento}}" required />
+                                    <div id="mensajeFechaFin" class="invalid-feedback">
+                                        <!--Aqui entran los mensajes de validacion de fecha-->
+                                    </div>
                                 </div>
 
                             </div>
@@ -53,7 +74,7 @@
                             </div>
                         </div>
                         
-                        <div class="text-center my-5">
+                        <div class="text-center my-4">
                             <button type="reset" class="btn btn-secondary mx-5">Cancelar</button>
                             <button id="confirmarBoton" type="submit" class="btn btn-primary mx-5">Crear</button>
                         </div>

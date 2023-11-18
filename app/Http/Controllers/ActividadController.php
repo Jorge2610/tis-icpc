@@ -32,8 +32,15 @@ class ActividadController extends Controller
             $actividad->fin_actividad = $request->fin_evento;
             $actividad->descripcion = $request->descripcion;
             $actividad->id_evento = $request->evento_id;
+            /**Antes de guardar debemos revisar si el nombre ya existe**/
+            $nombreExistente = Actividad::where('id_evento', $actividad->id_evento)
+            ->where('nombre', $actividad->nombre)
+            ->first();
+            if ($nombreExistente) {
+                return response()->json(['mensaje' => 'La actividad ya existe', 'error' => true]);
+            }
             $actividad->save();
-            return response()->json(['mensaje' => 'Recurso asignado correctamente', 'error' => false]);
+            return response()->json(['mensaje' => 'Actividad creada correctamente', 'error' => false]);
         } catch (QueryException $e) {
             return $e->getMessage();
         }
@@ -53,14 +60,25 @@ class ActividadController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $actividad = new Actividad();
+            /**Obtenemos la actividad con ID**/
+            $actividad = Actividad::find($id);
             $actividad->nombre = $request->nombre;
             $actividad->inicio_actividad = $request->inicio_evento;
             $actividad->fin_actividad = $request->fin_evento;
             $actividad->descripcion = $request->descripcion;
-            $actividad->id_evento = $request->input('id_evento');
+            $actividad->id_evento = $request->evento_id;
+            /**Antes de guardar debemos revisar si el nombre ya existe y que no sea el id del evento
+             * Para eso obtenemos el id del evento al que pertenece esta actividad
+             **/
+            $nombreExistente = Actividad::where('id_evento', $actividad->id_evento)
+            ->whereNot('id',$id)
+            ->where('nombre', $actividad->nombre)
+            ->first();
+            if ($nombreExistente) {
+                return response()->json(['mensaje' => 'La actividad ya existe', 'error' => true]);
+            }
             $actividad->save();
-            return response()->json(['mensaje' => 'Actualizado exitosamente', 'error' => false]);
+            return response()->json(['mensaje' => 'Actualizada exitosamente', 'error' => false]);
         } catch (QueryException $e) {
             return $e->getMessage();
         }
@@ -68,7 +86,8 @@ class ActividadController extends Controller
 
     public function crearActividad($id)
     {
-        return view('actividad.formCrearActividad', ['id' => $id]);
+        $evento = Evento::where('id',$id)->first();
+        return view('actividad.formCrearActividad', ['evento' => $evento]);
     }
     
     public function vistaTablaActividades()

@@ -13,7 +13,6 @@
                             <th scope="col" class="col-sm-0 col-md-3 text-center">Tipo de evento</th>
                             <th scope="col" class="col-sm-3 col-md-2 text-center">Fecha de creación</th>
                             <th scope="col" class="col-sm-3 col-md-2 text-center font-sm">Cantidad de actividades</th>
-                            <th scope="col" class="col-sm-3 col-md-2 text-center font-sm">Crear Actividad</th>
                         </tr>
                     </thead>
                     <tbody id="datosTabla">
@@ -26,12 +25,6 @@
                                 <td class="text-center">{{ date('d-m-Y', strtotime($actividad->created_at)) }}</td>
                                 <td class="text-center" id="contadorRecursos{{ $actividad->id }}">
                                     {{ $actividad->actividades->count() }}</td>
-                                <td class="text-center">
-                                    <button type="button" class="btn btn-primary btn-sm"
-                                            onclick="window.location.href='/admin/actividad/crear-actividad/{{ $actividad->id }}'">
-                                            <i class="bi bi-plus"></i>
-                                    </button>
-                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -46,5 +39,5 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
-    <script src="{{ asset('js/Actividad/verActividad.js') }}" defer></script>
+    <script src="{{ asset('js/Actividad/editarActividad.js') }}" defer></script>
 @endsection

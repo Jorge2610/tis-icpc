@@ -20,7 +20,6 @@ class CreateActividadsTable extends Migration
             $table->dateTime('fin_actividad')->format('d-m-Y');
             $table->text('descripcion', 1000)->nullable();
             $table->foreignId('id_evento')->constrained('eventos')->restrictOnDelete()->cascadeOnUpdate();
-            $table->tinyInteger('estado')->nullable()->default(0);
             $table->timestamps();
         });
     }
