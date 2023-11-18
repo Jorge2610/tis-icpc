@@ -19,7 +19,7 @@ function crearTipoDeActividad() {
                 form.reset();
                 window.location.href = "/admin/tipos-de-actividad";
             } catch (error) {
-                mostrarAlerta("Error", "Hubo un error al guardar el tipo de actividad", "danger");
+                mostrarAlerta("Error", "Error al guardar el tipo de actividad", "danger");
             }
         }
     });
