@@ -17,15 +17,15 @@
                     </thead>
                     <tbody id="datosTabla">
                         @php $contador = 1 @endphp
-                        @foreach ($recursos as $recurso)
-                            <tr onclick="seleccionarEvento({{ $recurso->id }}, '{{ $recurso->nombre }}', event)"
-                                id="{{ $recurso->id }}">
+                        @foreach ($eventos as $evento)
+                            <tr onclick="seleccionarEvento({{ $evento->id }}, '{{ $evento->nombre }}', event)"
+                                id="{{ $evento->id }}">
                                 <th scope="row">{{ $contador++ }}</th>
-                                <td>{{ $recurso->nombre }}</td>
-                                <td class="text-center">{{ $recurso->tipoEvento->nombre }}</td>
-                                <td class="text-center">{{ date('d-m-Y', strtotime($recurso->created_at)) }}</td>
-                                <td class="text-center" id="contadorSitios{{ $recurso->id }}">
-                                    {{ $recurso->recursos->count() }}</td>
+                                <td>{{ $evento->nombre }}</td>
+                                <td class="text-center">{{ $evento->tipoEvento->nombre }}</td>
+                                <td class="text-center">{{ date('d-m-Y', strtotime($evento->created_at)) }}</td>
+                                <td class="text-center" id="contadorSitios{{ $evento->id }}">
+                                    {{ $evento->recursos->count() }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -69,5 +69,5 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
-    <script src="{{ asset('js/subirRecurso.js') }}" defer></script>
+    <script src="{{ asset('js/subirSitio.js') }}" defer></script>
 @endsection

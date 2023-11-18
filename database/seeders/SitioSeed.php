@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
 
-class RecursoSeed extends Seeder
+class SitioSeed extends Seeder
 {
     /**
      * Run the database seeds.
@@ -19,7 +19,7 @@ class RecursoSeed extends Seeder
 
         for ($i = 0; $i < 200; $i++) {
             $currentDateTime = $faker->dateTimeBetween('-1 year', 'now');
-            DB::table('recursos')->insert([
+            DB::table('sitios')->insert([
                 'titulo' => $faker->name(),
                 'enlace' => $faker->url(),
                 'id_evento' => $faker->numberBetween(1, 100),
