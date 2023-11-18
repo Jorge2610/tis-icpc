@@ -7,7 +7,7 @@ const dataTableOptions = {
     pageLength: 10,
     lengthMenu: [5, 10, 15, 20],
     destroy: true,
-    order:[2, 'desc'],
+    order: [2, 'desc'],
     ordering: true,
     language: {
         lengthMenu: "Mostrar _MENU_ eventos",
@@ -44,6 +44,8 @@ window.addEventListener("load", () => {
 
 let seleccionado;
 let idSeleccionado;
+let patrocinadores;
+let quitando = false;
 const seleccionarEvento = async (id, nombre) => {
     if (seleccionado) {
         seleccionado.classList.remove("table-primary");
@@ -52,12 +54,13 @@ const seleccionarEvento = async (id, nombre) => {
     seleccionado.classList.add("table-primary");
     idSeleccionado = id;
     eventoSeleccionado.textContent = nombre;
-    cargarPatrocinadores();  
+    await cargarPatrocinadores();
+    mostrarPatrocinadores();
 };
 
 const cargarPatrocinadores = async () => {
-    let patrocinadoresEvento = await getPatrocinadoresEvento(idSeleccionado);
-    mostrarPatrocinadores(patrocinadoresEvento);
+    let data = await getPatrocinadoresEvento(idSeleccionado);
+    patrocinadores = await data;
 };
 
 const getPatrocinadoresEvento = async (id) => {
@@ -67,10 +70,10 @@ const getPatrocinadoresEvento = async (id) => {
     return data;
 };
 
-const mostrarPatrocinadores = (patrocinadoresEvento) => {
+const mostrarPatrocinadores = () => {
     let div = document.getElementById('divPatrocinadores');
     let content = "";
-    patrocinadoresEvento.map((evento) => {
+    patrocinadores.map((evento) => {
         content += `
             <div class="col text-center">
                 <div class="card" style="height: 13rem">
@@ -80,7 +83,7 @@ const mostrarPatrocinadores = (patrocinadoresEvento) => {
                         <h6 class="card-title text-truncate" title="${evento.patrocinadores.nombre}">
                             ${evento.patrocinadores.nombre}
                         </h6>
-                        <button class="btn btn-danger btn-sm" onclick="quitarPatrocinador(${evento.id})">Quitar</button>
+                        <button class="btn btn-danger btn-sm" onclick="quitarPatrocinador(${evento.id})" ${quitando ? "disabled" : ""}>Quitar</button>
                     </div>
                 </div>
             </div>
@@ -90,15 +93,29 @@ const mostrarPatrocinadores = (patrocinadoresEvento) => {
 };
 
 const quitarPatrocinador = async (idEventoPatrocinador) => {
+    quitando = true;
+    mostrarPatrocinadores();
+    let resultado = await realizarPeticion(idEventoPatrocinador);
+    if (resultado === "Quitado exitosamente") {
+        updateNroPatrocinadores();
+        await cargarPatrocinadores();
+    }
+    setTimeout(() => {
+        quitando = false;
+        mostrarPatrocinadores();
+    }, 2000);
+};
+
+const realizarPeticion = async (idEventoPatrocinador) => {
     let data = await axios.delete("/api/patrocinador/quitar/" + idEventoPatrocinador).then((response) => {
         mostrarAlerta(
             "Éxito",
             response.data.mensaje,
             response.error ? "danger" : "success"
         );
-        updateNroPatrocinadores();
-        cargarPatrocinadores();
+        return response.data.mensaje;
     });
+    return data;
 };
 
 const updateNroPatrocinadores = () => {

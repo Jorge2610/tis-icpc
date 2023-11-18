@@ -8,7 +8,7 @@ const dataTableOptions = {
     pageLength: 10,
     lengthMenu: [5, 10, 15, 20],
     destroy: true,
-    order:[2, 'desc'],
+    order: [2, 'desc'],
     ordering: true,
     language: {
         lengthMenu: "Mostrar _MENU_ eventos",
@@ -53,6 +53,8 @@ const getPatrocinadores = async () => {
 
 let seleccionado;
 let idSeleccionado;
+let asignando = false;
+let patrocinadoresNoAsigandos
 const seleccionarEvento = async (id, nombre) => {
     if (seleccionado) {
         seleccionado.classList.remove("table-primary");
@@ -61,12 +63,13 @@ const seleccionarEvento = async (id, nombre) => {
     seleccionado.classList.add("table-primary");
     idSeleccionado = id;
     eventoSeleccionado.textContent = nombre;
-    cargarPatrocinadores();  
+    await cargarPatrocinadoresNoAsignados();
+    mostrarPatrocinadores();
 };
 
-const cargarPatrocinadores = async () => {
+const cargarPatrocinadoresNoAsignados = async () => {
     let patrocinadoresEvento = await getPatrocinadoresEvento(idSeleccionado);
-    mostrarPatrocinadores(patrocinadoresEvento);
+    patrocinadoresNoAsigandos = getNoAsignados(patrocinadoresEvento);
 };
 
 const getPatrocinadoresEvento = async (id) => {
@@ -76,8 +79,7 @@ const getPatrocinadoresEvento = async (id) => {
     return data;
 };
 
-const mostrarPatrocinadores = (patrocinadoresEvento) => {
-    let patrocinadoresNoAsigandos = getNoAsignados(patrocinadoresEvento);
+const mostrarPatrocinadores = () => {
     let div = document.getElementById('divPatrocinadores');
     let content = "";
     patrocinadoresNoAsigandos.map((patrocinador) => {
@@ -90,7 +92,7 @@ const mostrarPatrocinadores = (patrocinadoresEvento) => {
                         <h6 class="card-title text-truncate" title="${patrocinador.nombre}">
                             ${patrocinador.nombre}
                         </h6>
-                        <button class="btn btn-primary btn-sm" onclick="asignarPatrocinador(${patrocinador.id})">Asignar</button>
+                        <button class="btn btn-primary btn-sm" onclick="asignarPatrocinador(${patrocinador.id})" ${asignando ? "disabled" : ""}>Asignar</button>
                     </div>
                 </div>
             </div>
@@ -113,6 +115,20 @@ const getNoAsignados = (patrocinadoresEvento) => {
 };
 
 const asignarPatrocinador = async (idPatrocinador) => {
+    asignando = true;
+    mostrarPatrocinadores();
+    let res = await realizarPeticion(idPatrocinador);
+    if (res === "Asignado exitosamente") {
+        updateNroPatrocinadores();
+        await cargarPatrocinadoresNoAsignados();
+    }
+    setTimeout(() => {
+        asignando = false;
+        mostrarPatrocinadores();
+    }, 2000);
+};
+
+const realizarPeticion = async (idPatrocinador) => {
     let formData = new FormData();
     formData.append('id_evento', idSeleccionado);
     formData.append('id_patrocinador', idPatrocinador);
@@ -122,9 +138,9 @@ const asignarPatrocinador = async (idPatrocinador) => {
             response.data.mensaje,
             response.error ? "danger" : "success"
         );
-        updateNroPatrocinadores();
-        cargarPatrocinadores();
+        return response.data.mensaje;
     });
+    return data;
 };
 
 const updateNroPatrocinadores = () => {
