@@ -67,5 +67,5 @@ Route::group(['prefix' => 'admin/patrocinador'], function () {
 Route::get('editarEvento', [EventoController::class, 'showEditEventForm']);
 
 Route::group(['prefix' => 'admin/tipos-de-actividad'], function () {
-    Route::view('/crear-tipo', 'actividad.crearTipoDeActividad')->name('crear-tipo');
+    Route::view('/crear-tipo', 'actividad.crearTipoActividad')->name('crear-tipo');
 });
