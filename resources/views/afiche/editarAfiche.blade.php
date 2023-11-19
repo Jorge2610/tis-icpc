@@ -46,7 +46,7 @@
                         @slot('modalId', 'modalCambiarAfiche')
                         @slot('modalTitle', 'Confirmacion')
                         @slot('modalContent')
-                            ¿Estas seguro de cambiar el afiche?
+                            ¿Está seguro de cambiar el afiche?
                         @endslot
                         @slot('modalButton')
                             <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal"
