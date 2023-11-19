@@ -35,8 +35,15 @@
                                     <button type="button" class="btn btn-danger btn-sm"
                                         onclick="setEventoId({{ $evento->id }})" id="botonAccion" style="min-width: 80px;"
                                         data-bs-toggle="modal"
-                                        data-bs-target="{{ strtotime($evento->inicio_inscripcion) > time() ? '#modalCancelar' : '#modalAnular' }}">
-                                        {{ strtotime($evento->inicio_inscripcion) > time() ? 'Cancelar' : 'Anular' }}
+                                        data-bs-target={{($anular)? "#modalAnular":"#modalCancelar"}}
+                                        @if($anular)
+                                            {{ strtotime($evento->inicio_evento) <= time() && 
+                                                strtotime($evento->fin_evento) >= time()? '' : 'disabled' }} 
+                                        @else
+                                            {{ strtotime($evento->inicio_evento) < time() ? 'disabled':'' }} 
+                                        @endif    
+                                        > 
+                                    {{($anular)?'anular':'cancelar'}}
                                     </button>
                                 </td>
                             </tr>
