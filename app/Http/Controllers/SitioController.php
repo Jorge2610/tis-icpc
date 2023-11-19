@@ -16,10 +16,10 @@ class SitioController extends Controller
     }
 
 
-    public function eventosConSitiosInteres()
+    public function eventosConSitios()
     {
         $eventos = Evento::where('estado', 0)->with('sitios')->get();
-        return view('eventos.subirSitio', ['eventos' => $eventos]);
+        return view('sitiosInteres.subirSitio', ['eventos' => $eventos]);
     }
 
     public function show($id)

@@ -6,6 +6,7 @@ use App\Http\Controllers\EventoController;
 use App\Http\Controllers\TipoEventoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RecursoController;
+use App\Http\Controllers\SitioController;
 use App\Models\Recurso;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -42,7 +43,7 @@ Route::group(['prefix' => 'admin/eventos'], function () {
     Route::get('afiche', [AficheController::class, 'vistaTablaEventos'])->name('afiche.tablaEventos');
     Route::get('patrocinador', [PatrocinadorController::class, 'vistaTablaEventos'])->name('patrocinador.tablaEventos');
     Route::get('patrocinador/eliminar', [PatrocinadorController::class, 'vistaTablaEventosEliminar'])->name('patrocinador.tablaEventosEliminar');
-    Route::get('recurso', [RecursoController::class, 'eventosConRecurso'])->name('material.tablaEventos');
+    Route::get('sitio', [SitioController::class, 'eventosConSitios'])->name('sitio.tablaEventos');
 });
 
 Route::group(['prefix' => 'eventos'], function () {

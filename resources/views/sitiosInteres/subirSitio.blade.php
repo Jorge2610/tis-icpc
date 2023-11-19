@@ -16,7 +16,9 @@
                         </tr>
                     </thead>
                     <tbody id="datosTabla">
-                        @php $contador = 1 @endphp
+                        @php
+                            $contador = 1;
+                        @endphp
                         @foreach ($eventos as $evento)
                             <tr onclick="seleccionarEvento({{ $evento->id }}, '{{ $evento->nombre }}', event)"
                                 id="{{ $evento->id }}">
@@ -25,7 +27,7 @@
                                 <td class="text-center">{{ $evento->tipoEvento->nombre }}</td>
                                 <td class="text-center">{{ date('d-m-Y', strtotime($evento->created_at)) }}</td>
                                 <td class="text-center" id="contadorSitios{{ $evento->id }}">
-                                    {{ $evento->recursos->count() }}</td>
+                                    {{ $evento->sitios->count() }}</td>
                             </tr>
                         @endforeach
                     </tbody>
