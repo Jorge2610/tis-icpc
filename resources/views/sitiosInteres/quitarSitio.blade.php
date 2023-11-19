@@ -33,33 +33,13 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-sm-12 col-md-4">
-                <div class="container d-flex flex-column justify-content-center align-items-center border p-3">
+            <div class="col-sm-12 col-md-4" >
+                <div class="container d-flex flex-column justify-content-center align-items-center border p-3" >
                     <div class="col-12 d-flex justify-content-center align-items-center">
-                        <h4>Asignar sitio de interes</h4>
+                        <h4>Quitar sitio de interes</h4>
                     </div>
                     <h5 id="nombreEvento" class="text-center fw-bold"></h5>
-                    <form class="needs-validation" novalidate id="formularioAgregarSitio">
-                        <div class="col-md-12 mt-2">
-                            <label for="tituloSitio" class="form-label">Titulo</label>
-                            <input name="titulo" type="text" class="form-control custom-input" id="tituloSitio"
-                                value="" placeholder="Ingrese un titulo" required>
-                            <div class="invalid-feedback">
-                                El titulo no puede estar vacio.
-                            </div>
-                        </div>
-
-                        <div class="col-md-12 mt-2">
-                            <label for="urlSitio" class="form-label">Enlace al sitio</label>
-                            <input name="enlace" type="url" class="form-control custom-input" id="urlSitio"
-                                value="" placeholder="https://www.ejemplo.com" required>
-                        </div>
-                    </form>
-                    <div class="d-flex justify-content-center mt-3 gap-3">
-                        <button type="button" class="btn btn-light" onclick="resetInputs()"
-                            id="asignarSitioCancelar">Cancelar</button>
-                        <button type="button" class="btn btn-primary" onclick="validarDatos()"
-                            id="asignarSitioAsignar">Asignar</button>
+                    <div id="sitiosContenedor" style="height:48vh; overflow-y: scroll;">
                     </div>
                 </div>
             </div>
@@ -71,5 +51,5 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
-    <script src="{{ asset('js/SitiosInteres/subirSitio.js') }}" defer></script>
+    <script src="{{ asset('js/SitiosInteres/quitarSitio.js') }}" defer></script>
 @endsection

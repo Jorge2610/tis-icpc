@@ -4,7 +4,7 @@ namespace App\View\Components\sider;
 
 use Illuminate\View\Component;
 
-class tipo-evento extends Component
+class sitiosInteres extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class tipo-evento extends Component
      */
     public function render()
     {
-        return view('components.sider.tipo-evento');
+        return view('components.sider.sitios-interes');
     }
 }

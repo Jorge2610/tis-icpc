@@ -22,9 +22,15 @@ class SitioController extends Controller
         return view('sitiosInteres.subirSitio', ['eventos' => $eventos]);
     }
 
+    public function eventosConSitiosQuitar()
+    {
+        $eventos = Evento::where('estado', 0)->with('sitios')->get();
+        return view('sitiosInteres.quitarSitio', ['eventos' => $eventos]);
+    }
+
     public function show($id)
     {
-        $sitios = Sitio::find($id);
+        $sitios = Evento::find($id)->sitios;
         return $sitios;
     }
 

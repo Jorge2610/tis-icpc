@@ -106,15 +106,15 @@
         </div>
 
         <div class="col-md-2">
-            @if ($evento->recursos->count() > 0)
+            @if ($evento->sitios->count() > 0)
                 <div class="col-12">
                     <h4 class="">Enlaces de interés: </h4>
                 </div>
 
                 <div class="row mb-5 d-flex">
-                    @foreach ($evento->recursos as $recurso)
-                        <a href="{{ $recurso->enlace }}" class="text-decoration-none text-primary fs-6 mt-2 text-truncate"
-                            title="{{ $recurso->enlace }}" target="_blank"> {{ $recurso->titulo }}</a>
+                    @foreach ($evento->sitios as $sitio)
+                        <a href="{{ $sitio->enlace }}" class="text-decoration-none text-primary fs-6 mt-2 text-truncate"
+                            title="{{ $sitio->enlace }}" target="_blank"> {{ $sitio->titulo }}</a>
                     @endforeach
 
                 </div>

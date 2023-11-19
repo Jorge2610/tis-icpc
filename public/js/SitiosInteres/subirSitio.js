@@ -78,7 +78,7 @@ const crearFormData = (form) => {
     const formData = new FormData(form);
     formData.append("id_evento", idSeleccionado);
     axios
-        .post("/api/recurso", formData)
+        .post("/api/sitio", formData)
         .then((response) => {
             mostrarAlerta(
                 "Éxito",

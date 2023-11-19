@@ -45,6 +45,7 @@ Route::group(['prefix' => 'admin/eventos'], function () {
     Route::get('patrocinador', [PatrocinadorController::class, 'vistaTablaEventos'])->name('patrocinador.tablaEventos');
     Route::get('patrocinador/eliminar', [PatrocinadorController::class, 'vistaTablaEventosEliminar'])->name('patrocinador.tablaEventosEliminar');
     Route::get('sitio', [SitioController::class, 'eventosConSitios'])->name('sitio.tablaEventos');
+    Route::get('sitio/quitar', [SitioController::class, 'eventosConSitiosQuitar'])->name('sitio.tablaEventosizar');
 });
 
 Route::group(['prefix' => 'eventos'], function () {

@@ -20,12 +20,8 @@ class DatabaseSeeder extends Seeder
             EventoSeeder::class,
             AficheSeeder::class,
             PatrocinadorSeed::class,
-<<<<<<< HEAD
-            RecursoSeed::class,
-            EventoPatrocinadorSeeder::class
-=======
+            EventoPatrocinadorSeeder::class,
             SitioSeed::class
->>>>>>> refactorizadoSubirSitio
         ]);
     }
 }

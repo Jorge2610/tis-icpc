@@ -4,7 +4,7 @@ namespace App\View\Components\sider;
 
 use Illuminate\View\Component;
 
-class patrocinador extends Component
+class Patrocinador extends Component
 {
     /**
      * Create a new component instance.
