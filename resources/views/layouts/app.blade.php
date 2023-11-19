@@ -83,6 +83,7 @@
                         <div class="accordion" id="menuLateral" >
                             <x-sider.tipo-evento/>
                             <x-sider.evento/>
+                            <x-sider.actividad/>
                             <x-sider.afiche/>
                             <x-sider.patrocinador/>
                             <x-sider.sitios-interes/>

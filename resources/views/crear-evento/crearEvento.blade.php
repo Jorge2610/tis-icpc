@@ -245,7 +245,7 @@
                             @slot('modalTitle', 'Confirmacion')
                             @slot('modalContent')
                                 @if (Route::currentRouteName() == 'evento.editar')
-                                    ¿Está seguro de cancelar la edicion del evento?
+                                    ¿Está seguro de cancelar la edición del evento?
                                 @else
                                     ¿Está seguro de cancelar el evento?
                                 @endif

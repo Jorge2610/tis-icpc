@@ -66,5 +66,5 @@ window.addEventListener("load", async () => {
 const recargarEventos = () => {
      setTimeout(() => {
          window.location.href = "/admin/tipos-de-evento/eliminar-tipo";
-     }, 1800);
+     },1700);
  }

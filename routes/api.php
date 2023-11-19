@@ -8,6 +8,7 @@ use App\Http\Controllers\EventoController;
 use App\Http\Controllers\PatrocinadorController;
 use App\Http\Controllers\SitioController;
 use App\Http\Controllers\TipoActividadController;
+use App\Http\Controllers\ActividadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,4 +79,11 @@ Route::group(['prefix' => 'tipo-actividad'], function () {
     Route::post('', [TipoActividadController::class, 'store'])->name('tipo-actividad.store');
     Route::post('{id}', [TipoActividadController::class, 'update'])->name('tipo-actividad.update');
     Route::delete('{id}', [TipoActividadController::class, 'destroy'])->name('tipo-actividad.destroy');
+});
+Route::group(['prefix' => 'actividad'], function () {
+    Route::get('', [ActividadController::class, 'index'])->name('actividad.index');
+    Route::get('{id}', [ActividadController::class, 'show'])->name('actividad.show');
+    Route::post('', [ActividadController::class, 'store'])->name('actividad.store');
+    Route::post('{id}', [ActividadController::class, 'update'])->name('actividad.update');
+    Route::delete('{id}', [ActividadController::class, 'destroy'])->name('actividad.destroy');
 });
