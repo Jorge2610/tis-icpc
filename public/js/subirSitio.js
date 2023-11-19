@@ -1,10 +1,10 @@
 let tablaDeTipos;
 let tablaInicializada = false;
 
-const tituloRecurso = document.getElementById("tituloRecurso");
-const urlRecurso = document.getElementById("urlRecurso");
-const cancelar = document.getElementById("asignarRecursoCancelar");
-const asignar = document.getElementById("asignarRecursoAsignar");
+const tituloSitio = document.getElementById("tituloSitio");
+const urlSitio = document.getElementById("urlSitio");
+const cancelar = document.getElementById("asignarSitioCancelar");
+const asignar = document.getElementById("asignarSitioAsignar");
 const eventoSeleccionado = document.getElementById("nombreEvento");
 
 const dataTableOptions = {
@@ -42,8 +42,8 @@ window.addEventListener("load", () => {
     initDataTable();
     if (!seleccionado) {
         eventoSeleccionado.textContent = "Selecciona un evento";
-        tituloRecurso.disabled = true;
-        urlRecurso.disabled = true;
+        tituloSitio.disabled = true;
+        urlSitio.disabled = true;
         cancelar.disabled = true;
         asignar.disabled = true;
     }
@@ -55,8 +55,8 @@ const seleccionarEvento = (id, nombre) => {
     if (seleccionado) {
         seleccionado.classList.remove("table-primary");
     }
-    tituloRecurso.disabled = false;
-    urlRecurso.disabled = false;
+    tituloSitio.disabled = false;
+    urlSitio.disabled = false;
     cancelar.disabled = false;
     asignar.disabled = false;
     seleccionado = document.getElementById(id);
@@ -66,7 +66,7 @@ const seleccionarEvento = (id, nombre) => {
 };
 
 const validarDatos = () => {
-    const form = document.getElementById("formularioAgregarRecurso");
+    const form = document.getElementById("formularioAgregarSitio");
     if (form.checkValidity()) {
         form.classList.remove("was-validated");
         crearFormData(form);
@@ -94,14 +94,14 @@ const crearFormData = (form) => {
 };
 
 const sumarContador = async () => {
-    const contadorRecursos = document.getElementById(
-        `contadorRecursos${idSeleccionado}`
+    const contadorSitios = document.getElementById(
+        `contadorSitios${idSeleccionado}`
     );
-    contadorRecursos.textContent = parseInt(contadorRecursos.textContent) + 1;
+    contadorSitios.textContent = parseInt(contadorSitios.textContent) + 1;
 };
 const resetInputs = () => {
-    let form = document.getElementById("formularioAgregarRecurso");
+    let form = document.getElementById("formularioAgregarSitio");
     form.classList.remove("was-validated");
-    tituloRecurso.value = "";
-    urlRecurso.value = "";
+    tituloSitio.value = "";
+    urlSitio.value = "";
 };

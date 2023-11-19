@@ -9,9 +9,9 @@
     <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse"
         aria-labelledby="panelsStayOpen-headingFive">
         <div class="my-1 ms-3">
-            <a href="{{ url('/admin/eventos/recurso') }}" class="list-group-item list-group-item-action py-2 border-0"
+            <a href="{{ url('/admin/eventos/sitio') }}" class="list-group-item list-group-item-action py-2 border-0"
                 id="subirMaterialSider">
-                Subir recurso
+                Subir sitio de interes
             </a>
         </div>
     </div>

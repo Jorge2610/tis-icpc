@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Afiche;
-use App\Models\Patrocinador;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,8 +20,12 @@ class DatabaseSeeder extends Seeder
             EventoSeeder::class,
             AficheSeeder::class,
             PatrocinadorSeed::class,
+<<<<<<< HEAD
             RecursoSeed::class,
             EventoPatrocinadorSeeder::class
+=======
+            SitioSeed::class
+>>>>>>> refactorizadoSubirSitio
         ]);
     }
 }

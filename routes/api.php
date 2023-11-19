@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TipoEventoController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\PatrocinadorController;
-use App\Http\Controllers\RecursoController;
+use App\Http\Controllers\SitioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,10 +63,10 @@ Route::group(['prefix' => 'afiche'], function () {
     Route::get('/{id}', [AficheController::class, 'showPorEventoId'])->name('eventos.showPorEventoId');
 });
 
-Route::group(['prefix' => 'recurso'], function () {
-    Route::get('', [RecursoController::class, 'index'])->name('recurso.index');
-    Route::get('{id}', [RecursoController::class, 'show'])->name('recurso.show');
-    Route::post('', [RecursoController::class, 'store'])->name('recurso.store');
-    Route::post('{id}', [RecursoController::class, 'update'])->name('recurso.update');
-    Route::delete('{id}', [RecursoController::class, 'destroy'])->name('recurso.destroy');
+Route::group(['prefix' => 'sitio'], function () {
+    Route::get('', [SitioController::class, 'index'])->name('sitio.index');
+    Route::get('{id}', [SitioController::class, 'show'])->name('sitio.show');
+    Route::post('', [SitioController::class, 'store'])->name('sitio.store');
+    Route::post('{id}', [SitioController::class, 'update'])->name('sitio.update');
+    Route::delete('{id}', [SitioController::class, 'destroy'])->name('sitio.destroy');
 });
