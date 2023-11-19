@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-6" style="min-height: 500px">
+            <div class="col-md-4" style="min-height: 500px">
                 <h2 class="text-center">Crear actividad</h2>
                 <form id="formularioActividad" class="needs-validation" novalidate>
                     @csrf
@@ -44,25 +44,21 @@
                             </div>
                             
                             <div class="row mt-3">
-
-                                <div class="col-md-1">Inicio</div>
-
-                                <div class="col-md-5">
+                                <div class="col-md-1 ml-2">Inicio</div>
+                                <div class="col-md-10 mr-2">
                                     <input name="inicio_evento" id="fechaInicio" class="form-control" type="datetime-local" min="{{$evento->inicio_evento}}" max="{{$evento->fin_evento}}" required />
-                                    <div id="mensajeFechaInicio" class="invalid-feedback">
-                                        
-                                    </div>
+                                    <div id="mensajeFechaInicio" class="invalid-feedback"></div>
                                 </div>
+                            </div>
 
+                            <div class="row mt-3">
                                 <div class="col-md-1">Fin</div>
-
-                                <div class="col-md-5">
+                                <div class="col-md-10">
                                     <input name="fin_evento" id="fechaFin" class="form-control" type="datetime-local" min="{{$evento->inicio_evento}}" max="{{$evento->fin_evento}}" required />
                                     <div id="mensajeFechaFin" class="invalid-feedback">
                                         <!--Aqui entran los mensajes de validacion de fecha-->
                                     </div>
                                 </div>
-
                             </div>
                         </div>
 
