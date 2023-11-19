@@ -1,35 +1,60 @@
+const form = document.getElementById("formularioActividad");
+const inputNombre = document.getElementById('nombreActividad')
+const mensajeNombre = document.getElementById('mensajeNombre')
+const fechaEventoInicio = document.getElementById("fechaEventoInicio");
+const fechaEventoFin = document.getElementById("fechaEventoFin");
+const fechaInicio = document.getElementById("fechaInicio");
+const fechaFin = document.getElementById("fechaFin");
+const mensajeFechaInicio = document.getElementById("mensajeFechaInicio");
+const mensajeFechaFin = document.getElementById("mensajeFechaFin");
+
 /**PETICIONES a AXIOS**/
 /**CREAR ACTIVIDAD**/
-const crearActividad = () => {
-    const form = document.getElementById("formularioActividad");
-    form.addEventListener("submit", async function (event) {
-        event.preventDefault();
-        form.classList.add("was-validated");
-
-        if (!form.checkValidity()) {
-            event.stopPropagation();
-        } else {
-            const formData = new FormData(this);
-            try {
-                const response = await axios.post("/api/actividad", formData);
-                mostrarAlerta(
-                    "Éxito",
-                    response.data.mensaje,
-                    response.data.error ? "danger" : "success"
-                );
-                form.classList.remove("was-validated");
-                form.reset();
-                if(response.data.error != "danger"){
-                    window.location.href = "/admin/actividad";
+const crearActividad = (formData) => {
+    axios.post("/api/actividad", formData)
+    .then(function(response){
+        const mensaje = response.data.mensaje
+        const nombreIgual = 'La actividad ya existe'
+        mostrarAlerta(
+            "Éxito",
+            mensaje,
+            response.data.error ? "danger" : "success"
+        );
+        if(mensaje === nombreIgual){
+            inputNombre.classList.remove('is-valid')
+            inputNombre.classList.add('is-invalid')
+            mensajeNombre.innerHTML = 'La actividad ya existe'
+        }else{
+            form.querySelectorAll(".form-control, .form-select").forEach(
+                (Element) => {
+                    Element.classList.remove("is-valid");
                 }
-            } catch (error) {
-                mostrarAlerta("Error", "Hubo un error al guardar la actividad", "danger");
+            );
+            form.reset();
+            if(response.data.error != "danger"){
+                window.location.href = "/admin/actividad";
             }
         }
+    })
+    .catch (function(error) {
+        mostrarAlerta("Error", "Hubo un error al guardar la actividad", "danger");
     });
 }
 
-document.addEventListener("DOMContentLoaded", crearActividad);
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    form.querySelectorAll(".form-control, .form-select").forEach((Element) => {
+        Element.dispatchEvent(new Event("change"));
+    });
+    if(validar()){
+        const formData = new FormData(form);
+        crearActividad(formData);
+    }
+});
+
+const validar = () => {
+    return form.querySelector(".is-invalid") === null;
+};
 
 /**EDITAR ACTIVIDAD**/
 
@@ -46,27 +71,12 @@ window.addEventListener("load", () => {
                 option.text = tipo.nombre;
                 select.appendChild(option);
             });
-            /*
-            const idTipoActividad = document
-                .getElementById("tipoDeActividad")
-                .getAttribute("data-id");
-            if (idTipoActividad != "") {
-                select.value = idTipoActividad;
-            }*/
         })
         .catch(function (error) {
             console.error(error);
         });
 });
 
-/**VALIDACIONES**/
-const fechaEventoInicio = document.getElementById("fechaEventoInicio");
-const fechaEventoFin = document.getElementById("fechaEventoFin");
-const fechaInicio = document.getElementById("fechaInicio");
-const fechaFin = document.getElementById("fechaFin");
-const form = document.getElementById("formularioActividad");
-const mensajeFechaInicio = document.getElementById("mensajeFechaInicio");
-const mensajeFechaFin = document.getElementById("mensajeFechaFin");
 
 //Agregar validación a los inputs
 form.querySelectorAll(".form-control, .form-select").forEach((Element) => {
@@ -142,8 +152,8 @@ fechaFin.addEventListener("change", () => {
     }else {
         //Quitamos todos los mensajes y validamos
         mensajeFechaFin.innerHTML = "";
-        fechaInicio.classList.remove("is-invalid");
-        fechaInicio.classList.add("is-valid");
+        fechaFin.classList.remove("is-invalid");
+        fechaFin.classList.add("is-valid");
     }
 });
 

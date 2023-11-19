@@ -17,7 +17,7 @@
                                 <input name="nombre" type="text" class="form-control custom-input" id="nombreActividad"
                                     value="" required placeholder="Ingrese el nombre de la actividad"
                                     maxlength="64">
-                                <div class="invalid-feedback">
+                                <div id="mensajeNombre" class="invalid-feedback">
                                     El nombre no puede estar vacio.
                                 </div>
                             </div>
@@ -27,7 +27,7 @@
                             <div class="col-md-12">
                                 <label for="tipoDeActividad" class="form-label">Tipo de actividad</label>
                                 <!-Cargar tipos de actividad->
-                                <select name="id_tipo_actividad" class="form-select fecha-editar" id="tipoDeActividad"
+                                <select name="id_tipo_actividad" class="form-select" id="tipoDeActividad"
                                     onchange="datoCambiado()" aria-placeholder="Elija un tipo de actividad..."
                                 required>
 
