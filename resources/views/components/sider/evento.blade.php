@@ -19,6 +19,10 @@
                 class="list-group-item list-group-item-action py-2 border-0" id="cancelarEventoSider">
                 Cancelar evento
             </a>
+            <a href="{{url('/admin/eventos/anular-evento')}}"
+            class="list-group-item list-group-item-action py-2 border-0" id="cancelarEventoSider">
+                Anular evento
+            </a>
         </div>
     </div>
 </div>

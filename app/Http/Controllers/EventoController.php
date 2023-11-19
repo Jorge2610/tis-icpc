@@ -201,7 +201,8 @@ class EventoController extends Controller
     public function eventosValidos()
     {
         $eventos = Evento::where('estado', 0)->get();
-        return view('eventos.cancelarEvento', ['eventos' => $eventos]);
+        $anular = false;
+        return view('eventos.cancelarEvento', ['eventos' => $eventos,'anular'=>$anular]);
     }
 
     public function subirRespaldo(Request $request)
@@ -219,4 +220,12 @@ class EventoController extends Controller
             ->get();
         return view('crear-evento.editarEvento', ['eventos' => $eventos]);
     }
+
+    public function eventosValidosAnular()
+    {
+        $eventos = Evento::where('estado', 0)->get();
+        $anular = true;
+        return view('eventos.cancelarEvento', ['eventos' => $eventos, 'anular'=>$anular]);
+    }
+    
 }
