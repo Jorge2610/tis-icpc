@@ -15,9 +15,14 @@ function crearTipoEvento() {
                     response.data.mensaje,
                     response.data.error ? "danger" : "success"
                 );
-                form.classList.remove("was-validated");
-                form.reset();
-                window.location.href = "/admin/tipos-de-evento";
+                if(response.data.mensaje === 'El tipo de evento ya existe'){
+                    const inputNombre = document.getElementById("nombreTipoEvento")  
+                    inputNombre.classList.remove("is-valid")  
+                }else{
+                    form.classList.remove("was-validated");
+                    form.reset();
+                    window.location.href = "/admin/tipos-de-evento";
+                }
             } catch (error) {
                 mostrarAlerta("Error", "Hubo un error al guardar el tipo de evento", "danger");
             }
