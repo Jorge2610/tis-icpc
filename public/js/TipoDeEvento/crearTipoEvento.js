@@ -17,7 +17,8 @@ function crearTipoEvento() {
                 );
                 if(response.data.mensaje === 'El tipo de evento ya existe'){
                     const inputNombre = document.getElementById("nombreTipoEvento")  
-                    inputNombre.classList.remove("is-valid")  
+                    inputNombre.classList.remove("is-valid")
+                    inputNombre.classList.remove("is-invalid")    
                 }else{
                     form.classList.remove("was-validated");
                     form.reset();

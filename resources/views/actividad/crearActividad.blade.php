@@ -20,7 +20,7 @@
                     <tbody id="datosTabla">
                         @php $contador = 1 @endphp
                         @foreach ($actividades as $actividad)
-                            @if (strtotime($actividad->inicio_evento) <= time())
+                            @if (strtotime($actividad->fin_evento) <= time())
                             @else
                                 <tr>
                                     <th scope="row">{{ $contador++ }}</th>

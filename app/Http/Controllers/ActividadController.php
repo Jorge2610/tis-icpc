@@ -32,6 +32,7 @@ class ActividadController extends Controller
             $actividad->fin_actividad = $request->fin_evento;
             $actividad->descripcion = $request->descripcion;
             $actividad->id_evento = $request->evento_id;
+            $actividad->id_tipo_actividad = $request->id_tipo_actividad;
             /**Antes de guardar debemos revisar si el nombre ya existe**/
             $nombreExistente = Actividad::where('id_evento', $actividad->id_evento)
             ->where('nombre', $actividad->nombre)
@@ -67,6 +68,7 @@ class ActividadController extends Controller
             $actividad->fin_actividad = $request->fin_evento;
             $actividad->descripcion = $request->descripcion;
             $actividad->id_evento = $request->evento_id;
+            $actividad->id_tipo_actividad = $request->id_tipo_actividad;
             /**Antes de guardar debemos revisar si el nombre ya existe y que no sea el id del evento
              * Para eso obtenemos el id del evento al que pertenece esta actividad
              **/
