@@ -15,7 +15,7 @@
                 id="editarActividadSider">
                 Editar actividad
             </a>
-            <a href="{{ url('') }}"
+            <a href="{{ url('/admin/actividad/eliminar') }}"
                 class="list-group-item list-group-item-action py-2 border-0" id="eliminaActividadSider">
                 Eliminar actividad
             </a>

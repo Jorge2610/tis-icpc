@@ -19,7 +19,7 @@ class EventoController extends Controller
 
     public function cargarEventos()
     {
-        $eventos = Evento::where('estado', 0)->with('tipoEvento', 'afiches')
+        $eventos = Evento::where('estado', 0)->with('tipoEvento', 'afiches', 'actividades')
             ->orderBy('updated_at', 'desc')
             ->get();
         return view('eventos.eventos', ['eventos' => $eventos]);

@@ -97,4 +97,25 @@ class ActividadController extends Controller
         $actividades =  Evento::where('estado', 0)->with('actividades')->get();
         return view('actividad.crearActividad', ['actividades' => $actividades]);
     }
+
+    public function listarEventos()
+    {
+        $eventos =  Evento::where('estado', 0)->with('actividades')->get();
+        return view('actividad.eliminarActividad', ['eventos' => $eventos]);
+    }
+
+    public function obtenerActividades($eventoId){
+        $actividades = Actividad::where('id_evento', $eventoId)->get();
+        return view('actividad.eliminarActividad', ['actividades' => $actividades]);
+    }
+
+    public function actividadPorEventoId($id)
+    {
+        try {
+            $actividad = Actividad::where('id_evento', $id)->get();
+            return $actividad;
+        } catch (QueryException $e) {
+            return $e->getMessage();
+        }
+    }
 }
