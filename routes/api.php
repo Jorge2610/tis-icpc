@@ -27,7 +27,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'tipo-evento'], function () {
     Route::get('/', [TipoEventoController::class, 'index'])->name('tipo-eventos.index');
     Route::get('{id}', [TipoEventoController::class, 'show'])->name('tipo-eventos.show');
-    Route::post('/', [TipoEventoController::class, 'store'])->name('tipo-eventos.store');
+    Route::post('/', [TipoEventoController::class, 'store'])->name('tipo-eventos.store');   
     Route::post('actualizar/{id}', [TipoEventoController::class, 'update'])->name('tipo-eventos.update');
     Route::delete('{id}', [TipoEventoController::class, 'destroy'])->name('tipo-eventos.destroy');
 });
@@ -77,4 +77,6 @@ Route::group(['prefix' => 'actividad'], function () {
     Route::post('', [ActividadController::class, 'store'])->name('actividad.store');
     Route::post('{id}', [ActividadController::class, 'update'])->name('actividad.update');
     Route::delete('{id}', [ActividadController::class, 'destroy'])->name('actividad.destroy');
+    Route::get('/obtener-actividad/{id}',[ActividadController::class,'obtenerActividades'])->name('actividad.obtener-actividad');
+    Route::get('/{id}', [ActividadController::class, 'actividadPorEventoId'])->name('actividad.actividadPorEventoId');
 });
