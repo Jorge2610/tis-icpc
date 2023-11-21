@@ -2,18 +2,21 @@
 
 @section('content')
     <div class="container">
+      <div class="row mb-2">
+            <h4>Crear actividad</h4>
+        </div>
         <div class="row g-5">
-            <div class="col-sm-12 col-md-11">
+            <div class="col-sm-12 col-md-12">
                 <table class="table table-responsive table-striped text-secondary" id="tablaEvento">
                     <caption>actividades</caption>
                     <thead>
                         <tr>
                             <th scope="col" class="col-sm-2 col-md-1">#</th>
-                            <th scope="col" class="col-sm-3 col-md-4">Nombre del evento</th>
+                            <th scope="col" class="col-sm-3 col-md-3">Nombre del evento</th>
                             <th scope="col" class="col-sm-0 col-md-3 text-center">Tipo de evento</th>
                             <th scope="col" class="col-sm-3 col-md-2 text-center">Fecha inicio</th>
                             <th scope="col" class="col-sm-3 col-md-2 text-center">Fecha fin</th>
-                            <th scope="col" class="col-sm-3 col-md-2 text-center font-sm">Cantidad de actividades</th>
+                            <th scope="col" class="col-sm-3 col-md-3 text-center font-sm">Cantidad de actividades</th>
                             <th scope="col" class="col-sm-3 col-md-2 text-center font-sm">Crear Actividad</th>
                         </tr>
                     </thead>
