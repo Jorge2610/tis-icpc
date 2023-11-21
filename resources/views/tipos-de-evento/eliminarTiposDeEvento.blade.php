@@ -54,7 +54,7 @@
                                         @slot('modalId', 'modalEliminarTipoEvento' . $tipoDeEvento->id)
                                         @slot('modalTitle', 'Eliminar tipo de evento')
                                         @slot('modalContent')
-                                            Esta seguro que quiere eliminar este tipo de evento?
+                                            ¿Está seguro de eliminar este tipo de evento?
                                         @endslot
                                         @slot('modalButton')
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
