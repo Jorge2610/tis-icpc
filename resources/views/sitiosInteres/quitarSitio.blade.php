@@ -36,7 +36,7 @@
             <div class="col-sm-12 col-md-4" >
                 <div class="container d-flex flex-column justify-content-center align-items-center border p-3" >
                     <div class="col-12 d-flex justify-content-center align-items-center">
-                        <h4>Quitar sitio de interes</h4>
+                        <h4>Quitar sitio de interés</h4>
                     </div>
                     <h5 id="nombreEvento" class="text-center fw-bold"></h5>
                     <div id="sitiosContenedor" style="height:48vh; overflow-y: scroll;">
