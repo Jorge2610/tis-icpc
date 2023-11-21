@@ -4,6 +4,7 @@
     <div class="container">
         <div class="row g-5">
             <div class="col-sm-12 col-md-8">
+                <h2>Eliminar actividad</h2>
                 <table class="table table-responsive table-striped text-secondary table-hover cursor" id="tablaEvento">
                     <caption>eventos</caption>
                     <thead>
