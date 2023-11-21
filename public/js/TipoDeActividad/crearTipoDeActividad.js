@@ -17,7 +17,7 @@ function crearTipoDeActividad() {
                 );
                 form.classList.remove("was-validated");
                 form.reset();
-                window.location.href = "/admin/tipos-de-actividad";
+                window.location.href = "/admin/tipo-de-actividad";
             } catch (error) {
                 mostrarAlerta("Error", "Error al guardar el tipo de actividad", "danger");
             }
