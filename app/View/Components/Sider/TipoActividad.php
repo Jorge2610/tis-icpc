@@ -4,7 +4,7 @@ namespace App\View\Components\sider;
 
 use Illuminate\View\Component;
 
-class Actividad extends Component
+class TipoActividad extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class Actividad extends Component
      */
     public function render()
     {
-        return view('components.sider.actividad');
+        return view('components.sider.tipo-actividad');
     }
 }
