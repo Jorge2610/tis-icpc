@@ -35,15 +35,21 @@
                                 <td class="text-center">
                                     <button data-bs-toggle="modal"
                                         data-bs-target="#modalEliminarPatrocinador{{ $patrocinador->id }}"
-                                        title="Eliminar patrocinador" type="button" class="btn btn-danger btn-sm"
-                                        {{ $patrocinador->eventoPatrocinador->count() > 0 ? 'disabled' : '' }}>
+                                        title="Eliminar patrocinador" type="button" class="btn btn-danger btn-sm">
                                         <i class="bi bi-trash"></i>
                                     </button>
                                     @component('components.modal')
                                         @slot('modalId', 'modalEliminarPatrocinador' . $patrocinador->id)
                                         @slot('modalTitle', 'Eliminar patrocinador')
                                         @slot('modalContent')
-                                            ¿Esta seguro que quiere eliminar este patrocinador?
+                                            @if ($patrocinador->eventoPatrocinador->count() > 0)
+                                                <p>
+                                                    <b>Este patrociandor tiene eventos asociados,</b> 
+                                                    ¿Esta seguro que quiere eliminar este patrocinador?
+                                                </p>
+                                            @else
+                                                ¿Esta seguro que quiere eliminar este patrocinador?
+                                            @endif
                                         @endslot
                                         @slot('modalButton')
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
