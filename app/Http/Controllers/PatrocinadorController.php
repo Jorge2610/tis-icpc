@@ -43,6 +43,32 @@ class PatrocinadorController extends Controller
         }
     }
 
+    public function estaBorrado(Request $request)
+    {
+        try {
+            $patrocinador = Patrocinador::onlyTrashed()->where('nombre', $request->nombre)->first();
+            if ($patrocinador) {
+                return response()->json(['id' => $patrocinador->id, 'borrado' => true]);
+            } else {
+                $this->store($request);
+                return response()->json(['borrado' => false]);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function restaurar($id)
+    {
+        try {
+            $patrocinador = Patrocinador::onlyTrashed()->find($id);
+            $patrocinador->restore();
+            return response()->json(['mensaje' => 'Restaurado exitosamente', 'error' => false]);
+        } catch (QueryException $e) {
+            return $e->getMessage();
+        }
+    }
+
     public function storeImage(Request $request)
     {
         try {
