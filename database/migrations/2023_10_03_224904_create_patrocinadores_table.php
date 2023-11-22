@@ -18,6 +18,7 @@ class CreatePatrocinadoresTable extends Migration
             $table->string('nombre', 64);
             $table->string('ruta_imagen', 128)->nullable();
             $table->string('enlace_web', 128)->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
