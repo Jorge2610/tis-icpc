@@ -102,22 +102,58 @@ const crearFormData = () => {
     crearPatrocinador(formData);
 };
 
+let idPatrocinador;
 const crearPatrocinador = async (formData) => {
-    await axios.post("/api/patrocinador", formData).then((response) => {
+    let res = await axios.post("/api/patrocinador/esta-borrado", formData).then((response) => {
+        return response.data;
+    });
+
+    if (res.borrado) {
+        idPatrocinador = res.id;
+        $('#modalPatrocinadroExistente').modal('show');
+    } else {
         mostrarAlerta(
-            "Éxito",
-            response.data.mensaje,
-            response.error ? "danger" : "success"
+            res.error ? "Peligro" : "Éxito",
+            res.mensaje,
+            res.error ? "danger" : "success"
         );
         resetInputs();
-        updateTablaPatrocinadores();
+        if (!res.error) {
+            updateTablaPatrocinadores();
+        }
+    }
+};
+
+let restoreResponseData;
+const restaurarPatrocinador = async () => {
+    $('#modalPatrocinadroExistente').modal('hide');
+    let res = await axios.post("/api/patrocinador/restaurar/" + idPatrocinador).then((response) => {
+        return response.data;
     });
+    restoreResponseData = res;
+    $('#modalActualizarPatrocinador').modal('show');
+};
+
+const actualizarDatosPatrocinador = async (actualizar) => {
+    $('#modalActualizarPatrocinador').modal('hide');
+    if (actualizar) {
+        let res = await axios.post("/api/patrocinador/" + idPatrocinador).then((response) => {
+            return response.data;
+        });
+    }
+    mostrarAlerta(
+        restoreResponseData.error ? "Peligro" : "Éxito",
+        restoreResponseData.mensaje,
+        restoreResponseData.error ? "danger" : "success"
+    );
+    resetInputs();
+    updateTablaPatrocinadores();
 };
 
 const updateTablaPatrocinadores = () => {
     setTimeout(() => {
-       // window.location.href = "/admin/patrocinador";
-    }, 1700);
+        window.location.href = "/admin/patrocinador";
+    }, 1750);
 };
 
 const resetInputs = () => {

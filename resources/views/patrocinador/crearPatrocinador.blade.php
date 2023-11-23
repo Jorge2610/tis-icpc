@@ -37,8 +37,7 @@
             </div>
 
             <div class="col-sm-12 col-md-4">
-                <div
-                    class="container d-flex flex-column align-items-center border p-3 container-image">
+                <div class="container d-flex flex-column align-items-center border p-3 container-image">
                     <h5 class="text-start">Logo patrocinador</h5>
                     <div class="d-flex justify-content-center">
                         <img src="{{ asset('/image/uploading.png') }}" alt="image" id = "imagePreview"
@@ -74,6 +73,38 @@
                             id="crearPatrocinadorCancelar">Cancelar</button>
                         <button type="button" class="btn btn-primary" onclick="validarDatos()"
                             id="crearPatrocinadorCrear">Crear</button>
+                        @component('components.modal')
+                            @slot('modalId', 'modalPatrocinadroExistente')
+                            @slot('modalTitle', 'Patrocinador ya existente')
+                            @slot('modalContent')
+                                <p>
+                                    <b>El patrocinador que intento crear ya existe,</b>
+                                    ¿Desea habilitarlo nuevamente?
+                                </p>
+                            @endslot
+                            @slot('modalButton')
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="resetInputs()">
+                                    No</button>
+                                <button type="button" class="btn btn-danger" onclick="restaurarPatrocinador()">Sí</button>
+                            @endslot
+                        @endcomponent
+
+                        @component('components.modal')
+                            @slot('modalId', 'modalActualizarPatrocinador')
+                            @slot('modalTitle', 'Actualizar datos del patrocinador')
+                            @slot('modalContent')
+                                <p>
+                                    ¿Desea actualizar los datos del patrocinador?
+                                </p>
+                            @endslot
+                            @slot('modalButton')
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                    onclick="actualizarDatosPatrocinador(false)">
+                                    No</button>
+                                <button type="button" class="btn btn-danger"
+                                    onclick="actualizarDatosPatrocinador(true)">Sí</button>
+                            @endslot
+                        @endcomponent
                     </div>
                 </div>
             </div>
