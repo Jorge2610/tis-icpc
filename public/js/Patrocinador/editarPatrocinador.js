@@ -6,8 +6,9 @@ const imagenPreview = document.getElementById("imagePreview");
 const botonSubir = document.getElementById("botonSubirLogoPatrocinador");
 const nombrePatrocinador = document.getElementById("nombrePatricinador");
 const urlPatricinador = document.getElementById("urlPatrocinador");
-const cancelar = document.getElementById("crearPatrocinadorCancelar");
-const asignar = document.getElementById("crearPatrocinadorCrear");
+const cancelar = document.getElementById("cancelarEditarPatrocinador");
+const asignar = document.getElementById("editarPatrocinador");
+const patrociandorSeleccionado = document.getElementById("nombrePatrocinador");
 
 const dataTableOptions = {
     pageLength: 10,
@@ -36,12 +37,18 @@ const initDataTable = async () => {
         tablaDePatrocinadores.destroy();
     }
     DataTable.datetime("DD-MM-YYYY");
-    tablaDePatrocinadores = $("#tablaEvento").DataTable(dataTableOptions);
+    tablaDePatrocinadores = $("#tablaPatrocinadores").DataTable(
+        dataTableOptions
+    );
     tablaInicializada = true;
 };
 
 window.addEventListener("load", () => {
     initDataTable();
+    if (!seleccionado) {
+        patrociandorSeleccionado.textContent = "Seleccione un patrocinador";
+        inhabilitarFormulario();
+    }
 });
 
 const validarImagen = (input, peso, callback) => {
@@ -81,10 +88,10 @@ function previsualizarImagen(event) {
 }
 
 const validarDatos = () => {
-    let form = document.getElementById("formularioAgregarPatrocinador");
-    if (form.checkValidity() && input.files[0] != undefined) {
+    let form = document.getElementById("formularioEditarPatrocinador");
+    if (form.checkValidity()) {
         form.classList.remove("was-validated");
-        crearPatrocinador();
+        crearFormData();
         return;
     }
     if (input.files[0] === undefined) {
@@ -94,75 +101,89 @@ const validarDatos = () => {
     form.classList.add("was-validated");
 };
 
-const getFormData = () => {
+const crearFormData = () => {
     const formData = new FormData();
     formData.append("nombre", nombrePatrocinador.value);
     formData.append("enlace_web", urlPatricinador.value);
     formData.append("logo", input.files[0]);
-    return formData;
-};
-
-let idPatrocinador;
-const crearPatrocinador = async () => {
-    let res = await axios.post("/api/patrocinador/esta-borrado", getFormData()).then((response) => {
-        return response.data;
-    });
-
-    if (res.borrado) {
-        idPatrocinador = res.id;
-        $('#modalPatrocinadroExistente').modal('show');
-    } else {
-        mostrarAlerta(
-            res.error ? "Peligro" : "Éxito",
-            res.mensaje,
-            res.error ? "danger" : "success"
-        );
-        resetInputs();
-        if (!res.error) {
-            updateTablaPatrocinadores();
-        }
-    }
-};
-
-let restoreResponseData;
-const restaurarPatrocinador = async () => {
-    $('#modalPatrocinadroExistente').modal('hide');
-    let res = await axios.post("/api/patrocinador/restaurar/" + idPatrocinador).then((response) => {
-        return response.data;
-    });
-    restoreResponseData = res;
-    $('#modalActualizarPatrocinador').modal('show');
-};
-
-const actualizarDatosPatrocinador = async (actualizar) => {
-    $('#modalActualizarPatrocinador').modal('hide');
-    if (actualizar) {
-        let res = await axios.post("/api/patrocinador/editar/" + idPatrocinador, getFormData()).then((response) => {
-            return response.data;
-        });
-    }
-    mostrarAlerta(
-        restoreResponseData.error ? "Peligro" : "Éxito",
-        restoreResponseData.mensaje,
-        restoreResponseData.error ? "danger" : "success"
-    );
-    resetInputs();
-    updateTablaPatrocinadores();
+    editarPatrocinador(formData);
 };
 
 const updateTablaPatrocinadores = () => {
     setTimeout(() => {
-        window.location.href = "/admin/patrocinador";
-    }, 1750);
+        window.location.href = "editar";
+    }, 1700);
 };
 
 const resetInputs = () => {
-    document.getElementById("formularioAgregarPatrocinador").classList.remove("was-validated");
+    document
+        .getElementById("formularioEditarPatrocinador")
+        .classList.remove("was-validated");
     botonSubir.classList.remove("btn-outline-danger");
     botonSubir.classList.add("btn-light", "text-primary");
     nombrePatrocinador.value = "";
     urlPatricinador.value = "";
     input.value = "";
     imagenPreview.src = "/image/uploading.png";
+};
 
+const inhabilitarFormulario = () => {
+    botonSubir.disabled = true;
+    nombrePatrocinador.disabled = true;
+    urlPatricinador.disabled = true;
+    input.disabled = true;
+    asignar.disabled = true;
+    cancelar.disabled = true;
+    document.getElementById("formularioEditarPatrocinador").disabled = true;
+};
+
+const habilitarFormulario = () => {
+    botonSubir.disabled = false;
+    urlPatricinador.disabled = false;
+    input.disabled = false;
+    asignar.disabled = false;
+    cancelar.disabled = false;
+    document.getElementById("formularioEditarPatrocinador").disabled = false;
+};
+
+let seleccionado;
+let idSeleccionado;
+let asignando = false;
+let patrocinadoresNoAsigandos;
+const seleccionarPatrocinador = async (id, nombre) => {
+    if (seleccionado) {
+        seleccionado.classList.remove("table-primary");
+    }
+    habilitarFormulario();
+    seleccionado = document.getElementById(id);
+    seleccionado.classList.add("table-primary");
+    idSeleccionado = id;
+    patrociandorSeleccionado.textContent = nombre;
+    await llenarFormulario(id);
+    await cargarPatrocinadoresNoAsignados();
+    mostrarPatrocinadores();
+};
+
+const editarPatrocinador = async (formData) => {
+    await axios.post(`/api/patrocinador/editar/${idSeleccionado}`, formData).then((response) => {
+        mostrarAlerta(
+            "Éxito",
+            response.data.mensaje,
+            response.error ? "danger" : "success"
+        );
+        resetInputs();
+        updateTablaPatrocinadores();
+    });
+};
+
+const getPatrocinador = async (id) => {
+    const response = await axios.get(`/api/patrocinador/show/${id}`);
+    return response.data;
+};
+
+const llenarFormulario = async (id) => {
+    const patrocinador = await getPatrocinador(id);
+    nombrePatrocinador.value = patrocinador.nombre;
+    urlPatricinador.value = patrocinador.enlace_web;
+    imagenPreview.src = patrocinador.ruta_imagen;
 };
