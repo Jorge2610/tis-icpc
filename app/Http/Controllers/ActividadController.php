@@ -118,4 +118,9 @@ class ActividadController extends Controller
             return $e->getMessage();
         }
     }
+
+    public function listaEditar(){
+        $eventos =  Evento::where('estado', 0)->with('actividades')->get();
+        return view('actividad.eliminarActividad', ['actividades' => $actividades]);
+    }
 }
