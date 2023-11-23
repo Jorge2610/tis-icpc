@@ -61,7 +61,7 @@ class PatrocinadorController extends Controller
             } else {
                 return $this->store($request);
             }
-        } catch (\Exception $e) {
+        } catch (QueryException $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }

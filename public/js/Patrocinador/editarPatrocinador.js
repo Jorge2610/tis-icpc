@@ -165,7 +165,7 @@ const seleccionarPatrocinador = async (id, nombre) => {
 };
 
 const editarPatrocinador = async (formData) => {
-    await axios.post(`/api/patrocinador/${idSeleccionado}`, formData).then((response) => {
+    await axios.post(`/api/patrocinador/editar/${idSeleccionado}`, formData).then((response) => {
         mostrarAlerta(
             "Éxito",
             response.data.mensaje,

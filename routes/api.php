@@ -53,7 +53,7 @@ Route::group(['prefix' => 'patrocinador', 'middleware' => 'api'], function () {
     Route::get('/show/{id}', [PatrocinadorController::class, 'show'])->name('patrocinadores.show');
     Route::get('/evento/{id}', [PatrocinadorController::class, 'showEventoWhithPatrocinadores'])->name('eventoPatrocinadores.show');
     Route::post('/', [PatrocinadorController::class, 'store'])->name('patrocinadores.store');
-    Route::post('{id}', [PatrocinadorController::class, 'update'])->name('patrocinadores.update');
+    Route::post('/editar/{id}', [PatrocinadorController::class, 'update'])->name('patrocinadores.update');
     Route::delete('{id}', [PatrocinadorController::class, 'destroy'])->name('patrocinadores.destroy');
     Route::post('/asignar', [PatrocinadorController::class, 'asignarPatrocinador'])->name('patrocinadores.asignar');
     Route::delete('/quitar/{id}', [PatrocinadorController::class, 'quitarPatrocinador'])->name('patrocinadores.quitar');
