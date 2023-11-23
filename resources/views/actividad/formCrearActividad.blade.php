@@ -24,20 +24,6 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-12 mt-4">
-                                <label for="tipoDeActividad" class="form-label">Tipo de actividad</label>
-                                <!-Cargar tipos de actividad->
-                                <select name="id_tipo_actividad" class="form-select" id="tipoDeActividad" aria-placeholder="Elija un tipo de actividad..."
-                                required>
-
-                                </select>
-                                <div class="invalid-feedback">
-                                    Seleccione un tipo de actividad.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
                             <div class="col-md-12 mt-4 ">
                                 <label class="form-label">Duración de la actividad *</label>
                             </div>

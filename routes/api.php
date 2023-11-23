@@ -50,6 +50,7 @@ Route::group(['prefix' => 'evento'], function () {
 Route::group(['prefix' => 'patrocinador', 'middleware' => 'api'], function () {
     Route::get('/', [PatrocinadorController::class, 'index'])->name('patrocinadores.index');
     Route::get('{id}', [PatrocinadorController::class, 'showPatrocinadorbyEvento'])->name('patrocinadores.show');
+    Route::get('/show/{id}', [PatrocinadorController::class, 'show'])->name('patrocinadores.show');
     Route::get('/evento/{id}', [PatrocinadorController::class, 'showEventoWhithPatrocinadores'])->name('eventoPatrocinadores.show');
     Route::post('/', [PatrocinadorController::class, 'store'])->name('patrocinadores.store');
     Route::post('{id}', [PatrocinadorController::class, 'update'])->name('patrocinadores.update');
@@ -75,7 +76,6 @@ Route::group(['prefix' => 'sitio'], function () {
     Route::post('{id}', [SitioController::class, 'update'])->name('sitio.update');
     Route::delete('{id}', [SitioController::class, 'destroy'])->name('sitio.destroy');
 });
-
 
 Route::group(['prefix' => 'tipo-actividad'], function () {
     Route::get('', [TipoActividadController::class, 'index'])->name('tipo-actividad.index');

@@ -11,7 +11,7 @@
         <div class="my-1 ms-3">
             <a href="{{ url('/admin/eventos/sitio') }}" class="list-group-item list-group-item-action py-2 border-0"
                 id="subirMaterialSider">
-                Subir sitio de interés
+                Registrar sitios de interés
             </a>
             <a href="{{ url('/admin/eventos/sitio/quitar') }}" class="list-group-item list-group-item-action py-2 border-0"
                 id="subirMaterialSider">
