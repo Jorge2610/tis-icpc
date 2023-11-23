@@ -84,7 +84,7 @@ const validarDatos = () => {
     let form = document.getElementById("formularioAgregarPatrocinador");
     if (form.checkValidity() && input.files[0] != undefined) {
         form.classList.remove("was-validated");
-        crearFormData();
+        crearPatrocinador();
         return;
     }
     if (input.files[0] === undefined) {
@@ -94,17 +94,17 @@ const validarDatos = () => {
     form.classList.add("was-validated");
 };
 
-const crearFormData = () => {
+const getFormData = () => {
     const formData = new FormData();
     formData.append("nombre", nombrePatrocinador.value);
     formData.append("enlace_web", urlPatricinador.value);
     formData.append("logo", input.files[0]);
-    crearPatrocinador(formData);
+    return formData;
 };
 
 let idPatrocinador;
-const crearPatrocinador = async (formData) => {
-    let res = await axios.post("/api/patrocinador/esta-borrado", formData).then((response) => {
+const crearPatrocinador = async () => {
+    let res = await axios.post("/api/patrocinador/esta-borrado", getFormData()).then((response) => {
         return response.data;
     });
 
@@ -137,7 +137,7 @@ const restaurarPatrocinador = async () => {
 const actualizarDatosPatrocinador = async (actualizar) => {
     $('#modalActualizarPatrocinador').modal('hide');
     if (actualizar) {
-        let res = await axios.post("/api/patrocinador/" + idPatrocinador).then((response) => {
+        let res = await axios.post("/api/patrocinador/editar/" + idPatrocinador, getFormData()).then((response) => {
             return response.data;
         });
     }
