@@ -58,25 +58,6 @@ const validar = () => {
 
 /**EDITAR ACTIVIDAD**/
 
-/**OBTENER TIPOS DE ACTIVIDAD**/
-window.addEventListener("load", () => {
-    axios
-        .get("/api/tipo-actividad")
-        .then(function (response) {
-            const select = document.getElementById("tipoDeActividad");
-            const tiposDeActividad = response.data;
-            tiposDeActividad.forEach(function (tipo) {
-                const option = document.createElement("option");
-                option.value = tipo.id;
-                option.text = tipo.nombre;
-                select.appendChild(option);
-            });
-        })
-        .catch(function (error) {
-            console.error(error);
-        });
-});
-
 
 //Agregar validación a los inputs
 form.querySelectorAll(".form-control, .form-select").forEach((Element) => {

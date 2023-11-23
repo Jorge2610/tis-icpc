@@ -13,8 +13,4 @@ class Actividad extends Model
     {
         return $this->belongsTo(Evento::class, 'id_evento');
     }
-    public function tipoActividad()
-    {
-        return $this->belongsTo(TipoActividad::class, 'id_tipo_actividad');
-    }
 }
