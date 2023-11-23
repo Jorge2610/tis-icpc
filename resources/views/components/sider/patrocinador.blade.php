@@ -13,6 +13,10 @@
                 class="list-group-item list-group-item-action py-2 border-0" id="crearPatrocinadorSider">
                 Crear patrocinador
             </a>
+            <a href="{{ url('/admin/patrocinador/editar') }}"
+                class="list-group-item list-group-item-action py-2 border-0" id="crearPatrocinadorSider">
+                Editar patrocinador
+            </a>
             <a href="{{ url('admin/patrocinador/eliminar') }}"
                 class="list-group-item list-group-item-action py-2 border-0" id="eliminarPatrocinadorSider">
                 Eliminar patrocinador

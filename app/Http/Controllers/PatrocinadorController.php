@@ -17,6 +17,11 @@ class PatrocinadorController extends Controller
         return $patrocinadores;
     }
 
+    public function show($id)
+    {
+        $patrocinador =  Patrocinador::find($id);
+        return $patrocinador;
+    }
     public function showPatrocinadorbyEvento($id)
     {
         $eventos =  EventoPatrocinador::where('id_evento', $id)->orderby('id_patrocinador', 'asc')->get();
@@ -37,9 +42,13 @@ class PatrocinadorController extends Controller
             $patrocinador->ruta_imagen = $this->storeImage($request);
             $patrocinador->enlace_web = $request->enlace_web;
             $patrocinador->save();
-            return response()->json(['mensaje' => 'Creado exitosamente', 'error' => false]);
+            return response()->json(['mensaje' => 'Creado exitosamente', 'error' => false, 'borrado' => false]);
         } catch (QueryException $e) {
-            return $e->getMessage();
+            if ($e->errorInfo[1] == 1062) {
+                return response()->json(['mensaje' => 'El patrocinador ya existe', 'error' => true, 'borrado' => false]);
+            }else{
+                return response()->json(['error' => $e->getMessage()], 500);
+            }
         }
     }
 
@@ -50,8 +59,7 @@ class PatrocinadorController extends Controller
             if ($patrocinador) {
                 return response()->json(['id' => $patrocinador->id, 'borrado' => true]);
             } else {
-                $this->store($request);
-                return response()->json(['borrado' => false]);
+                return $this->store($request);
             }
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
@@ -85,6 +93,7 @@ class PatrocinadorController extends Controller
     public function update(Request $request, $id)
     {
         try {
+            // dd($request->all());
             $patrocinador = Patrocinador::find($id);
             $patrocinador->nombre = $request->nombre;
             if ($request->hasFile('logo')) {
@@ -141,6 +150,12 @@ class PatrocinadorController extends Controller
         return view('patrocinador.crearPatrocinador', ['patrocinadores' => $patrocinadores]);
     }
 
+    public function vistaEditarPatrocinador()
+    {
+        $patrocinadores = Patrocinador::with('eventoPatrocinador.eventos')->orderBy('updated_at', 'desc')->get();
+        return view('patrocinador.editarPatrocinador', ['patrocinadores' => $patrocinadores]);
+    }
+
     public function vistaEliminarPatrocinador()
     {
         $patrocinadores = Patrocinador::with('eventoPatrocinador.eventos')->get();
@@ -159,4 +174,6 @@ class PatrocinadorController extends Controller
         $eventos =  Evento::where('estado', 0)->with('eventoPatrocinador.patrocinadores')->orderBy('eventos.created_at', 'desc')->get();
         return view('patrocinador.quitarPatrocinador', ['eventos' => $eventos]);
     }
+
+    
 }
