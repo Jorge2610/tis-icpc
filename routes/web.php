@@ -74,7 +74,8 @@ Route::group(['prefix' => 'admin/actividad'], function () {
     Route::get('/', [ActividadController::class, 'vistaTablaActividades'])->name('actividad.crearActividad');
     Route::get('crear-actividad/{id}',[ActividadController::class,'crearActividad'])->name('actividad.formCrearActividad');
     Route::get('/eliminar',[ActividadController::class,'listarEventos'])->name('actividad.listar');
-    Route::get('/editar-actividad',[ActividadController::class,'lisaEditar'])->name('actividad.listarEditar');
+    Route::get('/editar-actividad',[ActividadController::class,'listaEditar'])->name('actividad.listarEditar');
+    Route::get('/editar-actividad/{id}',[ActividadController::class,'editarActividad'])->name('actividad.editarActividad');
 });
 
 Route::get('editarEvento', [EventoController::class, 'showEditEventForm']);

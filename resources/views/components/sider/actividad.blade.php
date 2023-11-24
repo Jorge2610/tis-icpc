@@ -11,6 +11,10 @@
                 class="list-group-item list-group-item-action py-2 border-0" id="crearActividadSider">
                 Crear actividad
             </a>
+            <a href="{{ url('/admin/actividad/editar-actividad') }}"
+                class="list-group-item list-group-item-action py-2 border-0" id="crearActividadSider">
+                Editar actividad
+            </a>
             <a href="{{ url('/admin/actividad/eliminar') }}"
                 class="list-group-item list-group-item-action py-2 border-0" id="eliminaActividadSider">
                 Eliminar actividad

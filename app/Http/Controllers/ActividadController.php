@@ -66,12 +66,11 @@ class ActividadController extends Controller
             $actividad->inicio_actividad = $request->inicio_evento;
             $actividad->fin_actividad = $request->fin_evento;
             $actividad->descripcion = $request->descripcion;
-            $actividad->id_evento = $request->evento_id;
             /**Antes de guardar debemos revisar si el nombre ya existe y que no sea el id del evento
              * Para eso obtenemos el id del evento al que pertenece esta actividad
              **/
             $nombreExistente = Actividad::where('id_evento', $actividad->id_evento)
-            ->whereNot('id',$id)
+            ->where('id','!=',$id)
             ->where('nombre', $actividad->nombre)
             ->first();
             if ($nombreExistente) {
@@ -119,6 +118,11 @@ class ActividadController extends Controller
 
     public function listaEditar(){
         $eventos =  Evento::where('estado', 0)->with('actividades')->get();
-        return view('actividad.eliminarActividad', ['actividades' => $actividades]);
+        return view('actividad.listaEditarActividad', ['eventos' => $eventos]);
+    }
+    public function editarActividad($id){
+        $actividad = Actividad::find($id);
+        $evento = Evento::find($actividad->id_evento);
+        return view('actividad.editarActividad',['actividad'=>$actividad,'evento'=>$evento]);
     }
 }
