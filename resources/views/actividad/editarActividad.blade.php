@@ -66,7 +66,7 @@
                             <div class="col-md-12 mt-4">
                                 <label for="detalleActividad" class="form-label">Descripción de la actividad</label>
                                 <textarea name="descripcion" class="form-control" id="detalleActividad" rows="5" style="resize: none;"
-                                    placeholder="Ingrese una descripción..." maxlength="1000" value='{{$actividad->descripcion}}'></textarea>
+                                 placeholder="Ingrese una descripción..." maxlength="1000" >{{$actividad->descripcion}}</textarea>
                             </div>
                         </div>
                         

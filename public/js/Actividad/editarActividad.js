@@ -10,11 +10,8 @@ const mensajeFechaFin = document.getElementById("mensajeFechaFin");
 
 /**PETICIONES a AXIOS**/
 /**CREAR ACTIVIDAD**/
-const crearActividad = (formData) => {
-    formData.forEach(function(value, key){
-        console.log(key, value);
-    });
-    console.log(formData.get("id"));
+const editarActividad = (formData) => {
+
     axios.post("/api/actividad/"+formData.get("id"),formData)
     .then(function(response){
         const mensaje = response.data.mensaje
@@ -29,12 +26,9 @@ const crearActividad = (formData) => {
             inputNombre.classList.add('is-invalid')
             mensajeNombre.innerHTML = 'La actividad ya existe'
         }else{
-            form.querySelectorAll(".form-control, .form-select").forEach(
-                (Element) => {
-                    Element.classList.remove("is-valid");
-                }
-            );
-
+            if(response.data.error != "danger"){
+                window.location.href = "/admin/actividad/editar-actividad";
+            }
         }
     })
     .catch (function(error) {
@@ -53,7 +47,7 @@ form.addEventListener("submit", (event) => {
                 Element.disabled=false;            
         });
         const formData = new FormData(form);
-        crearActividad(formData);
+        editarActividad(formData);
         
     }
 });

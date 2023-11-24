@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row mb-2">
-            <h4>Cancelar evento</h4>
+            <h4>{{($anular)?'Anular':'Cancelar'}} evento</h4>
         </div>
         <div class="row g-5">
             <div class="col-sm-12">
@@ -25,28 +25,60 @@
                             date_default_timezone_set('America/Caracas');
                         @endphp
                         @foreach ($eventos as $evento)
-                            <tr id="{{ $evento->id }}">
-                                <th scope="row">{{ $contador++ }}</th>
-                                <td>{{ $evento->nombre }}</td>
-                                <td class="text-center">{{ $evento->tipoEvento->nombre }}</td>
-                                <td class="text-center">{{ date('d-m-Y', strtotime($evento->fin_evento)) }}</td>
-                                <td class="text-center">{{ date('d-m-Y', strtotime($evento->inicio_evento)) }}</td>
-                                <td class="text-center">
-                                    <button type="button" class="btn btn-danger btn-sm"
-                                        onclick="setEventoId({{ $evento->id }})" id="botonAccion" style="min-width: 80px;"
-                                        data-bs-toggle="modal"
-                                        data-bs-target={{($anular)? "#modalAnular":"#modalCancelar"}}
                                         @if($anular)
-                                            {{ strtotime($evento->inicio_evento) <= time() && 
-                                                strtotime($evento->fin_evento) >= time()? '' : 'disabled' }} 
+                                            @if(strtotime($evento->inicio_evento) <= time() && 
+                                                strtotime($evento->fin_evento) >= time())
+                                                <tr id="{{ $evento->id }}">
+                                                    <th scope="row">{{ $contador++ }}</th>
+                                                    <td>{{ $evento->nombre }}</td>
+                                                    <td class="text-center">{{ $evento->tipoEvento->nombre }}</td>
+                                                    <td class="text-center">{{ date('d-m-Y', strtotime($evento->fin_evento)) }}</td>
+                                                    <td class="text-center">{{ date('d-m-Y', strtotime($evento->inicio_evento)) }}</td>
+                                                    <td class="text-center">
+                                                    <button type="button" class="btn btn-danger btn-sm"
+                                                        onclick="setEventoId({{ $evento->id }})" id="botonAccion" style="min-width: 80px;"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target={{($anular)? "#modalAnular":"#modalCancelar"}}
+                                                        @if($anular)
+                                                            {{ strtotime($evento->inicio_evento) <= time() && 
+                                                                strtotime($evento->fin_evento) >= time()? '' : 'disabled' }} 
+                                                        @else
+                                                            {{ strtotime($evento->inicio_evento) < time() ? 'disabled':'' }} 
+                                                        @endif    
+                                                        > 
+                                                    {{($anular)?'Anular':'Cancelar'}}
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            @endif
                                         @else
-                                            {{ strtotime($evento->inicio_evento) < time() ? 'disabled':'' }} 
-                                        @endif    
-                                        > 
-                                    {{($anular)?'Anular':'Cancelar'}}
-                                    </button>
-                                </td>
-                            </tr>
+                                            @if(strtotime($evento->inicio_evento) >= time() )
+                                                <tr id="{{ $evento->id }}">
+                                                    <th scope="row">{{ $contador++ }}</th>
+                                                    <td>{{ $evento->nombre }}</td>
+                                                    <td class="text-center">{{ $evento->tipoEvento->nombre }}</td>
+                                                    <td class="text-center">{{ date('d-m-Y', strtotime($evento->fin_evento)) }}</td>
+                                                    <td class="text-center">{{ date('d-m-Y', strtotime($evento->inicio_evento)) }}</td>
+                                                    <td class="text-center">
+                                                        <button type="button" class="btn btn-danger btn-sm"
+                                                            onclick="setEventoId({{ $evento->id }})" id="botonAccion" style="min-width: 80px;"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target={{($anular)? "#modalAnular":"#modalCancelar"}}
+                                                            @if($anular)
+                                                                {{ strtotime($evento->inicio_evento) <= time() && 
+                                                                    strtotime($evento->fin_evento) >= time()? '' : 'disabled' }} 
+                                                            @else
+                                                                {{ strtotime($evento->inicio_evento) < time() ? 'disabled':'' }} 
+                                                            @endif    
+                                                            > 
+                                                            {{($anular)?'Anular':'Cancelar'}}
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            @endif
+                                            
+                                        @endif
+                            
                         @endforeach
                     </tbody>
                 </table>
