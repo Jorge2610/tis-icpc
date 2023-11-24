@@ -14,7 +14,7 @@
                                     de evento *</label>
                                 <input name="nombre" type="text" class="form-control custom-input" id="nombreTipoEvento"
                                     value="" required placeholder="Ingrese el nombre del tipo de evento"
-                                    maxlength="64">
+                                    maxlength="64" autocomplete="off">
                                 <div id="mensajeNombre" class="invalid-feedback">
                                     El nombre no puede estar vacio.
                                 </div>

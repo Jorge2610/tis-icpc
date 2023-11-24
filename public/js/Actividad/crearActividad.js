@@ -7,11 +7,12 @@ const fechaInicio = document.getElementById("fechaInicio");
 const fechaFin = document.getElementById("fechaFin");
 const mensajeFechaInicio = document.getElementById("mensajeFechaInicio");
 const mensajeFechaFin = document.getElementById("mensajeFechaFin");
+let nombreAnterior = ''
 
 /**PETICIONES a AXIOS**/
 /**CREAR ACTIVIDAD**/
 const crearActividad = (formData) => {
-    const nombreAnterior = inputNombre.value
+    nombreAnterior = inputNombre.value
     axios.post("/api/actividad", formData)
     .then(function(response){
         const mensaje = response.data.mensaje
@@ -24,7 +25,7 @@ const crearActividad = (formData) => {
         if(mensaje === nombreIgual){
             inputNombre.classList.remove('is-valid')
             inputNombre.classList.add('is-invalid')
-            mensajeNombre.innerHTML = 'La actividad ya existe'
+            mensajeNombre.textContent = 'La actividad ya existe'
         }else{
             form.querySelectorAll(".form-control, .form-select").forEach(
                 (Element) => {
@@ -39,19 +40,6 @@ const crearActividad = (formData) => {
     })
     .catch (function(error) {
         mostrarAlerta("Error", "Hubo un error al guardar la actividad", "danger");
-    });
-
-    inputNombre.addEventListener("input", function () {
-        // Verificar si el valor cambió
-        if (inputNombre.value !== nombreAnterior) {
-            console.log(inputNombre.value)
-            console.log(nombreAnterior)
-            inputNombre.classList.remove("is-invalid");
-            inputNombre.classList.add("is-valid");
-        }else{
-            inputNombre.classList.remove("is-valid");
-            inputNombre.classList.add("is-invalid");
-        }
     });
 }
 
@@ -85,6 +73,34 @@ form.querySelectorAll(".form-control, .form-select").forEach((Element) => {
         }
     });
 });
+
+/**Validacion para el input nombre**/
+inputNombre.addEventListener("input", function () {
+   if(nombreAnterior === ''){
+        if(inputNombre.value === ''){
+            inputNombre.classList.remove("is-valid");
+            inputNombre.classList.add("is-invalid");
+            mensajeNombre.textContent = "El nombre no puede estar vacío.";
+        }else{
+            inputNombre.classList.remove("is-invalid");
+            inputNombre.classList.add("is-valid");
+        }    
+   }else{
+        if (inputNombre.value !== nombreAnterior && inputNombre.value !== '') {
+            inputNombre.classList.remove("is-invalid");
+            inputNombre.classList.add("is-valid");
+        }else if(inputNombre.value == ''){
+            inputNombre.classList.remove("is-valid");
+            inputNombre.classList.add("is-invalid");
+            mensajeNombre.textContent = 'El nombre no puede estar vacío.'
+        }else{
+            inputNombre.classList.remove("is-valid");
+            inputNombre.classList.add("is-invalid");
+            mensajeNombre.textContent = 'La actividad ya existe'
+        }
+   }
+});
+
 
 /**Validaciones para fecha INICIO**/
 fechaInicio.addEventListener("change", () => {
