@@ -19,7 +19,7 @@
                     <input name="nombre" type="text" class="form-control fecha-editar" id="nombreDelEvento"
                         onchange="datoCambiado()" placeholder="Ingrese el nombre del evento" maxlength="64"
                         value="{{ isset($datos['nombreDelEvento']) ? $datos['nombreDelEvento'] : '' }}" required>
-                    <div class="invalid-feedback">
+                    <div id="mensajeNombre" class="invalid-feedback">
                         El nombre no puede estar vacio.
                     </div>
                 </div>

@@ -34,7 +34,9 @@ const crearActividad = (formData) => {
             );
             form.reset();
             if(response.data.error != "danger"){
-                window.location.href = "/admin/actividad";
+                setTimeout(()=>{
+                    window.location.href = "/admin/actividad";
+               },1800);
             }
         }
     })
