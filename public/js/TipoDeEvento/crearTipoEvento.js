@@ -1,11 +1,13 @@
 const form = document.getElementById("formularioTipoEvento");
 const botonCancelar = document.getElementById("cancelarBoton")
 const inputNombre = document.getElementById("nombreTipoEvento")  
-const mensaje = document.getElementById("mensajeNombre")
+const mensajeNombre = document.getElementById("mensajeNombre")
 const inputDescripcion = document.getElementById("detalleTipoEvento")
+let nombreAnterior = ''
 
 const crearTipoEvento = (formData) => {
-    const nombreAnterior = inputNombre.value
+    //Si el tipo de evento existe entonces se guarda este valor y servirá para la validación
+    nombreAnterior = inputNombre.value
     axios.post("/api/tipo-evento", formData)
     .then(function(response){
         const mensaje = response.data.mensaje
@@ -15,11 +17,12 @@ const crearTipoEvento = (formData) => {
             mensaje,
             response.data.error ? "danger" : "success"
         );
+        /**Si existe un tipo de evento con el mismo nombre, se mantiene los datos del formulario**/
         if(mensaje === nombreIgual){
             inputNombre.classList.remove("is-valid")
             inputNombre.classList.add("is-invalid")    
-            mensaje.innerHTML = "El tipo de evento ya existe"
             inputDescripcion.classList.add("is-valid")
+            mensajeNombre.textContent = 'El tipo de evento ya existe'
         }else{
             form.querySelectorAll(".form-control, .form-select").forEach(
                 (Element) => {
@@ -32,16 +35,6 @@ const crearTipoEvento = (formData) => {
     }).catch(function(error){
         mostrarAlerta("Error", "Hubo un error al guardar el tipo de evento", "danger");
     })
-
-    inputNombre.addEventListener("input", function () {
-        if (inputNombre.value !== nombreAnterior) {
-            inputNombre.classList.remove("is-invalid");
-            inputNombre.classList.add("is-valid");
-        }else{
-            inputNombre.classList.remove("is-valid");
-            inputNombre.classList.add("is-invalid");
-        }
-    });
 }
 
 form.addEventListener("submit",(event) =>{
@@ -70,6 +63,36 @@ form.querySelectorAll(".form-control, .form-select").forEach((Element) => {
             Element.classList.add("is-valid");
         }
     });
+});
+
+inputNombre.addEventListener("input", function () {
+    //Validaciones antes de que se guarde el nombre repetido
+    if(nombreAnterior === ''){
+        if(inputNombre.value === ''){
+            inputNombre.classList.remove("is-valid");
+            inputNombre.classList.add("is-invalid");
+            mensajeNombre.textContent = "El nombre no puede estar vacío.";
+        }else{
+            inputNombre.classList.remove("is-invalid");
+            inputNombre.classList.add("is-valid");
+        }
+    }else{
+        if(inputNombre.value !== nombreAnterior && inputNombre.value !== '') {
+            inputNombre.classList.remove("is-invalid");
+            inputNombre.classList.add("is-valid");
+            mensajeNombre.textContent = "";
+        }else {
+            if (inputNombre.value === "") {
+                inputNombre.classList.remove("is-valid");
+                inputNombre.classList.add("is-invalid");
+                mensajeNombre.textContent = "El nombre no puede estar vacío.";
+            } else {
+                inputNombre.classList.remove("is-valid");
+                inputNombre.classList.add("is-invalid");
+                mensajeNombre.textContent = "El tipo de evento ya existe";
+            }
+        }
+    }
 });
 
 function quitarValidacion(){
