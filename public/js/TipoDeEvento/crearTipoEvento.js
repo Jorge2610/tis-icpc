@@ -65,7 +65,7 @@ form.querySelectorAll(".form-control, .form-select").forEach((Element) => {
     });
 });
 
-inputNombre.addEventListener("input", function () {
+function validarNombreRepetido(){
     //Validaciones antes de que se guarde el nombre repetido
     if(nombreAnterior === ''){
         if(inputNombre.value === ''){
@@ -93,7 +93,10 @@ inputNombre.addEventListener("input", function () {
             }
         }
     }
-});
+}
+
+inputNombre.addEventListener("input",validarNombreRepetido );
+inputNombre.addEventListener("change",validarNombreRepetido );
 
 function quitarValidacion(){
     form.querySelectorAll(".form-control, .form-select").forEach(
