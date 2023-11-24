@@ -11,6 +11,7 @@ const mensajeFechaFin = document.getElementById("mensajeFechaFin");
 /**PETICIONES a AXIOS**/
 /**CREAR ACTIVIDAD**/
 const crearActividad = (formData) => {
+    const nombreAnterior = inputNombre.value
     axios.post("/api/actividad", formData)
     .then(function(response){
         const mensaje = response.data.mensaje
@@ -38,6 +39,19 @@ const crearActividad = (formData) => {
     })
     .catch (function(error) {
         mostrarAlerta("Error", "Hubo un error al guardar la actividad", "danger");
+    });
+
+    inputNombre.addEventListener("input", function () {
+        // Verificar si el valor cambió
+        if (inputNombre.value !== nombreAnterior) {
+            console.log(inputNombre.value)
+            console.log(nombreAnterior)
+            inputNombre.classList.remove("is-invalid");
+            inputNombre.classList.add("is-valid");
+        }else{
+            inputNombre.classList.remove("is-valid");
+            inputNombre.classList.add("is-invalid");
+        }
     });
 }
 
@@ -138,3 +152,11 @@ fechaFin.addEventListener("change", () => {
     }
 });
 
+function quitarValidacion(){
+    form.querySelectorAll(".form-control, .form-select").forEach(
+        (Element) => {
+            Element.classList.remove("is-valid");
+            Element.classList.remove("is-invalid");
+        }
+    );
+}

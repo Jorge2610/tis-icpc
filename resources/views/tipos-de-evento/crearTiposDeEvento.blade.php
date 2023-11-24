@@ -15,7 +15,7 @@
                                 <input name="nombre" type="text" class="form-control custom-input" id="nombreTipoEvento"
                                     value="" required placeholder="Ingrese el nombre del tipo de evento"
                                     maxlength="64">
-                                <div class="invalid-feedback">
+                                <div id="mensajeNombre" class="invalid-feedback">
                                     El nombre no puede estar vacio.
                                 </div>
                             </div>
@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <div class="text-center my-5">
-                            <button type="reset" class="btn btn-secondary mx-5">Cancelar</button>
+                            <button id="cancelarBoton" type="reset" class="btn btn-secondary mx-5" onClick="quitarValidacion()">Cancelar</button>
                             <button id="confirmarBoton" type="submit" class="btn btn-primary mx-5">Crear</button>
                         </div>
                 </form>

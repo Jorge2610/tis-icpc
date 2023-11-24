@@ -57,7 +57,7 @@
                         </div>
                         
                         <div class="text-center my-4">
-                            <button type="reset" class="btn btn-secondary mx-5">Cancelar</button>
+                            <button type="reset" class="btn btn-secondary mx-5" onClick="quitarValidacion()">Cancelar</button>
                             <button id="confirmarBoton" type="submit" class="btn btn-primary mx-5">Crear</button>
                         </div>
                 </form>
