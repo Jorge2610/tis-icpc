@@ -19,6 +19,8 @@ let boolMaxEdad = true;
 let crear = true; //0-> Crear  1->Editar
 let datosActualizados = false;
 let nombreAnterior = ''
+let mensajeRepetido = ''
+
 
 const mostrarInput = (indInput, check) => {
     let input = document.getElementById(indInput);
@@ -55,6 +57,7 @@ const editarEvento = (formData) => {
             "/eventos/" + document.getElementById("nombreDelEvento").value;
     }
     console.log(formData.get("evento_id"));
+    nombreAnterior = nombreEvento.value
     axios
         .post("/api/evento/actualizar/" + formData.get("evento_id"), formData)
         .then(function (response) {
@@ -63,9 +66,18 @@ const editarEvento = (formData) => {
                 response.data.mensaje,
                 response.data.error ? "danger" : "success"
             );
-            const mensaje = response.data.mensaje
-            const existe = 'El evento ya existe'
-            mensaje === existe ? nombreAnterior = nombreEvento.value: nombreAnterior = ''
+            mensajeRepetido = response.data.mensaje
+            console.log(mensajeRepetido)
+            if(mensajeRepetido !== 'El evento ya existe')  {
+                setTimeout(()=>{
+                    window.location.href = "/editarEvento";
+               },1800);
+                form.reset();
+            }else{
+                nombreEvento.classList.remove("is-valid")
+                nombreEvento.classList.add("is-invalid")
+                mensajeNombre.textContent = 'El evento ya existe.'
+            } 
         })
         .catch(function (error) {
             mostrarAlerta(
@@ -77,6 +89,7 @@ const editarEvento = (formData) => {
 };
 
 const crearEvento = (formData) => {
+    nombreAnterior = nombreEvento.value
     axios
         .post("/api/evento/", formData)
         .then(function (response) {
@@ -85,9 +98,18 @@ const crearEvento = (formData) => {
                 response.data.mensaje,
                 response.data.error ? "danger" : "success"
             );
-            const mensaje = response.data.mensaje
-            const existe = 'El evento ya existe'
-            mensaje === existe ? nombreAnterior = nombreEvento.value: nombreAnterior = ''
+            mensajeRepetido = response.data.mensaje
+            console.log(mensajeRepetido)
+            if(mensajeRepetido === 'El evento ya existe')  {
+                nombreEvento.classList.remove("is-valid")
+                nombreEvento.classList.add("is-invalid")
+                mensajeNombre.textContent = 'El evento ya existe.'
+            }else{
+                setTimeout(() => {
+                    location.reload();
+                }, 1800);
+                form.reset();
+            } 
         })
         .catch(function (error) {
             mostrarAlerta(
@@ -97,6 +119,7 @@ const crearEvento = (formData) => {
             );
         });
 };
+
 const datoCambiado = () => {
     if (!crear) {
         datosActualizados = true;
@@ -170,32 +193,10 @@ form.addEventListener("submit", (event) => {
         formData.set("grado_academico", insti.slice(0, -1));
         if (!crear) {
             editarEvento(formData);
-            if(nombreAnterior !== '')  {
-                setTimeout(()=>{
-                    window.location.href = "/editarEvento";
-               },1800);
-                form.reset();
-            }else{
-                nombreEvento.classList.remove("is-valid")
-                nombreEvento.classList.add("is-invalid")
-                mensajeNombre.textContent = 'El evento ya existe.'
-            } 
         } else {
             crearEvento(formData);
-            /**Si existe un evento con ese nombre**/
-            if(nombreAnterior !== '')  {
-                setTimeout(() => {
-                    location.reload();
-                }, 1800);
-                form.reset();
-            }else{
-                nombreEvento.classList.remove("is-valid")
-                nombreEvento.classList.add("is-invalid")
-                mensajeNombre.textContent = 'El evento ya existe.'
-            } 
         }
         $("#modalConfirmacion").modal("hide");
-        //form.reset();
     }
 });
 
