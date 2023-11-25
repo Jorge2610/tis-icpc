@@ -44,7 +44,7 @@
                                         @slot('modalContent')
                                             @if ($patrocinador->eventoPatrocinador->count() > 0)
                                                 <p>
-                                                    <b>Este patrociandor tiene eventos asociados,</b> 
+                                                    <b>Este patrocinador tiene eventos asociados,</b> 
                                                     ¿Esta seguro que quiere eliminar este patrocinador?
                                                 </p>
                                             @else
