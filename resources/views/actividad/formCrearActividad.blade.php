@@ -16,7 +16,7 @@
                                 <label for="nombreActividad" class="form-label">Nombre de la actividad *</label>
                                 <input name="nombre" type="text" class="form-control custom-input" id="nombreActividad"
                                     value="" required placeholder="Ingrese el nombre de la actividad"
-                                    maxlength="64">
+                                    maxlength="64" autocomplete="off">
                                 <div id="mensajeNombre" class="invalid-feedback">
                                     El nombre no puede estar vacio.
                                 </div>
@@ -57,7 +57,7 @@
                         </div>
                         
                         <div class="text-center my-4">
-                            <button type="reset" class="btn btn-secondary mx-5">Cancelar</button>
+                            <button type="reset" class="btn btn-secondary mx-5" onClick="quitarValidacion()">Cancelar</button>
                             <button id="confirmarBoton" type="submit" class="btn btn-primary mx-5">Crear</button>
                         </div>
                 </form>

@@ -7,10 +7,12 @@ const fechaInicio = document.getElementById("fechaInicio");
 const fechaFin = document.getElementById("fechaFin");
 const mensajeFechaInicio = document.getElementById("mensajeFechaInicio");
 const mensajeFechaFin = document.getElementById("mensajeFechaFin");
+let nombreAnterior = ''
 
 /**PETICIONES a AXIOS**/
 /**CREAR ACTIVIDAD**/
 const crearActividad = (formData) => {
+    nombreAnterior = inputNombre.value
     axios.post("/api/actividad", formData)
     .then(function(response){
         const mensaje = response.data.mensaje
@@ -23,7 +25,7 @@ const crearActividad = (formData) => {
         if(mensaje === nombreIgual){
             inputNombre.classList.remove('is-valid')
             inputNombre.classList.add('is-invalid')
-            mensajeNombre.innerHTML = 'La actividad ya existe'
+            mensajeNombre.textContent = 'La actividad ya existe'
         }else{
             form.querySelectorAll(".form-control, .form-select").forEach(
                 (Element) => {
@@ -32,7 +34,9 @@ const crearActividad = (formData) => {
             );
             form.reset();
             if(response.data.error != "danger"){
-                window.location.href = "/admin/actividad";
+                setTimeout(()=>{
+                    window.location.href = "/admin/actividad";
+               },1800);
             }
         }
     })
@@ -71,6 +75,10 @@ form.querySelectorAll(".form-control, .form-select").forEach((Element) => {
         }
     });
 });
+
+/**Validacion para el input nombre**/
+inputNombre.addEventListener("input", validarNombreRepetido);
+inputNombre.addEventListener("change", validarNombreRepetido);
 
 /**Validaciones para fecha INICIO**/
 fechaInicio.addEventListener("change", () => {
@@ -137,4 +145,39 @@ fechaFin.addEventListener("change", () => {
         fechaFin.classList.add("is-valid");
     }
 });
+
+function validarNombreRepetido() {
+    if(nombreAnterior === ''){
+         if(inputNombre.value === ''){
+             inputNombre.classList.remove("is-valid");
+             inputNombre.classList.add("is-invalid");
+             mensajeNombre.textContent = "El nombre no puede estar vacío.";
+         }else{
+             inputNombre.classList.remove("is-invalid");
+             inputNombre.classList.add("is-valid");
+         }    
+    }else{
+         if (inputNombre.value !== nombreAnterior && inputNombre.value !== '') {
+             inputNombre.classList.remove("is-invalid");
+             inputNombre.classList.add("is-valid");
+         }else if(inputNombre.value == ''){
+             inputNombre.classList.remove("is-valid");
+             inputNombre.classList.add("is-invalid");
+             mensajeNombre.textContent = 'El nombre no puede estar vacío.'
+         }else{
+             inputNombre.classList.remove("is-valid");
+             inputNombre.classList.add("is-invalid");
+             mensajeNombre.textContent = 'La actividad ya existe'
+         }
+    }
+ }
+
+function quitarValidacion(){
+    form.querySelectorAll(".form-control, .form-select").forEach(
+        (Element) => {
+            Element.classList.remove("is-valid");
+            Element.classList.remove("is-invalid");
+        }
+    );
+}
 

@@ -10,6 +10,7 @@ const chekcTodas = document.getElementById("check-institucion-TODAS");
 const costo = document.getElementById("costoEvento");
 const checkTodasRango = document.getElementById("input-grado-Todas");
 const nombreEvento = document.getElementById("nombreDelEvento");
+const mensajeNombre = document.getElementById("mensajeNombre");
 
 let boolCosto = true;
 let boolMinEdad = true;
@@ -17,6 +18,7 @@ let boolcheckEdad = true;
 let boolMaxEdad = true;
 let crear = true; //0-> Crear  1->Editar
 let datosActualizados = false;
+let nombreAnterior = ''
 
 const mostrarInput = (indInput, check) => {
     let input = document.getElementById(indInput);
@@ -61,6 +63,9 @@ const editarEvento = (formData) => {
                 response.data.mensaje,
                 response.data.error ? "danger" : "success"
             );
+            const mensaje = response.data.mensaje
+            const existe = 'El evento ya existe'
+            mensaje === existe ? nombreAnterior = nombreEvento.value: nombreAnterior = ''
         })
         .catch(function (error) {
             mostrarAlerta(
@@ -80,6 +85,9 @@ const crearEvento = (formData) => {
                 response.data.mensaje,
                 response.data.error ? "danger" : "success"
             );
+            const mensaje = response.data.mensaje
+            const existe = 'El evento ya existe'
+            mensaje === existe ? nombreAnterior = nombreEvento.value: nombreAnterior = ''
         })
         .catch(function (error) {
             mostrarAlerta(
@@ -162,18 +170,32 @@ form.addEventListener("submit", (event) => {
         formData.set("grado_academico", insti.slice(0, -1));
         if (!crear) {
             editarEvento(formData);
-           // window.location.href ="/eventos/"+nombreEvento.value;
-           setTimeout(()=>{
-                window.location.href = "/editarEvento";
-           },1800);
+            if(nombreAnterior !== '')  {
+                setTimeout(()=>{
+                    window.location.href = "/editarEvento";
+               },1800);
+                form.reset();
+            }else{
+                nombreEvento.classList.remove("is-valid")
+                nombreEvento.classList.add("is-invalid")
+                mensajeNombre.textContent = 'El evento ya existe.'
+            } 
         } else {
             crearEvento(formData);
-            setTimeout(() => {
-                location.reload();
-            }, 1800);  
+            /**Si existe un evento con ese nombre**/
+            if(nombreAnterior !== '')  {
+                setTimeout(() => {
+                    location.reload();
+                }, 1800);
+                form.reset();
+            }else{
+                nombreEvento.classList.remove("is-valid")
+                nombreEvento.classList.add("is-invalid")
+                mensajeNombre.textContent = 'El evento ya existe.'
+            } 
         }
         $("#modalConfirmacion").modal("hide");
-        form.reset();
+        //form.reset();
     }
 });
 
@@ -194,6 +216,9 @@ inputEdad.addEventListener("change", () => {
 inputCosto.addEventListener("change", () => {
     mostrarInput("eventoPago", inputCosto.checked);
 });
+
+nombreEvento.addEventListener("input",validarNombreRepetido);
+nombreEvento.addEventListener("change",validarNombreRepetido);
 
 //iniciar editar un evento
 const iniciarEditar=()=>{
@@ -255,3 +280,29 @@ const fechasMin = () => {
     fechaInicio.min = laFecha;
     fechaFin.min = laFecha;
 };
+
+function validarNombreRepetido(){
+    if(nombreAnterior === ''){
+         if(nombreEvento.value === ''){
+             nombreEvento.classList.remove("is-valid");
+             nombreEvento.classList.add("is-invalid");
+             mensajeNombre.textContent = "El nombre no puede estar vacío.";
+         }else{
+             nombreEvento.classList.remove("is-invalid");
+             nombreEvento.classList.add("is-valid");
+         }    
+    }else{
+         if (nombreEvento.value !== nombreAnterior && nombreEvento.value !== '') {
+             nombreEvento.classList.remove("is-invalid");
+             nombreEvento.classList.add("is-valid");
+         }else if(nombreEvento.value == ''){
+             nombreEvento.classList.remove("is-valid");
+             nombreEvento.classList.add("is-invalid");
+             mensajeNombre.textContent = 'El nombre no puede estar vacío.'
+         }else{
+             nombreEvento.classList.remove("is-valid");
+             nombreEvento.classList.add("is-invalid");
+             mensajeNombre.textContent = 'La actividad ya existe'
+         }
+    }
+ }
