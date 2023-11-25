@@ -5,10 +5,9 @@
         <div class="row g-5">
             <div class="col-sm-12 col-md-8">
                 <table class="table table-responsive table-striped text-secondary table-hover cursor" id="tablaEvento">
-                    <caption>eventos</caption>
+                    <caption>Eventos</caption>
                     <thead>
                         <tr>
-                            <th scope="col" class="col-sm-2 col-md-1">#</th>
                             <th scope="col" class="col-sm-4 col-md-4">Nombre del evento</th>
                             <th scope="col" class="col-sm-0 col-md-3 text-center">Tipo de evento</th>
                             <th scope="col" class="col-sm-3 col-md-2 text-center">Fecha de creación</th>
@@ -17,12 +16,8 @@
                         </tr>
                     </thead>
                     <tbody id="datosTabla">
-                        @php
-                            $contador = 1;
-                        @endphp
                         @foreach ($afiches as $afiche)
                             <tr onclick="seleccionarEvento({{ $afiche }})" id="{{ $afiche->id }}">
-                                <th scope="row">{{ $contador++ }}</th>
                                 <td>{{ $afiche->nombre }}</td>
                                 <td class="text-center">{{ $afiche->tipoEvento->nombre }}</td>
                                 <td class="text-center">{{ date('d-m-Y', strtotime($afiche->created_at)) }}</td>

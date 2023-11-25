@@ -28,9 +28,6 @@
                 </thead>
                 <tbody id="datosTabla">
                     @foreach ($tiposDeEventos as $tipoDeEvento)
-                        @php
-                            $fechaFormateada = date('d-m-Y', strtotime($tipoDeEvento->created_at));
-                        @endphp
                         <tr>
                             <td>{{ $tipoDeEvento->created_at }}</td>
                             <td>{{ $tipoDeEvento->nombre }}</td>
@@ -43,7 +40,7 @@
                                 <div class="color-cell" style="background-color:{{ $tipoDeEvento->color }};"></div>
                             </td>
                             <td class="text-center">Yo</td>
-                            <td class="text-center ">{{ $fechaFormateada }}</td>
+                            <td class="text-center ">{{ date('d-m-Y', strtotime($tipoDeEvento->created_at)) }}</td>
 
                         </tr>
                     @endforeach
@@ -57,5 +54,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
     <script src="{{ asset('js/TipoDeEvento/tipoDeEvento.js') }}" defer></script>
 @endsection

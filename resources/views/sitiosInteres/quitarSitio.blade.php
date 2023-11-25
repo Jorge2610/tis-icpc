@@ -2,13 +2,15 @@
 
 @section('content')
     <div class="container">
+        <div class="row mb-2">
+            <h4>Quitar sitio de interés de un evento</h4>
+        </div>
         <div class="row g-5">
             <div class="col-sm-12 col-md-8">
                 <table class="table table-responsive table-striped text-secondary table-hover cursor" id="tablaEvento">
-                    <caption>eventos</caption>
+                    <caption>Eventos</caption>
                     <thead>
                         <tr>
-                            <th scope="col" class="col-sm-2 col-md-1">#</th>
                             <th scope="col" class="col-sm-4 col-md-4">Nombre del evento</th>
                             <th scope="col" class="col-sm-0 col-md-3 text-center">Tipo de evento</th>
                             <th scope="col" class="col-sm-3 col-md-2 text-center">Fecha de creación</th>
@@ -16,13 +18,9 @@
                         </tr>
                     </thead>
                     <tbody id="datosTabla">
-                        @php
-                            $contador = 1;
-                        @endphp
                         @foreach ($eventos as $evento)
                             <tr onclick="seleccionarEvento({{ $evento->id }}, '{{ $evento->nombre }}', event)"
                                 id="{{ $evento->id }}">
-                                <th scope="row">{{ $contador++ }}</th>
                                 <td>{{ $evento->nombre }}</td>
                                 <td class="text-center">{{ $evento->tipoEvento->nombre }}</td>
                                 <td class="text-center">{{ date('d-m-Y', strtotime($evento->created_at)) }}</td>
@@ -33,13 +31,16 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-sm-12 col-md-4" >
-                <div class="container d-flex flex-column justify-content-center align-items-center border p-3" >
+            <div class="col-sm-12 col-md-4">
+                <div class="container d-flex flex-column border p-3">
                     <div class="col-12 d-flex justify-content-center align-items-center">
                         <h4>Quitar sitio de interés</h4>
                     </div>
                     <h5 id="nombreEvento" class="text-center fw-bold"></h5>
-                    <div id="sitiosContenedor" style="height:48vh; overflow-y: scroll;">
+                    <div class="col-md-12">
+                        <div class="row row-cols-1 g-3 mt-2" style="height:48vh; overflow-y: scroll;" id="sitiosContenedor">
+                            <!-Aca se muestran los patrocinadores de un evento desde el js->
+                        </div>
                     </div>
                 </div>
             </div>
