@@ -53,7 +53,7 @@ class SitioController extends Controller
         try {
             $sitio = Sitio::find($id);
             $sitio->delete();
-            return response()->json(['mensaje' => 'Eliminado exitosamente', 'error' => false]);
+            return response()->json(['mensaje' => 'Quitado exitosamente', 'error' => false]);
         } catch (QueryException $e) {
             return $e->getMessage();
         }
