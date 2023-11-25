@@ -7,7 +7,7 @@ const dataTableOptions = {
     pageLength: 10,
     lengthMenu: [5, 10, 15, 20],
     destroy: true,
-    order: [2, 'desc'],
+    order: [2, "desc"],
     ordering: true,
     language: {
         lengthMenu: "Mostrar _MENU_ eventos",
@@ -64,14 +64,16 @@ const cargarPatrocinadores = async () => {
 };
 
 const getPatrocinadoresEvento = async (id) => {
-    let data = await axios.get("/api/patrocinador/evento/" + id).then((response) => {
-        return response.data;
-    });
+    let data = await axios
+        .get("/api/patrocinador/evento/" + id)
+        .then((response) => {
+            return response.data;
+        });
     return data;
 };
 
 const mostrarPatrocinadores = () => {
-    let div = document.getElementById('divPatrocinadores');
+    let div = document.getElementById("divPatrocinadores");
     let content = "";
     patrocinadores.map((evento) => {
         content += `
@@ -82,10 +84,16 @@ const mostrarPatrocinadores = () => {
                             alt="logoPatrocinador" style="max-height: 100%; width: auto">
                     </div>
                     <div class="card-body">
-                        <h6 class="card-title text-truncate" title="${evento.patrocinadores.nombre}">
+                        <h6 class="card-title text-truncate" title="${
+                            evento.patrocinadores.nombre
+                        }">
                             ${evento.patrocinadores.nombre}
                         </h6>
-                        <button class="btn btn-danger btn-sm" onclick="quitarPatrocinador(${evento.id})" ${quitando ? "disabled" : ""}>Quitar</button>
+                        <button class="btn btn-danger btn-sm"
+                        data-bs-toggle="modal" data-bs-target="#modalQuitarPatrocinador"
+                        onclick="seleccionPatrocinador(${evento.id})" ${
+            quitando ? "disabled" : ""
+        }>Quitar</button>
                     </div>
                 </div>
             </div>
@@ -94,29 +102,38 @@ const mostrarPatrocinadores = () => {
     div.innerHTML = content;
 };
 
-const quitarPatrocinador = async (idEventoPatrocinador) => {
-    quitando = true;
-    mostrarPatrocinadores();
-    let resultado = await realizarPeticion(idEventoPatrocinador);
-    if (resultado === "Quitado exitosamente") {
-        updateNroPatrocinadores();
-        await cargarPatrocinadores();
-    }
-    setTimeout(() => {
-        quitando = false;
+let patrocinadorSeleccionado;
+const seleccionPatrocinador = (id) => {
+    patrocinadorSeleccionado = id;
+};
+
+const quitarPatrocinador = async () => {
+    if (patrocinadorSeleccionado) {
+        quitando = true;
         mostrarPatrocinadores();
-    }, 2000);
+        let resultado = await realizarPeticion(patrocinadorSeleccionado);
+        if (resultado === "Quitado exitosamente") {
+            updateNroPatrocinadores();
+            await cargarPatrocinadores();
+        }
+        setTimeout(() => {
+            quitando = false;
+            mostrarPatrocinadores();
+        }, 2000);
+    }
 };
 
 const realizarPeticion = async (idEventoPatrocinador) => {
-    let data = await axios.delete("/api/patrocinador/quitar/" + idEventoPatrocinador).then((response) => {
-        mostrarAlerta(
-            "Éxito",
-            response.data.mensaje,
-            response.error ? "danger" : "success"
-        );
-        return response.data.mensaje;
-    });
+    let data = await axios
+        .delete("/api/patrocinador/quitar/" + idEventoPatrocinador)
+        .then((response) => {
+            mostrarAlerta(
+                "Éxito",
+                response.data.mensaje,
+                response.error ? "danger" : "success"
+            );
+            return response.data.mensaje;
+        });
     return data;
 };
 

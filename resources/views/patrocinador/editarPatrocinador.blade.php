@@ -57,7 +57,8 @@
                             <label for="nombrePatricinador" class="form-label">Nombre
                                 del patrocinador *</label>
                             <input name="nombre" type="text" class="form-control custom-input" id="nombrePatricinador"
-                                value="" placeholder="Ingrese un nombre" required title="El nombre del patrocinador no se puede editar">
+                                value="" placeholder="Ingrese un nombre" required
+                                title="El nombre del patrocinador no se puede editar">
                             <div class="invalid-feedback">
                                 El nombre no puede estar vacio.
                             </div>
@@ -73,9 +74,21 @@
                     <div class="d-flex justify-content-center mt-3">
                         <button type="button" class="btn btn-light" onclick="resetInputs()"
                             id="cancelarEditarPatrocinador">Cancelar</button>
-                        <button type="button" class="btn btn-primary" onclick="validarDatos()"
-                            id="editarPatrocinador">Editar</button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#modalEdicionPatrocinador" id="editarPatrocinador">Editar</button>
                     </div>
+                    @component('components.modal')
+                        @slot('modalId', 'modalEdicionPatrocinador')
+                        @slot('modalTitle', 'Confirmacion')
+                        @slot('modalContent')
+                            ¿Estas seguro de editar este patrocinador?
+                        @endslot
+                        @slot('modalButton')
+                            <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>
+                            <button type="reset" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal"
+                                onclick="validarDatos()">Sí</button>
+                        @endslot
+                    @endcomponent
                 </div>
             </div>
         </div>
