@@ -69,7 +69,7 @@ const mostrarSitios = (response) => {
     console.log(response);
     response.map((sitio) => {
         const sitioContenedor = document.createElement("div");
-        sitioContenedor.id = "sitio"+sitio.id;
+        sitioContenedor.id = "sitio" + sitio.id;
         sitioContenedor.innerHTML = `
             <div class="container col-12 col-md-12 col-lg-12" >
                 <div class="card w-100 shadow " style="min-height: 100px; width: 18rem !important">
@@ -78,7 +78,8 @@ const mostrarSitios = (response) => {
                         <a class="card-text text-truncate d-block"  style="max-width: 300px;" href="${sitio.enlace}" title="${sitio.enlace}" target="_blank">${sitio.enlace}</a>
                     </div>
                     <div class="card-footer" >
-                        <button class="btn btn-danger" onclick="quitarSitio(${sitio.id})">Quitar</button>
+                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalQuitarSitio"
+                        onclick="seleccionarSitio(${sitio.id})">Quitar</button>
                     </div>
                 </div>
             </div>
@@ -87,20 +88,28 @@ const mostrarSitios = (response) => {
     });
 };
 
-const quitarSitio = async (id) => {
-    const response = await axios
-        .delete("/api/sitio/" + id)
-        .then((response) => {
-            document.getElementById("sitio"+id).remove();
-            mostrarAlerta(
-                "Éxito",
-                response.data.mensaje,
-                response.error ? "danger" : "success"
-            );
-            restarContador();
-            return response.data;
-        });
-    mostrarSitios(response);
+let sitioSeleccionado;
+
+const seleccionarSitio = (id) => {
+    sitioSeleccionado = id;
+};
+
+const quitarSitio = async () => {
+    if (sitioSeleccionado) {
+        const response = await axios
+            .delete("/api/sitio/" + sitioSeleccionado)
+            .then((response) => {
+                document.getElementById("sitio" + sitioSeleccionado).remove();
+                mostrarAlerta(
+                    "Éxito",
+                    response.data.mensaje,
+                    response.error ? "danger" : "success"
+                );
+                restarContador();
+                return response.data;
+            });
+        mostrarSitios(response);
+    }
 };
 
 const restarContador = async () => {
