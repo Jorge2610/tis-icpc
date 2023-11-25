@@ -62,19 +62,28 @@ const validarCosto = () => {
     }
 };
 
+costo.addEventListener("keyup",()=>{
+    let numero = costo.value.toString();
+    var decimales = (numero.split('.')[1] || []).length;
+    if(decimales>1){
+        numero = numero.split('.')[0]+"."+numero.split('.')[1][0];
+        costo.value= numero;
+    }
+});
 
 costo.addEventListener("change", () => {
     let numero = costo.value.toString();
     var decimales = (numero.split('.')[1] || []).length;
+    if(decimales>1){
+        numero = numero.split('.')[0]+"."+numero.split('.')[1][0];
+        costo.value= numero;
+    }
     if ((costo.value < costo.min || costo.value == "") && inputCosto.checked) {
         isValid(costo,false)
     }
-    else{if(decimales > 1){
-            isValid(costo,false);
-        }else{
-            validarCosto();
-            isValid(costo,true);
-        }  
+    else{
+        validarCosto();
+        isValid(costo,true);
     }
     if (boolCosto) {
         boolCosto = false;
