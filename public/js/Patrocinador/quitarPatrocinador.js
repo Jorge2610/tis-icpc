@@ -77,8 +77,10 @@ const mostrarPatrocinadores = () => {
         content += `
             <div class="col text-center">
                 <div class="card" style="height: 13rem">
-                    <img src="${evento.patrocinadores.ruta_imagen}" class="img-fluid rounded"
-                        alt="logoPatrocinador">
+                    <div class="row justify-content-center" style="max-height: 125px">
+                        <img src="${evento.patrocinadores.ruta_imagen}" class="img-fluid"
+                            alt="logoPatrocinador" style="max-height: 100%; width: auto">
+                    </div>
                     <div class="card-body">
                         <h6 class="card-title text-truncate" title="${evento.patrocinadores.nombre}">
                             ${evento.patrocinadores.nombre}
