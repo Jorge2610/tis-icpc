@@ -48,7 +48,7 @@
                                                     ¿Esta seguro que quiere eliminar este patrocinador?
                                                 </p>
                                             @else
-                                                ¿Esta seguro que quiere eliminar este patrocinador?
+                                                ¿Está seguro que quiere eliminar este patrocinador?
                                             @endif
                                         @endslot
                                         @slot('modalButton')
