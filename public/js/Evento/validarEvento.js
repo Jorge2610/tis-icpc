@@ -102,13 +102,20 @@ fechaFin.addEventListener("change", () => {
 
 edadMaxima.addEventListener("change", () => {
     let ambos = edadMaxima.value === "" && edadMinima.value === "";
-    if (parseInt(edadMaxima.value) < parseInt(edadMaxima.min) && edadMaxima.value !== "") {
+    if (parseInt(edadMaxima.value) < parseInt(edadMaxima.min) && (edadMaxima.value !== "")) {
         isValid(edadMaxima,false);
     } else {
         if (ambos && inputEdad.checked) {
             isValid(edadMaxima,false);
         } else {
             isValid(edadMaxima,true);
+            if(edadMaxima.value!==""&&edadMinima.value===""){
+                document.getElementById("ValidoRangoEdad").innerText="Edad valida hasta los "+edadMaxima.value;
+            }
+            else{
+                if(edadMinima.value!==""&&edadMaxima.value!=="")
+                    document.getElementById("ValidoRangoEdad").innerText="";
+            }
         }
     }
     if (boolMinEdad && boolMaxEdad && boolcheckEdad) {
@@ -126,8 +133,16 @@ edadMinima.addEventListener("change", () => {
     if (parseInt(edadMinima.value) < parseInt(edadMinima.min) && edadMinima.value !== "") {
         isValid(edadMinima,false);
     } else {
+            if(edadMinima.value!=="")
+                edadMaxima.min = edadMinima.value;
             isValid(edadMinima,true);
-            edadMaxima.min = edadMinima.value;
+            if(edadMinima.value!==""&&edadMaxima.value===""){
+                document.getElementById("ValidoRangoEdad").innerText="Edad valida desde los "+edadMinima.value;
+            }
+            else{
+                if(edadMaxima.value!==""&&edadMinima.value!=="")
+                    document.getElementById("ValidoRangoEdad").innerText="";
+            }
     }
     if (ambos && inputEdad.checked) {
         isValid(edadMinima,false);
@@ -141,6 +156,7 @@ edadMinima.addEventListener("change", () => {
     } else {
         boolMinEdad = true;
     }
+    
 });
 inputCosto.addEventListener("change", () => {
     validarCosto();

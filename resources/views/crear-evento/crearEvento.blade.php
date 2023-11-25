@@ -114,6 +114,8 @@
                             id="edadCheck" onchange="datoCambiado()" data-id="{{ $datos['edad_minima'] }}"
                             @if ($datos['edad_minima']) checked @endif>
                         <label for="limiteDeEdad" class="form-check-label">Rango de edad</label>
+                        <div class="valid-feedback" id="ValidoRangoEdad">
+                            </div>
                         <div class="row" id="rangosDeEdad" style="display: none;">
                             <div class="col-md-6">
                                 <div class="row " id="rangoMin">

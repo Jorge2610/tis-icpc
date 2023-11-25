@@ -18,8 +18,6 @@ class CreateEventosTable extends Migration
             $table->id();
             $table->string('nombre', 64)->unique();
             $table->text('descripcion', 2048)->nullable();
-            $table->dateTime('inicio_inscripcion')->format('d-m-Y')->nullable();
-            $table->dateTime('fin_inscripcion')->format('d-m-Y')->nullable();
             $table->dateTime('inicio_evento')->format('d-m-Y');
             $table->dateTime('fin_evento')->format('d-m-Y');
             $table->string('institucion')->nullable();
