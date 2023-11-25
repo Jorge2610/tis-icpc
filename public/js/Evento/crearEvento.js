@@ -268,7 +268,7 @@ const iniciarEditar=()=>{
         document.querySelectorAll(".fecha-editar").forEach(Element=>{
             Element.disabled=true;
         })
-        fechaFin.min=fechaInicio.value;
+        fechaFin.min=laFecha;
     }else{
         fechasMin();
     }

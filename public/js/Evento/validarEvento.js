@@ -46,6 +46,10 @@ const validarEdad = () => {
     } else {
         isValid(inputEdad,true);
     }
+    if(!inputEdad.checked){
+        inputEdad.classList.remove("is-valid");
+        inputEdad.classList.remove("is-invalid");
+    }
 };
 
 const validarCosto = () => {
@@ -59,6 +63,10 @@ const validarCosto = () => {
         isValid(inputCosto,false)
     } else {
         isValid(inputCosto,true)
+    }
+    if(!inputCosto.checked){
+        inputCosto.classList.remove("is-valid");
+        inputCosto.classList.remove("is-invalid");
     }
 };
 
@@ -102,7 +110,8 @@ fechaInicio.addEventListener("change", () => {
     ) {
         isValid(fechaInicio,false);
     } else {
-        fechaFin.min = fechaInicio.value;
+        if(fechaInicio.hasAttribute('disabled'))
+            fechaFin.min = fechaInicio.value;
         fechaFin.dispatchEvent(new Event("change"));
 
     }
