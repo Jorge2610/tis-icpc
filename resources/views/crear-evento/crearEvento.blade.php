@@ -116,6 +116,9 @@
                         <label for="limiteDeEdad" class="form-check-label">Rango de edad</label>
                         <div class="valid-feedback" id="ValidoRangoEdad">
                             </div>
+                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                                Rango de edades no valido
+                            </div>
                         <div class="row" id="rangosDeEdad" style="display: none;">
                             <div class="col-md-6">
                                 <div class="row " id="rangoMin">
@@ -126,7 +129,7 @@
                                         <div class="input-group">
                                             <input name="edad_minima" type="number"
                                                 class="form-control input-edad fecha-editar" min="10"
-                                                id="edadMinima" step="1"
+                                                id="edadMinima" step="1" max="99"
                                                 value="{{ isset($datos['edad_minima']) ? $datos['edad_minima'] : '' }}">
                                         </div>
                                     </div>
@@ -141,7 +144,7 @@
                                         <div class="input-group">
                                             <input name="edad_maxima" type="number"
                                                 class="form-control input-edad fecha-editar" id="edadMaxima"
-                                                step="1" min="10"
+                                                step="1" min="10" max="99"
                                                 value="{{ isset($datos['edad_maxima']) ? $datos['edad_maxima'] : '' }}">
                                         </div>
                                     </div>
