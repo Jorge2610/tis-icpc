@@ -45,7 +45,7 @@
                                             @if ($patrocinador->eventoPatrocinador->count() > 0)
                                                 <p>
                                                     <b>Este patrocinador tiene eventos asociados,</b> 
-                                                    ¿Esta seguro que quiere eliminar este patrocinador?
+                                                    ¿Está seguro que quiere eliminar este patrocinador?
                                                 </p>
                                             @else
                                                 ¿Está seguro que quiere eliminar este patrocinador?
