@@ -6,6 +6,7 @@ const dataTableOptions = {
     pageLength: 10,
     lengthMenu: [5, 10, 15, 20],
     destroy: true,
+    order: [[3, "desc"]],
     language: {
         lengthMenu: "Mostrar _MENU_ entradas",
         zeroRecords: "Ningún tipo de evento encontrado",
@@ -27,6 +28,7 @@ const initDataTable = async () => {
     if (tablaInicializada) {
         tablaDeTipos.destroy();
     }
+    DataTable.datetime("DD-MM-YYYY");
     tablaDeTipos = $("#tablaTipoDeEvento").DataTable(dataTableOptions);
     tablaInicializada = true;
 };
@@ -38,7 +40,7 @@ async function eliminarTipoEvento(id) {
         .then(response => {
             if (!response.data.error) {
                 // Si la eliminación es exitosa, mostramos un mensaje de éxito en el modal
-                $('#modalEliminarTipoEvento'+id).modal('hide'); // Cerrar el modal
+                $('#modalEliminarTipoEvento' + id).modal('hide'); // Cerrar el modal
                 mostrarAlerta(
                     "Éxito",
                     response.data.mensaje,
@@ -48,7 +50,7 @@ async function eliminarTipoEvento(id) {
 
             } else {
                 // Si hay un error, mostramos un mensaje de error en el modal
-                $('#modalEliminarTipoEvento'+id).modal('hide'); // Cerrar el modal
+                $('#modalEliminarTipoEvento' + id).modal('hide'); // Cerrar el modal
                 $('#modalMensaje').text('Error: ' + response.data.mensaje);
                 $('#modalError').modal('show');
             }
@@ -59,12 +61,12 @@ async function eliminarTipoEvento(id) {
 }
 
 window.addEventListener("load", async () => {
-    await initDataTable();
+    initDataTable();
 });
 
 /**Para recargar eventos, si o si debemos llamar a la pagina**/
 const recargarEventos = () => {
-     setTimeout(() => {
-         window.location.href = "/admin/tipos-de-evento/eliminar-tipo";
-     },1700);
- }
+    setTimeout(() => {
+        window.location.href = "/admin/tipos-de-evento/eliminar-tipo";
+    }, 1700);
+}

@@ -18,7 +18,6 @@
                 <caption>Tipo de eventos</caption>
                 <thead>
                     <tr>
-                        <th scope="col" class="col-md-1 ">#</th>
                         <th scope="col" class="col-md-2">Nombre del tipo de evento</th>
                         <th scope="col" class="col-md-2 text-center">Color de referencia</th>
                         <th scope="col" class="col-md-2 text-center">Autor</th>
@@ -28,15 +27,8 @@
                     </tr>
                 </thead>
                 <tbody id="datosTabla">
-                    @php
-                        $contador = 1;
-                    @endphp
                     @foreach ($tiposDeEventos as $tipoDeEvento)
-                        {{-- @php
-                            $fechaFormateada = date('d-m-Y', strtotime($tipoDeEvento->created_at));
-                        @endphp --}}
                         <tr>
-                            <th scope='row'>{{ $contador++ }}</th>
                             <td>{{ $tipoDeEvento->nombre }}</td>
                             <td class="container-color">
                                 <div class="color-cell" style="background-color:{{ $tipoDeEvento->color }};"></div>
@@ -45,11 +37,11 @@
                             <td class="text-center">{{ date('d-m-Y', strtotime($tipoDeEvento->created_at)) }}</td>
                             <td class="text-center">{{ $tipoDeEvento->eventos->count() }}</td>
                             <td class="text-center">
-                                    <button type="button" class="btn btn-primary btn-sm"
-                                        onclick="window.location.href='/admin/tipos-de-evento/editar-tipo-evento/{{ $tipoDeEvento->id }}'"
-                                        {{ $tipoDeEvento->eventos->count() > 0 ? 'disabled' : '' }}>
-                                        <i class="bi bi-pencil-fill"></i>
-                                    </button>
+                                <button type="button" class="btn btn-primary btn-sm"
+                                    onclick="window.location.href='/admin/tipos-de-evento/editar-tipo-evento/{{ $tipoDeEvento->id }}'"
+                                    {{ $tipoDeEvento->eventos->count() > 0 ? 'disabled' : '' }}>
+                                    <i class="bi bi-pencil-fill"></i>
+                                </button>
                             </td>
                         </tr>
                     @endforeach
@@ -63,5 +55,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
     <script src="{{ asset('js/TipoDeEvento/editarTipoEvento.js') }}" defer></script>
 @endsection

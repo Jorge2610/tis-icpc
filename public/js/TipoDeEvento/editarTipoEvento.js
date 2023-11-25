@@ -6,6 +6,7 @@ const dataTableOptions = {
     pageLength: 10,
     lengthMenu: [5, 10, 15, 20],
     destroy: true,
+    order: [[3, "desc"]],
     language: {
         lengthMenu: "Mostrar _MENU_ entradas",
         zeroRecords: "Ningún tipo de evento encontrado",
@@ -32,47 +33,9 @@ const initDataTable = async () => {
     if (tablaInicializada) {
         tablaDeTipos.destroy();
     }
-    //await cargarTiposDeEvento();
+    DataTable.datetime("DD-MM-YYYY");
     tablaDeTipos = $("#tablaTipoDeEvento").DataTable(dataTableOptions);
     tablaInicializada = true;
-};
-
-const cargarTiposDeEvento = async () => {
-    try {
-        const response = await axios.get("/api/tipo-evento");
-        tablaDeTipos.destroy();
-        const tiposDeEvento = response.data;
-        const tableBody = document.getElementById("datosTabla");
-
-        let content = tiposDeEvento.map((element, index) => {
-            const fecha = new Date(element.created_at);
-            const dia = fecha.getDate();
-            const mes = fecha.getMonth() + 1;
-            const anio = fecha.getFullYear();
-            const fechaFormateada = `${dia}-${mes}-${anio}`;
-
-            return `
-                <tr>
-                    <th scope='row'>${index + 1}</th>
-                    <td>${element.nombre}</td>
-                    <td class="container-color">
-                        <div class="color-cell" style="background-color:${element.color};"></div>
-                    </td>
-                    <td class="text-center">Yo</td>
-                    <td class="text-center">${fechaFormateada}</td>
-                    <td class="text-center">
-                        <button type="button" class="btn btn-primary btn-sm" onclick="editarTipoEvento(${element.id})">
-                            <i class="bi bi-pencil-fill"></i>
-                        </button>
-                    </td>
-                </tr>
-            `;
-        }).join("");
-
-        tableBody.innerHTML = content;
-    } catch (error) {
-        alert(error);
-    }
 };
 
 //Editar evento
@@ -107,6 +70,12 @@ function editarTipoEvento(id) {
             });
     });
 }
+
+const recargarEventos = () => {
+    setTimeout(() => {
+        window.location.href = "/admin/tipos-de-evento/editar-tipo";
+    }, 1750);
+};
 
 window.addEventListener("load", async () => {
     await initDataTable();

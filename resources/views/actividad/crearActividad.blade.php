@@ -8,10 +8,9 @@
         <div class="row g-5">
             <div class="col-sm-12 col-md-12">
                 <table class="table table-responsive table-striped text-secondary" id="tablaEvento">
-                    <caption>actividades</caption>
+                    <caption>Actividades</caption>
                     <thead>
                         <tr>
-                            <th scope="col" class="col-sm-2 col-md-1">#</th>
                             <th scope="col" class="col-sm-3 col-md-3">Nombre del evento</th>
                             <th scope="col" class="col-sm-0 col-md-3 text-center">Tipo de evento</th>
                             <th scope="col" class="col-sm-3 col-md-2 text-center">Fecha inicio</th>
@@ -21,12 +20,10 @@
                         </tr>
                     </thead>
                     <tbody id="datosTabla">
-                        @php $contador = 1 @endphp
                         @foreach ($actividades as $actividad)
                             @if (strtotime($actividad->fin_evento) <= time())
                             @else
                                 <tr>
-                                    <th scope="row">{{ $contador++ }}</th>
                                     <td>{{ $actividad->nombre }}</td>
                                     <td class="text-center">{{ $actividad->tipoEvento->nombre }}</td>
                                     <td class="text-center">{{ date('d-m-Y H:i', strtotime($actividad->inicio_evento)) }}</td>

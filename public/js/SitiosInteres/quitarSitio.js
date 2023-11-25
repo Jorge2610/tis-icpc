@@ -8,7 +8,7 @@ const dataTableOptions = {
     pageLength: 10,
     lengthMenu: [5, 10, 15, 20],
     destroy: true,
-    order: [[3, "desc"]],
+    order: [[2, "desc"]],
     language: {
         lengthMenu: "Mostrar _MENU_ entradas",
         zeroRecords: "Ningún tipo de evento encontrado",
