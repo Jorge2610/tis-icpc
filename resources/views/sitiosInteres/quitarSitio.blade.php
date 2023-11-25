@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="container">
+        <div class="row mb-2">
+            <h4>Quitar sitio de interés de un evento</h4>
+        </div>
         <div class="row g-5">
             <div class="col-sm-12 col-md-8">
                 <table class="table table-responsive table-striped text-secondary table-hover cursor" id="tablaEvento">
@@ -31,7 +34,7 @@
             <div class="col-sm-12 col-md-4">
                 <div class="container d-flex flex-column border p-3">
                     <div class="col-12 d-flex justify-content-center align-items-center">
-                        <h4>Quitar patrocinador de:</h4>
+                        <h4>Quitar sitio de interés</h4>
                     </div>
                     <h5 id="nombreEvento" class="text-center fw-bold"></h5>
                     <div class="col-md-12">

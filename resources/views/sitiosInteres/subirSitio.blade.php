@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="container">
+        <div class="row mb-2">
+            <h4>Registrar sitio de interés en un evento</h4>
+        </div>
         <div class="row g-5">
             <div class="col-sm-12 col-md-8">
                 <table class="table table-responsive table-striped text-secondary table-hover cursor" id="tablaEvento">
