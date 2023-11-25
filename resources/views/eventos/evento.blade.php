@@ -108,7 +108,7 @@
         <div class="col-md-2">
             @if ($evento->sitios->count() > 0)
                 <div class="col-12">
-                    <h4 class="">Enlaces de interés: </h4>
+                    <h4 class="">Sitios de interés: </h4>
                 </div>
 
                 <div class="row mb-5 d-flex">

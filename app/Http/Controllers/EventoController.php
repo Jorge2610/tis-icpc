@@ -40,8 +40,6 @@ class EventoController extends Controller
             $evento = new Evento();
             $evento->nombre             = $request->nombre;
             $evento->descripcion        = $request->descripcion;
-            $evento->inicio_inscripcion = $request->inicio_inscripcion;
-            $evento->fin_inscripcion    = $request->fin_inscripcion;
             $evento->inicio_evento      = $request->inicio_evento;
             $evento->fin_evento         = $request->fin_evento;
             $evento->institucion        = $request->institucion;
@@ -77,8 +75,6 @@ class EventoController extends Controller
             $evento = Evento::find($id);
             $evento->nombre             = $request->nombre;
             $evento->descripcion        = $request->descripcion;
-            $evento->inicio_inscripcion = $request->inicio_inscripcion;
-            $evento->fin_inscripcion    = $request->fin_inscripcion;
             $evento->inicio_evento      = $request->inicio_evento;
             $evento->fin_evento         = $request->fin_evento;
             $evento->institucion        = $request->institucion;
