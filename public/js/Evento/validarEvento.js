@@ -102,7 +102,7 @@ fechaFin.addEventListener("change", () => {
 
 edadMaxima.addEventListener("change", () => {
     let ambos = edadMaxima.value === "" && edadMinima.value === "";
-    if (parseInt(edadMaxima.value) < parseInt(edadMaxima.min) && edadMaxima.value !== "") {
+    if (parseInt(edadMaxima.value) < parseInt(edadMaxima.min) && (edadMaxima.value !== "")) {
         isValid(edadMaxima,false);
     } else {
         if (ambos && inputEdad.checked) {
@@ -126,8 +126,9 @@ edadMinima.addEventListener("change", () => {
     if (parseInt(edadMinima.value) < parseInt(edadMinima.min) && edadMinima.value !== "") {
         isValid(edadMinima,false);
     } else {
+            if(edadMinima.value!=="")
+                edadMaxima.min = edadMinima.value;
             isValid(edadMinima,true);
-            edadMaxima.min = edadMinima.value;
     }
     if (ambos && inputEdad.checked) {
         isValid(edadMinima,false);
