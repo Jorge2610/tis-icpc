@@ -34,8 +34,6 @@ class EventoSeeder extends Seeder
             DB::table('eventos')->insert([
                 'nombre' => "evento " . ($i + 1),
                 'descripcion' => $faker->paragraph(10),
-                'inicio_inscripcion' => $inicio_inscripcion,
-                'fin_inscripcion' => $fin_inscripcion,
                 'inicio_evento' => $inicio_evento,
                 'fin_evento' => $fin_evento,
                 'institucion' => $faker->company() . ' - ' . $faker->companySuffix(),
