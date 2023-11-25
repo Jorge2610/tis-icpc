@@ -72,7 +72,7 @@ const mostrarSitios = (response) => {
         sitioContenedor.id = "sitio"+sitio.id;
         sitioContenedor.innerHTML = `
             <div class="container col-12 col-md-12 col-lg-12" >
-                <div class="card w-100 my-3 shadow " style="min-height: 100px; width: 18rem !important">
+                <div class="card w-100 shadow " style="min-height: 100px; width: 18rem !important">
                     <div class="card-body" >
                         <h5 class="card-title">${sitio.titulo}</h5>
                         <a class="card-text text-truncate d-block"  style="max-width: 300px;" href="${sitio.enlace}" title="${sitio.enlace}" target="_blank">${sitio.enlace}</a>
