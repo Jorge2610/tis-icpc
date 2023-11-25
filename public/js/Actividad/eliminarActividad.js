@@ -76,6 +76,9 @@ const cambiarEvento = (evento) => {
 
     evento.actividades.forEach((actividad) => {
         // Crear un elemento div para cada actividad
+        if(actividad.descripcion==null){
+            actividad.descripcion="";
+        }
         const actividadDiv = document.createElement("div");
         actividadDiv.classList.add("col-auto");
         actividadDiv.id = `tarjetaActividad${actividad.id}`;
