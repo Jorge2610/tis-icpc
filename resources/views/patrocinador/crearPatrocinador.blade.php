@@ -38,7 +38,7 @@
 
             <div class="col-sm-12 col-md-4">
                 <div class="container d-flex flex-column align-items-center border p-3 container-image">
-                    <h5 class="text-start">Logo patrocinador</h5>
+                    <h5 class="text-start">Imagen patrocinador</h5>
                     <div class="d-flex justify-content-center">
                         <img src="{{ asset('/image/uploading.png') }}" alt="image" id = "imagePreview"
                             class="rounded mx-auto d-block img-thumbnail" style="max-height: 270px; max-width: 270px">
@@ -48,7 +48,7 @@
 
                     <div class="d-flex justify-content-center mt-3">
                         <button type="button" class="btn btn-light text-primary" id="botonSubirLogoPatrocinador"
-                            onclick="document.getElementById('imageUpload').click()">Subir logo</button>
+                            onclick="document.getElementById('imageUpload').click()">Subir imagen</button>
                     </div>
                     <form class="needs-validation" novalidate id="formularioAgregarPatrocinador">
                         <div class="col-md-12 mt-2">
@@ -57,7 +57,7 @@
                             <input name="nombre" type="text" class="form-control custom-input" id="nombrePatricinador"
                                 value="" placeholder="Ingrese un nombre" required>
                             <div class="invalid-feedback">
-                                El nombre no puede estar vacio.
+                                El nombre no puede estar vacío.
                             </div>
                         </div>
 
