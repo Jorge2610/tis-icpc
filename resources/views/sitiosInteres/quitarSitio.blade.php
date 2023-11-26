@@ -38,7 +38,7 @@
                     </div>
                     <h5 id="nombreEvento" class="text-center fw-bold"></h5>
                     <div class="col-md-12">
-                        <div class="row row-cols-1 g-3 mt-2" style="height:48vh; overflow-y: scroll;" id="sitiosContenedor">
+                        <div class="row row-cols-1 g-3 mt-2" style="height:48vh; overflow-y: auto;" id="sitiosContenedor">
                             <!-Aca se muestran los patrocinadores de un evento desde el js->
                         </div>
                     </div>
