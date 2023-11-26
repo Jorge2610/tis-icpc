@@ -6,13 +6,13 @@
             <div class="col-sm-12 col-md-8">
                 <h2>Eliminar actividad</h2>
                 <table class="table table-responsive table-striped text-secondary table-hover cursor" id="tablaEvento">
-                    <caption>Actividades</caption>
+                    <caption>Eventos</caption>
                     <thead>
                         <tr>
                             <th scope="col" class="col-sm-4 col-md-4">Nombre del evento</th>
                             <th scope="col" class="col-sm-0 col-md-3 text-center">Tipo de evento</th>
-                            <th scope="col" class="col-sm-3 col-md-2 text-center">Fecha inicio</th>
-                            <th scope="col" class="col-sm-3 col-md-2 text-center">Fecha fin</th>
+                            <th scope="col" class="col-sm-3 col-md-2 text-center">Fecha de inicio del evento</th>
+                            <th scope="col" class="col-sm-3 col-md-2 text-center">Fecha de fin del evento</th>
                             <th scope="col" class="col-sm-3 col-md-2 text-center font-sm">Cantidad de actividades</th>
 
                         </tr>
