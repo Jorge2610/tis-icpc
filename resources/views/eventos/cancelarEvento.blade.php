@@ -115,7 +115,7 @@
                                                         placeholder="Ingrese el motivo de la anulación" value=""
                                                         required maxlength="64">
                                                     <div class="invalid-feedback">
-                                                        El motivo de anulacion no puede estar vacio.
+                                                        El motivo de la anulación no puede estar vacío.
                                                     </div>
                                                 </div>
 
@@ -124,7 +124,7 @@
                                                         Descripción del motivo de la anulación
                                                     </label>
                                                     <textarea class="form-control" id="descripcionAnulacion" rows="3" style="resize: none;"
-                                                        placeholder="Ingrese una descripcion..." maxlength="512">
+                                                        placeholder="Ingrese una descripción..." maxlength="512">
                                                 </textarea>
                                                 </div>
 

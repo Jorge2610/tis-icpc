@@ -249,7 +249,7 @@
                         </button>
                         @component('components.modal')
                             @slot('modalId', 'modalCancelar')
-                            @slot('modalTitle', 'Confirmacion')
+                            @slot('modalTitle', 'Confirmación')
                             @slot('modalContent')
                                 @if (Route::currentRouteName() == 'evento.editar')
                                     ¿Está seguro de cancelar la edición del evento?
@@ -272,7 +272,7 @@
                     </button>
                     @component('components.modal')
                         @slot('modalId', 'modalConfirmacion')
-                        @slot('modalTitle', 'Confirmacion')
+                        @slot('modalTitle', 'Confirmación')
                         @slot('modalContent')
                             @if (Route::currentRouteName() == 'evento.editar')
                                 ¿Está seguro de editar el evento?

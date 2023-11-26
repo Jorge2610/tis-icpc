@@ -60,7 +60,7 @@
                                 value="" placeholder="Ingrese un nombre" required
                                 title="El nombre del patrocinador no se puede editar">
                             <div class="invalid-feedback">
-                                El nombre no puede estar vacio.
+                                El nombre no puede estar vacío.
                             </div>
                         </div>
 
@@ -79,9 +79,9 @@
                     </div>
                     @component('components.modal')
                         @slot('modalId', 'modalEdicionPatrocinador')
-                        @slot('modalTitle', 'Confirmacion')
+                        @slot('modalTitle', 'Confirmación')
                         @slot('modalContent')
-                            ¿Estas seguro de editar este patrocinador?
+                            ¿Está seguro de editar este patrocinador?
                         @endslot
                         @slot('modalButton')
                             <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>

@@ -43,7 +43,7 @@
                             <input name="titulo" type="text" class="form-control custom-input" id="tituloSitio"
                                 value="" placeholder="Ingrese un titulo" required>
                             <div class="invalid-feedback">
-                                El titulo no puede estar vacio.
+                                El titulo no puede estar vacío.
                             </div>
                         </div>
 

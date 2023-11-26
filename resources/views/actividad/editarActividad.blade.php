@@ -17,7 +17,7 @@
                                     placeholder="Ingrese el nombre de la actividad" maxlength="64"
                                     @if (strtotime($actividad->inicio_actividad) <= time()) disabled @endif>
                                 <div id="mensajeNombre" class="invalid-feedback">
-                                    El nombre no puede estar vacio.
+                                    El nombre no puede estar vacío.
                                 </div>
                             </div>
                         </div>

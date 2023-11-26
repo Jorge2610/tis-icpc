@@ -40,7 +40,7 @@
                     <div class="row gap-2 mt-2 d-flex justify-content-center" id="contenedorAsignar"></div>
                     @component('components.modal')
                         @slot('modalId', 'modalEliminarActividad')
-                        @slot('modalTitle', 'Confirmacion')
+                        @slot('modalTitle', 'Confirmación')
                         @slot('modalContent')
                             ¿Estas seguro de eliminar la actividad?
                         @endslot

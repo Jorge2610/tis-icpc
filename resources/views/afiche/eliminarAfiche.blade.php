@@ -41,9 +41,9 @@
 
                     @component('components.modal')
                         @slot('modalId', 'modalEliminarAfiche')
-                        @slot('modalTitle', 'Confirmacion')
+                        @slot('modalTitle', 'Confirmación')
                         @slot('modalContent')
-                            ¿Estas seguro de eliminar el afiche?
+                            ¿Está seguro de eliminar el afiche?
                         @endslot
                         @slot('modalButton')
                             <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>
