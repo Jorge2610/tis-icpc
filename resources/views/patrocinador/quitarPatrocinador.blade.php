@@ -49,11 +49,11 @@
                         @slot('modalId', 'modalQuitarPatrocinador')
                         @slot('modalTitle', 'Confirmación')
                         @slot('modalContent')
-                            ¿Estas seguro de quitar este patrocinador?
+                            ¿Estás seguro de quitar este patrocinador?
                         @endslot
                         @slot('modalButton')
                             <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>
-                            <button type="reset" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal"
+                            <button type="reset" class="btn btn-danger w-25 mx-8" data-bs-dismiss="modal"
                                 onclick="quitarPatrocinador()">Sí</button>
                         @endslot
                     @endcomponent
