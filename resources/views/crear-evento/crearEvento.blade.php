@@ -254,7 +254,7 @@
                                 @if (Route::currentRouteName() == 'evento.editar')
                                     ¿Está seguro de cancelar la edición del evento?
                                 @else
-                                    ¿Está seguro de cancelar el evento?
+                                    ¿Está seguro de cancelar la creación del evento?
                                 @endif
                             @endslot
                             @slot('modalButton')
