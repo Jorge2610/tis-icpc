@@ -6,12 +6,19 @@ const dataTableOptions = {
     pageLength: 10,
     lengthMenu: [5, 10, 15, 20],
     destroy: true,
-    order: [[2, "desc"]],
+    order: [[2,"asc"]],
+    columnDefs: [
+        {
+            targets: 2, // Índice de la tercera columna
+            type: 'date', // Tipo de fecha genérico
+        }
+    ],
+
     language: {
         lengthMenu: "Mostrar _MENU_ entradas",
-        zeroRecords: "Ningún tipo de evento encontrado",
+        zeroRecords: "Ninguna actividad encontrada",
         info: "Mostrando de _START_ a _END_ de un total de _TOTAL_ registros",
-        infoEmpty: "Ningún usuario encontrado",
+        infoEmpty: "Ninguna actividad encontrada",
         infoFiltered: "(filtrados desde _MAX_ registros totales)",
         search: "Buscar:",
         loadingRecords: "Cargando...",
