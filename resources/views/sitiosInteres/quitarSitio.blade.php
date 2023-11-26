@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row mb-2">
-            <h4>Quitar sitio de interés de un evento</h4>
+            <h2>Quitar sitio de interés de un evento</h2>
         </div>
         <div class="row g-5">
             <div class="col-sm-12 col-md-8">
