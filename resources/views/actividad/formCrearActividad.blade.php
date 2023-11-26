@@ -18,7 +18,7 @@
                                     value="" required placeholder="Ingrese el nombre de la actividad"
                                     maxlength="64" autocomplete="off">
                                 <div id="mensajeNombre" class="invalid-feedback">
-                                    El nombre no puede estar vacio.
+                                    El nombre no puede estar vacío.
                                 </div>
                             </div>
                         </div>

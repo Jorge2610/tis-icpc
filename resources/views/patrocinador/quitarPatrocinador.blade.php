@@ -47,7 +47,7 @@
                 </div>
                 @component('components.modal')
                         @slot('modalId', 'modalQuitarPatrocinador')
-                        @slot('modalTitle', 'Confirmacion')
+                        @slot('modalTitle', 'Confirmación')
                         @slot('modalContent')
                             ¿Estas seguro de quitar este patrocinador?
                         @endslot

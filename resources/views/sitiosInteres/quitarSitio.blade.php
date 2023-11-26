@@ -45,9 +45,9 @@
                 </div>
                 @component('components.modal')
                         @slot('modalId', 'modalQuitarSitio')
-                        @slot('modalTitle', 'Confirmacion')
+                        @slot('modalTitle', 'Confirmación')
                         @slot('modalContent')
-                            ¿Estas seguro de quitar este sitio de interés?
+                            ¿Está seguro de quitar este sitio de interés?
                         @endslot
                         @slot('modalButton')
                             <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>

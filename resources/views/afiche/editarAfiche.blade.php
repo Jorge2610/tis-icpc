@@ -40,7 +40,7 @@
                     </div>
                     @component('components.modal')
                         @slot('modalId', 'modalCambiarAfiche')
-                        @slot('modalTitle', 'Confirmacion')
+                        @slot('modalTitle', 'Confirmación')
                         @slot('modalContent')
                             ¿Está seguro de cambiar el afiche?
                         @endslot
