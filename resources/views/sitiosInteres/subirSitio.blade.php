@@ -39,7 +39,7 @@
                     <h5 id="nombreEvento" class="text-center fw-bold"></h5>
                     <form class="needs-validation" novalidate id="formularioAgregarSitio">
                         <div class="col-md-12 mt-2">
-                            <label for="tituloSitio" class="form-label">Título</label>
+                            <label for="tituloSitio" class="form-label">Título *</label>
                             <input name="titulo" type="text" class="form-control custom-input" id="tituloSitio"
                                 value="" placeholder="Ingrese un título" required>
                             <div class="invalid-feedback">
@@ -48,7 +48,7 @@
                         </div>
 
                         <div class="col-md-12 mt-2">
-                            <label for="urlSitio" class="form-label">Enlace al sitio</label>
+                            <label for="urlSitio" class="form-label">Enlace al sitio *</label>
                             <input name="enlace" type="url" class="form-control custom-input" id="urlSitio"
                                 value="" placeholder="https://www.ejemplo.com" required>
                         </div>
