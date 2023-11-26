@@ -106,10 +106,9 @@ const crearEvento = (formData) => {
                 mensajeNombre.textContent = 'El evento ya existe.'
             }else{
                 setTimeout(() => {
-                    location.reload();
+                    window.location.href = "/eventos/" ;
                 }, 1800);
-                form.reset();
-            } 
+            }    
         })
         .catch(function (error) {
             mostrarAlerta(
@@ -161,7 +160,8 @@ window.addEventListener("load", () => {
 
 const cerrar = (edicion) => {
     if (crear) {
-        window.location.href = "/eventos/" 
+        location.reload();
+        form.reset();   
     }
     else{
         window.location.href = "/editarEvento/";

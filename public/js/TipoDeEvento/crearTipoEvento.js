@@ -30,7 +30,9 @@ const crearTipoEvento = (formData) => {
                 }
             );
             form.reset();
-            window.location.href = "/admin/tipos-de-evento";
+            setTimeout(()=>{
+                window.location.href = "/admin/tipos-de-evento";
+            },1800);
         }   
     }).catch(function(error){
         mostrarAlerta("Error", "Hubo un error al guardar el tipo de evento", "danger");

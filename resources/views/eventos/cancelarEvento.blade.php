@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row mb-2">
-            <h4>{{ $anular ? 'Anular' : 'Cancelar' }} evento</h4>
+            <h2>{{ $anular ? 'Anular' : 'Cancelar' }} evento</h2>
         </div>
         <div class="row g-5">
             <div class="col-sm-12">
@@ -86,7 +86,7 @@
                                 <div class="modal-footer d-flex justify-content-center">
                                     <button type="button" class="btn btn-secondary w-25 mx-8"
                                         data-bs-dismiss="modal">No</button>
-                                    <button type="button" class="btn btn-primary w-25 mx-8"
+                                    <button type="button" class="btn btn-danger w-25 mx-8"
                                         onclick="cancelarEvento()">Sí</button>
                                 </div>
                             </div>
@@ -152,7 +152,7 @@
                                     <div class="modal-footer d-flex justify-content-center">
                                         <button type="button" class="btn btn-secondary w-25 mx-8"
                                             data-bs-dismiss="modal">No</button>
-                                        <button type="button" class="btn btn-primary w-25 mx-8"
+                                        <button type="button" class="btn btn-danger w-25 mx-8"
                                             onclick="anularEvento()">Sí</button>
                                     </div>
                                 </div>

@@ -8,9 +8,9 @@
                 value="{{ isset($datos['ruta_afiche']) ? $datos['ruta_afiche'] : '' }}">
             <div class="col-md-12">
                 @if (Route::currentRouteName() == 'evento.editar')
-                    <h5 id="titulo">Editar evento</h5>
+                    <h2 id="titulo">Editar evento</h2>
                 @else
-                    <h5 id="titulo">Crear evento</h5>
+                    <h2 id="titulo">Crear evento</h2>
                 @endif
             </div>
             <div class="col-md-6 border-end">
@@ -209,7 +209,7 @@
 
 
             <div class="col-md-12 mt-4  ms-3">
-                <h6>Duracion del evento *</h6>
+                <h6>Duración del evento *</h6>
             </div>
 
             <div class="row mt-3 ms-3">
@@ -235,7 +235,7 @@
             <div class="col-md-12 mt-5  ms-3">
                 <label for="descripcionDelEvento" class="form-label">Descripción del evento</label>
                 <textarea name="descripcion" class="form-control" id="descripcionDelEvento" rows="8" style="resize: none;"
-                    onchange="datoCambiado()" placeholder="Ingrese una descripcion..." maxlength="2048">{{ $datos['descripcionDelEvento'] }}</textarea>
+                    onchange="datoCambiado()" placeholder="Ingrese una descripción..." maxlength="2048">{{ $datos['descripcionDelEvento'] }}</textarea>
             </div>
 
             <div class="row mt-4 text-center">
