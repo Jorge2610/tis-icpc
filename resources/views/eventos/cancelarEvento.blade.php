@@ -85,7 +85,7 @@
                                 </div>
                                 <div class="modal-footer d-flex justify-content-center">
                                     <button type="button" class="btn btn-secondary w-25 mx-8"
-                                        data-bs-dismiss="modal">No</button>
+                                        data-bs-dismiss="modal" onclick="resetModalCancelar()">No</button>
                                     <button type="button" class="btn btn-danger w-25 mx-8"
                                         onclick="cancelarEvento()">Sí</button>
                                 </div>
@@ -151,7 +151,7 @@
                                     </form>
                                     <div class="modal-footer d-flex justify-content-center">
                                         <button type="button" class="btn btn-secondary w-25 mx-8"
-                                            data-bs-dismiss="modal">No</button>
+                                            data-bs-dismiss="modal" onclick="resetModalAnular()">No</button>
                                         <button type="button" class="btn btn-danger w-25 mx-8"
                                             onclick="anularEvento()">Sí</button>
                                     </div>

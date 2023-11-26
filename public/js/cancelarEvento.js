@@ -51,7 +51,7 @@ const cancelarEvento = async () => {
         "Error al cancelar el evento"
     );
     resetModalCancelar();
-    recargarEventos();
+    recargarEventos(0);
 };
 
 const crearFormDataCancelar = () => {
@@ -72,7 +72,7 @@ const anularEvento = async () => {
             "Error al anular el evento"
         );
         resetModalAnular();
-        recargarEventos();
+        recargarEventos(1);
     }
 };
 
@@ -128,8 +128,9 @@ const resetModalAnular = () => {
     document.getElementById("contrasenia").value = "";
 };
 
-const recargarEventos = () => {
+const recargarEventos = (control) => {
+    let ruta = control === 0 ? "/admin/eventos/cancelar-evento" : "/admin/eventos/anular-evento";
     setTimeout(() => {
-        window.location.href = "/admin/eventos/cancelar-evento";
+        window.location.href = ruta;
     }, 1800);
 };
