@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row align-items-end">
             <div class="col-md-2">
-                <h4>Tipo de evento</h4>
+                <h2>Editar tipo de evento</h2>
             </div>
             <div class="col-md-1">
                 <x-ModalCrearTipoEvento />
@@ -28,22 +28,23 @@
                 </thead>
                 <tbody id="datosTabla">
                     @foreach ($tiposDeEventos as $tipoDeEvento)
-                        <tr>
-                            <td>{{ $tipoDeEvento->nombre }}</td>
-                            <td class="container-color">
-                                <div class="color-cell" style="background-color:{{ $tipoDeEvento->color }};"></div>
-                            </td>
-                            <td class="text-center">Yo</td>
-                            <td class="text-center">{{ date('d-m-Y', strtotime($tipoDeEvento->created_at)) }}</td>
-                            <td class="text-center">{{ $tipoDeEvento->eventos->count() }}</td>
-                            <td class="text-center">
-                                <button type="button" class="btn btn-primary btn-sm"
-                                    onclick="window.location.href='/admin/tipos-de-evento/editar-tipo-evento/{{ $tipoDeEvento->id }}'"
-                                    {{ $tipoDeEvento->eventos->count() > 0 ? 'disabled' : '' }}>
-                                    <i class="bi bi-pencil-fill"></i>
-                                </button>
-                            </td>
-                        </tr>
+                        @if( $tipoDeEvento->eventos->count() == 0 )
+                            <tr>
+                                <td>{{ $tipoDeEvento->nombre }}</td>
+                                <td class="container-color">
+                                    <div class="color-cell" style="background-color:{{ $tipoDeEvento->color }};"></div>
+                                </td>
+                                <td class="text-center">Yo</td>
+                                <td class="text-center">{{ date('d-m-Y', strtotime($tipoDeEvento->created_at)) }}</td>
+                                <td class="text-center">{{ $tipoDeEvento->eventos->count() }}</td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-primary btn-sm"
+                                        onclick="window.location.href='/admin/tipos-de-evento/editar-tipo-evento/{{ $tipoDeEvento->id }}'">
+                                        <i class="bi bi-pencil-fill"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>

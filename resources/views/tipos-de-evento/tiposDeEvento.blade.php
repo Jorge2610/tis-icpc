@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row align-items-end">
             <div class="col-md-2">
-                <h4>Tipo de evento</h4>
+                <h2>Tipo de evento</h2>
             </div>
             <div class="col-md-1">
                 <x-ModalCrearTipoEvento />
