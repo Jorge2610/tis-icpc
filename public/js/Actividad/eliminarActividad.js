@@ -93,8 +93,8 @@ const cambiarEvento = (evento) => {
                 <div class="container col-12 col-md-12 col-lg-12">
                     <div class="card w-100 my-3 shadow" style="min-height: 100px; width: 17rem !important">
                         <div class="card-body">
-                            <h5 class="card-title">${actividad.nombre}</h5>
-                            <h4 class="card-text text-truncate d-block" style="max-width: 300px;">${actividad.descripcion}</h4>
+                            <h3 class="card-title">${actividad.nombre}</h3>
+                            <h5 class="card-text text-truncate d-block" style="max-width: 300px;">${actividad.descripcion}</h5>
                             <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Inicio: ${actividad.inicio_actividad}</h6>
                             <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Fin: ${actividad.fin_actividad}</h6>
                         </div>
@@ -112,8 +112,8 @@ const cambiarEvento = (evento) => {
                 <div class="container col-12 col-md-12 col-lg-12">
                     <div class="card w-100 my-3 shadow" style="min-height: 100px; width: 17rem !important">
                         <div class="card-body">
-                            <h5 class="card-title">${actividad.nombre}</h5>
-                            <h4 class="card-text text-truncate d-block" style="max-width: 300px;">${actividad.descripcion}</h4>
+                            <h3 class="card-title">${actividad.nombre}</h3>
+                            <h5 class="card-text text-truncate d-block" style="max-width: 300px;">${actividad.descripcion}</h5>
                             <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Inicio: ${actividad.inicio_actividad}</h6>
                             <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Fin: ${actividad.fin_actividad}</h6>
                         </div>
@@ -127,29 +127,6 @@ const cambiarEvento = (evento) => {
     });
 };
 
-
-// const cargarActividades = async (idEvento) => {
-//     // Realizar una llamada a tu API para obtener las actividades asociadas al evento
-//     const response = await axios.get(
-//         `/api/actividad/obtener-actividad/${idEvento}`
-//     );
-//     const actividades = response.data;
-
-//     // Limpiar el contenedor y volver a renderizar las actividades
-//     contenedorAsignar.innerHTML = "";
-//     actividades.forEach((actividad) => {
-//         contenedorAsignar.innerHTML += `<div class="col-auto" id="tarjetaActividad${actividad.id}">
-//             <div class="card" style="width: 10rem;">
-//                 <div class="card-body">
-//                     <h5 class="card-title">${actividad.nombre}</h5>
-//                     <p class="card-text">${actividad.descripcion}</p>
-//                     <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-//                     data-bs-target="#modalEliminarActividad" onclick="seleccionarActividad(${actividad.id})">Eliminar</a>
-//                 </div>
-//             </div>
-//         </div>`;
-//     });
-// };
 
 const seleccionarActividad = (id) => {
     actividadSeleccionada = id;
