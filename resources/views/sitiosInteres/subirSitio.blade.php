@@ -39,11 +39,11 @@
                     <h5 id="nombreEvento" class="text-center fw-bold"></h5>
                     <form class="needs-validation" novalidate id="formularioAgregarSitio">
                         <div class="col-md-12 mt-2">
-                            <label for="tituloSitio" class="form-label">Titulo</label>
+                            <label for="tituloSitio" class="form-label">Título</label>
                             <input name="titulo" type="text" class="form-control custom-input" id="tituloSitio"
-                                value="" placeholder="Ingrese un titulo" required>
+                                value="" placeholder="Ingrese un título" required>
                             <div class="invalid-feedback">
-                                El titulo no puede estar vacío.
+                                El título no puede estar vacío.
                             </div>
                         </div>
 
