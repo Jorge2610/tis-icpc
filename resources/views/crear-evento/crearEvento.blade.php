@@ -117,7 +117,7 @@
                         <div class="valid-feedback" id="ValidoRangoEdad">
                             </div>
                             <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                                Rango de edades no valido
+                                Rango de edades no válido
                             </div>
                         <div class="row" id="rangosDeEdad" style="display: none;">
                             <div class="col-md-6">
