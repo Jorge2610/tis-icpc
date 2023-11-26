@@ -30,7 +30,9 @@ class PatrocinadorController extends Controller
 
     public function showEventoWhithPatrocinadores($id)
     {
-        $evento = EventoPatrocinador::where('id_evento', $id)->with('patrocinadores')->get();
+        $evento = EventoPatrocinador::where('id_evento', $id)->with(['patrocinadores' => function ($query) {
+            $query->withTrashed();
+        }])->get();
         return $evento;
     }
 
@@ -46,7 +48,7 @@ class PatrocinadorController extends Controller
         } catch (QueryException $e) {
             if ($e->errorInfo[1] == 1062) {
                 return response()->json(['mensaje' => 'El patrocinador ya existe', 'error' => true, 'borrado' => false]);
-            }else{
+            } else {
                 return response()->json(['error' => $e->getMessage()], 500);
             }
         }
@@ -174,6 +176,4 @@ class PatrocinadorController extends Controller
         $eventos =  Evento::where('estado', 0)->with('eventoPatrocinador.patrocinadores')->orderBy('eventos.created_at', 'desc')->get();
         return view('patrocinador.quitarPatrocinador', ['eventos' => $eventos]);
     }
-
-    
 }
