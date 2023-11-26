@@ -16,7 +16,7 @@
                             <th scope="col" class="col-sm-3 col-md-2 text-center">Fecha inicio</th>
                             <th scope="col" class="col-sm-3 col-md-2 text-center">Fecha fin</th>
                             <th scope="col" class="col-sm-3 col-md-3 text-center font-sm">Cantidad de actividades</th>
-                            <th scope="col" class="col-sm-3 col-md-2 text-center font-sm">Crear Actividad</th>
+                            <th scope="col" class="col-sm-3 col-md-2 text-center font-sm">Acción</th>
                         </tr>
                     </thead>
                     <tbody id="datosTabla">
