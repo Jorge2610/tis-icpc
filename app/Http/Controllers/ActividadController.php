@@ -40,7 +40,7 @@ class ActividadController extends Controller
                 return response()->json(['mensaje' => 'La actividad ya existe', 'error' => true]);
             }
             $actividad->save();
-            return response()->json(['mensaje' => 'Actividad creada correctamente', 'error' => false]);
+            return response()->json(['mensaje' => 'Actividad creada exitosamente', 'error' => false]);
         } catch (QueryException $e) {
             return $e->getMessage();
         }
