@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row align-items-end">
             <div class="col-md-6">
-                <h2>Tipo de evento</h2>
+                <h2>Tipos de evento</h2>
             </div>
             <div class="col-md-1">
                 <x-ModalCrearTipoEvento />
@@ -15,7 +15,7 @@
         </div>
         <div class="row mt-3">
             <table class="table table-striped text-secondary" id="tablaTipoDeEvento">
-                <caption>Tipo de eventos</caption>
+                <caption>Tipos de eventos</caption>
                 <thead>
                     <tr>
                         <th scope="col" class="col-md-3" data-visible="false">Ordenador</th>
