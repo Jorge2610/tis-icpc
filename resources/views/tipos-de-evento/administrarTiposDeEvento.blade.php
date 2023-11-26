@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row align-items-end">
-            <div class="col-md-2">
+            <div class="col-md-6">
                 <h2>Editar tipo de evento</h2>
             </div>
             <div class="col-md-1">
