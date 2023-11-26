@@ -78,9 +78,9 @@
                                             Motivo de la
                                             cancelación
                                         </label>
-                                        <input type="text" class="form-control" id="motivoCancelacion"
+                                        <textarea rows="3" type="text" class="form-control" id="motivoCancelacion"
                                             placeholder="Ingrese el motivo de la cancelación" value=""
-                                            maxlength="128">
+                                            maxlength="128" style="resize: none"></textarea>
                                     </div>
                                 </div>
                                 <div class="modal-footer d-flex justify-content-center">
