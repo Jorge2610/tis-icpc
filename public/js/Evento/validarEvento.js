@@ -110,7 +110,7 @@ fechaInicio.addEventListener("change", () => {
     ) {
         isValid(fechaInicio, false);
     } else {
-        if (fechaInicio.hasAttribute('disabled'))
+        if (!fechaInicio.hasAttribute('disabled'))
             fechaFin.min = fechaInicio.value;
         fechaFin.dispatchEvent(new Event("change"));
 
