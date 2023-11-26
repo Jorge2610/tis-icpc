@@ -38,7 +38,7 @@
                     </div>
                     <h5 id="nombreEvento" class="text-center fw-bold"></h5>
                     <div class="col-md-12">
-                        <div class="row row-cols-1 g-3 mt-2" style="height:48vh; overflow-y: scroll;" id="sitiosContenedor">
+                        <div class="row row-cols-1 g-3 mt-2" style="height:48vh; overflow-y: auto;" id="sitiosContenedor">
                             <!-Aca se muestran los patrocinadores de un evento desde el js->
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                         @endslot
                         @slot('modalButton')
                             <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>
-                            <button type="reset" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal"
+                            <button type="reset" class="btn btn-danger w-25 mx-8" data-bs-dismiss="modal"
                                 onclick="quitarSitio()">Sí</button>
                         @endslot
                     @endcomponent
