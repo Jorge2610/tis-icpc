@@ -8,21 +8,20 @@
         <div class="row g-5">
             <div class="col-sm-12 col-md-12">
                 <table class="table table-responsive table-striped text-secondary" id="tablaEvento">
-                    <caption>Actividades</caption>
+                    <caption>Eventos</caption>
                     <thead>
                         <tr>
                             <th scope="col" class="col-sm-3 col-md-3">Nombre del evento</th>
                             <th scope="col" class="col-sm-0 col-md-3 text-center">Tipo de evento</th>
-                            <th scope="col" class="col-sm-3 col-md-2 text-center">Fecha inicio</th>
-                            <th scope="col" class="col-sm-3 col-md-2 text-center">Fecha fin</th>
+                            <th scope="col" class="col-sm-3 col-md-2 text-center">Fecha de inicio del evento</th>
+                            <th scope="col" class="col-sm-3 col-md-2 text-center">Fecha de fin del evento</th>
                             <th scope="col" class="col-sm-3 col-md-3 text-center font-sm">Cantidad de actividades</th>
                             <th scope="col" class="col-sm-3 col-md-2 text-center font-sm">Acción</th>
                         </tr>
                     </thead>
                     <tbody id="datosTabla">
                         @foreach ($actividades as $actividad)
-                            @if (strtotime($actividad->fin_evento) <= time())
-                            @else
+                            @if (strtotime($actividad->fin_evento) >= time())
                                 <tr>
                                     <td>{{ $actividad->nombre }}</td>
                                     <td class="text-center">{{ $actividad->tipoEvento->nombre }}</td>
