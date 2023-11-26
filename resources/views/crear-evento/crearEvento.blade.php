@@ -51,7 +51,8 @@
             </div>
             <div class="row mt-4">
                 <div class="col-lg-6 col-md-12 mb-3 ">
-                    <button id="btnGroupDrop1" type="button" class="btn dropdown-toggle w-100 text-start ps-3 pt-2 pb-2 "
+                    <button id="btnGroupDrop1" type="button"
+                        class="btn dropdown-toggle w-100 text-start ps-3 pt-2 pb-2 "
                         style ="border-color: rgb(207, 207, 207)" data-bs-toggle="dropdown" aria-expanded="false">
                         Instituciones admitidas
                     </button>
@@ -115,10 +116,10 @@
                             @if ($datos['edad_minima']) checked @endif>
                         <label for="limiteDeEdad" class="form-check-label">Rango de edad</label>
                         <div class="valid-feedback" id="ValidoRangoEdad">
-                            </div>
-                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                                Rango de edades no válido
-                            </div>
+                        </div>
+                        <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                            Rango de edades no válido
+                        </div>
                         <div class="row" id="rangosDeEdad" style="display: none;">
                             <div class="col-md-6">
                                 <div class="row " id="rangoMin">
@@ -190,9 +191,10 @@
                             <div class="col-md-8">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Bs.</span>
-                                    <input name="precio_inscripcion" type="number" class="form-control fecha-editar"
-                                        min="1" id="costoEvento" step="0.5"
+                                    <input name="precio_inscripcion" type="number" class="form-control"
+                                        min="1" max="5000" id="costoEvento" step="0.5" onchange="setCostoInvalidoFeedback()"
                                         value="{{ isset($datos['precio_inscripcion']) ? $datos['precio_inscripcion'] : '0.0' }}">
+                                    <div id="costoInvalido" class="invalid-feedback"></div>
                                 </div>
                             </div>
                         </div>
