@@ -42,7 +42,7 @@
                         @slot('modalId', 'modalEliminarActividad')
                         @slot('modalTitle', 'Confirmación')
                         @slot('modalContent')
-                            ¿Estás seguro de eliminar la actividad?
+                            ¿Está seguro de eliminar la actividad?
                         @endslot
                         @slot('modalButton')
                             <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>

@@ -51,7 +51,7 @@ class ActividadController extends Controller
         try {
             $actividad = Actividad::find($id);
             $actividad->delete();
-            return response()->json(['mensaje' => 'Eliminado exitosamente', 'error' => false]);
+            return response()->json(['mensaje' => 'Eliminada exitosamente', 'error' => false]);
         } catch (QueryException $e) {
             return $e->getMessage();
         }
