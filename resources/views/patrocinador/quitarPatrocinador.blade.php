@@ -19,15 +19,17 @@
                     </thead>
                     <tbody id="datosTabla">
                         @foreach ($eventos as $evento)
-                            <tr onclick="seleccionarEvento({{ $evento->id }}, '{{ $evento->nombre }}', event)"
-                                id="{{ $evento->id }}">
-                                <td>{{ $evento->nombre }}</td>
-                                <td>{{ $evento->tipoEvento->nombre }}</td>
-                                <td class="text-center">{{ date('d-m-Y', strtotime($evento->created_at)) }}</td>
-                                <td class="text-center" id="contadorPatrocinadores{{ $evento->id }}">
-                                    {{ $evento->eventoPatrocinador->count() }}</td>
+                            @if (strtotime($evento->fin_evento) >= time())
+                                <tr onclick="seleccionarEvento({{ $evento->id }}, '{{ $evento->nombre }}', event)"
+                                    id="{{ $evento->id }}">
+                                    <td>{{ $evento->nombre }}</td>
+                                    <td>{{ $evento->tipoEvento->nombre }}</td>
+                                    <td class="text-center">{{ date('d-m-Y', strtotime($evento->created_at)) }}</td>
+                                    <td class="text-center" id="contadorPatrocinadores{{ $evento->id }}">
+                                        {{ $evento->eventoPatrocinador->count() }}</td>
 
-                            </tr>
+                                </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>
@@ -46,17 +48,17 @@
                     </div>
                 </div>
                 @component('components.modal')
-                        @slot('modalId', 'modalQuitarPatrocinador')
-                        @slot('modalTitle', 'Confirmación')
-                        @slot('modalContent')
-                            ¿Está seguro de quitar este patrocinador?
-                        @endslot
-                        @slot('modalButton')
-                            <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>
-                            <button type="reset" class="btn btn-danger w-25 mx-8" data-bs-dismiss="modal"
-                                onclick="quitarPatrocinador()">Sí</button>
-                        @endslot
-                    @endcomponent
+                    @slot('modalId', 'modalQuitarPatrocinador')
+                    @slot('modalTitle', 'Confirmación')
+                    @slot('modalContent')
+                        ¿Está seguro de quitar este patrocinador?
+                    @endslot
+                    @slot('modalButton')
+                        <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>
+                        <button type="reset" class="btn btn-danger w-25 mx-8" data-bs-dismiss="modal"
+                            onclick="quitarPatrocinador()">Sí</button>
+                    @endslot
+                @endcomponent
             </div>
         </div>
 
