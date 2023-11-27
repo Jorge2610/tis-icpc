@@ -7,6 +7,7 @@ const inputNombre = document.getElementById("nombreTipoEvento");
 const mensajeNombre = document.getElementById("mensajeNombre");
 const inputDescripcion = document.getElementById("detalleTipoEvento");
 let nombreAnterior = "";
+
 const dataTableOptions = {
     pageLength: 10,
     lengthMenu: [5, 10, 15, 20],
@@ -29,6 +30,18 @@ const dataTableOptions = {
     },
 };
 
+window.addEventListener("load", async () => {
+    await initDataTable();
+});
+
+const initDataTable = async () => {
+    if (tablaInicializada) {
+        tablaDeTipos.destroy();
+    }
+    DataTable.datetime("DD-MM-YYYY");
+    tablaDeTipos = $("#tablaTipoDeEvento").DataTable(dataTableOptions);
+    tablaInicializada = true;
+}
 const editarTipoEvento = (formData) => {
     //Si el tipo de evento existe entonces se guarda este valor y servirá para la validación
     nombreAnterior = inputNombre.value
