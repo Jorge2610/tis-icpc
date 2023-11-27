@@ -19,14 +19,16 @@
                     </thead>
                     <tbody id="datosTabla">
                         @foreach ($eventos as $evento)
-                            <tr onclick="seleccionarEvento({{ $evento->id }}, '{{ $evento->nombre }}', event)"
-                                id="{{ $evento->id }}">
-                                <td>{{ $evento->nombre }}</td>
-                                <td class="text-center">{{ $evento->tipoEvento->nombre }}</td>
-                                <td class="text-center">{{ date('d-m-Y', strtotime($evento->created_at)) }}</td>
-                                <td class="text-center" id="contadorSitios{{ $evento->id }}">
-                                    {{ $evento->sitios->count() }}</td>
-                            </tr>
+                            @if (strtotime($evento->fin_evento) >= time())
+                                <tr onclick="seleccionarEvento({{ $evento->id }}, '{{ $evento->nombre }}', event)"
+                                    id="{{ $evento->id }}">
+                                    <td>{{ $evento->nombre }}</td>
+                                    <td class="text-center">{{ $evento->tipoEvento->nombre }}</td>
+                                    <td class="text-center">{{ date('d-m-Y', strtotime($evento->created_at)) }}</td>
+                                    <td class="text-center" id="contadorSitios{{ $evento->id }}">
+                                        {{ $evento->sitios->count() }}</td>
+                                </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>
