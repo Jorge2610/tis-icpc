@@ -104,14 +104,14 @@ costo.addEventListener("change", () => {
 
 fechaInicio.addEventListener("change", () => {
     if(fechaInicio.classList.contains("is-invalid")){
-        document.getElementById("mensajeErrorFechaInicio").innerHTML="Seleccione una fecha y hora";
+        document.getElementById("mensajeErrorFechaInicio").innerHTML="Seleccione una fecha y hora.";
     }
     if (
         fechaInicio.value < fechaInicio.min &&
         fechaInicio.value !== ""
     ) {
         isValid(fechaInicio, false);
-        document.getElementById("mensajeErrorFechaInicio").innerHTML="Seleccione una fecha correcta";
+        document.getElementById("mensajeErrorFechaInicio").innerHTML="Seleccione una fecha correcta.";
         fechaFin.min=laFecha;
     } else {
         if (!fechaInicio.hasAttribute('disabled') && boolFecha){
@@ -127,11 +127,11 @@ fechaInicio.addEventListener("change", () => {
 
 fechaFin.addEventListener("change", () => {
     if(fechaFin.classList.contains("is-invalid")){
-        document.getElementById("mensajeErrorFechaFin").innerHTML="Seleccione una fecha y hora";
+        document.getElementById("mensajeErrorFechaFin").innerHTML="Seleccione una fecha y hora.";
     }
     if (fechaFin.value < fechaFin.min && fechaFin.value !== "") {
         isValid(fechaFin);
-        document.getElementById("mensajeErrorFechaFin").innerHTML="Seleccione una fecha correcta";
+        document.getElementById("mensajeErrorFechaFin").innerHTML="Seleccione una fecha correcta.";
         fechaInicio.max="";
     }
     if(boolFecha){
@@ -158,7 +158,7 @@ edadMaxima.addEventListener("change", () => {
             else {
                 isValid(edadMaxima, true);
                 if (edadMaxima.value !== "" && edadMinima.value === "") {
-                    document.getElementById("ValidoRangoEdad").innerText = "Edad válida hasta los " + edadMaxima.value + " años";
+                    document.getElementById("ValidoRangoEdad").innerText = "Edad válida hasta los " + edadMaxima.value + " años.";
                 }
                 else {
                     if (edadMinima.value !== "" && edadMaxima.value !== "")
@@ -193,7 +193,7 @@ edadMinima.addEventListener("change", () => {
                     edadMaxima.min = edadMinima.value;
                 isValid(edadMinima, true);
                 if (edadMinima.value !== "" && edadMaxima.value === "") {
-                    document.getElementById("ValidoRangoEdad").innerText = "Edad válida desde los " + edadMinima.value + " años";
+                    document.getElementById("ValidoRangoEdad").innerText = "Edad válida desde los " + edadMinima.value + " años.";
                 }
                 else {
                     if (edadMaxima.value !== "" && edadMinima.value !== "")
