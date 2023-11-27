@@ -8,6 +8,7 @@
         <div class="row g-5">
             <div class="col-sm-12 col-md-12">
                 <table class="table table-responsive table-striped text-secondary" id="tablaEvento">
+                <caption>Patrocinadores</caption>
                     <thead>
                         <tr>
                             <th scope="col" class="col-sm-3 col-md-3">Nombre del patrocinador</th>

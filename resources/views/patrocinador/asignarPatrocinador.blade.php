@@ -8,6 +8,7 @@
         <div class="row g-5">
             <div class="col-sm-12 col-md-8" id="tablaEventos">
                 <table class="table table-responsive table-striped text-secondary table-hover cursor" id="tablaEvento">
+                <caption>Eventos</caption>
                     <thead>
                         <tr>
                             <th scope="col" class="col-sm-4 col-md-4">Nombre del evento</th>
