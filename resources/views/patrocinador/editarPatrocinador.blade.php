@@ -14,7 +14,7 @@
                             <th scope="col" class="col-sm-3 col-md-3">Nombre del patrocinador</th>
                             <th scope="col" class="col-sm-4 col-md-4">Enlace web</th>
                             <th scope="col" class="col-sm-3 col-md-3">Imagen</th>
-                            <th scope="col" class="col-sm-2 col-md-2">Fecha de edición</th>
+                            <th scope="col" class="col-sm-2 col-md-2">Última actualización</th>
                         </tr>
                     </thead>
                     <tbody id="datosTabla">
