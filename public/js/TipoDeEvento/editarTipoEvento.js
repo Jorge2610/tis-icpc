@@ -1,6 +1,6 @@
 let tablaDeTipos;
 let tablaInicializada = false;
-const form = document.getElementById("formularioTipoEvento");
+let form = document.getElementById("formularioTipoEvento");
 const idTipoEvento = document.getElementById("id");
 const botonCancelar = document.getElementById("cancelarBoton");
 const inputNombre = document.getElementById("nombreTipoEvento");
@@ -29,11 +29,11 @@ const dataTableOptions = {
     },
 };
 
-const editarTipoEvento = (form) => {
+const editarTipoEvento = (formData) => {
     //Si el tipo de evento existe entonces se guarda este valor y servirá para la validación
     nombreAnterior = inputNombre.value
-    console.log("Este es el id que obtenemos del formulario " + idTipoEvento.value);
-    axios.post(`/api/tipo-evento/actualizar/${idTipoEvento.value}`, form)
+    console.log("Este es el formulario que obtenemos del front " + formData);
+    axios.post(`/api/tipo-evento/actualizar/${idTipoEvento.value}`, formData)
     .then(function(response){
         const mensaje = response.data.mensaje
         const nombreIgual = 'El tipo de evento ya existe'
@@ -50,11 +50,6 @@ const editarTipoEvento = (form) => {
             mensajeNombre.textContent = 'El tipo de evento ya existe'
             console.log("Este es el inputNombre "+inputNombre);
         }else{
-            form.querySelectorAll(".form-control, .form-select").forEach(
-                (Element) => {
-                    Element.classList.remove("is-valid");
-                }
-            );
             //form.reset();
         }   
     }).catch(function(error){
@@ -69,8 +64,13 @@ form.addEventListener("submit",(event) =>{
         Element.dispatchEvent(new Event("change"));
     });
     if(validar()){
+        form.querySelectorAll(".form-control, .form-select").forEach((Element) => {
+            if(Element.disabled)
+                Element.disabled=false;            
+        });
         const formData = new FormData(form);
         editarTipoEvento(formData);
+        
     }
 })
 
@@ -91,35 +91,27 @@ form.querySelectorAll(".form-control, .form-select").forEach((Element) => {
     });
 });
 
-function validarNombreRepetido(){
-    //Validaciones antes de que se guarde el nombre repetido
-    if(nombreAnterior === ''){
-        if(inputNombre.value === ''){
-            inputNombre.classList.remove("is-valid");
-            inputNombre.classList.add("is-invalid");
-            mensajeNombre.textContent = "El nombre no puede estar vacío.";
-        }else{
-            inputNombre.classList.remove("is-invalid");
-            inputNombre.classList.add("is-valid");
-        }
-    }else{
-        if(inputNombre.value !== nombreAnterior && inputNombre.value !== '') {
-            inputNombre.classList.remove("is-invalid");
-            inputNombre.classList.add("is-valid");
-            mensajeNombre.textContent = "";
-        }else {
-            if (inputNombre.value === "") {
-                inputNombre.classList.remove("is-valid");
-                inputNombre.classList.add("is-invalid");
-                mensajeNombre.textContent = "El nombre no puede estar vacío.";
-            } else {
-                inputNombre.classList.remove("is-valid");
-                inputNombre.classList.add("is-invalid");
-                mensajeNombre.textContent = "El tipo de evento ya existe";
-            }
-        }
+function validarNombreRepetido() {
+    const nuevoNombre = inputNombre.value.trim();
+
+    if (nuevoNombre === '') {
+        inputNombre.classList.remove('is-valid');
+        inputNombre.classList.add('is-invalid');
+        mensajeNombre.textContent = 'El nombre no puede estar vacío.';
+    } else if (nuevoNombre === nombreAnterior) {
+        inputNombre.classList.remove('is-invalid');
+        inputNombre.classList.add('is-valid');
+        mensajeNombre.textContent = '';
+    } else {
+        // Realizar la lógica para verificar si el nombre ya existe
+        // Puedes realizar una solicitud al servidor aquí si es necesario
+        // y actualizar las clases y mensajes en consecuencia.
     }
 }
+
+inputNombre.addEventListener('input', validarNombreRepetido);
+// Puedes quitar uno de los dos eventos (input o change) si no son necesarios ambos.
+// inputNombre.addEventListener('change', validarNombreRepetido);
 
 inputNombre.addEventListener("input",validarNombreRepetido );
 inputNombre.addEventListener("change",validarNombreRepetido );
