@@ -22,14 +22,24 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12 mt-4 ">
+                                <label class="form-label">Duración del evento</label>
+                            </div>
+                            
+                            <div class="row justify-content-between pr-0">
+                                <div class="col-md-5"><strong>Inicio: </strong> {{date('d-m-Y H:i', strtotime($evento->inicio_evento))}} </div>
+                                <div class="col-md-7"><strong>Fin: </strong> {{date ('d-m-Y H:i', strtotime($evento->fin_evento))}} </div>
+                            </div>
 
+                        </div>
                         <div class="row">
                             <div class="col-md-12 mt-4 ">
                                 <label class="form-label">Duración de la actividad *</label>
                             </div>
                             
                             <div class="row mt-3 justify-content-between pr-0">
-                                <div class="col-md-5">Inicio</div>                         
+                                <div class="col-md-5">Inicio</div>
                                 <div class="col-md-7 p-0">
                                     <input name="inicio_evento" id="fechaInicio" class="form-control" type="datetime-local" min="{{max($evento->inicio_evento, date('Y-m-d\TH:i'))}}" max="{{$evento->fin_evento}}" required />
                                     <div id="mensajeFechaInicio" class="invalid-feedback"></div>
