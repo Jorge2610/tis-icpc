@@ -230,7 +230,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-9">
                     <input name="fin_evento" id="fechaFin" class="form-control" type="datetime-local"
                         onchange="datoCambiado()" min=""
-                        value="{{ isset($datos['fin_evento']) ? $datos['fin_evento'] : '' }}" required />
+                        value="{{ isset($datos['fin_evento']) ? $datos['fin_evento'] : '' }}"required />
                     <div class="invalid-feedback" id="mensajeErrorFechaFin"></div>
                 </div>
 

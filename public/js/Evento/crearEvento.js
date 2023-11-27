@@ -138,6 +138,7 @@ window.addEventListener("load", () => {
         iniciarEditar();
     }else{
         fechasMin();
+        fechaFin.disabled=true;
     }
     axios
         .get("/api/tipo-evento")

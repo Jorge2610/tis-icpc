@@ -106,24 +106,32 @@ fechaInicio.addEventListener("change", () => {
     if(fechaInicio.classList.contains("is-invalid")){
         document.getElementById("mensajeErrorFechaInicio").innerHTML="Seleccione una fecha y hora.";
     }
-    if (
-        fechaInicio.value < fechaInicio.min &&
-        fechaInicio.value !== ""
+    if ((fechaInicio.value < fechaInicio.min &&
+        fechaInicio.value !== "")
     ) {
         isValid(fechaInicio, false);
         document.getElementById("mensajeErrorFechaInicio").innerHTML="Seleccione una fecha correcta.";
-        fechaFin.min=laFecha;
     } else {
-        if (!fechaInicio.hasAttribute('disabled') && boolFecha){
+        if (!fechaInicio.hasAttribute('disabled')){
             boolFecha=false;
             fechaFin.min = fechaInicio.value;
-            fechaFin.dispatchEvent(new Event("change"));
         }
         else{
             boolFecha=true;
         }
     }
-});
+    if(fechaInicio.classList.contains("is-valid")){
+        fechaFin.disabled=false;
+        fechaFin.dispatchEvent(new Event("change"));
+    }     
+    else{
+        fechaFin.disabled=true;
+        fechaFin.value="";
+        fechaFin.classList.remove("is-valid");
+        fechaFin.classList.remove("is-invalid");
+    }
+        
+}); 
 
 fechaFin.addEventListener("change", () => {
     if(fechaFin.classList.contains("is-invalid")){
@@ -135,9 +143,7 @@ fechaFin.addEventListener("change", () => {
         fechaInicio.max="";
     }
     if(boolFecha){
-        fechaInicio.max=fechaFin.value;
         boolFecha=false;
-        fechaInicio.dispatchEvent(new Event("change"));
     }
     else{
         boolFecha=true;
