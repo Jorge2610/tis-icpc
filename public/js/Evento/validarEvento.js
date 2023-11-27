@@ -103,23 +103,44 @@ costo.addEventListener("change", () => {
 });
 
 fechaInicio.addEventListener("change", () => {
+    if(fechaInicio.classList.contains("is-invalid")){
+        document.getElementById("mensajeErrorFechaInicio").innerHTML="Seleccione una fecha y hora";
+    }
     if (
         fechaInicio.value < fechaInicio.min &&
-        fechaInicio.value !== "" &&
-        fechaInicio.value != ""
+        fechaInicio.value !== ""
     ) {
         isValid(fechaInicio, false);
+        document.getElementById("mensajeErrorFechaInicio").innerHTML="Seleccione una fecha correcta";
+        fechaFin.min=laFecha;
     } else {
-        if (!fechaInicio.hasAttribute('disabled'))
+        if (!fechaInicio.hasAttribute('disabled') && boolFecha){
+            boolFecha=false;
             fechaFin.min = fechaInicio.value;
-        fechaFin.dispatchEvent(new Event("change"));
-
+            fechaFin.dispatchEvent(new Event("change"));
+        }
+        else{
+            boolFecha=true;
+        }
     }
 });
 
 fechaFin.addEventListener("change", () => {
+    if(fechaFin.classList.contains("is-invalid")){
+        document.getElementById("mensajeErrorFechaFin").innerHTML="Seleccione una fecha y hora";
+    }
     if (fechaFin.value < fechaFin.min && fechaFin.value !== "") {
         isValid(fechaFin);
+        document.getElementById("mensajeErrorFechaFin").innerHTML="Seleccione una fecha correcta";
+        fechaInicio.max="";
+    }
+    if(boolFecha){
+        fechaInicio.max=fechaFin.value;
+        boolFecha=false;
+        fechaInicio.dispatchEvent(new Event("change"));
+    }
+    else{
+        boolFecha=true;
     }
 });
 

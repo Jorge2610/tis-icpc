@@ -222,6 +222,7 @@
                     <input name="inicio_evento" id="fechaInicio" class="form-control fecha-editar"
                         type="datetime-local" onchange="datoCambiado()" min=""
                         value="{{ isset($datos['inicio_evento']) ? $datos['inicio_evento'] : '' }}" required />
+                    <div class="invalid-feedback" id="mensajeErrorFechaInicio"></div>
                 </div>
 
                 <div class="col-md-1 col-sm-3 align-self-center">Fin:</div>
@@ -230,6 +231,7 @@
                     <input name="fin_evento" id="fechaFin" class="form-control" type="datetime-local"
                         onchange="datoCambiado()" min=""
                         value="{{ isset($datos['fin_evento']) ? $datos['fin_evento'] : '' }}" required />
+                    <div class="invalid-feedback" id="mensajeErrorFechaFin"></div>
                 </div>
 
             </div>

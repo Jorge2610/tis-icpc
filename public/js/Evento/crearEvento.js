@@ -12,6 +12,7 @@ const checkTodasRango = document.getElementById("input-grado-Todas");
 const nombreEvento = document.getElementById("nombreDelEvento");
 const mensajeNombre = document.getElementById("mensajeNombre");
 
+let boolFecha = true;
 let boolCosto = true;
 let boolMinEdad = true;
 let boolcheckEdad = true;
@@ -21,6 +22,9 @@ let datosActualizados = false;
 let nombreAnterior = ''
 let mensajeRepetido = ''
 
+let fechaLocal = new Date();
+fechaLocal.setHours(fechaLocal.getHours() - 4);
+let laFecha = fechaLocal.toISOString().substring(0, 16);
 
 const mostrarInput = (indInput, check) => {
     let input = document.getElementById(indInput);
@@ -226,9 +230,6 @@ const iniciarEditar=()=>{
     mostrarInput("genero", inputGenero.checked);
     mostrarInput("rangosDeEdad", inputEdad.checked);
     mostrarInput("eventoPago", inputCosto.checked);
-    let fechaLocal = new Date();
-    fechaLocal.setHours(fechaLocal.getHours() - 4);
-    let laFecha = fechaLocal.toISOString().substring(0, 16);
     let f1=new Date(fechaInicio.value);
     let fl1=new Date(laFecha);
     let boolGrado=true;
