@@ -10,7 +10,7 @@ const dataTableOptions = {
     order: [[3, "desc"]],
     language: {
         lengthMenu: "Mostrar _MENU_ eventos",
-        zeroRecords: "Ningún tipo de evento encontrado",
+        zeroRecords: "Ningún evento encontrado",
         info: "Mostrando de _START_ a _END_ de un total de _TOTAL_ eventos",
         infoEmpty: "Ningún evento encontrado",
         infoFiltered: "(filtrados desde _MAX_ registros totales)",
