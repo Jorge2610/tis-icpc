@@ -64,7 +64,7 @@ const cambiarEvento = (evento) => {
             <img src="${afiche.ruta_imagen}" class="card-img-top" alt="Afiche" id="imagenAfichepreview${afiche.id}">
             <div class="card-body d-flex justify-content-around gap-2">
                 <input type="file" id="imageUpload${afiche.id}" style="display: none;" onchange="previsualizarImagen(event, ${afiche.id})" accept="image/jpeg, image/png, image/jpg">
-                <a href="#" class="btn btn-primary btn-sm" onclick="document.getElementById('imageUpload${afiche.id}').click()">Cambiar</a>
+                <button class="btn btn-primary btn-sm" onclick="document.getElementById('imageUpload${afiche.id}').click()">Cambiar</button>
             </div>
         </div>
     </div>`;
@@ -171,3 +171,12 @@ const cargarAfiche = async () => {
         document.getElementById(`tarjetaAfiche${aficheSeleccion}`).remove();
     });
 };
+
+const resize_ob = new ResizeObserver(function (entries) {
+    let rect = entries[0].contentRect;
+    let height = rect.height;
+    vh = parseInt((height / window.innerHeight) * 89);
+    document.getElementById("contenedorAsignar").style.maxHeight = vh + "vh";
+});
+
+resize_ob.observe(document.getElementById("tablaEventos"));

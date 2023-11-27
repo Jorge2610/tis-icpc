@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row g-5">
-            <div class="col-sm-12 col-md-8">
+            <div class="col-sm-12 col-md-8" id="tablaEventos">
                 <h2>Eliminar afiche</h2>
                 <table class="table table-responsive table-striped text-secondary table-hover cursor" id="tablaEvento">
                     <caption>Eventos</caption>
@@ -18,13 +18,15 @@
                     </thead>
                     <tbody id="datosTabla">
                         @foreach ($afiches as $afiche)
-                            <tr onclick="seleccionarEvento({{ $afiche }})" id="{{ $afiche->id }}">
-                                <td>{{ $afiche->nombre }}</td>
-                                <td class="text-center">{{ $afiche->tipoEvento->nombre }}</td>
-                                <td class="text-center">{{ date('d-m-Y', strtotime($afiche->created_at)) }}</td>
-                                <td class="text-center" id="contadorAfiches{{ $afiche->id }}">
-                                    {{ $afiche->afiches->count() }}</td>
-                            </tr>
+                            @if (strtotime($afiche->fin_evento) >= time())
+                                <tr onclick="seleccionarEvento({{ $afiche }})" id="{{ $afiche->id }}">
+                                    <td>{{ $afiche->nombre }}</td>
+                                    <td class="text-center">{{ $afiche->tipoEvento->nombre }}</td>
+                                    <td class="text-center">{{ date('d-m-Y', strtotime($afiche->created_at)) }}</td>
+                                    <td class="text-center" id="contadorAfiches{{ $afiche->id }}">
+                                        {{ $afiche->afiches->count() }}</td>
+                                </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>
@@ -35,7 +37,8 @@
                         <h4>Afiches</h4>
                     </div>
                     <h5 id="nombreEvento" class="text-center fw-bold"></h5>
-                    <div class="row gap-2 mt-2 d-flex justify-content-center" id="contenedorAsignar">
+                    <div class="row gap-2 mt-2 d-flex justify-content-center pb-2" style="overflow-y: auto; overflow-x: hidden"
+                        id="contenedorAsignar">
 
                     </div>
 
