@@ -3,8 +3,8 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-5" style="min-height: 500px">
-                <h2 class="text-center">Editar actividad</h2>
+            <div class="col-md-8 " style="min-height: 500px">
+                <h2 class="text-center mb-5 ">Editar actividad</h2>
                 <form id="formularioActividad" class="needs-validation" novalidate>
                     @csrf
                     <input type="hidden" name="id" value="{{ $actividad->id }}">
@@ -27,8 +27,8 @@
                             </div>
                             
                             <div class="row justify-content-between pr-0">
-                                <div class="col-md-5"><strong>Inicio: </strong> {{date('d-m-Y H:i', strtotime($evento->inicio_evento))}} </div>
-                                <div class="col-md-7"><strong>Fin: </strong> {{date ('d-m-Y H:i', strtotime($evento->fin_evento))}} </div>
+                                <div class="col-sm-12 col-md-12 col-lg-5"><strong>Inicio: </strong> {{date('d-m-Y H:i', strtotime($evento->inicio_evento))}} </div>
+                                <div class="col-sm-12 col-md-12 col-lg-7"><strong>Fin: </strong> {{date ('d-m-Y H:i', strtotime($evento->fin_evento))}} </div>
                             </div>
 
                         </div>
