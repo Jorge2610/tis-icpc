@@ -116,6 +116,8 @@ const updateTablaPatrocinadores = () => {
 };
 
 const resetInputs = () => {
+    window.location.reload();
+    /*
     document
         .getElementById("formularioEditarPatrocinador")
         .classList.remove("was-validated");
@@ -124,7 +126,7 @@ const resetInputs = () => {
     nombrePatrocinador.value = "";
     urlPatricinador.value = "";
     input.value = "";
-    imagenPreview.src = "/image/uploading.png";
+    imagenPreview.src = "/image/uploading.png";*/
 };
 
 const inhabilitarFormulario = () => {
