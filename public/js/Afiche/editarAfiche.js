@@ -59,7 +59,6 @@ const seleccionarEvento = (afiche) => {
 
 const cambiarEvento = async () => {
     const response = await cargarAfiche();
-    console.log(response);
     response.data.map((afiche) => {
         contenedorAsignar.innerHTML += `<div class="col-auto" id="tarjetaAfiche${afiche.id}">
         <div class="card" style="width: 10rem;">
