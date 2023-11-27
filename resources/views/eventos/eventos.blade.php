@@ -2,10 +2,19 @@
 
 @section('content')
     <div class="container">
+        <div class="row mb-4 d-flex flex-row-reverse">
+            <div class="col-xl-6 col-lg-12" style="width: 565px; margin-right: 165px">
+                <input class="form-control" type="text" placeholder="Buscar evento..." onkeyup="buscarEvento()"
+                    id="buscadorDeEvento">
+            </div>
+            <div class="col-xl-6 col-lg-12" style="width: 565px;">
+                <input id="datoEventos" type="text" value={{ $eventos }} hidden>
+            </div>
+        </div>
         <div class="row g-5" id="tarjetasRow">
             @foreach ($eventos as $evento)
                 <div class="col-md-auto">
-                    <div class="tarjeta card mb-3" style="max-width: 540px; min-height: 250px">
+                    <div class="tarjeta card mb-3" style="max-width: 540px; min-height: 200px">
                         <div class="row g-0">
                             <div class="col-md-8">
                                 <div class="card-body">
@@ -13,13 +22,6 @@
                                     <h6 id="tipoDeEvento">{{ $evento->tipoEvento->nombre }}</h6>
                                     <hr>
                                     </hr>
-                                    <p class="cart-text">
-                                        <span>Inscripciones:</span>
-                                        <span id="fechaInicioIns"
-                                            class="mx-2 fst-italic">{{ $evento->inicio_inscripcion == null ? '' : date('d-m-Y', strtotime($evento->inicio_inscripcion)) }}</span>
-                                        <span id="fechaFinIns"
-                                            class="fst-italic">{{ $evento->fin_inscripcion == null ? '' : date('d-m-Y', strtotime($evento->fin_inscripcion)) }}</span>
-                                    </p>
                                     <p class="cart-text">
                                         <span>Fecha del evento:</span>
                                         <span id="fechaInicioEvento"
@@ -45,4 +47,6 @@
             @endforeach
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+    <script src="{{ asset('js/eventos.js') }}" defer></script>
 @endsection

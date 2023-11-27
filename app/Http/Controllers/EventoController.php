@@ -13,7 +13,9 @@ class EventoController extends Controller
 {
     public function index()
     {
-        $eventos = Evento::where('estado', 0)->get();
+        $eventos = Evento::where('estado', 0)->with('tipoEvento', 'afiches', 'actividades')
+            ->orderBy('updated_at', 'desc')
+            ->get();
         return $eventos;
     }
 
@@ -27,7 +29,7 @@ class EventoController extends Controller
 
     public function cargarEvento(String $nombre)
     {
-        $evento = Evento::where('estado', 0)->with('afiches','eventoPatrocinador.patrocinadores','sitios')->where('nombre', $nombre)->first();
+        $evento = Evento::where('estado', 0)->with('afiches', 'eventoPatrocinador.patrocinadores', 'sitios')->where('nombre', $nombre)->first();
         if (!$evento) {
             return abort(404);
         }
@@ -198,7 +200,7 @@ class EventoController extends Controller
     {
         $eventos = Evento::where('estado', 0)->get();
         $anular = false;
-        return view('eventos.cancelarEvento', ['eventos' => $eventos,'anular'=>$anular]);
+        return view('eventos.cancelarEvento', ['eventos' => $eventos, 'anular' => $anular]);
     }
 
     public function subirRespaldo(Request $request)
@@ -221,7 +223,6 @@ class EventoController extends Controller
     {
         $eventos = Evento::where('estado', 0)->get();
         $anular = true;
-        return view('eventos.cancelarEvento', ['eventos' => $eventos, 'anular'=>$anular]);
+        return view('eventos.cancelarEvento', ['eventos' => $eventos, 'anular' => $anular]);
     }
-    
 }
