@@ -39,8 +39,12 @@ const initDataTable = async () => {
     tablaInicializada = true;
 };
 
-const setEventoId = (id) => {
+const setEventoId = (id,anular) => {
     idEvento = id;
+    if (anular)
+        resetModalAnular();
+    else
+        resetModalCancelar();
 };
 
 const cancelarEvento = async () => {
@@ -122,6 +126,7 @@ const resetModalCancelar = () => {
 
 const resetModalAnular = () => {
     $("#modalAnular").modal("hide");
+    document.getElementById("formularioAnulacion").classList.remove("was-validated");
     document.getElementById("motivoAnulacion").value = "";
     document.getElementById("descripcionAnulacion").value = "";
     document.getElementById("archivosRespaldo").value = "";
