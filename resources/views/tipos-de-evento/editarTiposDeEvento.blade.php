@@ -60,7 +60,7 @@
                     </div>
                     <div class="text-center my-5">
                         <a href="/admin/tipos-de-evento/editar-tipo" class="btn btn-secondary mx-5">Cancelar</a>
-                        <button id="confirmarBoton" onclick="editarTipoEvento()" class="btn btn-primary mx-5">Editar</button>
+                        <button id="confirmarBoton" type="submit" class="btn btn-primary mx-5">Editar</button>
                     </div>
                 </div>
             </form>

@@ -32,7 +32,7 @@ const dataTableOptions = {
 const editarTipoEvento = (formData) => {
     //Si el tipo de evento existe entonces se guarda este valor y servirá para la validación
     nombreAnterior = inputNombre.value
-    console.log("Este es el formulario que obtenemos del front " + formData);
+    console.log("Llamada a editarTipoEvento");  
     axios.post(`/api/tipo-evento/actualizar/${idTipoEvento.value}`, formData)
     .then(function(response){
         const mensaje = response.data.mensaje
@@ -58,21 +58,22 @@ const editarTipoEvento = (formData) => {
     })
 };
 
-form.addEventListener("submit",(event) =>{
-    event.preventDefault()
-    form.querySelectorAll(".form-control, .form-select").forEach((Element) => {
-        Element.dispatchEvent(new Event("change"));
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    form.querySelectorAll(".form-control, .form-select").forEach((element) => {
+        element.dispatchEvent(new Event("change"));
     });
-    if(validar()){
-        form.querySelectorAll(".form-control, .form-select").forEach((Element) => {
-            if(Element.disabled)
-                Element.disabled=false;            
+
+    if (validar()) {
+        form.querySelectorAll(".form-control, .form-select").forEach((element) => {
+            if (element.disabled)
+                element.disabled = false;
         });
         const formData = new FormData(form);
         editarTipoEvento(formData);
-        
     }
-})
+});
 
 const validar = () => {
     return form.querySelector(".is-invalid") === null;
@@ -91,27 +92,35 @@ form.querySelectorAll(".form-control, .form-select").forEach((Element) => {
     });
 });
 
-function validarNombreRepetido() {
-    const nuevoNombre = inputNombre.value.trim();
-
-    if (nuevoNombre === '') {
-        inputNombre.classList.remove('is-valid');
-        inputNombre.classList.add('is-invalid');
-        mensajeNombre.textContent = 'El nombre no puede estar vacío.';
-    } else if (nuevoNombre === nombreAnterior) {
-        inputNombre.classList.remove('is-invalid');
-        inputNombre.classList.add('is-valid');
-        mensajeNombre.textContent = '';
-    } else {
-        // Realizar la lógica para verificar si el nombre ya existe
-        // Puedes realizar una solicitud al servidor aquí si es necesario
-        // y actualizar las clases y mensajes en consecuencia.
+function validarNombreRepetido(){
+    //Validaciones antes de que se guarde el nombre repetido
+    if(nombreAnterior === ''){
+        if(inputNombre.value === ''){
+            inputNombre.classList.remove("is-valid");
+            inputNombre.classList.add("is-invalid");
+            mensajeNombre.textContent = "El nombre no puede estar vacío.";
+        }else{
+            inputNombre.classList.remove("is-invalid");
+            inputNombre.classList.add("is-valid");
+        }
+    }else{
+        if(inputNombre.value !== nombreAnterior && inputNombre.value !== '') {
+            inputNombre.classList.remove("is-invalid");
+            inputNombre.classList.add("is-valid");
+            mensajeNombre.textContent = "";
+        }else {
+            if (inputNombre.value === "") {
+                inputNombre.classList.remove("is-valid");
+                inputNombre.classList.add("is-invalid");
+                mensajeNombre.textContent = "El nombre no puede estar vacío.";
+            } else {
+                inputNombre.classList.remove("is-valid");
+                inputNombre.classList.add("is-invalid");
+                mensajeNombre.textContent = "El tipo de evento ya existe";
+            }
+        }
     }
 }
-
-inputNombre.addEventListener('input', validarNombreRepetido);
-// Puedes quitar uno de los dos eventos (input o change) si no son necesarios ambos.
-// inputNombre.addEventListener('change', validarNombreRepetido);
 
 inputNombre.addEventListener("input",validarNombreRepetido );
 inputNombre.addEventListener("change",validarNombreRepetido );
