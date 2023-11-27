@@ -14,9 +14,9 @@ const dataTableOptions = {
     order: [[2, "desc"]],
     language: {
         lengthMenu: "Mostrar _MENU_ entradas",
-        zeroRecords: "Ningún tipo de evento encontrado",
+        zeroRecords: "Ningún evento encontrado",
         info: "Mostrando de _START_ a _END_ de un total de _TOTAL_ registros",
-        infoEmpty: "Ningún usuario encontrado",
+        infoEmpty: "Ningún evento encontrado",
         infoFiltered: "(filtrados desde _MAX_ registros totales)",
         search: "Buscar:",
         loadingRecords: "Cargando...",

@@ -16,7 +16,7 @@ const dataTableOptions = {
     order: [[3, "desc"]],
     language: {
         lengthMenu: "Mostrar _MENU_ patrocinadores",
-        zeroRecords: "Ningún patrociandor encontrado",
+        zeroRecords: "Ningún patrocinador encontrado",
         info: "Mostrando de _START_ a _END_ de un total de _TOTAL_ patrocinadores",
         infoEmpty: "Ningún patrocinador encontrado",
         infoFiltered: "(filtrados desde _MAX_ patrocinadores en total)",
