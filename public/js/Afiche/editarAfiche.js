@@ -54,11 +54,12 @@ const seleccionarEvento = (afiche) => {
     seleccionado.classList.add("table-primary");
     idEvento = afiche.id;
     eventoSeleccionado.textContent = afiche.nombre;
-    cambiarEvento(afiche);
+    cambiarEvento();
 };
 
-const cambiarEvento = (evento) => {
-    evento.afiches.map((afiche) => {
+const cambiarEvento = async () => {
+    const response = await cargarAfiche();
+    response.data.map((afiche) => {
         contenedorAsignar.innerHTML += `<div class="col-auto" id="tarjetaAfiche${afiche.id}">
         <div class="card" style="width: 10rem;">
             <img src="${afiche.ruta_imagen}" class="card-img-top" alt="Afiche" id="imagenAfichepreview${afiche.id}">
@@ -122,15 +123,15 @@ const cambiarAfiche = async () => {
         const input = document.getElementById(`imageUpload${aficheSeleccion}`);
         const form = new FormData();
         form.append("afiche", input.files[0]);
-        await axios
-            .post(`/api/afiche/${aficheSeleccion}`, form)
-            .then((response) => {
-                mostrarAlerta(
-                    "Éxito",
-                    response.data.mensaje,
-                    response.error ? "danger" : "success"
-                );
-            });
+        const response = await axios.post(
+            `/api/afiche/${aficheSeleccion}`,
+            form
+        );
+        mostrarAlerta(
+            "Éxito",
+            response.data.mensaje,
+            response.error ? "danger" : "success"
+        );
     }
 };
 
@@ -165,17 +166,14 @@ const seleccionarAfiche = (id) => {
 };
 
 const cargarAfiche = async () => {
-    await axios.get(`/api/afiche/${idEvento}`).then((response) => {
-        document.getElementById(`contadorAfiches${idEvento}`).textContent =
-            response.data.length;
-        document.getElementById(`tarjetaAfiche${aficheSeleccion}`).remove();
-    });
+    const response = await axios.get(`/api/afiche/${idEvento}`);
+    return response;
 };
 
 const resize_ob = new ResizeObserver(function (entries) {
     let rect = entries[0].contentRect;
     let height = rect.height;
-    vh = parseInt((height / window.innerHeight) * 89);
+    let vh = parseInt((height / window.innerHeight) * 89);
     document.getElementById("contenedorAsignar").style.maxHeight = vh + "vh";
 });
 

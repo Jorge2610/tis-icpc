@@ -78,7 +78,7 @@
                             @slot('modalTitle', 'Patrocinador ya existente')
                             @slot('modalContent')
                                 <p>
-                                    <b>El patrocinador que intento crear ya existe,</b>
+                                    <b>El patrocinador que intentó crear ya existe,</b>
                                     ¿Desea habilitarlo nuevamente?
                                 </p>
                             @endslot

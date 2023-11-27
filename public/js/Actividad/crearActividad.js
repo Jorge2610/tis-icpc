@@ -60,8 +60,6 @@ const validar = () => {
     return form.querySelector(".is-invalid") === null;
 };
 
-/**EDITAR ACTIVIDAD**/
-
 
 //Agregar validación a los inputs
 form.querySelectorAll(".form-control, .form-select").forEach((Element) => {
@@ -90,19 +88,19 @@ fechaInicio.addEventListener("change", () => {
     if ( fechaInicioSeleccionada < fechaMin) {
         fechaInicio.classList.add("is-invalid");
         fechaInicio.classList.remove("is-valid");
-        mensajeFechaInicio.innerHTML = "La hora es menor al inicio de evento";
+        mensajeFechaInicio.innerHTML = "Rango de fechas no válido.";
     } else if(fechaInicioSeleccionada > fechaMax){
         fechaInicio.classList.add("is-invalid");
         fechaInicio.classList.remove("is-valid");
-        mensajeFechaInicio.innerHTML = "La hora es mayor al fin de evento";
+        mensajeFechaInicio.innerHTML = "Rango de fechas no válido.";
     }else if(fechaInicio.value == ""){
         fechaInicio.classList.add("is-invalid");
         fechaInicio.classList.remove("is-valid");
-        mensajeFechaInicio.innerHTML = "Seleccione una fecha y hora";
-    }else if(fechaInicio.value > fechaFin.value){
-        fechaFin.classList.add("is-invalid");
-        fechaFin.classList.remove("is-valid");
-        mensajeFechaFin.innerHTML = "Seleccione una fecha correcta";
+        mensajeFechaInicio.innerHTML = "Seleccione una fecha y hora.";
+    }else if(fechaInicio.value > fechaFin.value && fechaFin.value !== ''){
+        fechaInicio.classList.add("is-invalid");
+        fechaInicio.classList.remove("is-valid");
+        mensajeFechaInicio.innerHTML = "Rango de fechas no válido.";
     }else {
         //Quitamos todos los mensajes y validamos
         mensajeFechaInicio.innerHTML = "";
@@ -110,8 +108,8 @@ fechaInicio.addEventListener("change", () => {
         fechaInicio.classList.add("is-valid");
         //Ponemos como valor mínimo la fecha inicio de la actividad
         fechaFin.min = fechaInicio.value;
-        fechaFin.dispatchEvent(new Event("change"));
     }
+    fechaFin.dispatchEvent(new Event("change"));
 });
 
 /**Validaciones para fecha FIN**/
@@ -125,25 +123,26 @@ fechaFin.addEventListener("change", () => {
     if (fechaFinSeleccionada < fechaMin) {
         fechaFin.classList.add("is-invalid");
         fechaFin.classList.remove("is-valid");
-        mensajeFechaFin.innerHTML = "La hora es menor al inicio de evento";
+        mensajeFechaFin.innerHTML = "Rango de fechas no válido.";
     } else if(fechaFinSeleccionada > fechaMax){
         fechaFin.classList.add("is-invalid");
         fechaFin.classList.remove("is-valid");
-        mensajeFechaFin.innerHTML = "La hora es mayor al fin de evento";
+        mensajeFechaFin.innerHTML = "Rango de fechas no válido.";
     }else if(fechaFin.value == ""){
         fechaFin.classList.add("is-invalid");
         fechaFin.classList.remove("is-valid");
-        mensajeFechaFin.innerHTML = "Seleccione una fecha y hora";
-    }else if(fechaFin.value < fechaInicio.value){
-        fechaInicio.classList.add("is-invalid");
-        fechaInicio.classList.remove("is-valid");
-        mensajeFechaInicio.innerHTML = "Seleccione una fecha correcta";
+        mensajeFechaFin.innerHTML = "Seleccione una fecha y hora.";
+    }else if(fechaFin.value < fechaInicio.value && fechaInicio.value !== ''){
+        fechaFin.classList.add("is-invalid");
+        fechaFin.classList.remove("is-valid");
+        mensajeFechaFin.innerHTML = "Rango de fechas no válido.";
     }else {
         //Quitamos todos los mensajes y validamos
         mensajeFechaFin.innerHTML = "";
         fechaFin.classList.remove("is-invalid");
         fechaFin.classList.add("is-valid");
     }
+    fechaInicio.dispatchEvent(new Event("change"));
 });
 
 function validarNombreRepetido() {
@@ -167,7 +166,7 @@ function validarNombreRepetido() {
          }else{
              inputNombre.classList.remove("is-valid");
              inputNombre.classList.add("is-invalid");
-             mensajeNombre.textContent = 'La actividad ya existe'
+             mensajeNombre.textContent = 'La actividad ya existe.'
          }
     }
  }

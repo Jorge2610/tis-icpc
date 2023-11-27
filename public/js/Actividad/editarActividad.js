@@ -7,11 +7,12 @@ const fechaInicio = document.getElementById("fechaInicio");
 const fechaFin = document.getElementById("fechaFin");
 const mensajeFechaInicio = document.getElementById("mensajeFechaInicio");
 const mensajeFechaFin = document.getElementById("mensajeFechaFin");
+let nombreAnterior = ''
 
 /**PETICIONES a AXIOS**/
-/**CREAR ACTIVIDAD**/
+/**EDITAR   ACTIVIDAD**/
 const editarActividad = (formData) => {
-
+    nombreAnterior = inputNombre.value
     axios.post("/api/actividad/"+formData.get("id"),formData)
     .then(function(response){
         const mensaje = response.data.mensaje
@@ -27,7 +28,9 @@ const editarActividad = (formData) => {
             mensajeNombre.innerHTML = 'La actividad ya existe'
         }else{
             if(response.data.error != "danger"){
-                window.location.href = "/admin/actividad/editar-actividad";
+                setTimeout(()=>{
+                    window.location.href = "/admin/actividad/editar-actividad";
+               },1800);
             }
         }
     })
@@ -56,8 +59,6 @@ const validar = () => {
     return form.querySelector(".is-invalid") === null;
 };
 
-/**EDITAR ACTIVIDAD**/
-
 
 //Agregar validación a los inputs
 form.querySelectorAll(".form-control, .form-select").forEach((Element) => {
@@ -72,6 +73,10 @@ form.querySelectorAll(".form-control, .form-select").forEach((Element) => {
     });
 });
 
+/**Validacion para el input nombre**/
+inputNombre.addEventListener("input", validarNombreRepetido);
+inputNombre.addEventListener("change", validarNombreRepetido);
+
 /**Validaciones para fecha INICIO**/
 fechaInicio.addEventListener("change", () => {
     const fechaInicioSeleccionada = new Date(fechaInicio.value);
@@ -82,19 +87,19 @@ fechaInicio.addEventListener("change", () => {
     if ( fechaInicioSeleccionada < fechaMin) {
         fechaInicio.classList.add("is-invalid");
         fechaInicio.classList.remove("is-valid");
-        mensajeFechaInicio.innerHTML = "La hora es menor al inicio de evento";
+        mensajeFechaInicio.innerHTML = "Rango de fechas no válido.";
     } else if(fechaInicioSeleccionada > fechaMax){
         fechaInicio.classList.add("is-invalid");
         fechaInicio.classList.remove("is-valid");
-        mensajeFechaInicio.innerHTML = "La hora es mayor al fin de evento";
+        mensajeFechaInicio.innerHTML = "Rango de fechas no válido.";
     }else if(fechaInicio.value == ""){
         fechaInicio.classList.add("is-invalid");
         fechaInicio.classList.remove("is-valid");
-        mensajeFechaInicio.innerHTML = "Seleccione una fecha y hora";
-    }else if(fechaInicio.value > fechaFin.value){
-        fechaFin.classList.add("is-invalid");
-        fechaFin.classList.remove("is-valid");
-        mensajeFechaFin.innerHTML = "Seleccione una fecha correcta";
+        mensajeFechaInicio.innerHTML = "Seleccione una fecha y hora.";
+    }else if(fechaInicio.value > fechaFin.value && fechaFin.value !== ''){
+        fechaInicio.classList.add("is-invalid");
+        fechaInicio.classList.remove("is-valid");
+        mensajeFechaInicio.innerHTML = "Rango de fechas no válido.";
     }else {
         //Quitamos todos los mensajes y validamos
         mensajeFechaInicio.innerHTML = "";
@@ -102,8 +107,8 @@ fechaInicio.addEventListener("change", () => {
         fechaInicio.classList.add("is-valid");
         //Ponemos como valor mínimo la fecha inicio de la actividad
         fechaFin.min = fechaInicio.value;
-        fechaFin.dispatchEvent(new Event("change"));
     }
+    fechaFin.dispatchEvent(new Event("change"));
 });
 
 /**Validaciones para fecha FIN**/
@@ -117,23 +122,59 @@ fechaFin.addEventListener("change", () => {
     if (fechaFinSeleccionada < fechaMin) {
         fechaFin.classList.add("is-invalid");
         fechaFin.classList.remove("is-valid");
-        mensajeFechaFin.innerHTML = "La hora es menor al inicio de evento";
+        mensajeFechaFin.innerHTML = "Rango de fechas no válido.";
     } else if(fechaFinSeleccionada > fechaMax){
         fechaFin.classList.add("is-invalid");
         fechaFin.classList.remove("is-valid");
-        mensajeFechaFin.innerHTML = "La hora es mayor al fin de evento";
+        mensajeFechaFin.innerHTML = "Rango de fechas no válido.";
     }else if(fechaFin.value == ""){
         fechaFin.classList.add("is-invalid");
         fechaFin.classList.remove("is-valid");
-        mensajeFechaFin.innerHTML = "Seleccione una fecha y hora";
-    }else if(fechaFin.value < fechaInicio.value){
-        fechaInicio.classList.add("is-invalid");
-        fechaInicio.classList.remove("is-valid");
-        mensajeFechaInicio.innerHTML = "Seleccione una fecha correcta";
+        mensajeFechaFin.innerHTML = "Seleccione una fecha y hora.";
+    }else if(fechaFin.value < fechaInicio.value && fechaInicio.value !== ''){
+        fechaFin.classList.add("is-invalid");
+        fechaFin.classList.remove("is-valid");
+        mensajeFechaFin.innerHTML = "Rango de fechas no válido.";
     }else {
         //Quitamos todos los mensajes y validamos
         mensajeFechaFin.innerHTML = "";
         fechaFin.classList.remove("is-invalid");
         fechaFin.classList.add("is-valid");
     }
+    fechaInicio.dispatchEvent(new Event("change"));
 });
+
+function validarNombreRepetido() {
+    if(nombreAnterior === ''){
+         if(inputNombre.value === ''){
+             inputNombre.classList.remove("is-valid");
+             inputNombre.classList.add("is-invalid");
+             mensajeNombre.textContent = "El nombre no puede estar vacío.";
+         }else{
+             inputNombre.classList.remove("is-invalid");
+             inputNombre.classList.add("is-valid");
+         }    
+    }else{
+         if (inputNombre.value !== nombreAnterior && inputNombre.value !== '') {
+             inputNombre.classList.remove("is-invalid");
+             inputNombre.classList.add("is-valid");
+         }else if(inputNombre.value == ''){
+             inputNombre.classList.remove("is-valid");
+             inputNombre.classList.add("is-invalid");
+             mensajeNombre.textContent = 'El nombre no puede estar vacío.'
+         }else{
+             inputNombre.classList.remove("is-valid");
+             inputNombre.classList.add("is-invalid");
+             mensajeNombre.textContent = 'La actividad ya existe.'
+         }
+    }
+ }
+
+function quitarValidacion(){
+    form.querySelectorAll(".form-control, .form-select").forEach(
+        (Element) => {
+            Element.classList.remove("is-valid");
+            Element.classList.remove("is-invalid");
+        }
+    );
+}
