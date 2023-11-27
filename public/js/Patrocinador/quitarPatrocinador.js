@@ -149,7 +149,7 @@ const resize_ob = new ResizeObserver(function (entries) {
     let rect = entries[0].contentRect;
     let height = rect.height;
     vh = parseInt((height / window.innerHeight) * 78) + 1;
-    document.getElementById("divPatrocinadores").style.height = vh + "vh";
+    document.getElementById("divPatrocinadores").style.maxHeight = vh + "vh";
 });
 
 resize_ob.observe(document.getElementById("tablaEventos"));

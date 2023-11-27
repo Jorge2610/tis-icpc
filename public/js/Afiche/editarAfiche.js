@@ -171,3 +171,12 @@ const cargarAfiche = async () => {
         document.getElementById(`tarjetaAfiche${aficheSeleccion}`).remove();
     });
 };
+
+const resize_ob = new ResizeObserver(function (entries) {
+    let rect = entries[0].contentRect;
+    let height = rect.height;
+    vh = parseInt((height / window.innerHeight) * 89);
+    document.getElementById("contenedorAsignar").style.maxHeight = vh + "vh";
+});
+
+resize_ob.observe(document.getElementById("tablaEventos"));
