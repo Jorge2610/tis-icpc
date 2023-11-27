@@ -25,11 +25,12 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
+                            <input type="hidden" id="id" name="tipoEventoId" value="{{$tipoEvento->id}}">
                             <label for="nombreTipoEvento" class="form-label">Nombre del tipo de evento *</label>
                             <input name="nombre" type="text" class="form-control custom-input"
                                 id="nombreTipoEvento" value="{{ $tipoEvento->nombre }}" required
                                 placeholder="Ingrese el nombre del tipo de evento" maxlength="64">
-                            <div class="invalid-feedback">
+                            <div id="mensajeNombre" class="invalid-feedback">
                                 El nombre no puede estar vacío.
                             </div>
                         </div>
@@ -59,7 +60,7 @@
                     </div>
                     <div class="text-center my-5">
                         <a href="/admin/tipos-de-evento/editar-tipo" class="btn btn-secondary mx-5">Cancelar</a>
-                        <button id="confirmarBoton" onclick="editarTipoEvento({{ $tipoEvento->id }})" class="btn btn-primary mx-5">Editar</button>
+                        <button id="confirmarBoton" type="submit" class="btn btn-primary mx-5">Editar</button>
                     </div>
                 </div>
             </form>
