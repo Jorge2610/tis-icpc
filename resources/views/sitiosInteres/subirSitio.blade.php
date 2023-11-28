@@ -52,7 +52,7 @@
                         <div class="col-md-12 mt-2">
                             <label for="urlSitio" class="form-label">Enlace al sitio *</label>
                             <input name="enlace" type="url" class="form-control custom-input" id="urlSitio"
-                                value="" placeholder="https://www.ejemplo.com" maxlength="128" required>
+                                value="" pattern="https?://.+" placeholder="https://www.ejemplo.com" maxlength="128" required>
                         </div>
                     </form>
                     <div class="d-flex justify-content-center mt-3 gap-3">

@@ -65,7 +65,7 @@
                             <label for="urlPatrocinador" class="form-label">Enlace
                                 a la página web del patrocinador</label>
                             <input name="enlace_web" type="url" class="form-control custom-input" id="urlPatrocinador"
-                                value="" placeholder="https://www.ejemplo.com">
+                                value="" pattern="https?://.+" placeholder="https://www.ejemplo.com">
                         </div>
                     </form>
                     <div class="d-flex justify-content-center mt-3">
