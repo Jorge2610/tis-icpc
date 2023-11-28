@@ -52,7 +52,11 @@
                         <div class="col-md-12 mt-2">
                             <label for="urlSitio" class="form-label">Enlace al sitio *</label>
                             <input name="enlace" type="url" class="form-control custom-input" id="urlSitio"
-                                value="" pattern="https?://.+" placeholder="https://www.ejemplo.com" maxlength="128" required>
+                                value="" pattern="https?://.+" placeholder="https://www.ejemplo.com" maxlength="128"
+                                required>
+                            <div class="invalid-feedback">
+                                El enlace al sitio no puede estar vacío.
+                            </div>
                         </div>
                     </form>
                     <div class="d-flex justify-content-center mt-3 gap-3">
@@ -61,7 +65,7 @@
                         <button type="button" class="btn btn-primary" onclick="validarDatos()"
                             id="asignarSitioAsignar">Asignar</button>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
