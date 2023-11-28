@@ -61,9 +61,11 @@ const editarTipoEvento = (formData) => {
             inputNombre.classList.add("is-invalid")    
             inputDescripcion.classList.add("is-valid")
             mensajeNombre.textContent = 'El tipo de evento ya existe'
-            console.log("Este es el inputNombre "+inputNombre);
         }else{
             //form.reset();
+            setTimeout(()=>{
+                window.location.href = "/admin/tipos-de-evento/editar-tipo";
+            },1500);
         }   
     }).catch(function(error){
         console.log(mensaje);
