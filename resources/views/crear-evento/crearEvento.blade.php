@@ -228,9 +228,10 @@
                 <div class="col-md-1 col-sm-3 align-self-center">Fin:</div>
 
                 <div class="col-lg-12 col-md-12 col-sm-9">
-                    <input name="fin_evento" id="fechaFin" class="form-control" type="datetime-local"
-                        onchange="datoCambiado()" min=""
-                        value="{{ isset($datos['fin_evento']) ? $datos['fin_evento'] : '' }}"required />
+                    <input name="fin_evento" id="fechaFin" class="form-control" 
+                        type="datetime-local" onchange="datoCambiado()" min=""
+                        value="{{ isset($datos['fin_evento']) ? $datos['fin_evento'] : '' }}"required 
+                        {{(strtotime($datos['inicio_evento']) > time())? 'disabled':''}} />
                     <div class="invalid-feedback" id="mensajeErrorFechaFin"></div>
                 </div>
 
