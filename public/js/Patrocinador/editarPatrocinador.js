@@ -94,10 +94,6 @@ const validarDatos = () => {
         crearFormData();
         return;
     }
-    if (input.files[0] === undefined) {
-        botonSubir.classList.remove("btn-light", "text-primary");
-        botonSubir.classList.add("btn-outline-danger");
-    }
     form.classList.add("was-validated");
 };
 
@@ -119,8 +115,6 @@ const resetInputs = (control) => {
     document
         .getElementById("formularioEditarPatrocinador")
         .classList.remove("was-validated");
-    botonSubir.classList.remove("btn-outline-danger");
-    botonSubir.classList.add("btn-light", "text-primary");
     nombrePatrocinador.value = "";
     urlPatricinador.value = "";
     input.value = "";
@@ -141,8 +135,10 @@ const inhabilitarFormulario = () => {
 };
 
 const habilitarFormulario = () => {
+    resetInputs();
     botonSubir.disabled = false;
     urlPatricinador.disabled = false;
+    urlPatricinador
     input.disabled = false;
     asignar.disabled = false;
     cancelar.disabled = false;
@@ -163,7 +159,6 @@ const seleccionarPatrocinador = async (id, nombre) => {
     idSeleccionado = id;
     patrociandorSeleccionado.textContent = nombre;
     await llenarFormulario(id);
-    mostrarPatrocinadores();
 };
 
 const editarPatrocinador = async (formData) => {
