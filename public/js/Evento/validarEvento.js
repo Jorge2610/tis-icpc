@@ -83,12 +83,16 @@ costo.addEventListener("change", () => {
     let numero = costo.value.toString();
     var decimales = (numero.split('.')[1] || []).length;
 
-    if (inputCosto.checked && (parseFloat(costo.value)>=
-    parseFloat(costo.min) && parseFloat(costo.value)<= parseFloat(costo.max))) {
-        isValid(costo, true)
-    }
+    if (inputCosto.checked){
+        if (parseFloat(costo.value)>=
+            parseFloat(costo.min) && parseFloat(costo.value)<= parseFloat(costo.max)) {
+            isValid(costo, true);
+        }else{
+            isValid(costo, false);
+        }
+    } 
     else {
-        isValid(costo, false);
+        isValid(costo, true);
     }
     if (boolCosto) {
         boolCosto = false;

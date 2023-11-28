@@ -29,12 +29,18 @@ class EventoController extends Controller
 
     public function cargarEvento(String $nombre)
     {
-        $evento = Evento::where('estado', 0)->with('afiches', 'eventoPatrocinador.patrocinadores', 'sitios')->where('nombre', $nombre)->first();
+        $evento = Evento::where('estado', 0)->with(['afiches', 'eventoPatrocinador.patrocinadores' => function ($q) {
+            $q->withTrashed();
+        }, 'sitios', 'actividades'])
+            ->where('nombre', $nombre)->first();
+
         if (!$evento) {
             return abort(404);
         }
+
         return view('eventos.evento', ['evento' => $evento]);
     }
+
 
     public function store(Request $request)
     {
