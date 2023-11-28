@@ -16,7 +16,6 @@
             </div>
         </div>
         <div class="row">
-
             <div class="col-md-12 col-main  g-5">
                 <div class="row">
                     @if ($evento->afiches->count() > 0)
@@ -29,12 +28,12 @@
                             <div class="col-md-12 col-sm-12  mt-3 " style="font-size: small">
                     @endif
                     <div class="row">
-                        <div class="col-lg-9 col-md-10 col-sm-12 col-12">
+                        <div class="col-lg-9 col-md-12 col-sm-12 col-12">
                             <h3>{{ $evento->nombre }}</h3>
                             <p class="fs-6">{{ $evento->tipoEvento->nombre }}
                             <p>
                         </div>
-                        <div class="col-lg-3 col-md-2 col-sm-12 col-12">
+                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                             <div class="row mt-3 d-flex">
                                 <button type="button" class="btn btn-primary w-100 justify-content-center"
                                     disabled>Inscribirme</button>
