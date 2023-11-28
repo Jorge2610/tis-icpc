@@ -36,7 +36,7 @@
                         <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                             <div class="row mt-3 d-flex">
                                 <button type="button" class="btn btn-primary w-100 justify-content-center"
-                                    disabled>Inscribirme</button>
+                                    disabled hidden>Inscribirme</button>
 
                             </div>
                         </div>
