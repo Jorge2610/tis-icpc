@@ -35,8 +35,8 @@
                         </div>
                         <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                             <div class="row mt-3 d-flex">
-                                <button type="button" class="btn btn-primary w-100 justify-content-center"
-                                    disabled hidden>Inscribirme</button>
+                                <button type="button" class="btn btn-primary w-100 justify-content-center" disabled
+                                    hidden>Inscribirme</button>
                             </div>
                         </div>
                     </div>
@@ -219,12 +219,14 @@
                 <div class="row mt-3 gap-3">
                     @foreach ($evento->eventoPatrocinador as $patrocinador)
                         <div id="imagenPatrocinador" class="col-auto">
-                            <a href="{{ $patrocinador->patrocinadores->enlace_web ? $patrocinador->patrocinadores->enlace_web : '#' }}"
-                                class="text-decoration-none" title="{{ $patrocinador->patrocinadores->nombre }}"
-                                target="_blank">
-                                <img id="imagenPatrocinador" src="{{ $patrocinador->patrocinadores->ruta_imagen }}"
-                                    alt="Imagen del patrocinador"
-                                    style="object-fit: cover; max-height: 7rem; max-width: 100%;">
+                            @if ($patrocinador->patrocinadores->enlace_web !== null)
+                                <a class="text-decoration-none" href="{{ $patrocinador->patrocinadores->enlace_web }}" target="_blank">
+                                @else
+                                    <a class="text-decoration-none" title="{{ $patrocinador->patrocinadores->nombre }}"
+                                        target="_blank">
+                            @endif
+                            <img id="imagenPatrocinador" src="{{ $patrocinador->patrocinadores->ruta_imagen }}"
+                                alt="Imagen del patrocinador" style="object-fit: cover; max-height: 7rem; max-width: 100%;">
                             </a>
                         </div>
                     @endforeach
