@@ -20,7 +20,7 @@
         <div class="row g-5" id="tarjetasRow">
             @foreach ($eventos as $evento)
                 <div class="col-md-auto">
-                    <div class="tarjeta card mb-3" style="max-width: 540px; min-height: 200px; ">
+                    <div class="tarjeta card mb-3" style="width: 540px; min-height: 200px; ">
                         <div class="row g-0">
                             <div class="col-md-8">
                                 <div class="card-body">
