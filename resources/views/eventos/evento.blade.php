@@ -35,9 +35,8 @@
                         </div>
                         <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                             <div class="row mt-3 d-flex">
-                                <button type="button" class="btn btn-primary w-100 justify-content-center"
-                                    disabled hidden>Inscribirme</button>
-
+                                <button type="button" class="btn btn-primary w-100 justify-content-center" disabled
+                                    hidden>Inscribirme</button>
                             </div>
                         </div>
                     </div>
@@ -150,7 +149,7 @@
             <div class="col-md-12 {{ $evento->sitios->count() > 0 ? 'col-lg-9' : 'col-lg-12' }} border-end ">
                 <h3 class="">Descripción</h3>
                 <hr>
-                <p class="px-4" style="text-align: justify ">{!! nl2br($evento->descripcion) !!}</p>
+                <p class="px-4 text-break " style="text-align: justify">{!! nl2br($evento->descripcion) !!}</p>
             </div>
         @else
             <div class="row mt-5">
@@ -199,7 +198,7 @@
                                     <strong>Hora: </strong> {{ date('H:i', strtotime($actividad->fin_actividad)) }}
                                 </p>
 
-                                <p class="card-text col-12 px-4" style="text-align: justify">
+                                <p class="card-text col-12 px-4 text-break" style="text-align: justify">
                                     {!! nl2br($actividad->descripcion) !!}
                                 </p>
                             </div>
@@ -220,12 +219,14 @@
                 <div class="row mt-3 gap-3">
                     @foreach ($evento->eventoPatrocinador as $patrocinador)
                         <div id="imagenPatrocinador" class="col-auto">
-                            <a href="{{ $patrocinador->patrocinadores->enlace_web ? $patrocinador->patrocinadores->enlace_web : '#' }}"
-                                class="text-decoration-none" title="{{ $patrocinador->patrocinadores->nombre }}"
-                                target="_blank">
-                                <img id="imagenPatrocinador" src="{{ $patrocinador->patrocinadores->ruta_imagen }}"
-                                    alt="Imagen del patrocinador"
-                                    style="object-fit: cover; max-height: 7rem; max-width: 100%;">
+                            @if ($patrocinador->patrocinadores->enlace_web !== null)
+                                <a class="text-decoration-none" href="{{ $patrocinador->patrocinadores->enlace_web }}" target="_blank">
+                                @else
+                                    <a class="text-decoration-none" title="{{ $patrocinador->patrocinadores->nombre }}"
+                                        target="_blank">
+                            @endif
+                            <img id="imagenPatrocinador" src="{{ $patrocinador->patrocinadores->ruta_imagen }}"
+                                alt="Imagen del patrocinador" style="object-fit: cover; max-height: 7rem; max-width: 100%;">
                             </a>
                         </div>
                     @endforeach
