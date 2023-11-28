@@ -7,7 +7,7 @@
                 <input class="form-control" type="text" placeholder="Buscar evento..." onkeyup="buscarEvento()"
                     id="buscadorDeEvento">
             </div>
-            <div class="col-xl-6 col-lg-12" style="width: 565px;">
+            <div class="col-xl-6 col-lg-12" >
                 <input id="datoEventos" type="text" value={{ $eventos }} hidden>
             </div>
         </div>
@@ -36,10 +36,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-flex p-3 align-self-center col-md-4">
+                            <div class="d-flex p-3 justify-content-center col-md-4" style="height: 195px">
 
                                 <img src="{{ URL::asset($evento->afiches->count() > 0 ? $evento->afiches->first()->ruta_imagen : '../image/aficheDefecto.png') }}"
-                                    class="img-fluid rounded-start" alt="...">
+                                    class="img-fluid rounded-start object-fit-scale" alt="...">
                             </div>
                         </div>
                     </div>
