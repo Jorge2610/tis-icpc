@@ -82,16 +82,13 @@ costo.addEventListener("keyup", () => {
 costo.addEventListener("change", () => {
     let numero = costo.value.toString();
     var decimales = (numero.split('.')[1] || []).length;
-    if (decimales > 1) {
-        numero = numero.split('.')[0] + "." + numero.split('.')[1][0];
-        costo.value = numero;
-    }
-    if ((costo.value < costo.min || costo.value > costo.max || costo.value == "") && inputCosto.checked) {
-        isValid(costo, false)
+
+    if (inputCosto.checked && (parseFloat(costo.value)>=
+    parseFloat(costo.min) && parseFloat(costo.value)<= parseFloat(costo.max))) {
+        isValid(costo, true)
     }
     else {
-        validarCosto();
-        isValid(costo, true);
+        isValid(costo, false);
     }
     if (boolCosto) {
         boolCosto = false;
@@ -106,24 +103,32 @@ fechaInicio.addEventListener("change", () => {
     if(fechaInicio.classList.contains("is-invalid")){
         document.getElementById("mensajeErrorFechaInicio").innerHTML="Seleccione una fecha y hora.";
     }
-    if (
-        fechaInicio.value < fechaInicio.min &&
-        fechaInicio.value !== ""
+    if ((fechaInicio.value < fechaInicio.min &&
+        fechaInicio.value !== "")
     ) {
         isValid(fechaInicio, false);
         document.getElementById("mensajeErrorFechaInicio").innerHTML="Seleccione una fecha correcta.";
-        fechaFin.min=laFecha;
     } else {
-        if (!fechaInicio.hasAttribute('disabled') && boolFecha){
+        if (!fechaInicio.hasAttribute('disabled')){
             boolFecha=false;
             fechaFin.min = fechaInicio.value;
-            fechaFin.dispatchEvent(new Event("change"));
         }
         else{
             boolFecha=true;
         }
     }
-});
+    if(fechaInicio.classList.contains("is-valid")){
+        fechaFin.disabled=false;
+        fechaFin.dispatchEvent(new Event("change"));
+    }     
+    else{
+        fechaFin.disabled=true;
+        fechaFin.value="";
+        fechaFin.classList.remove("is-valid");
+        fechaFin.classList.remove("is-invalid");
+    }
+        
+}); 
 
 fechaFin.addEventListener("change", () => {
     if(fechaFin.classList.contains("is-invalid")){
@@ -135,9 +140,7 @@ fechaFin.addEventListener("change", () => {
         fechaInicio.max="";
     }
     if(boolFecha){
-        fechaInicio.max=fechaFin.value;
         boolFecha=false;
-        fechaInicio.dispatchEvent(new Event("change"));
     }
     else{
         boolFecha=true;

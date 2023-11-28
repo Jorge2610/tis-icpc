@@ -191,7 +191,7 @@
                             <div class="col-md-8">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Bs.</span>
-                                    <input name="precio_inscripcion" type="number" class="form-control"
+                                    <input name="precio_inscripcion" type="number" class="form-control fecha-editar"
                                         min="1" max="5000" id="costoEvento" step="0.5" onchange="setCostoInvalidoFeedback()"
                                         value="{{ isset($datos['precio_inscripcion']) ? $datos['precio_inscripcion'] : '0.0' }}">
                                     <div id="costoInvalido" class="invalid-feedback"></div>
@@ -230,7 +230,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-9">
                     <input name="fin_evento" id="fechaFin" class="form-control" type="datetime-local"
                         onchange="datoCambiado()" min=""
-                        value="{{ isset($datos['fin_evento']) ? $datos['fin_evento'] : '' }}" required />
+                        value="{{ isset($datos['fin_evento']) ? $datos['fin_evento'] : '' }}"required />
                     <div class="invalid-feedback" id="mensajeErrorFechaFin"></div>
                 </div>
 
