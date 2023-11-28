@@ -2,14 +2,20 @@
 
 @section('content')
     <div class="container">
-        <div class="row mb-4 d-flex flex-row-reverse">
-            <div class="col-xl-6 col-lg-12" style="width: 565px; margin-right: 165px">
-                <input class="form-control" type="text" placeholder="Buscar evento..." onkeyup="buscarEvento()"
-                    id="buscadorDeEvento">
+        <div class="row mb-5 d-flex justify-content-center">
+            <div class="col-offset-6 col-lg-6 col-md-12 col-sm-12">
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                    <input class="form-control" type="text" placeholder="Buscar evento..." onkeyup="buscarEvento()"
+                        id="buscadorDeEvento">
+                </div>
             </div>
-            <div class="col-xl-6 col-lg-12" >
-                <input id="datoEventos" type="text" value={{ $eventos }} hidden>
-            </div>
+        </div>
+
+        <div class="col-xl-12 col-lg-12" style="width: 565px;">
+            <input id="datoEventos" type="text" value={{ $eventos }} hidden>
         </div>
         <div class="row g-5" id="tarjetasRow">
             @foreach ($eventos as $evento)
