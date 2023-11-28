@@ -115,9 +115,7 @@ const updateTablaPatrocinadores = () => {
     }, 1700);
 };
 
-const resetInputs = () => {
-    window.location.reload();
-    /*
+const resetInputs = (control) => {
     document
         .getElementById("formularioEditarPatrocinador")
         .classList.remove("was-validated");
@@ -126,7 +124,10 @@ const resetInputs = () => {
     nombrePatrocinador.value = "";
     urlPatricinador.value = "";
     input.value = "";
-    imagenPreview.src = "/image/uploading.png";*/
+    imagenPreview.src = "/image/uploading.png";
+    if (control == 0) {
+        window.location.reload();
+    }
 };
 
 const inhabilitarFormulario = () => {
@@ -162,7 +163,6 @@ const seleccionarPatrocinador = async (id, nombre) => {
     idSeleccionado = id;
     patrociandorSeleccionado.textContent = nombre;
     await llenarFormulario(id);
-    await cargarPatrocinadoresNoAsignados();
     mostrarPatrocinadores();
 };
 
@@ -173,7 +173,7 @@ const editarPatrocinador = async (formData) => {
             response.data.mensaje,
             response.error ? "danger" : "success"
         );
-        resetInputs();
+        resetInputs(1);
         updateTablaPatrocinadores();
     });
 };
