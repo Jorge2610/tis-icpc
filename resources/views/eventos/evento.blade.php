@@ -37,7 +37,6 @@
                             <div class="row mt-3 d-flex">
                                 <button type="button" class="btn btn-primary w-100 justify-content-center"
                                     disabled hidden>Inscribirme</button>
-
                             </div>
                         </div>
                     </div>
@@ -150,7 +149,7 @@
             <div class="col-md-12 {{ $evento->sitios->count() > 0 ? 'col-lg-9' : 'col-lg-12' }} border-end ">
                 <h3 class="">Descripción</h3>
                 <hr>
-                <p class="px-4" style="text-align: justify ">{!! nl2br($evento->descripcion) !!}</p>
+                <p class="px-4 text-break " style="text-align: justify">{!! nl2br($evento->descripcion) !!}</p>
             </div>
         @else
             <div class="row mt-5">
@@ -199,7 +198,7 @@
                                     <strong>Hora: </strong> {{ date('H:i', strtotime($actividad->fin_actividad)) }}
                                 </p>
 
-                                <p class="card-text col-12 px-4" style="text-align: justify">
+                                <p class="card-text col-12 px-4 text-break" style="text-align: justify">
                                     {!! nl2br($actividad->descripcion) !!}
                                 </p>
                             </div>
