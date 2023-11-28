@@ -72,7 +72,7 @@
                         </div>
                     </form>
                     <div class="d-flex justify-content-center mt-3">
-                        <button type="button" class="btn btn-light" onclick="resetInputs()"
+                        <button type="button" class="btn btn-light" onclick="resetInputs(0)"
                             id="cancelarEditarPatrocinador">Cancelar</button>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#modalEdicionPatrocinador" id="editarPatrocinador">Editar</button>
