@@ -107,7 +107,7 @@
                     @if ($evento->requiere_registro)
                         <div class="row mt-3">
                             <div class="col-12">
-                                <strong>El evento requiere registro</strong>
+                                <strong>Es por equipo</strong>
                             </div>
                         </div>
                     @endif
@@ -115,7 +115,7 @@
                     @if ($evento->evento_equipos)
                         <div class="row mt-3">
                             <div class="col-12">
-                                <strong>Es por equipo</strong>
+                                <strong>El evento requiere registro</strong>
                             </div>
                         </div>
                     @endif

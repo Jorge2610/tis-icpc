@@ -15,8 +15,11 @@ const getEventos = async () => {
 const buscarEvento = () => {
     let buscado = document.getElementById("buscadorDeEvento").value;
     eventosFiltrados = eventos.filter(evento => {
-        let nombreEvento = evento.nombre.toLowerCase();
-        return nombreEvento.includes(buscado.toLowerCase());
+        let datos = evento.nombre.toLowerCase();
+        datos += " " + moment(evento.inicio_evento).format("DD-MM-YYYY");
+        datos += " " + moment(evento.fin_evento).format("DD-MM-YYYY");
+        datos += " " + evento.tipo_evento.nombre;
+        return datos.includes(buscado.toLowerCase());
     });
     mostrarEventos();
 };
@@ -51,9 +54,9 @@ const mostrarEventos = () => {
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex p-3 align-self-center col-md-4">
+                    <div class="d-flex p-3 align-self-center col-md-4" style="height: 195px">
                         <img src="${rutaImagen}"
-                            class="img-fluid rounded-start" alt="...">
+                            class="img-fluid rounded-start object-fit-scale" alt="...">
                     </div>
                 </div>
             </div>
