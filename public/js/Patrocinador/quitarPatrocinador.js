@@ -79,8 +79,8 @@ const mostrarPatrocinadores = () => {
         content += `
             <div class="col text-center">
                 <div class="card" style="height: 13rem">
-                    <div class="row justify-content-center" style="max-height: 125px">
-                        <img src="${evento.patrocinadores.ruta_imagen}" class="img-fluid"
+                    <div class="row justify-content-center" style="height: 125px">
+                        <img src="${evento.patrocinadores.ruta_imagen}" class="img-fluid object-fit-scale"
                             alt="logoPatrocinador" style="max-height: 100%; width: auto">
                     </div>
                     <div class="card-body">
