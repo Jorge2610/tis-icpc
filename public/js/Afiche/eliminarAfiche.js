@@ -54,12 +54,21 @@ const seleccionarEvento = (afiche) => {
     seleccionado.classList.add("table-primary");
     idEvento = afiche.id;
     eventoSeleccionado.textContent = afiche.nombre;
-    cambiarEvento(afiche);
+    cargarAfiche();
 };
 
-const cambiarEvento = (evento) => {
-    evento.afiches.map((afiche) => {
-        contenedorAsignar.innerHTML += `<div class="col-auto" id="tarjetaAfiche${afiche.id}">
+const getAfichesDelEvento = async () => {
+    let afiches = await axios.get("/api/afiche/" + idEvento).then(response => {
+        return response.data;
+    });
+    return afiches;
+};
+
+const cambiarEvento = (afiches) => {
+    document.getElementById(`contadorAfiches${idEvento}`).textContent = afiches.length;
+    let content = "";
+    afiches.map((afiche) => {
+        content += `<div class="col-auto" id="tarjetaAfiche${afiche.id}">
         <div class="card" style="width: 10rem;">
             <img src="${afiche.ruta_imagen}" class="card-img-top" alt="Afiche" id="imagenAfichepreview${afiche.id}">
             <div class="card-body d-flex justify-content-around gap-2">
@@ -70,6 +79,7 @@ const cambiarEvento = (evento) => {
         </div>
     </div>`;
     });
+    contenedorAsignar.innerHTML = content;
 };
 
 const seleccionarAfiche = (id) => {
@@ -91,11 +101,8 @@ const eliminarAfiche = async () => {
 };
 
 const cargarAfiche = async () => {
-    await axios.get(`/api/afiche/${idEvento}`).then((response) => {
-        document.getElementById(`contadorAfiches${idEvento}`).textContent =
-            response.data.length;
-        document.getElementById(`tarjetaAfiche${aficheSeleccion}`).remove();
-    });
+    let afiches = await getAfichesDelEvento();
+    cambiarEvento(afiches);
 };
 
 const resize_ob = new ResizeObserver(function (entries) {
