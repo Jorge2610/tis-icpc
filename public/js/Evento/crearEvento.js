@@ -95,7 +95,7 @@ const editarEvento = (formData) => {
 const crearEvento = (formData) => {
     nombreAnterior = nombreEvento.value
     axios
-        .post("/api/evento/", formData)
+        .post("/api/evento", formData)
         .then(function (response) {
             mostrarAlerta(
                 "Éxito",
