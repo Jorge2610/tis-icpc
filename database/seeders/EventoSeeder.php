@@ -39,7 +39,7 @@ class EventoSeeder extends Seeder
                 'institucion' => $faker->company() . ' - ' . $faker->companySuffix(),
                 'region' => $faker->city(),
                 'grado_academico' => $faker->randomElement(['ninguno', 'primaria', 'secundaria', 'universidad', 'postgrado', 'doctorado']),
-                'evento_equipos' => $faker->randomElement(['on', '']),
+                'cantidad_equipo' => $faker->numberBetween(2, 10),
                 'requiere_registro' => $faker->randomElement(['on', '']),
                 'edad_minima' => $rangoMin,
                 'edad_maxima' => $faker->numberBetween($rangoMin, 70),

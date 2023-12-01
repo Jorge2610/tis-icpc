@@ -74,7 +74,7 @@ const editarEvento = (formData) => {
             console.log(mensajeRepetido)
             if(mensajeRepetido !== 'El evento ya existe')  {
                 setTimeout(()=>{
-                    window.location.href = "/editarEvento";
+                    // window.location.href = "/editarEvento";
                },1800);
                 form.reset();
             }else{
@@ -169,7 +169,7 @@ const cerrar = (edicion) => {
         form.reset();   
     }
     else{
-        window.location.href = "/editarEvento/";
+        // window.location.href = "/editarEvento/";
     }
 };
 

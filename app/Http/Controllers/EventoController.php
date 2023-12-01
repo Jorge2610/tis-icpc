@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
+use App\Notifications\cambiosEnEvento;
 use App\Models\Evento;
 use App\Models\Anulado;
 use App\Models\Cancelado;
@@ -53,7 +54,7 @@ class EventoController extends Controller
             $evento->institucion        = $request->institucion;
             $evento->region             = $request->region;
             $evento->grado_academico    = $request->grado_academico;
-            $evento->evento_equipos     = $request->evento_equipos;
+            $evento->cantidad_equipo     = $request->cantidad_equipo;
             $evento->requiere_registro  = $request->requiere_registro;
             $evento->edad_minima        = $request->edad_minima;
             $evento->edad_maxima        = $request->edad_maxima;
@@ -80,7 +81,8 @@ class EventoController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $evento = Evento::find($id);
+            $evento = Evento::findOrFail($id);
+            $atributosAntiguos = $evento->getOriginal();
             $evento->nombre             = $request->nombre;
             $evento->descripcion        = $request->descripcion;
             $evento->inicio_evento      = $request->inicio_evento;
@@ -88,7 +90,7 @@ class EventoController extends Controller
             $evento->institucion        = $request->institucion;
             $evento->region             = $request->region;
             $evento->grado_academico    = $request->grado_academico;
-            $evento->evento_equipos     = $request->evento_equipos;
+            $evento->cantidad_equipo     = $request->cantidad_equipo;
             $evento->requiere_registro  = $request->requiere_registro;
             $evento->edad_minima        = $request->edad_minima;
             $evento->edad_maxima        = $request->edad_maxima;
@@ -96,6 +98,7 @@ class EventoController extends Controller
             $evento->precio_inscripcion = $request->precio_inscripcion;
             $evento->id_tipo_evento = $request->id_tipo_evento;
             $evento->save();
+            $this->notificarCambios($evento, $atributosAntiguos);
             return response()->json(['mensaje' => 'Actualizado exitosamente', 'error' => false]);
         } catch (QueryException $e) {
             if ($e->errorInfo[1] == 1062) {
@@ -108,6 +111,16 @@ class EventoController extends Controller
                 }
             }
         }
+    }
+
+    protected function notificarCambios($evento, $atributosAntiguos)
+    {
+        $cambios = array_diff_assoc($evento->getOriginal(), $atributosAntiguos);
+        // if(!empty($cambios)) {
+        //     $evento->inscritos->each(function ($usuario) use ($evento) {
+        //         $usuario->notify(new CambiosEnEvento($evento));
+        //     });
+        // }
     }
 
     public function destroy($id)
@@ -140,7 +153,7 @@ class EventoController extends Controller
             'institucion' => '',
             'region' => '',
             'grado_academico' => '',
-            'evento_equipos' => '',
+            'cantidad_equipo' => '',
             'requiere_registro' => '',
             'edad_minima' => '',
             'edad_maxima' => '',
@@ -163,7 +176,7 @@ class EventoController extends Controller
                 'institucion' => $evento->institucion,
                 'region' => $evento->region,
                 'grado_academico' =>  $evento->grado_academico,
-                'evento_equipos' => $evento->evento_equipos,
+                'cantidad_equipo' => $evento->cantidad_equipo,
                 'requiere_registro' => $evento->requiere_registro,
                 'edad_minima' => $evento->edad_minima,
                 'edad_maxima' => $evento->edad_maxima,
@@ -232,4 +245,5 @@ class EventoController extends Controller
         $anular = true;
         return view('eventos.cancelarEvento', ['eventos' => $eventos, 'anular' => $anular]);
     }
+
 }
