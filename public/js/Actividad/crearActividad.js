@@ -54,6 +54,7 @@ form.addEventListener("submit", (event) => {
         const formData = new FormData(form);
         crearActividad(formData);
     }
+    $("#modalConfirmacion").modal("hide");
 });
 
 const validar = () => {
@@ -178,5 +179,6 @@ function quitarValidacion(){
             Element.classList.remove("is-invalid");
         }
     );
+    window.location.href = "/admin/actividad";
 }
 

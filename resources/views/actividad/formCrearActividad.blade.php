@@ -67,8 +67,44 @@
                         </div>
                         
                         <div class="text-center my-4">
-                            <button type="reset" class="btn btn-secondary mx-5" onClick="quitarValidacion()">Cancelar</button>
-                            <button id="confirmarBoton" type="submit" class="btn btn-primary mx-5">Crear</button>
+                            <button type="button" class="btn btn-secondary mx-5" data-bs-toggle="modal" data-bs-target="#modalCancelar">Cancelar</button>
+                                @component('components.modal')
+                                    @slot('modalId', 'modalCancelar')
+                                    @slot('modalTitle', 'Confirmación')
+                                    @slot('modalContent')
+                                        ¿Está seguro de cancelar la creación de la actividad?
+                                    @endslot
+                                    @slot('modalButton')
+                                        <button type="button" class="btn btn-secondary w-25 mx-8"
+                                            data-bs-dismiss="modal">No</button>
+                                        <button type="reset" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal"
+                                            onClick="quitarValidacion()">Sí</button>
+                                    @endslot
+                                @endcomponent
+                            <button type="button" id="confirmarBoton" class="btn btn-primary mx-5" data-bs-toggle="modal" data-bs-target="#modalConfirmacion">Crear</button>
+                                @component('components.modal')
+                                    @slot('modalId', 'modalConfirmacion')
+                                    @slot('modalTitle', 'Confirmación')
+                                    @slot('modalContent')
+                                        <div class="container">
+                                            <div class="row">
+                                                <div>
+                                                    ¿Está seguro de crear la actividad?
+                                                </div>
+                                            </div>
+                                            <div class="row mt-2">
+                                                <div>
+                                                    <input name="actividad_notificacion" type="checkbox" class="form-check-input border-dark" id="notificacionCheck">
+                                                    <label class="form-check-label " for="notificacionCheck">Enviar notificaciones a usuarios inscritos al evento</label>
+                                                </div>
+                                            </div> 
+                                        </div>                                       
+                                    @endslot
+                                    @slot('modalButton')
+                                        <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>
+                                        <button type="submit" class="btn btn-primary w-25 mx-8">Sí</button>
+                                    @endslot
+                                @endcomponent
                         </div>
                 </form>
             </div>
