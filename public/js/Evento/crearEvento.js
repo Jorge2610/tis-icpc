@@ -11,6 +11,7 @@ const costo = document.getElementById("costoEvento");
 const checkTodasRango = document.getElementById("input-grado-Todas");
 const nombreEvento = document.getElementById("nombreDelEvento");
 const mensajeNombre = document.getElementById("mensajeNombre");
+const checkEquipo = document.getElementById("equipoCheck");
 
 let boolFecha = true;
 let boolCosto = true;
@@ -109,7 +110,7 @@ const crearEvento = (formData) => {
                 nombreEvento.classList.add("is-invalid")
                 mensajeNombre.textContent = 'El evento ya existe.'
             }else{
-                setTimeout(() => {
+               setTimeout(() => {
                     window.location.href = "/eventos/" ;
                 }, 1800);
             }    
@@ -221,6 +222,9 @@ inputEdad.addEventListener("change", () => {
 });
 inputCosto.addEventListener("change", () => {
     mostrarInput("eventoPago", inputCosto.checked);
+});
+checkEquipo.addEventListener("change",()=>{
+    mostrarInput("numero-integrantes",checkEquipo.checked);
 });
 
 nombreEvento.addEventListener("input",validarNombreRepetido);
