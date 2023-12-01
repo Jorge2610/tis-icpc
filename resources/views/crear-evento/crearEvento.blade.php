@@ -158,9 +158,9 @@
                
                 <div class="row mt-4">
                     <div class="col-md-6 mt-2">
-                        <input name="evento_equipos" type="checkbox"
+                        <input  type="checkbox"
                             class="form-check-input border-dark fecha-editar" onchange="datoCambiado()"
-                            id="equipoCheck" @if ($datos['evento_equipos']) checked @endif>
+                            id="equipoCheck" @if ($datos['cantidad_equipo']) checked @endif>
                         <label class="form-check-label " for="equipoCheck">Por equipos</label>
                     </div>
 
@@ -179,10 +179,10 @@
                     <div class="col-md-6">
                         <div class="row" id="numero-integrantes" style="display:none;">
                             <div class="col-md-4">
-                                <label class="col-form-label" for="costoEvento">Nro.</label>
+                                <label class="col-form-label fecha-editar" for="costoEvento">Nro.</label>
                             </div>
                             <div class="col-md-8">
-                                <input name="miembros-equipo" type="number" class="form-control fecha-editar"
+                                <input name="cantidad_equipo" type="number" class="form-control fecha-editar"
                                             min="2"  id="miembros-equipo" step="1" onchange="setCostoInvalidoFeedback()"
                                             value="{{ isset($datos['precio_inscripcion']) ? $datos['precio_inscripcion'] : '0.0' }}">
                                 <div id="costoInvalido" class="invalid-feedback"></div>

@@ -110,7 +110,7 @@ const crearEvento = (formData) => {
                 nombreEvento.classList.add("is-invalid")
                 mensajeNombre.textContent = 'El evento ya existe.'
             }else{
-                setTimeout(() => {
+               setTimeout(() => {
                     window.location.href = "/eventos/" ;
                 }, 1800);
             }    
