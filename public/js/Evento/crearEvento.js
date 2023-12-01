@@ -170,7 +170,7 @@ const cerrar = (edicion) => {
         form.reset();   
     }
     else{
-        // window.location.href = "/editarEvento/";
+        window.location.href = "/editarEvento/";
     }
 };
 

@@ -22,7 +22,9 @@ class EventoController extends Controller
 
     public function cargarEventos()
     {
-        $eventos = Evento::where('estado', 0)->with('tipoEvento', 'afiches', 'actividades')
+        $eventos = Evento::where('estado', 0)->with(['tipoEvento' => function ($query) {
+            $query->withTrashed();
+        }, 'afiches', 'actividades'])
             ->orderBy('updated_at', 'desc')
             ->get();
         return view('eventos.eventos', ['eventos' => $eventos]);
@@ -30,7 +32,9 @@ class EventoController extends Controller
 
     public function cargarEvento(String $nombre)
     {
-        $evento = Evento::where('estado', 0)->with(['afiches', 'eventoPatrocinador.patrocinadores' => function ($q) {
+        $evento = Evento::where('estado', 0)->with(['afiches','tipoEvento' => function ($q) {
+            $q->withTrashed();
+        }, 'eventoPatrocinador.patrocinadores' => function ($q) {
             $q->withTrashed();
         }, 'sitios', 'actividades'])
             ->where('nombre', $nombre)->first();
@@ -38,7 +42,6 @@ class EventoController extends Controller
         if (!$evento) {
             return abort(404);
         }
-
         return view('eventos.evento', ['evento' => $evento]);
     }
 
@@ -98,7 +101,9 @@ class EventoController extends Controller
             $evento->precio_inscripcion = $request->precio_inscripcion;
             $evento->id_tipo_evento = $request->id_tipo_evento;
             $evento->save();
-            $this->notificarCambios($evento, $atributosAntiguos);
+            if ($request->notificacion) {
+                $this->notificarCambios($evento, $atributosAntiguos);
+            }
             return response()->json(['mensaje' => 'Actualizado exitosamente', 'error' => false]);
         } catch (QueryException $e) {
             if ($e->errorInfo[1] == 1062) {
@@ -235,9 +240,9 @@ class EventoController extends Controller
 
     public function showEditEventForm()
     {
-        $eventos = Evento::with('tipoEvento')
-            ->where('estado', 0)
-            ->orderBy('updated_at', 'desc')
+        $eventos = Evento::with(['tipoEvento' => function ($query) {
+            $query->withTrashed();
+        }])->where('estado', 0)->orderBy('updated_at', 'desc')
             ->get();
         return view('crear-evento.editarEvento', ['eventos' => $eventos]);
     }
@@ -248,5 +253,4 @@ class EventoController extends Controller
         $anular = true;
         return view('eventos.cancelarEvento', ['eventos' => $eventos, 'anular' => $anular]);
     }
-
 }

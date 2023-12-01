@@ -166,14 +166,18 @@ class PatrocinadorController extends Controller
 
     public function vistaAsignarPatrocinador()
     {
-        $eventos =  Evento::where('estado', 0)->with('eventoPatrocinador.patrocinadores')->orderBy('eventos.created_at', 'desc')->get();
+        $eventos =  Evento::where('estado', 0)->with(['eventoPatrocinador.patrocinadores', 'tipoEvento' => function ($query) {
+            $query->withTrashed();
+        }])->orderBy('eventos.created_at', 'desc')->get();
         $patrocinadores =  Patrocinador::all();
         return view('patrocinador.asignarPatrocinador', ['eventos' => $eventos, 'patrocinadores' => $patrocinadores]);
     }
 
     public function vistaQuitarPatrocinador()
     {
-        $eventos =  Evento::where('estado', 0)->with('eventoPatrocinador.patrocinadores')->orderBy('eventos.created_at', 'desc')->get();
+        $eventos =  Evento::where('estado', 0)->with(['eventoPatrocinador.patrocinadores', 'tipoEvento' => function ($q) {
+            $q->withTrashed();
+        }])->orderBy('eventos.created_at', 'desc')->get();
         return view('patrocinador.quitarPatrocinador', ['eventos' => $eventos]);
     }
 }

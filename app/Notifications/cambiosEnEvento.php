@@ -49,7 +49,7 @@ class cambiosEnEvento extends Notification
             ->line('Se realizaron cambios en el evento.')
             ->line('Detalles del cambio:')
             ->line($this->getCambiosDescripcion($cambios))
-            ->action('Ver detalles del evento', url('/eventos/' . $this->evento->id))
+            ->action('Ver detalles del evento', url('/eventos/' . $this->evento->nombre))
             ->line('Gracias por usar nuestra aplicación!');
     }
 

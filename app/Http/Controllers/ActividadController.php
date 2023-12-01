@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Models\Actividad;
@@ -8,17 +9,22 @@ use App\Models\Evento;
 
 class ActividadController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $actividades = Actividad::all();
         return $actividades;
     }
 
-    public function eventosConActividades(){
-        $eventos = Evento::where('estado', 0)->with('actividades')->get();
+    public function eventosConActividades()
+    {
+        $eventos = Evento::where('estado', 0)->with(['actividades', function ($q) {
+            $q->withTrashed();
+        }])->get();
         return view('eventos.', ['actividades' => $eventos]);
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $actividad = Actividad::find($id);
         return $actividad;
     }
@@ -34,8 +40,8 @@ class ActividadController extends Controller
             $actividad->id_evento = $request->evento_id;
             /**Antes de guardar debemos revisar si el nombre ya existe**/
             $nombreExistente = Actividad::where('id_evento', $actividad->id_evento)
-            ->where('nombre', $actividad->nombre)
-            ->first();
+                ->where('nombre', $actividad->nombre)
+                ->first();
             if ($nombreExistente) {
                 return response()->json(['mensaje' => 'La actividad ya existe', 'error' => true]);
             }
@@ -70,9 +76,9 @@ class ActividadController extends Controller
              * Para eso obtenemos el id del evento al que pertenece esta actividad
              **/
             $nombreExistente = Actividad::where('id_evento', $actividad->id_evento)
-            ->where('id','!=',$id)
-            ->where('nombre', $actividad->nombre)
-            ->first();
+                ->where('id', '!=', $id)
+                ->where('nombre', $actividad->nombre)
+                ->first();
             if ($nombreExistente) {
                 return response()->json(['mensaje' => 'La actividad ya existe', 'error' => true]);
             }
@@ -81,27 +87,32 @@ class ActividadController extends Controller
         } catch (QueryException $e) {
             return $e->getMessage();
         }
-    }    
+    }
 
     public function crearActividad($id)
     {
-        $evento = Evento::where('id',$id)->first();
+        $evento = Evento::where('id', $id)->first();
         return view('actividad.formCrearActividad', ['evento' => $evento]);
     }
-    
+
     public function vistaTablaActividades()
     {
-        $actividades =  Evento::where('estado', 0)->with('actividades')->get();
+        $actividades =  Evento::where('estado', 0)->with(['actividades', 'tipoEvento' => function($q) {
+            $q->withTrashed();
+        }])->get();
         return view('actividad.crearActividad', ['actividades' => $actividades]);
     }
 
     public function listarEventos()
     {
-        $eventos =  Evento::where('estado', 0)->with('actividades')->get();
+        $eventos =  Evento::where('estado', 0)->with(['actividades', 'tipoEvento' => function($q) {
+            $q->withTrashed();
+        }])->get();
         return view('actividad.eliminarActividad', ['eventos' => $eventos]);
     }
 
-    public function obtenerActividades($eventoId){
+    public function obtenerActividades($eventoId)
+    {
         $actividades = Actividad::where('id_evento', $eventoId)->get();
         return view('actividad.eliminarActividad', ['actividades' => $actividades]);
     }
@@ -116,13 +127,17 @@ class ActividadController extends Controller
         }
     }
 
-    public function listaEditar(){
-        $eventos =  Evento::where('estado', 0)->with('actividades')->get();
+    public function listaEditar()
+    {
+        $eventos =  Evento::where('estado', 0)->with(['actividades', 'tipoEvento' => function ($q){
+            $q->withTrashed();
+        }])->get();
         return view('actividad.listaEditarActividad', ['eventos' => $eventos]);
     }
-    public function editarActividad($id){
+    public function editarActividad($id)
+    {
         $actividad = Actividad::find($id);
         $evento = Evento::find($actividad->id_evento);
-        return view('actividad.editarActividad',['actividad'=>$actividad,'evento'=>$evento]);
+        return view('actividad.editarActividad', ['actividad' => $actividad, 'evento' => $evento]);
     }
 }

@@ -70,23 +70,24 @@ Route::group(['prefix' => 'afiche'], function () {
 });
 
 Route::group(['prefix' => 'sitio'], function () {
-    Route::get('', [SitioController::class, 'index'])->name('sitio.index');
+    Route::get('/', [SitioController::class, 'index'])->name('sitio.index');
     Route::get('{id}', [SitioController::class, 'show'])->name('sitio.show');
-    Route::post('', [SitioController::class, 'store'])->name('sitio.store');
+    Route::post('/', [SitioController::class, 'store'])->name('sitio.store');
     Route::post('{id}', [SitioController::class, 'update'])->name('sitio.update');
     Route::delete('{id}', [SitioController::class, 'destroy'])->name('sitio.destroy');
 });
 
 Route::group(['prefix' => 'tipo-actividad'], function () {
-    Route::get('', [TipoActividadController::class, 'index'])->name('tipo-actividad.index');
-    Route::post('', [TipoActividadController::class, 'store'])->name('tipo-actividad.store');
+    Route::get('/', [TipoActividadController::class, 'index'])->name('tipo-actividad.index');
+    Route::post('/', [TipoActividadController::class, 'store'])->name('tipo-actividad.store');
     Route::post('{id}', [TipoActividadController::class, 'update'])->name('tipo-actividad.update');
     Route::delete('{id}', [TipoActividadController::class, 'destroy'])->name('tipo-actividad.destroy');
 });
+
 Route::group(['prefix' => 'actividad'], function () {
-    Route::get('', [ActividadController::class, 'index'])->name('actividad.index');
+    Route::get('/', [ActividadController::class, 'index'])->name('actividad.index');
     Route::get('{id}', [ActividadController::class, 'show'])->name('actividad.show');
-    Route::post('', [ActividadController::class, 'store'])->name('actividad.store');
+    Route::post('/', [ActividadController::class, 'store'])->name('actividad.store');
     Route::post('{id}', [ActividadController::class, 'update'])->name('actividad.update');
     Route::delete('{id}', [ActividadController::class, 'destroy'])->name('actividad.destroy');
     Route::get('/obtener-actividad/{id}',[ActividadController::class,'obtenerActividades'])->name('actividad.obtener-actividad');

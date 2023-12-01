@@ -18,13 +18,17 @@ class SitioController extends Controller
 
     public function eventosConSitios()
     {
-        $eventos = Evento::where('estado', 0)->with('sitios')->get();
+        $eventos = Evento::where('estado', 0)->with(['sitios', 'tipoEvento' => function($q) {
+            $q->withTrashed();
+        }])->get();
         return view('sitiosInteres.subirSitio', ['eventos' => $eventos]);
     }
 
     public function eventosConSitiosQuitar()
     {
-        $eventos = Evento::where('estado', 0)->with('sitios')->get();
+        $eventos = Evento::where('estado', 0)->with(['sitios', 'tipoEvento' => function($q){
+            $q->withTrashed();
+        }])->get();
         return view('sitiosInteres.quitarSitio', ['eventos' => $eventos]);
     }
 
