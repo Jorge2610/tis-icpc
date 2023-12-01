@@ -116,6 +116,9 @@ class EventoController extends Controller
     protected function notificarCambios($evento, $atributosAntiguos)
     {
         $cambios = array_diff_assoc($evento->getOriginal(), $atributosAntiguos);
+        echo '<pre>';
+        print_r($cambios);
+        echo '</pre>';
         // if(!empty($cambios)) {
         //     $evento->inscritos->each(function ($usuario) use ($evento) {
         //         $usuario->notify(new CambiosEnEvento($evento));

@@ -28,61 +28,59 @@
                 </thead>
                 <tbody id="datosTabla">
                     @foreach ($tiposDeEventos as $tipoDeEvento)
-                        @if( $tipoDeEvento->eventos->count()==0)
-                            <tr>
-                                <td>{{ $tipoDeEvento->nombre }}</td>
-                                <td class="container-color">
-                                    <div class="color-cell" style="background-color:{{ $tipoDeEvento->color }};"></div>
-                                </td>
-                                <td class="text-center">Yo</td>
-                                <td class="text-center">{{ date('d-m-Y', strtotime($tipoDeEvento->created_at)) }}</td>
-                                <td class="text-center">{{ $tipoDeEvento->eventos->count() }}</td>
-                                <td class="text-center">
-                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#modalEliminarTipoEvento{{ $tipoDeEvento->id }}">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                    @component('components.modal')
-                                        @slot('modalId', 'modalEliminarTipoEvento' . $tipoDeEvento->id)
-                                        @slot('modalTitle', 'Eliminar tipo de evento')
-                                        @slot('modalContent')
-                                            ¿Está seguro de eliminar este tipo de evento?
-                                        @endslot
-                                        @slot('modalButton')
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                            <button type="button" class="btn btn-danger"
-                                                onclick="eliminarTipoEvento({{ $tipoDeEvento->id }})">Sí</button>
-                                        @endslot
-                                    @endcomponent
-                                    @component('components.modal')
-                                        @slot('modalId', 'modalExito')
-                                        @slot('modalTitle', 'Éxito')
-                                        @slot('modalContent')
-                                            <div id="modalMensajeExito">
-                                                Eliminado satisfactoriamente!
-                                            </div>
-                                        @endslot
-                                        @slot('modalButton')
-                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
-                                        @endslot
-                                    @endcomponent
+                        <tr>
+                            <td>{{ $tipoDeEvento->nombre }}</td>
+                            <td class="container-color">
+                                <div class="color-cell" style="background-color:{{ $tipoDeEvento->color }};"></div>
+                            </td>
+                            <td class="text-center">Yo</td>
+                            <td class="text-center">{{ date('d-m-Y', strtotime($tipoDeEvento->created_at)) }}</td>
+                            <td class="text-center">{{ $tipoDeEvento->eventos->count() }}</td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#modalEliminarTipoEvento{{ $tipoDeEvento->id }}">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                                @component('components.modal')
+                                    @slot('modalId', 'modalEliminarTipoEvento' . $tipoDeEvento->id)
+                                    @slot('modalTitle', 'Eliminar tipo de evento')
+                                    @slot('modalContent')
+                                        ¿Está seguro de eliminar este tipo de evento?
+                                    @endslot
+                                    @slot('modalButton')
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                        <button type="button" class="btn btn-danger"
+                                            onclick="eliminarTipoEvento({{ $tipoDeEvento->id }})">Sí</button>
+                                    @endslot
+                                @endcomponent
+                                @component('components.modal')
+                                    @slot('modalId', 'modalExito')
+                                    @slot('modalTitle', 'Éxito')
+                                    @slot('modalContent')
+                                        <div id="modalMensajeExito">
+                                            Eliminado satisfactoriamente!
+                                        </div>
+                                    @endslot
+                                    @slot('modalButton')
+                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+                                    @endslot
+                                @endcomponent
 
-                                    <!-- Modal de Error -->
-                                    @component('components.modal')
-                                        @slot('modalId', 'modalError')
-                                        @slot('modalTitle', 'Error')
-                                        @slot('modalContent')
-                                            <div id="modalMensajeError">El tipo de evento que quieres eliminar tiene
-                                                eventos asociados a el!
-                                            </div>
-                                        @endslot
-                                        @slot('modalButton')
-                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
-                                        @endslot
-                                    @endcomponent
-                                </td>
-                            </tr>
-                        @endif
+                                <!-- Modal de Error -->
+                                @component('components.modal')
+                                    @slot('modalId', 'modalError')
+                                    @slot('modalTitle', 'Error')
+                                    @slot('modalContent')
+                                        <div id="modalMensajeError">El tipo de evento que quieres eliminar tiene
+                                            eventos asociados a el!
+                                        </div>
+                                    @endslot
+                                    @slot('modalButton')
+                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+                                    @endslot
+                                @endcomponent
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>

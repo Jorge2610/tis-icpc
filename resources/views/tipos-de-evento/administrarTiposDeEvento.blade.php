@@ -28,7 +28,7 @@
                 </thead>
                 <tbody id="datosTabla">
                     @foreach ($tiposDeEventos as $tipoDeEvento)
-                        @if( $tipoDeEvento->eventos->count() == 0 )
+                        
                             <tr>
                                 <td>{{ $tipoDeEvento->nombre }}</td>
                                 <td class="container-color">
@@ -44,7 +44,7 @@
                                     </button>
                                 </td>
                             </tr>
-                        @endif
+                       
                     @endforeach
                 </tbody>
             </table>
