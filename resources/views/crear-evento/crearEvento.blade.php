@@ -155,25 +155,14 @@
                     </div>
                 </div>
 
+               
                 <div class="row mt-4">
-
-                    <div class="col-md-6">
+                    <div class="col-md-6 mt-2">
                         <input name="evento_equipos" type="checkbox"
                             class="form-check-input border-dark fecha-editar" onchange="datoCambiado()"
                             id="equipoCheck" @if ($datos['evento_equipos']) checked @endif>
                         <label class="form-check-label " for="equipoCheck">Por equipos</label>
                     </div>
-
-                    <div class="col-md-6">
-                        <input name="requiere_registro" type="checkbox"
-                            class="form-check-input border-dark fecha-editar" onchange="datoCambiado()"
-                            id="registroCheck" @if ($datos['requiere_registro']) checked @endif>
-                        <label class="form-check-label" for="registroCheck">Requiere registro</label>
-                    </div>
-
-                </div>
-
-                <div class="row mt-4">
 
                     <div class="col-md-6 mt-2">
                         <input name="evento_pago" type="checkbox" class="form-check-input border-dark fecha-editar"
@@ -181,6 +170,24 @@
                             data-id="{{ $datos['precio_inscripcion'] }}"
                             @if ($datos['precio_inscripcion']) checked @endif>
                         <label class="form-check-label" for="eventoPagoCheck">Evento de pago</label>
+                    </div>
+                    
+                </div>
+
+                <div class="row mt-4">
+
+                    <div class="col-md-6">
+                        <div class="row" id="numero-integrantes" style="display:none;">
+                            <div class="col-md-4">
+                                <label class="col-form-label" for="costoEvento">Nro.</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input name="miembros-equipo" type="number" class="form-control fecha-editar"
+                                            min="2"  id="miembros-equipo" step="1" onchange="setCostoInvalidoFeedback()"
+                                            value="{{ isset($datos['precio_inscripcion']) ? $datos['precio_inscripcion'] : '0.0' }}">
+                                <div id="costoInvalido" class="invalid-feedback"></div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-md-6">
@@ -200,6 +207,14 @@
                         </div>
                     </div>
 
+                </div>
+                 <div class="row mt-4">
+                    <div class="col-md-6">
+                        <input name="requiere_registro" type="checkbox"
+                            class="form-check-input border-dark fecha-editar" onchange="datoCambiado()"
+                            id="registroCheck" @if ($datos['requiere_registro']) checked @endif>
+                        <label class="form-check-label" for="registroCheck">Requiere registro</label>
+                    </div>
                 </div>
 
             </div>
