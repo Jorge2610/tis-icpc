@@ -89,22 +89,41 @@
                             @endslot
                         @endcomponent
 
-                        @component('components.modal')
-                            @slot('modalId', 'modalActualizarPatrocinador')
-                            @slot('modalTitle', 'Actualizar datos del patrocinador')
-                            @slot('modalContent')
-                                <p>
-                                    ¿Desea actualizar los datos del patrocinador?
-                                </p>
-                            @endslot
-                            @slot('modalButton')
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                                    onclick="actualizarDatosPatrocinador(false)">
-                                    No</button>
-                                <button type="button" class="btn btn-danger"
-                                    onclick="actualizarDatosPatrocinador(true)">Sí</button>
-                            @endslot
-                        @endcomponent
+                        <div class="modal fade" id="modalActualizarPatrocinador" tabindex="-1"
+                            aria-labelledby="modalAnularLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">
+                                            Actualizar datos del patrocinador
+                                        </h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row container px-5">
+                                            Datos del patrocinador restaurado:
+                                            <div class="col-md-7 mt-3" id="datosPatrocinadorRestaurado">
+
+                                            </div>
+                                            <div class="d-flex align-items-center col-md-5 mt-3">
+                                                <img class="img-fluid rounded object-fit-scale"
+                                                    src="/image/aficheDefecto.png" alt="Imagen patrocinador"
+                                                    style="max-height: 100%" id="imagenPatrocinadorRestaurado">
+                                            </div>
+                                            <div class="col-md-12 mt-2 text-start">
+                                                ¿Desea actualizar los datos del patrocinador?
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer d-flex justify-content-center">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                            onclick="actualizarDatosPatrocinador(false)">
+                                            No</button>
+                                        <button type="button" class="btn btn-danger"
+                                            onclick="actualizarDatosPatrocinador(true)">Sí</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

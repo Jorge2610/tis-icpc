@@ -131,7 +131,23 @@ const restaurarPatrocinador = async () => {
         return response.data;
     });
     restoreResponseData = res;
+    await getDatosPatrocinadorRestaurado();
     $('#modalActualizarPatrocinador').modal('show');
+};
+
+const getDatosPatrocinadorRestaurado = async () => {
+    let patrocinador = await axios.get("/api/patrocinador/show/" + idPatrocinador).then((response) => {
+        return response.data;
+    });
+    let img = document.getElementById("imagenPatrocinadorRestaurado");
+    img.src = patrocinador.ruta_imagen;
+    img.alt = patrocinador.nombre;
+    let datosDiv = document.getElementById("datosPatrocinadorRestaurado");
+    let enlace = patrocinador.enlace_web === null ? "" : patrocinador.enlace_web;
+    datosDiv.innerHTML = `<p>Nombre:</p>
+                          <p class="text-truncate" title="${patrocinador.nombre}"> ${patrocinador.nombre}</p>
+                          <p>Enlace:</p>
+                          <p class="text-truncate" title="${enlace}"><a href="${enlace}" target="_blank"> ${enlace}</a></p>`;
 };
 
 const actualizarDatosPatrocinador = async (actualizar) => {
