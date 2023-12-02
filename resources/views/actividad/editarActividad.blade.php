@@ -3,8 +3,8 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8 " style="min-height: 500px">
-                <h2 class="text-center mb-5 ">Editar actividad</h2>
+            <div class="col-md-7 " style="min-height: 500px">
+                <h2 class="text-center mb-3 ">Editar actividad</h2>
                 <form id="formularioActividad" class="needs-validation" novalidate>
                     @csrf
                     <input type="hidden" name="id" value="{{ $actividad->id }}">
@@ -71,14 +71,43 @@
                         <div class="row">
                             <div class="col-md-12 mt-4">
                                 <label for="detalleActividad" class="form-label">Descripción de la actividad</label>
-                                <textarea name="descripcion" class="form-control" id="detalleActividad" rows="5" style="resize: none;"
+                                <textarea name="descripcion" class="form-control" id="detalleActividad" rows="3" style="resize: none;"
                                     placeholder="Ingrese una descripción..." maxlength="1000">{{ $actividad->descripcion }}</textarea>
                             </div>
                         </div>
 
+                        <div class="form-check form-switch mt-4 d-flex justify-content-center">
+                            <input class="form-check-input" type="checkbox" role="switch" id="switchNotificacion" checked>
+                            <label class="form-check-label" for="switchNotificacion">¿Desea enviar una notificación sobre los cambios a los usuarios?</label>
+                        </div>
+
                         <div class="text-center my-4">
-                            <button type="reset" class="btn btn-secondary mx-5" onClick="quitarValidacion()">Cancelar</button>
-                            <button id="confirmarBoton" type="submit" class="btn btn-primary mx-5">Editar</button>
+                            <button type="button" class="btn btn-secondary mx-5" data-bs-toggle="modal" data-bs-target="#modalCancelar">Cancelar</button>
+                            @component('components.modal')
+                                    @slot('modalId', 'modalCancelar')
+                                    @slot('modalTitle', 'Confirmación')
+                                    @slot('modalContent')
+                                        ¿Está seguro de cancelar la edición de la actividad?
+                                    @endslot
+                                    @slot('modalButton')
+                                        <button type="button" class="btn btn-secondary w-25 mx-8"
+                                            data-bs-dismiss="modal">No</button>
+                                        <button type="reset" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal"
+                                            onClick="quitarValidacion()">Sí</button>
+                                    @endslot
+                                @endcomponent
+                            <button id="confirmarBoton" type="button" class="btn btn-primary mx-5" data-bs-toggle="modal" data-bs-target="#modalConfirmacion">Editar</button>
+                            @component('components.modal')
+                                    @slot('modalId', 'modalConfirmacion')
+                                    @slot('modalTitle', 'Confirmación')
+                                    @slot('modalContent')
+                                        ¿Está seguro de editar la actividad?                 
+                                    @endslot
+                                    @slot('modalButton')
+                                        <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>
+                                        <button type="submit" class="btn btn-primary w-25 mx-8">Sí</button>
+                                    @endslot
+                                @endcomponent
                         </div>
                 </form>
             </div>

@@ -3,8 +3,8 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <h2 class="text-center mb-5 ">Crear actividad</h2>
+            <div class="col-md-7">
+                <h2 class="text-center mb-3">Crear actividad</h2>
                 <form id="formularioActividad" class="needs-validation" novalidate>
                     @csrf
                     <input type="hidden" name="evento_id" value="{{$evento->id}}">
@@ -49,7 +49,7 @@
                             <div class="row mt-3 justify-content-between">
                                 <div class="col-md-4">Fin</div>
                                 <div class="col-md-7 p-0">
-                                    <input name="fin_evento" id="fechaFin" class="form-control" type="datetime-local" min="{{max($evento->inicio_evento, date('Y-m-d\TH:i'))}}" max="{{$evento->fin_evento}}" required />
+                                    <input name="fin_evento" id="fechaFin" class="form-control" type="datetime-local" min="{{max($evento->inicio_evento, date('Y-m-d\TH:i'))}}" max="{{$evento->fin_evento}}" disabled required />
                                     <div id="mensajeFechaFin" class="invalid-feedback">
                                         <!--Aqui entran los mensajes de validacion de fecha-->
                                     </div>
@@ -61,18 +61,43 @@
                         <div class="row">
                             <div class="col-md-12 mt-4">
                                 <label for="detalleActividad" class="form-label">Descripción de la actividad</label>
-                                <textarea name="descripcion" class="form-control" id="detalleActividad" rows="5" style="resize: none;"
+                                <textarea name="descripcion" class="form-control" id="detalleActividad" rows="3" style="resize: none;"
                                     placeholder="Ingrese una descripción..." maxlength="1000"></textarea>
                             </div>
                         </div>
                         
                         <div class="text-center my-4">
-                            <button type="reset" class="btn btn-secondary mx-5" onClick="quitarValidacion()">Cancelar</button>
-                            <button id="confirmarBoton" type="submit" class="btn btn-primary mx-5">Crear</button>
+                            <button type="button" class="btn btn-secondary mx-5" data-bs-toggle="modal" data-bs-target="#modalCancelar">Cancelar</button>
+                                @component('components.modal')
+                                    @slot('modalId', 'modalCancelar')
+                                    @slot('modalTitle', 'Confirmación')
+                                    @slot('modalContent')
+                                        ¿Está seguro de cancelar la creación de la actividad?
+                                    @endslot
+                                    @slot('modalButton')
+                                        <button type="button" class="btn btn-secondary w-25 mx-8"
+                                            data-bs-dismiss="modal">No</button>
+                                        <button type="reset" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal"
+                                            onClick="quitarValidacion()">Sí</button>
+                                    @endslot
+                                @endcomponent
+                            <button type="button" id="confirmarBoton" class="btn btn-primary mx-5" data-bs-toggle="modal" data-bs-target="#modalConfirmacion">Crear</button>
+                                @component('components.modal')
+                                    @slot('modalId', 'modalConfirmacion')
+                                    @slot('modalTitle', 'Confirmación')
+                                    @slot('modalContent')
+                                        ¿Está seguro de crear la actividad?                                      
+                                    @endslot
+                                    @slot('modalButton')
+                                        <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>
+                                        <button type="submit" class="btn btn-primary w-25 mx-8">Sí</button>
+                                    @endslot
+                                @endcomponent
                         </div>
                 </form>
             </div>
         </div>
     </div>
     <script src="{{ asset('js/Actividad/crearActividad.js') }}" defer></script>
+    <script src="{{ asset('js/Actividad/validarActividad.js') }}" defer></script>
 @endsection

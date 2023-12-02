@@ -50,9 +50,9 @@ form.addEventListener("submit", (event) => {
                 Element.disabled=false;            
         });
         const formData = new FormData(form);
-        editarActividad(formData);
-        
+        editarActividad(formData); 
     }
+    $("#modalConfirmacion").modal("hide");
 });
 
 const validar = () => {
