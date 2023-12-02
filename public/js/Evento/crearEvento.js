@@ -12,7 +12,9 @@ const checkTodasRango = document.getElementById("input-grado-Todas");
 const nombreEvento = document.getElementById("nombreDelEvento");
 const mensajeNombre = document.getElementById("mensajeNombre");
 const checkEquipo = document.getElementById("equipoCheck");
+const inputEquipo = document.getElementById("miembros-equipo");
 
+let boolEquipo=true;
 let boolFecha = true;
 let boolCosto = true;
 let boolMinEdad = true;
