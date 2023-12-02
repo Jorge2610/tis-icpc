@@ -80,8 +80,7 @@ costo.addEventListener("keyup", () => {
 });
 
 costo.addEventListener("change", () => {
-    let numero = costo.value.toString();
-    var decimales = (numero.split('.')[1] || []).length;
+
 
     if (inputCosto.checked){
         if (parseFloat(costo.value)>=
@@ -250,6 +249,47 @@ checkTodasRango.addEventListener("change", () => {
     });
 });
 
+checkEquipo.addEventListener("change",()=>{
+    if (boolEquipo) {
+        boolEquipo = false;
+        inputEquipo.dispatchEvent(new Event("change"));
+    } else {
+        boolEquipo = true;
+    }
+    if (inputEquipo.classList.contains("is-invalid")) {
+        isValid(checkEquipo, false)
+    } else {
+        isValid(checkEquipo, true)
+    }
+    if (!checkEquipo.checked) {
+        inputEquipo.classList.remove("is-valid");
+        inputEquipo.classList.remove("is-invalid");
+    }
+});
+
+inputEquipo.addEventListener("change",()=>{
+    console.log(inputEquipo.value);
+    if (checkEquipo.checked){
+        if ((parseInt(inputEquipo.value)>=
+            parseInt(inputEquipo.min) && parseInt(inputEquipo.value)<= parseFloat(inputEquipo.max)
+            )) {
+            isValid(inputEquipo, true);
+        }else{
+            isValid(inputEquipo, false);
+        }
+    } 
+    else {
+        isValid(inputEquipo, true);
+    }
+    if (boolEquipo) {
+        boolEquipo = false;
+        checkEquipo.dispatchEvent(new Event("change"));
+
+    } else {
+        boolEquipo = true;
+    }
+});
+
 document.querySelectorAll(".grado-requerido").forEach((Element) => {
     Element.addEventListener("change", () => {
         let bandera = true;
@@ -274,3 +314,14 @@ const isValid = (componente, bandera) => {
         componente.classList.add("is-invalid");
     }
 }
+
+document.querySelectorAll(".entero").forEach((Element)=>{
+    Element.addEventListener("keyup",()=>{
+        console.log(Element.value.includes("."));
+        if (Element.value.includes(".")) {
+            let numero = Element.value.split('.')[0];
+            console.log(numero);
+            Element.value = numero;
+        }
+    });
+})
