@@ -92,25 +92,40 @@
                         <div class="modal fade" id="modalActualizarPatrocinador" tabindex="-1"
                             aria-labelledby="modalAnularLabel" aria-hidden="true">
                             <div class="modal-dialog">
-                                <div class="modal-content">
+                                <div class="modal-content" style="width: 600px">
                                     <div class="modal-header">
                                         <h5 class="modal-title">
-                                            Actualizar datos del patrocinador
+                                            ¿Desea actualizar los datos del patrocinador?
                                         </h5>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="row container px-5">
-                                            Datos del patrocinador restaurado:
-                                            <div class="col-md-7 mt-3" id="datosPatrocinadorRestaurado">
-
+                                        <div class="row">
+                                            <div class="col-md-12 text-center">
+                                                <h5 id="nombrePatrocinador"></h5>
                                             </div>
-                                            <div class="d-flex align-items-center col-md-5 mt-3">
-                                                <img class="img-fluid rounded object-fit-scale"
-                                                    src="/image/aficheDefecto.png" alt="Imagen patrocinador"
-                                                    style="max-height: 100%" id="imagenPatrocinadorRestaurado">
+                                        </div>
+                                        <div class="row g-4">
+                                            <div class="col-md-6 border-end border-2">
+                                                <div class="col-md-12 text-center">
+                                                    Anterior
+                                                </div>
+                                                <div class="row justify-content-center mt-2" style="height: 150px">
+                                                    <img src="" class="img-fluid rounded object-fit-scale"
+                                                        alt="logoPatrocinador" style="max-height: 100%; width: auto"
+                                                        id="imagenPatrocinadorRestaurada">
+                                                </div>
+                                                <h6 class="mt-2" id="datosPatrocinadorRestaurado"></h6>
                                             </div>
-                                            <div class="col-md-12 mt-2 text-start">
-                                                ¿Desea actualizar los datos del patrocinador?
+                                            <div class="col-md-6">
+                                                <div class="col-md-12 text-center">
+                                                    Nuevo
+                                                </div>
+                                                <div class="row justify-content-center mt-2" style="height: 150px">
+                                                    <img src="" class="img-fluid rounded object-fit-scale"
+                                                        alt="logoPatrocinador" style="max-height: 100%; width: auto"
+                                                        id="nuevaImagenPatrocinador">
+                                                </div>
+                                                <h6 class="mt-2" id="nuevosDatosPatrocinador"></h6>
                                             </div>
                                         </div>
                                     </div>
