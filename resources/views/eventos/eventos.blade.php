@@ -36,7 +36,7 @@
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </span>
                     <input class="form-control" type="text" placeholder="Buscar evento..." onkeyup="buscarEvento()"
-                        id="buscadorDeEvento" style="max-width: 475px;">
+                        id="buscadorDeEvento" style="max-width: 500px;">
                 </div>
             </div>           
         </div>

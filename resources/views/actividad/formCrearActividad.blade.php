@@ -3,8 +3,8 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <h2 class="text-center mb-5 ">Crear actividad</h2>
+            <div class="col-md-7">
+                <h2 class="text-center mb-3">Crear actividad</h2>
                 <form id="formularioActividad" class="needs-validation" novalidate>
                     @csrf
                     <input type="hidden" name="evento_id" value="{{$evento->id}}">
@@ -61,7 +61,7 @@
                         <div class="row">
                             <div class="col-md-12 mt-4">
                                 <label for="detalleActividad" class="form-label">Descripción de la actividad</label>
-                                <textarea name="descripcion" class="form-control" id="detalleActividad" rows="5" style="resize: none;"
+                                <textarea name="descripcion" class="form-control" id="detalleActividad" rows="3" style="resize: none;"
                                     placeholder="Ingrese una descripción..." maxlength="1000"></textarea>
                             </div>
                         </div>
@@ -86,19 +86,7 @@
                                     @slot('modalId', 'modalConfirmacion')
                                     @slot('modalTitle', 'Confirmación')
                                     @slot('modalContent')
-                                        <div class="container">
-                                            <div class="row">
-                                                <div>
-                                                    ¿Está seguro de crear la actividad?
-                                                </div>
-                                            </div>
-                                            <div class="row mt-2">
-                                                <div>
-                                                    <input name="actividad_notificacion" type="checkbox" class="form-check-input border-dark" id="notificacionCheck">
-                                                    <label class="form-check-label " for="notificacionCheck">Enviar notificaciones a usuarios inscritos al evento</label>
-                                                </div>
-                                            </div> 
-                                        </div>                                       
+                                        ¿Está seguro de crear la actividad?                                      
                                     @endslot
                                     @slot('modalButton')
                                         <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>

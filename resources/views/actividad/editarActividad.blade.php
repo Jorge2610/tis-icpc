@@ -3,8 +3,8 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8 " style="min-height: 500px">
-                <h2 class="text-center mb-5 ">Editar actividad</h2>
+            <div class="col-md-7 " style="min-height: 500px">
+                <h2 class="text-center mb-3 ">Editar actividad</h2>
                 <form id="formularioActividad" class="needs-validation" novalidate>
                     @csrf
                     <input type="hidden" name="id" value="{{ $actividad->id }}">
@@ -71,9 +71,14 @@
                         <div class="row">
                             <div class="col-md-12 mt-4">
                                 <label for="detalleActividad" class="form-label">Descripción de la actividad</label>
-                                <textarea name="descripcion" class="form-control" id="detalleActividad" rows="5" style="resize: none;"
+                                <textarea name="descripcion" class="form-control" id="detalleActividad" rows="3" style="resize: none;"
                                     placeholder="Ingrese una descripción..." maxlength="1000">{{ $actividad->descripcion }}</textarea>
                             </div>
+                        </div>
+
+                        <div class="form-check form-switch mt-4 d-flex justify-content-center">
+                            <input class="form-check-input" type="checkbox" role="switch" id="switchNotificacion" checked>
+                            <label class="form-check-label" for="switchNotificacion">¿Desea enviar una notificación sobre los cambios a los usuarios?</label>
                         </div>
 
                         <div class="text-center my-4">
@@ -96,19 +101,7 @@
                                     @slot('modalId', 'modalConfirmacion')
                                     @slot('modalTitle', 'Confirmación')
                                     @slot('modalContent')
-                                        <div class="container">
-                                            <div class="row">
-                                                <div>
-                                                    ¿Está seguro de editar la actividad?
-                                                </div>
-                                            </div>
-                                            <div class="row mt-2">
-                                                <div>
-                                                    <input name="actividad_notificacion" type="checkbox" class="form-check-input border-dark" id="notificacionCheck">
-                                                    <label class="form-check-label " for="notificacionCheck">Enviar notificaciones a usuarios inscritos al evento</label>
-                                                </div>
-                                            </div> 
-                                        </div>                                       
+                                        ¿Está seguro de editar la actividad?                 
                                     @endslot
                                     @slot('modalButton')
                                         <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>
