@@ -3,15 +3,42 @@
 @section('content')
     <div class="container">
         <div class="row mb-5 d-flex justify-content-center">
-            <div class="col-offset-6 col-lg-6 col-md-12 col-sm-12">
-                <div class="input-group">
+            <div class="col-md-auto">
+                <label for="select_ver" class="form-label">Ver</label>
+                <select id="select_ver" class="form-select" aria-label="ver" onchange="filtrarVer()">
+                    <option value="1" selected>Todos</option>
+                    <option value="2">En curso</option>
+                    <option value="3">Futuros</option>
+                    <option value="4">Pasados</option>
+                </select>
+            </div>
+
+            <div class="col-md-auto">
+                <label for="select_tipo_evento" class="form-label">Tipo de evento</label>
+                <select id="select_tipo_evento" class="form-select" aria-label="tipos" onchange="filtrarTipo()">
+                    <option selected>Todos</option>
+                </select>
+            </div>
+
+            <div class="col-md-auto">
+                <label for="select_por" class="form-label">Ordenar por</label>
+                <select id="select_por" class="form-select" aria-label="" onchange="mostrarEventos()">
+                    <option value="1">A-Z</option>
+                    <option value="2">Z-A</option>
+                    <option value="3" selected>Más recientes</option>
+                    <option value="4">Más antiguos</option>
+                </select>
+            </div>
+
+            <div class="col-md" style="margin-left:100px;">
+                <div class="input-group" style="margin-top: 33px;">
                     <span class="input-group-text">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </span>
                     <input class="form-control" type="text" placeholder="Buscar evento..." onkeyup="buscarEvento()"
-                        id="buscadorDeEvento">
+                        id="buscadorDeEvento" style="max-width: 475px;">
                 </div>
-            </div>
+            </div>           
         </div>
 
         <div class="col-xl-12 col-lg-12" style="width: 565px;">

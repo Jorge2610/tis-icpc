@@ -1,12 +1,6 @@
 const form = document.getElementById("formularioActividad");
 const inputNombre = document.getElementById('nombreActividad')
 const mensajeNombre = document.getElementById('mensajeNombre')
-const fechaEventoInicio = document.getElementById("fechaEventoInicio");
-const fechaEventoFin = document.getElementById("fechaEventoFin");
-const fechaInicio = document.getElementById("fechaInicio");
-const fechaFin = document.getElementById("fechaFin");
-const mensajeFechaInicio = document.getElementById("mensajeFechaInicio");
-const mensajeFechaFin = document.getElementById("mensajeFechaFin");
 let nombreAnterior = ''
 
 /**PETICIONES a AXIOS**/
@@ -61,90 +55,9 @@ const validar = () => {
     return form.querySelector(".is-invalid") === null;
 };
 
-
-//Agregar validación a los inputs
-form.querySelectorAll(".form-control, .form-select").forEach((Element) => {
-    Element.addEventListener("change", () => {
-        if (Element.hasAttribute("required") && Element.value === "") {
-            Element.classList.remove("is-valid");
-            Element.classList.add("is-invalid");
-        } else {
-            Element.classList.remove("is-invalid");
-            Element.classList.add("is-valid");
-        }
-    });
-});
-
 /**Validacion para el input nombre**/
 inputNombre.addEventListener("input", validarNombreRepetido);
 inputNombre.addEventListener("change", validarNombreRepetido);
-
-/**Validaciones para fecha INICIO**/
-fechaInicio.addEventListener("change", () => {
-    const fechaInicioSeleccionada = new Date(fechaInicio.value);
-    const fechaMin = new Date(fechaInicio.min);
-    const fechaMax = new Date(fechaInicio.max);
-
-    // Verificar si la fecha está dentro del rango permitido
-    if ( fechaInicioSeleccionada < fechaMin) {
-        fechaInicio.classList.add("is-invalid");
-        fechaInicio.classList.remove("is-valid");
-        mensajeFechaInicio.innerHTML = "Rango de fechas no válido.";
-    } else if(fechaInicioSeleccionada > fechaMax){
-        fechaInicio.classList.add("is-invalid");
-        fechaInicio.classList.remove("is-valid");
-        mensajeFechaInicio.innerHTML = "Rango de fechas no válido.";
-    }else if(fechaInicio.value == ""){
-        fechaInicio.classList.add("is-invalid");
-        fechaInicio.classList.remove("is-valid");
-        mensajeFechaInicio.innerHTML = "Seleccione una fecha y hora.";
-    }else if(fechaInicio.value > fechaFin.value && fechaFin.value !== ''){
-        fechaInicio.classList.add("is-invalid");
-        fechaInicio.classList.remove("is-valid");
-        mensajeFechaInicio.innerHTML = "Rango de fechas no válido.";
-    }else {
-        //Quitamos todos los mensajes y validamos
-        mensajeFechaInicio.innerHTML = "";
-        fechaInicio.classList.remove("is-invalid");
-        fechaInicio.classList.add("is-valid");
-        //Ponemos como valor mínimo la fecha inicio de la actividad
-        fechaFin.min = fechaInicio.value;
-    }
-    fechaFin.dispatchEvent(new Event("change"));
-});
-
-/**Validaciones para fecha FIN**/
-fechaFin.addEventListener("change", () => {
-    // Obtener las fechas como objetos Date
-    const fechaFinSeleccionada = new Date(fechaFin.value);
-    const fechaMin = new Date(fechaFin.min);
-    const fechaMax = new Date(fechaFin.max);
-
-    // Verificar si la fecha está dentro del rango permitido
-    if (fechaFinSeleccionada < fechaMin) {
-        fechaFin.classList.add("is-invalid");
-        fechaFin.classList.remove("is-valid");
-        mensajeFechaFin.innerHTML = "Rango de fechas no válido.";
-    } else if(fechaFinSeleccionada > fechaMax){
-        fechaFin.classList.add("is-invalid");
-        fechaFin.classList.remove("is-valid");
-        mensajeFechaFin.innerHTML = "Rango de fechas no válido.";
-    }else if(fechaFin.value == ""){
-        fechaFin.classList.add("is-invalid");
-        fechaFin.classList.remove("is-valid");
-        mensajeFechaFin.innerHTML = "Seleccione una fecha y hora.";
-    }else if(fechaFin.value < fechaInicio.value && fechaInicio.value !== ''){
-        fechaFin.classList.add("is-invalid");
-        fechaFin.classList.remove("is-valid");
-        mensajeFechaFin.innerHTML = "Rango de fechas no válido.";
-    }else {
-        //Quitamos todos los mensajes y validamos
-        mensajeFechaFin.innerHTML = "";
-        fechaFin.classList.remove("is-invalid");
-        fechaFin.classList.add("is-valid");
-    }
-    fechaInicio.dispatchEvent(new Event("change"));
-});
 
 function validarNombreRepetido() {
     if(nombreAnterior === ''){
