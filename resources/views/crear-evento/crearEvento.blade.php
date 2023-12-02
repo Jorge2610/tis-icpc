@@ -183,9 +183,9 @@
                             </div>
                             <div class="col-md-8">
                                 <input name="cantidad_equipo" type="number" class="form-control fecha-editar entero" max="50"
-                                            min="2"  id="miembros-equipo" step="1" onchange="setCostoInvalidoFeedback()"
+                                            min="2"  id="miembros-equipo" step="1" 
                                             value="{{ isset($datos['precio_inscripcion']) ? $datos['precio_inscripcion'] : '0.0' }}">
-                                <div id="costoInvalido" class="invalid-feedback"></div>
+                                <div id="equipoInvalido" class="invalid-feedback"></div>
                             </div>
                         </div>
                     </div>
@@ -201,7 +201,7 @@
                                     <input name="precio_inscripcion" type="number" class="form-control fecha-editar"
                                         min="1" max="5000" id="costoEvento" step="0.5" onchange="setCostoInvalidoFeedback()"
                                         value="{{ isset($datos['precio_inscripcion']) ? $datos['precio_inscripcion'] : '0.0' }}">
-                                    <div id="costoInvalido" class="invalid-feedback"></div>
+                                    <div id="costoInvalido" class="invalid-feedback">chals e </div>
                                 </div>
                             </div>
                         </div>
