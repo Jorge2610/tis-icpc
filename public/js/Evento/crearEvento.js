@@ -55,6 +55,9 @@ const prepararFormData = () => {
     if (!inputCosto.checked) {
         formData.set("precio_inscripcion", "");
     }
+    if(!checkEquipo.checked){
+        formData.set("cantidad_equipo","");
+    }
     return formData;
 };
 

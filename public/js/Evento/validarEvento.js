@@ -226,14 +226,18 @@ inputCosto.addEventListener("change", () => {
 });
 
 const setCostoInvalidoFeedback = () => {
-    let inputCosto = document.getElementById("costoEvento");
     let invalidFeedback = document.getElementById("costoInvalido");
-    let value = inputCosto.value;
+    let value = costo.value;
     value = parseFloat(value);
-    if (value != NaN) {
+    console.log(value);
+    if (!isNaN(value)) {
+        console.log("holas");
         invalidFeedback.innerText =
-            value < inputCosto.min ? "Monto mínimo " + inputCosto.min + " Bs." :
-                value > inputCosto.max ? "Monto máximo " + inputCosto.max + " Bs.": "";
+            value < parseFloat(costo.min) ? "Monto mínimo " + costo.min + " Bs." :
+                value > parseFloat(costo.max) ? "Monto máximo " + costo.max + " Bs.": "";
+    }
+    else{
+        invalidFeedback.innerText="El costo no puede ser vacío."
     }
 }
 
@@ -262,13 +266,12 @@ checkEquipo.addEventListener("change",()=>{
         isValid(checkEquipo, true)
     }
     if (!checkEquipo.checked) {
-        inputEquipo.classList.remove("is-valid");
-        inputEquipo.classList.remove("is-invalid");
+        checkEquipo.classList.remove("is-valid");
+        checkEquipo.classList.remove("is-invalid");
     }
 });
 
 inputEquipo.addEventListener("change",()=>{
-    console.log(inputEquipo.value);
     if (checkEquipo.checked){
         if ((parseInt(inputEquipo.value)>=
             parseInt(inputEquipo.min) && parseInt(inputEquipo.value)<= parseFloat(inputEquipo.max)
@@ -287,6 +290,17 @@ inputEquipo.addEventListener("change",()=>{
 
     } else {
         boolEquipo = true;
+    }
+    let invalidFeedback = document.getElementById("equipoInvalido");
+    let value = inputEquipo.value;
+    value = parseFloat(value);
+    if (!isNaN(value)) {
+        invalidFeedback.innerText =
+            value < parseFloat(inputEquipo.min) ? "Cantidad mínima " + inputEquipo.min  :
+                value > parseFloat(inputEquipo.max) ? "Cantidad máxima " + inputEquipo.max : "";
+    }
+    else{
+        invalidFeedback.innerText="La cantidad no puede ser vacío."
     }
 });
 
