@@ -18,7 +18,7 @@ class TipoEventoController extends Controller
         $tipo_eventos = TipoEvento::all();
         return $tipo_eventos;
     }
-
+    
     public function store(Request $request)
     {
         try {
@@ -51,14 +51,14 @@ class TipoEventoController extends Controller
             $tipo_evento->descripcion = $request->descripcion;
             $tipo_evento->color = $request->color;
             $tipo_evento->save();
-            return response()->json(['mensaje' => 'Actualizado exitosamente', 'error' => false]);
+            return response()->json(['mensaje' => 'Actualizado exitosamente', 'error' => false, 'borrado' => false]);
         } catch (QueryException $e) {
             $errorCode = $e->errorInfo[1];
             if ($errorCode == 1062) {
-                $respuesta = response()->json(['mensaje' => 'El tipo de evento ya existe', 'error' => true]);
+                $respuesta = response()->json(['mensaje' => 'El tipo de evento ya existe', 'error' => true, 'borrado' => false]);
             } else {
                 if ($e->errorInfo[1] == 1406) {
-                    $respuesta = response()->json(['mensaje' => 'Campo demasiado grande', 'error' => true]);
+                    $respuesta = response()->json(['mensaje' => 'Campo demasiado grande', 'error' => true, 'borrado' => false]);
                 } else {
                     $respuesta = $e->getMessage();
                 }
@@ -77,6 +77,30 @@ class TipoEventoController extends Controller
             if ($e->errorInfo[1] == 1451) {
                 return response()->json(['mensaje' => 'El tipo de evento tiene eventos asociados', 'error' => true]);
             }
+            return $e->getMessage();
+        }
+    }
+
+    public function crear(Request $request)
+    {
+        try {
+            $tipoEvento = TipoEvento::onlyTrashed()->where('nombre', $request->nombre)->first();
+            if ($tipoEvento) {
+                return response()->json(['borrado' => true, 'id' => $tipoEvento->id]);
+            } else {
+                $store = $this->store($request);
+                return $store;
+            }
+        } catch (QueryException $e) {
+        }
+    }
+    public function restaurar($id)
+    {
+        try {
+            $tipo_evento = TipoEvento::onlyTrashed()->find($id);
+            $tipo_evento->restore();
+            return response()->json(['mensaje' => 'Restaurado exitosamente', 'error' => false]);
+        } catch (QueryException $e) {
             return $e->getMessage();
         }
     }

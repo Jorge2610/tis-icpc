@@ -28,9 +28,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'tipo-evento'], function () {
     Route::get('/', [TipoEventoController::class, 'index'])->name('tipo-eventos.index');
     Route::get('{id}', [TipoEventoController::class, 'show'])->name('tipo-eventos.show');
-    Route::post('/', [TipoEventoController::class, 'store'])->name('tipo-eventos.store');
+    Route::post('/', [TipoEventoController::class, 'crear'])->name('tipo-eventos.crear');
     Route::post('actualizar/{id}', [TipoEventoController::class, 'update'])->name('tipo-eventos.update');
     Route::delete('{id}', [TipoEventoController::class, 'destroy'])->name('tipo-eventos.destroy');
+    Route::post('restaurar/{id}', [TipoEventoController::class, 'restaurar'])->name('tipo-eventos.restaurar');
 });
 
 Route::group(['prefix' => 'evento'], function () {

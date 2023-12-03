@@ -37,18 +37,90 @@
                                         </div>
                                     </div>
                                     <div class=" mt-2 custom-col colum-col">
-                                        <input name="color" type="color"
-                                            class="form-control-color controlador" id="colorTipoEvento"
-                                            value="#563d7c" title="Choose your color">
+                                        <input name="color" type="color" class="form-control-color controlador"
+                                            id="colorTipoEvento" value="#563d7c" title="Choose your color">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="text-center my-5">
-                            <button id="cancelarBoton" type="reset" class="btn btn-secondary mx-5" onClick="quitarValidacion()">Cancelar</button>
+                            <button id="cancelarBoton" type="reset" class="btn btn-secondary mx-5"
+                                onClick="quitarValidacion()">Cancelar</button>
                             <button id="confirmarBoton" type="submit" class="btn btn-primary mx-5">Crear</button>
                         </div>
                 </form>
+                @component('components.modal')
+                    @slot('modalId', 'modalTipoEventoExistente')
+                    @slot('modalTitle', 'Tipo de evento ya existe')
+                    @slot('modalContent')
+                        <p>
+                            <b>El tipo de evento que intentó crear ya existe,</b>
+                            ¿Desea habilitarlo nuevamente?
+                        </p>
+                    @endslot
+                    @slot('modalButton')
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limpiarForm()">
+                            No</button>
+                        <button type="button" class="btn btn-danger" onclick="restaurarTipoEvento()">Sí</button>
+                    @endslot
+                @endcomponent
+
+                <div class="modal fade" id="modalActualizarTipoEvento" tabindex="-1" aria-labelledby="modalAnularLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content" style="width: 600px">
+                            <div class="modal-header">
+                                <h5 class="modal-title">
+                                    ¿Desea actualizar los datos del tipo de evento?
+                                </h5>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row g-4">
+                                    <div class="col-md-12">
+                                        <h5 id="nombre" class="text-center"></h5>
+                                    </div>
+                                    <div class="col-md-6 border-end border-2">
+
+                                        <div class="container">
+                                            <h6 class="text-center fw-bold">Anterior</h6>
+                                            <p class="mt-3"><strong>Descripción:</strong></p>
+                                            <div style="height: 100px; " class="overflow-auto">
+
+                                                <p id="antiguoDescripcion" class ="text-break me-3 text-justify"
+                                                    style="white-space: pre-line"></p>
+                                            </div>
+                                            <p class="mt-3"><strong>Color de referencia:</strong></p>
+                                            <div id="antiguoColor" class="mx-auto" style="width: 50px; height: 50px; border-radius: 50%">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="container">
+                                            <h6 class="text-center fw-bold">Nuevo</h6>
+                                            <p class="mt-3"><strong>Descripción:</strong></p>
+                                            <div style="height: 100px; text-align: justify" class="overflow-auto">
+
+                                                <p id="nuevoDescripcion" class ="text-break me-3 text-justify"
+                                                    style="white-space: pre-line"></p>
+                                            </div>
+                                            <p class="mt-3"><strong>Color de referencia:</strong></p>
+                                            <div id="nuevoColor" class="mx-auto"
+                                                style="width: 50px; height: 50px; border-radius: 50%">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer d-flex justify-content-center">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                    onclick="actualizarTipoEvento()">
+                                    No</button>
+                                <button type="button" class="btn btn-danger"
+                                    onclick="actualizarTipoEvento(true)">Sí</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
