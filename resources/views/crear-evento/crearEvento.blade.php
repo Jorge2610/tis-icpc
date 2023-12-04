@@ -260,7 +260,7 @@
             @if(Route::currentRouteName() == 'evento.editar')
             <div class="col-md-12 mt-5  ms-3">
                 <input name="notificacion" type="checkbox" class="form-check-input border-dark"
-                            id="notificacion">
+                            id="notificacion" checked="true">
                 <label for="notificacion" class="form-check-label">Enviar notificación de la edición</label>
             </div>
             @endif
