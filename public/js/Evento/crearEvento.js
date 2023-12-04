@@ -13,6 +13,7 @@ const nombreEvento = document.getElementById("nombreDelEvento");
 const mensajeNombre = document.getElementById("mensajeNombre");
 const checkEquipo = document.getElementById("equipoCheck");
 const inputEquipo = document.getElementById("miembros-equipo");
+const checkNotificacion = document.getElementById("notificacion");
 
 let boolEquipo=true;
 let boolFecha = true;
@@ -58,6 +59,14 @@ const prepararFormData = () => {
     if(!checkEquipo.checked){
         formData.set("cantidad_equipo","");
     }
+    if(!crear){
+        if(!checkNotificacion.checked){
+            formData.set("notificacion","");
+        }else{
+            formData.set("notificacion","on");
+        }    
+    }
+    
     return formData;
 };
 
@@ -66,7 +75,6 @@ const editarEvento = (formData) => {
         window.location.href =
             "/eventos/" + document.getElementById("nombreDelEvento").value;
     }
-    console.log(formData.get("evento_id"));
     nombreAnterior = nombreEvento.value
     axios
         .post("/api/evento/actualizar/" + formData.get("evento_id"), formData)
@@ -77,10 +85,9 @@ const editarEvento = (formData) => {
                 response.data.error ? "danger" : "success"
             );
             mensajeRepetido = response.data.mensaje
-            console.log(mensajeRepetido)
             if(mensajeRepetido !== 'El evento ya existe')  {
                 setTimeout(()=>{
-                    // window.location.href = "/editarEvento";
+                    window.location.href = "/editarEvento";
                },1800);
                 form.reset();
             }else{

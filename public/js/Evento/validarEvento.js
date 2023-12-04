@@ -229,9 +229,7 @@ const setCostoInvalidoFeedback = () => {
     let invalidFeedback = document.getElementById("costoInvalido");
     let value = costo.value;
     value = parseFloat(value);
-    console.log(value);
     if (!isNaN(value)) {
-        console.log("holas");
         invalidFeedback.innerText =
             value < parseFloat(costo.min) ? "Monto mínimo " + costo.min + " Bs." :
                 value > parseFloat(costo.max) ? "Monto máximo " + costo.max + " Bs.": "";
