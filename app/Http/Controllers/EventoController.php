@@ -8,6 +8,7 @@ use App\Notifications\cambiosEnEvento;
 use App\Models\Evento;
 use App\Models\Anulado;
 use App\Models\Cancelado;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
 class EventoController extends Controller
@@ -32,7 +33,7 @@ class EventoController extends Controller
 
     public function cargarEvento(String $nombre)
     {
-        $evento = Evento::where('estado', 0)->with(['afiches','tipoEvento' => function ($q) {
+        $evento = Evento::where('estado', 0)->with(['afiches', 'tipoEvento' => function ($q) {
             $q->withTrashed();
         }, 'eventoPatrocinador.patrocinadores' => function ($q) {
             $q->withTrashed();
@@ -101,9 +102,9 @@ class EventoController extends Controller
             $evento->precio_inscripcion = $request->precio_inscripcion;
             $evento->id_tipo_evento = $request->id_tipo_evento;
             $evento->save();
-            if ($request->notificacion) {
+            
                 $this->notificarCambios($evento, $atributosAntiguos);
-            }
+            
             return response()->json(['mensaje' => 'Actualizado exitosamente', 'error' => false]);
         } catch (QueryException $e) {
             if ($e->errorInfo[1] == 1062) {
@@ -121,16 +122,33 @@ class EventoController extends Controller
     protected function notificarCambios($evento, $atributosAntiguos)
     {
         $cambios = array_diff_assoc($evento->getOriginal(), $atributosAntiguos);
-        echo '<pre>';
-        print_r($cambios);
-        echo '</pre>';
-        // if(!empty($cambios)) {
-        //     $evento->inscritos->each(function ($usuario) use ($evento) {
-        //         $usuario->notify(new CambiosEnEvento($evento));
-        //     });
-        // }
-    }
+        $fecha1 = \Carbon\Carbon::parse($evento->inicio_evento)->setTimezone('UTC');
+        $fecha2 = \Carbon\Carbon::parse($atributosAntiguos['inicio_evento'])->setTimezone('UTC');
+        $fecha3 = \Carbon\Carbon::parse($evento->fin_evento)->setTimezone('UTC');
+        $fecha4 = \Carbon\Carbon::parse($atributosAntiguos['fin_evento'])->setTimezone('UTC');
 
+        if (!$fecha1->equalTo($fecha2)) {
+            $cambios['inicio_evento'] = $evento->inicio_evento;
+        } else {
+            unset($cambios['inicio_evento']);
+        }
+        if (!$fecha3->equalTo($fecha4)) {
+            $cambios['fin_evento'] = $evento->fin_evento;
+        } else {
+            unset($cambios['fin_evento']);
+        }
+
+        $inscritos = ['email' => 'ivpalacios47@gmail.com'];
+
+        if (!empty($cambios)) {
+            foreach ($inscritos as $tipo => $valor) {
+                // Asumo que $valor contiene la dirección de correo electrónico del usuario
+                $usuario = new User(); // Reemplaza 'Usuario' con el nombre de tu modelo de usuario
+                $usuario->email = $valor;
+                $usuario->notify(new CambiosEnEvento($evento, $cambios));
+            }
+        }
+    }
     public function destroy($id)
     {
         try {

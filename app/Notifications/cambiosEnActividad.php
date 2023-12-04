@@ -7,12 +7,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-
-class cambiosEnEvento extends Notification
+class cambiosEnActividad extends Notification
 {
-
     use Queueable;
-
+    protected $actividad;
     protected $evento;
     protected $cambios;
     /**
@@ -20,8 +18,9 @@ class cambiosEnEvento extends Notification
      *
      * @return void
      */
-    public function __construct($evento, $cambios)
+    public function __construct($actividad, $evento, $cambios = null)
     {
+        $this->actividad = $actividad;
         $this->evento = $evento;
         $this->cambios = $cambios;
     }
@@ -45,22 +44,22 @@ class cambiosEnEvento extends Notification
      */
     public function toMail($notifiable)
     {
-        
+        $cambios = $this->cambios;
         return (new MailMessage)
             ->line('Se realizaron cambios en el evento.')
             ->line('Detalles del cambio:')
-            ->line($this->getCambiosDescripcion($this->cambios))
-            ->action('Ver detalles del evento', url('/eventos/' . $this->evento->nombre))
-            ->line('Gracias por usar nuestra aplicación!');
+            ->line($this->getCambiosDescripcion($cambios))
+            ->action('Notification Action', url('/'))
+            ->line('Thank you for using our application!');
     }
 
     
 
-    protected function getCambiosDescripcion(array $cambios)
+    protected function getCambiosDescripcion()
     {
         $descripcion = "";
-        foreach ($cambios as $atributo => $value) {
-            $descripcion .= $atributo . ": " . $value . "\n";
+        foreach ($this->cambios as $atributo => $value) {
+            $descripcion .= ucfirst($atributo) . ' cambió de ' . $value['old'] . ' a ' . $value['new'] . "\n";
         }
         return $descripcion;
     }
