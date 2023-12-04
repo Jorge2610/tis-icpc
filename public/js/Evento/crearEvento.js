@@ -13,6 +13,7 @@ const nombreEvento = document.getElementById("nombreDelEvento");
 const mensajeNombre = document.getElementById("mensajeNombre");
 const checkEquipo = document.getElementById("equipoCheck");
 const inputEquipo = document.getElementById("miembros-equipo");
+const checkNotificacion = document.getElementById("notificacion");
 
 let boolEquipo=true;
 let boolFecha = true;
@@ -58,6 +59,12 @@ const prepararFormData = () => {
     if(!checkEquipo.checked){
         formData.set("cantidad_equipo","");
     }
+    if(!checkNotificacion.checked){
+        formData.set("notificacion","");
+    }else{
+        formData.set("notificacion","on");
+    }
+
     return formData;
 };
 
