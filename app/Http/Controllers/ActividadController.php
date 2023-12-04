@@ -66,6 +66,7 @@ class ActividadController extends Controller
     public function update(Request $request, $id)
     {
         try {
+            $notificacion = $request->switchNotificacion;
             /**Obtenemos la actividad con ID**/
             $actividad = Actividad::find($id);
             $actividad->nombre = $request->nombre;
@@ -83,7 +84,7 @@ class ActividadController extends Controller
                 return response()->json(['mensaje' => 'La actividad ya existe', 'error' => true]);
             }
             $actividad->save();
-            return response()->json(['mensaje' => 'Actualizada exitosamente', 'error' => false]);
+            return response()->json(['mensaje' => $notificacion, 'error' => false]);
         } catch (QueryException $e) {
             return $e->getMessage();
         }

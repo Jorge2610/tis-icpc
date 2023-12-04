@@ -7,12 +7,17 @@ const fechaInicio = document.getElementById("fechaInicio");
 const fechaFin = document.getElementById("fechaFin");
 const mensajeFechaInicio = document.getElementById("mensajeFechaInicio");
 const mensajeFechaFin = document.getElementById("mensajeFechaFin");
+const switchMensaje = document.getElementById("switchNotificacion")
 let nombreAnterior = ''
 
 /**PETICIONES a AXIOS**/
 /**EDITAR   ACTIVIDAD**/
 const editarActividad = (formData) => {
     nombreAnterior = inputNombre.value
+    const estaActivado = switchMensaje.checked
+    const valorCheckbox = estaActivado ? "on":"off"
+    formData.append("switchNotificacion",valorCheckbox)
+
     axios.post("/api/actividad/"+formData.get("id"),formData)
     .then(function(response){
         const mensaje = response.data.mensaje
@@ -77,38 +82,34 @@ form.querySelectorAll(".form-control, .form-select").forEach((Element) => {
 inputNombre.addEventListener("input", validarNombreRepetido);
 inputNombre.addEventListener("change", validarNombreRepetido);
 
+
 /**Validaciones para fecha INICIO**/
 fechaInicio.addEventListener("change", () => {
     const fechaInicioSeleccionada = new Date(fechaInicio.value);
     const fechaMin = new Date(fechaInicio.min);
     const fechaMax = new Date(fechaInicio.max);
-
-    // Verificar si la fecha está dentro del rango permitido
-    if ( fechaInicioSeleccionada < fechaMin) {
-        fechaInicio.classList.add("is-invalid");
-        fechaInicio.classList.remove("is-valid");
-        mensajeFechaInicio.innerHTML = "Rango de fechas no válido.";
-    } else if(fechaInicioSeleccionada > fechaMax){
-        fechaInicio.classList.add("is-invalid");
-        fechaInicio.classList.remove("is-valid");
-        mensajeFechaInicio.innerHTML = "Rango de fechas no válido.";
-    }else if(fechaInicio.value == ""){
-        fechaInicio.classList.add("is-invalid");
-        fechaInicio.classList.remove("is-valid");
-        mensajeFechaInicio.innerHTML = "Seleccione una fecha y hora.";
-    }else if(fechaInicio.value > fechaFin.value && fechaFin.value !== ''){
-        fechaInicio.classList.add("is-invalid");
-        fechaInicio.classList.remove("is-valid");
-        mensajeFechaInicio.innerHTML = "Rango de fechas no válido.";
-    }else {
-        //Quitamos todos los mensajes y validamos
-        mensajeFechaInicio.innerHTML = "";
-        fechaInicio.classList.remove("is-invalid");
-        fechaInicio.classList.add("is-valid");
-        //Ponemos como valor mínimo la fecha inicio de la actividad
-        fechaFin.min = fechaInicio.value;
+    if(fechaInicio.disabled == false){
+        // Verificar si la fecha está dentro del rango permitido
+        if(fechaInicioSeleccionada < fechaMin || fechaInicioSeleccionada > fechaMax || (fechaInicio.value > fechaFin.value && fechaFin.value !== '') ) {
+            isValid(fechaInicio,false)
+            mensajeFechaInicio.innerHTML = "Rango de fechas no válido.";
+            deshabilitar()
+        }else if(fechaInicio.value == ""){
+            isValid(fechaInicio,false)
+            mensajeFechaInicio.innerHTML = "Seleccione una fecha y hora.";
+            deshabilitar()
+        }else {
+            //Quitamos todos los mensajes y validamos
+            mensajeFechaInicio.innerHTML = "";
+            isValid(fechaInicio,true)
+            //Ponemos como valor mínimo la fecha inicio de la actividad
+            fechaFin.disabled = false
+            fechaFin.min = fechaInicio.value;
+            fechaFin.dispatchEvent(new Event("change"));
+        }
+    }else{
+        isValid(fechaInicio,true)
     }
-    fechaFin.dispatchEvent(new Event("change"));
 });
 
 /**Validaciones para fecha FIN**/
@@ -119,30 +120,36 @@ fechaFin.addEventListener("change", () => {
     const fechaMax = new Date(fechaFin.max);
 
     // Verificar si la fecha está dentro del rango permitido
-    if (fechaFinSeleccionada < fechaMin) {
-        fechaFin.classList.add("is-invalid");
-        fechaFin.classList.remove("is-valid");
-        mensajeFechaFin.innerHTML = "Rango de fechas no válido.";
-    } else if(fechaFinSeleccionada > fechaMax){
-        fechaFin.classList.add("is-invalid");
-        fechaFin.classList.remove("is-valid");
-        mensajeFechaFin.innerHTML = "Rango de fechas no válido.";
-    }else if(fechaFin.value == ""){
-        fechaFin.classList.add("is-invalid");
-        fechaFin.classList.remove("is-valid");
-        mensajeFechaFin.innerHTML = "Seleccione una fecha y hora.";
-    }else if(fechaFin.value < fechaInicio.value && fechaInicio.value !== ''){
-        fechaFin.classList.add("is-invalid");
-        fechaFin.classList.remove("is-valid");
+    if(fechaFin.value == ""){
+     isValid(fechaFin,false)
+     mensajeFechaFin.innerHTML = "Seleccione una fecha y hora.";
+    }else if (fechaFinSeleccionada < fechaMin || fechaFinSeleccionada > fechaMax || (fechaFin.value < fechaInicio.value && fechaInicio.value !== '')) {
+        isValid(fechaFin,false)
         mensajeFechaFin.innerHTML = "Rango de fechas no válido.";
     }else {
         //Quitamos todos los mensajes y validamos
         mensajeFechaFin.innerHTML = "";
-        fechaFin.classList.remove("is-invalid");
-        fechaFin.classList.add("is-valid");
+        isValid(fechaFin,true)
     }
-    fechaInicio.dispatchEvent(new Event("change"));
 });
+
+const isValid = (componente, bandera) => {
+     if (bandera) {
+         componente.classList.remove("is-invalid");
+         componente.classList.add("is-valid");
+     }
+     else {
+         componente.classList.remove("is-valid");
+         componente.classList.add("is-invalid");
+     }
+ }
+
+const deshabilitar = () =>{
+     fechaFin.disabled = true;
+     fechaFin.value=""
+     fechaFin.classList.remove('is-valid')
+     fechaFin.classList.remove('is-invalid')
+}
 
 function validarNombreRepetido() {
     if(nombreAnterior === ''){
