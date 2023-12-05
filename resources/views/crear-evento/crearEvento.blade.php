@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('content')
+    {{-- @php
+        dd($datos)
+    @endphp --}}
     <div class="container">
         <form class="row g-4 needs-validation mt-1" method="POST" novalidate id="formularioCrearEvento">
             @csrf
@@ -29,8 +32,13 @@
                         <!-Cargar tipos de evento->
                             <select name="id_tipo_evento" class="form-select fecha-editar" id="tipoDelEvento"
                                 onchange="datoCambiado()" aria-placeholder="Elija un tipo de evento..."
-                                data-id="{{ $datos['id_tipo_evento'] }}" required>
-                            </select>
+                                data-id="{{ $datos['id_tipo_evento'] }}"
+                                required>
+                            
+                            <option value="{{ $datos['id_tipo_evento'] }}" {{$datos['id_tipo_evento'] ? 'selected' : '' }}>
+                                {{ $datos['nombre_tipo_evento'] }}
+                            </option>
+                        </select>
                             <div class="invalid-feedback">
                                 Seleccione un tipo de evento.
                             </div>
@@ -155,12 +163,12 @@
                     </div>
                 </div>
 
-               
+
                 <div class="row mt-4">
                     <div class="col-md-6 mt-2">
-                        <input  type="checkbox"
-                            class="form-check-input border-dark fecha-editar" onchange="datoCambiado()"
-                            id="equipoCheck" @if ($datos['cantidad_equipo']) checked @endif>
+                        <input type="checkbox" class="form-check-input border-dark fecha-editar"
+                            onchange="datoCambiado()" id="equipoCheck"
+                            @if ($datos['cantidad_equipo']) checked @endif>
                         <label class="form-check-label " for="equipoCheck">Por equipos</label>
                     </div>
 
@@ -171,7 +179,7 @@
                             @if ($datos['precio_inscripcion']) checked @endif>
                         <label class="form-check-label" for="eventoPagoCheck">Evento de pago</label>
                     </div>
-                    
+
                 </div>
 
                 <div class="row mt-4">
@@ -182,9 +190,9 @@
                                 <label class="col-form-label fecha-editar" for="costoEvento">Cantidad.</label>
                             </div>
                             <div class="col-md-8">
-                                <input name="cantidad_equipo" type="number" class="form-control fecha-editar entero" max="50"
-                                            min="2"  id="miembros-equipo" step="1" 
-                                            value="{{ isset($datos['precio_inscripcion']) ? $datos['precio_inscripcion'] : '0.0' }}">
+                                <input name="cantidad_equipo" type="number" class="form-control fecha-editar entero"
+                                    max="50" min="2" id="miembros-equipo" step="1"
+                                    value="{{ isset($datos['precio_inscripcion']) ? $datos['precio_inscripcion'] : '0.0' }}">
                                 <div id="equipoInvalido" class="invalid-feedback"></div>
                             </div>
                         </div>
@@ -199,7 +207,8 @@
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Bs.</span>
                                     <input name="precio_inscripcion" type="number" class="form-control fecha-editar"
-                                        min="1" max="5000" id="costoEvento" step="0.5" onchange="setCostoInvalidoFeedback()"
+                                        min="1" max="5000" id="costoEvento" step="0.5"
+                                        onchange="setCostoInvalidoFeedback()"
                                         value="{{ isset($datos['precio_inscripcion']) ? $datos['precio_inscripcion'] : '0.0' }}">
                                     <div id="costoInvalido" class="invalid-feedback">chals e </div>
                                 </div>
@@ -208,7 +217,7 @@
                     </div>
 
                 </div>
-                 <div class="row mt-4">
+                <div class="row mt-4">
                     <div class="col-md-6">
                         <input name="requiere_registro" type="checkbox"
                             class="form-check-input border-dark fecha-editar" onchange="datoCambiado()"
@@ -243,10 +252,10 @@
                 <div class="col-md-1 col-sm-3 align-self-center">Fin:</div>
 
                 <div class="col-lg-12 col-md-12 col-sm-9">
-                    <input name="fin_evento" id="fechaFin" class="form-control" 
-                        type="datetime-local" onchange="datoCambiado()" min=""
-                        value="{{ isset($datos['fin_evento']) ? $datos['fin_evento'] : '' }}"required 
-                        {{(strtotime($datos['inicio_evento']) > time())? 'disabled':''}} />
+                    <input name="fin_evento" id="fechaFin" class="form-control" type="datetime-local"
+                        onchange="datoCambiado()" min=""
+                        value="{{ isset($datos['fin_evento']) ? $datos['fin_evento'] : '' }}"required
+                        {{ strtotime($datos['inicio_evento']) > time() ? 'disabled' : '' }} />
                     <div class="invalid-feedback" id="mensajeErrorFechaFin"></div>
                 </div>
 
@@ -257,12 +266,12 @@
                 <textarea name="descripcion" class="form-control" id="descripcionDelEvento" rows="8" style="resize: none;"
                     onchange="datoCambiado()" placeholder="Ingrese una descripción..." maxlength="2048">{{ $datos['descripcionDelEvento'] }}</textarea>
             </div>
-            @if(Route::currentRouteName() == 'evento.editar')
-            <div class="col-md-12 mt-5  ms-3">
-                <input name="notificacion" type="checkbox" class="form-check-input border-dark"
-                            id="notificacion" checked="true">
-                <label for="notificacion" class="form-check-label">Enviar notificación de la edición</label>
-            </div>
+            @if (Route::currentRouteName() == 'evento.editar')
+                <div class="col-md-12 mt-5  ms-3">
+                    <input name="notificacion" type="checkbox" class="form-check-input border-dark"
+                        id="notificacion" checked="true">
+                    <label for="notificacion" class="form-check-label">Enviar notificación de la edición</label>
+                </div>
             @endif
             <div class="row mt-4 text-center">
                 <div class="col-md-6">

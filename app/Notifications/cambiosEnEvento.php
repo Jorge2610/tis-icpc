@@ -48,8 +48,7 @@ class cambiosEnEvento extends Notification
         
         return (new MailMessage)
             ->line('Se realizaron cambios en el evento.')
-            ->line('Detalles del cambio:')
-            ->line($this->getCambiosDescripcion($this->cambios))
+            ->line('Por favor revisa el evento: ')
             ->action('Ver detalles del evento', url('/eventos/' . $this->evento->nombre))
             ->line('Gracias por usar nuestra aplicación!');
     }

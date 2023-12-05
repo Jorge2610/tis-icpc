@@ -102,9 +102,9 @@ class EventoController extends Controller
             $evento->precio_inscripcion = $request->precio_inscripcion;
             $evento->id_tipo_evento = $request->id_tipo_evento;
             $evento->save();
-            
+            if ($request->notificacion) {
                 $this->notificarCambios($evento, $atributosAntiguos);
-            
+            }
             return response()->json(['mensaje' => 'Actualizado exitosamente', 'error' => false]);
         } catch (QueryException $e) {
             if ($e->errorInfo[1] == 1062) {
@@ -163,7 +163,9 @@ class EventoController extends Controller
 
     public function show($id)
     {
-        $evento = Evento::find($id);
+        $evento = Evento::with(["tipoEvento" => function ($q) {
+            $q->withTrashed();
+        }])->find($id);
         return $evento;
     }
 
@@ -209,7 +211,8 @@ class EventoController extends Controller
                 'genero' => $evento->genero,
                 'precio_inscripcion' => $evento->precio_inscripcion,
                 'ruta_afiche' => $evento->ruta_afiche,
-                'id_tipo_evento' => $evento->id_tipo_evento
+                'id_tipo_evento' => $evento->id_tipo_evento,
+                'nombre_tipo_evento' => $evento->tipoEvento->nombre
             ];
         }
         return view('crear-evento.crearEvento', compact('datos'));
