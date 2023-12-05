@@ -53,7 +53,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title fw-bold" id="nombreEvento">{{ $evento->nombre }}</h5>
                                     <h6 id="tipoDeEvento">{{ $evento->tipoEvento->nombre }}</h6>
-                                    <hr>
+                                    <hr style="height:4px; opacity:1; border:none; background-color:{{ $evento->tipoEvento->color }};" >
                                     </hr>
                                     <p class="cart-text">
                                         <span>Fecha del evento:</span>
