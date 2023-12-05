@@ -261,17 +261,17 @@
 
             </div>
 
-            <div class="col-md-12 mt-5  ms-3">
+            <div class="col-md-12 mt-5  ms-3 ">
                 <label for="descripcionDelEvento" class="form-label">Descripción del evento</label>
                 <textarea name="descripcion" class="form-control" id="descripcionDelEvento" rows="8" style="resize: none;"
                     onchange="datoCambiado()" placeholder="Ingrese una descripción..." maxlength="2048">{{ $datos['descripcionDelEvento'] }}</textarea>
             </div>
-            @if (Route::currentRouteName() == 'evento.editar')
-                <div class="col-md-12 mt-5  ms-3">
-                    <input name="notificacion" type="checkbox" class="form-check-input border-dark"
-                        id="notificacion" checked="true">
-                    <label for="notificacion" class="form-check-label">Enviar notificación de la edición</label>
-                </div>
+            @if(Route::currentRouteName() == 'evento.editar')
+            <div class="col-md-12 mt-5  ms-3 form-check form-switch">
+                <input name="notificacion" class="form-check-input" type="checkbox"
+                        id="notificacion"  role="switch" checked>
+                <label for="notificacion" class="form-check-label">Enviar notificación de la edición</label>
+            </div>
             @endif
             <div class="row mt-4 text-center">
                 <div class="col-md-6">
