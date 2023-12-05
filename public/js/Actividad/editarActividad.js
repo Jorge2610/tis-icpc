@@ -7,7 +7,7 @@ const fechaInicio = document.getElementById("fechaInicio");
 const fechaFin = document.getElementById("fechaFin");
 const mensajeFechaInicio = document.getElementById("mensajeFechaInicio");
 const mensajeFechaFin = document.getElementById("mensajeFechaFin");
-const switchMensaje = document.getElementById("switchNotificacion")
+const switchMensaje = document.getElementById("notificacion")
 let nombreAnterior = ''
 
 /**PETICIONES a AXIOS**/
@@ -15,8 +15,8 @@ let nombreAnterior = ''
 const editarActividad = (formData) => {
     nombreAnterior = inputNombre.value
     const estaActivado = switchMensaje.checked
-    const valorCheckbox = estaActivado ? "on":"off"
-    formData.append("switchNotificacion",valorCheckbox)
+    const valorCheckbox = estaActivado ? "on":
+    formData.append("notificacion",valorCheckbox)
 
     axios.post("/api/actividad/"+formData.get("id"),formData)
     .then(function(response){

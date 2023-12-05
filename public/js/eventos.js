@@ -119,48 +119,59 @@ const mostrarEventos = () => {
                 eventosFiltrados.sort((a, b) => b.nombre.localeCompare(a.nombre));
                 break;
         case "3":
-                eventosFiltrados.sort((a,b)=> new Date(a.created_at) - new Date(b.created_at))
+                eventosFiltrados.sort((a,b)=> new Date(b.created_at) - new Date(a.created_at))        
                 break;
         case "4":
-                eventosFiltrados.sort((a,b)=> new Date(b.created_at) - new Date(a.created_at))
+                eventosFiltrados.sort((a,b)=> new Date(a.created_at) - new Date(b.created_at))
                 break;                            
     }
 
-    eventosFiltrados.map(evento => {
-        let rutaImagen = evento.afiches.length > 0 ? evento.afiches[0].ruta_imagen : "/image/aficheDefecto.png";
-        contenido +=
-            `
-        <div class="col-md-auto">
-            <div class="tarjeta card mb-3" style="width: 540px; height: 200px">
-                <div class="row g-0">
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold" id="nombreEvento">${evento.nombre}</h5>
-                            <h6 id="tipoDeEvento">${evento.tipo_evento.nombre}</h6>
-                            <hr>
-                            </hr>
-                            <p class="cart-text">
-                                <span>Fecha del evento:</span>
-                                <span id="fechaInicioEvento"
-                                    class="mx-2 fst-italic">${moment(evento.inicio_evento).format("DD-MM-YYYY")}</span>
-                                <span id="fechaFinEvento"
-                                    class="fst-italic">${moment(evento.fin_evento).format("DD-MM-YYYY")}</span>
-                            </p>
-                            <div class="row text-end">
-                                <a href="/eventos/${evento.nombre}"
-                                    id="linkEvento" class="text-decoration-none stretched-link">Saber
-                                    más...</a>
+    if(eventosFiltrados.length != 0){
+        eventosFiltrados.map(evento => {
+            let rutaImagen = evento.afiches.length > 0 ? evento.afiches[0].ruta_imagen : "/image/aficheDefecto.png";
+            contenido +=
+                `
+            <div class="col-md-auto">
+                <div class="tarjeta card mb-3" style="width: 540px; height: 200px">
+                    <div class="row g-0">
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold" id="nombreEvento">${evento.nombre}</h5>
+                                <h6 id="tipoDeEvento">${evento.tipo_evento.nombre}</h6>
+                                <hr>
+                                </hr>
+                                <p class="cart-text">
+                                    <span>Fecha del evento:</span>
+                                    <span id="fechaInicioEvento"
+                                        class="mx-2 fst-italic">${moment(evento.inicio_evento).format("DD-MM-YYYY")}</span>
+                                    <span id="fechaFinEvento"
+                                        class="fst-italic">${moment(evento.fin_evento).format("DD-MM-YYYY")}</span>
+                                </p>
+                                <div class="row text-end">
+                                    <a href="/eventos/${evento.nombre}"
+                                        id="linkEvento" class="text-decoration-none stretched-link">Saber
+                                        más...</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="d-flex p-3 align-self-center col-md-4" style="height: 195px">
-                        <img src="${rutaImagen}"
-                            class="img-fluid rounded-start object-fit-scale" alt="...">
+                        <div class="d-flex p-3 align-self-center col-md-4" style="height: 195px">
+                            <img src="${rutaImagen}"
+                                class="img-fluid rounded-start object-fit-scale" alt="...">
+                        </div>
                     </div>
                 </div>
             </div>
+                `;
+        });
+    }else{
+        contenido =  `
+        <div class="row mt-5">
+            <div class="alert alert-info w-50 mx-auto text-center" role="alert">
+                No existen eventos que cumplan con tu criterio de búsqueda.
+            </div>
         </div>
             `;
-    });
+    }
+    
     div.innerHTML = contenido;
 };
