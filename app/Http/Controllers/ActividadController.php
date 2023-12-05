@@ -46,12 +46,19 @@ class ActividadController extends Controller
                 return response()->json(['mensaje' => 'La actividad ya existe', 'error' => true]);
             }
             $actividad->save();
+            $this->notificacionActividad($actividad);
             return response()->json(['mensaje' => 'Actividad creada exitosamente', 'error' => false]);
         } catch (QueryException $e) {
             return $e->getMessage();
         }
     }
 
+    public function notificacionActividad($actividad)
+    {
+        $actividad->inscritos->each(function ($usuario) use ($actividad) {
+            $usuario->notify(new CambiosEnEvento($actividad));
+        });
+    }
     public function destroy($id)
     {
         try {
@@ -98,7 +105,7 @@ class ActividadController extends Controller
 
     public function vistaTablaActividades()
     {
-        $actividades =  Evento::where('estado', 0)->with(['actividades', 'tipoEvento' => function($q) {
+        $actividades =  Evento::where('estado', 0)->with(['actividades', 'tipoEvento' => function ($q) {
             $q->withTrashed();
         }])->get();
         return view('actividad.crearActividad', ['actividades' => $actividades]);
@@ -106,7 +113,7 @@ class ActividadController extends Controller
 
     public function listarEventos()
     {
-        $eventos =  Evento::where('estado', 0)->with(['actividades', 'tipoEvento' => function($q) {
+        $eventos =  Evento::where('estado', 0)->with(['actividades', 'tipoEvento' => function ($q) {
             $q->withTrashed();
         }])->get();
         return view('actividad.eliminarActividad', ['eventos' => $eventos]);
@@ -130,7 +137,7 @@ class ActividadController extends Controller
 
     public function listaEditar()
     {
-        $eventos =  Evento::where('estado', 0)->with(['actividades', 'tipoEvento' => function ($q){
+        $eventos =  Evento::where('estado', 0)->with(['actividades', 'tipoEvento' => function ($q) {
             $q->withTrashed();
         }])->get();
         return view('actividad.listaEditarActividad', ['eventos' => $eventos]);
