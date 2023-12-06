@@ -176,8 +176,6 @@ class EventoController extends Controller
         $datos = [
             'nombreDelEvento' => '',
             'descripcionDelEvento' => '',
-            'inicio_inscripcion' => '',
-            'fin_inscripcion' => '',
             'inicio_evento' => '',
             'fin_evento' => '',
             'institucion' => '',
@@ -189,8 +187,8 @@ class EventoController extends Controller
             'edad_maxima' => '',
             'genero' => '',
             'precio_inscripcion' => '',
-            'ruta_afiche' => '',
-            'id_tipo_evento' => ''
+            'id_tipo_evento' => '',
+            'nombre_tipo_evento' => ''
 
         ];
         if ($id !== null) {
@@ -199,8 +197,6 @@ class EventoController extends Controller
                 'evento_id' => $evento->id,
                 'nombreDelEvento' => $evento->nombre,
                 'descripcionDelEvento' => $evento->descripcion,
-                'inicio_inscripcion' => ($evento->inicio_inscripcion) ? date('Y-m-d', strtotime($evento->inicio_inscripcion)) : '',
-                'fin_inscripcion' => ($evento->fin_inscripcion) ? date('Y-m-d', strtotime($evento->fin_inscripcion)) : '',
                 'inicio_evento' => $evento->inicio_evento,
                 'fin_evento' => $evento->fin_evento,
                 'institucion' => $evento->institucion,
@@ -212,7 +208,6 @@ class EventoController extends Controller
                 'edad_maxima' => $evento->edad_maxima,
                 'genero' => $evento->genero,
                 'precio_inscripcion' => $evento->precio_inscripcion,
-                'ruta_afiche' => $evento->ruta_afiche,
                 'id_tipo_evento' => $evento->id_tipo_evento,
                 'nombre_tipo_evento' => $evento->tipoEvento->nombre
             ];
@@ -248,7 +243,9 @@ class EventoController extends Controller
 
     public function eventosValidos()
     {
-        $eventos = Evento::where('estado', 0)->get();
+        $eventos = Evento::where('estado', 0)->with(['tipoEvento' => function ($query) {
+            $query->withTrashed();
+        }])->get();
         $anular = false;
         return view('eventos.cancelarEvento', ['eventos' => $eventos, 'anular' => $anular]);
     }
@@ -272,7 +269,9 @@ class EventoController extends Controller
 
     public function eventosValidosAnular()
     {
-        $eventos = Evento::where('estado', 0)->get();
+        $eventos = Evento::where('estado', 0)->with(['tipoEvento' => function ($query) {
+            $query->withTrashed();
+        }])->get();
         $anular = true;
         return view('eventos.cancelarEvento', ['eventos' => $eventos, 'anular' => $anular]);
     }

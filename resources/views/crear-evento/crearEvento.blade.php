@@ -7,8 +7,7 @@
         <form class="row g-4 needs-validation mt-1" method="POST" novalidate id="formularioCrearEvento">
             @csrf
             <input type="hidden" name="evento_id" value="{{ isset($datos['evento_id']) ? $datos['evento_id'] : '' }}">
-            <input type="hidden" id="imagen" name='imagen'
-                value="{{ isset($datos['ruta_afiche']) ? $datos['ruta_afiche'] : '' }}">
+
             <div class="col-md-12">
                 @if (Route::currentRouteName() == 'evento.editar')
                     <h2 id="titulo">Editar evento</h2>
@@ -23,7 +22,7 @@
                         onchange="datoCambiado()" placeholder="Ingrese el nombre del evento" maxlength="64"
                         value="{{ isset($datos['nombreDelEvento']) ? $datos['nombreDelEvento'] : '' }}" required>
                     <div id="mensajeNombre" class="invalid-feedback">
-                        El nombre no puede estar vacio.
+                        El nombre no puede estar vacío.
                     </div>
                 </div>
                 <div class="row mt-4">
@@ -34,11 +33,12 @@
                                 onchange="datoCambiado()" aria-placeholder="Elija un tipo de evento..."
                                 data-id="{{ $datos['id_tipo_evento'] }}"
                                 required>
-                            
-                            <option value="{{ $datos['id_tipo_evento'] }}" {{$datos['id_tipo_evento'] ? 'selected' : '' }}>
-                                {{ $datos['nombre_tipo_evento'] }}
-                            </option>
-                        </select>
+                                @if( $datos['nombre_tipo_evento'] != '' )
+                                    <option value="{{ $datos['id_tipo_evento'] }}" {{$datos['id_tipo_evento'] ? 'selected' : '' }}>
+                                        {{ $datos['nombre_tipo_evento'] }}
+                                    </option>
+                                @endif
+                            </select>
                             <div class="invalid-feedback">
                                 Seleccione un tipo de evento.
                             </div>
@@ -50,9 +50,6 @@
                                 <option value="{{ $regionDato }}" @if ($datos['region'] == $regionDato || 'Departamental' == $regionDato) selected @endif>
                                     {{ $regionDato }}
                                 </option>
-                                @if ($datos['region'] == $regionDato && date('Y-m-d') >= $datos['inicio_inscripcion'])
-                                @break;
-                            @endif
                         @endforeach
                     </select>
                 </div>
