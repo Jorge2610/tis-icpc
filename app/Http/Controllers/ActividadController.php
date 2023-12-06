@@ -59,6 +59,38 @@ class ActividadController extends Controller
             $usuario->notify(new CambiosEnEvento($actividad));
         });
     }
+
+    protected function notificarCambios($actividad, $atributosAntiguos)
+    {
+        $cambios = array_diff_assoc($actividad->getOriginal(), $atributosAntiguos);
+        $fecha1 = \Carbon\Carbon::parse('inicio_actividad')->setTimezone('UTC');
+        $fecha2 = \Carbon\Carbon::parse($atributosAntiguos['inicio_actividad'])->setTimezone('UTC');
+        $fecha3 = \Carbon\Carbon::parse('fin_actividad')->setTimezone('UTC');
+        $fecha4 = \Carbon\Carbon::parse(['fin_actividad'])->setTimezone('UTC');
+
+        if (!$fecha1->equalTo($fecha2)) {
+            $cambios['inicio_actividad'] = $actividad->inicio_actividad;
+        } else {
+            unset($cambios['inicio_actividad']);
+        }
+        if (!$fecha3->equalTo($fecha4)) {
+            $cambios['fin_actividad'] =  $actividad->fin_actividad;
+        } else {
+            unset($cambios['fin_actividad']);
+        }
+
+        $inscritos = ['email' => 'jesusgonzales0968@gmail.com'];
+
+        if (!empty($cambios)) {
+            foreach ($inscritos as $tipo => $valor) {
+                // Asumo que $valor contiene la dirección de correo electrónico del usuario
+                $usuario = new User(); // Reemplaza 'Usuario' con el nombre de tu modelo de usuario
+                $usuario->email = $valor;
+                $usuario->notify(new CambiosEnActividad($actividad, $cambios));
+            }
+        }
+    }
+
     public function destroy($id)
     {
         try {
@@ -73,9 +105,9 @@ class ActividadController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $notificacion = $request->switchNotificacion;
             /**Obtenemos la actividad con ID**/
             $actividad = Actividad::find($id);
+            $atributosAntiguos = $actividad->getOriginal();
             $actividad->nombre = $request->nombre;
             $actividad->inicio_actividad = $request->inicio_evento;
             $actividad->fin_actividad = $request->fin_evento;
@@ -91,6 +123,9 @@ class ActividadController extends Controller
                 return response()->json(['mensaje' => 'La actividad ya existe', 'error' => true]);
             }
             $actividad->save();
+            if($request->notificacion){
+                $this->notificarCambios($actividad,$atributosAntiguos);
+            }
             return response()->json(['mensaje' => $notificacion, 'error' => false]);
         } catch (QueryException $e) {
             return $e->getMessage();

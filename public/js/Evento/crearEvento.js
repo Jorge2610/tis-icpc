@@ -116,7 +116,6 @@ const crearEvento = (formData) => {
                 response.data.error ? "danger" : "success"
             );
             mensajeRepetido = response.data.mensaje
-            console.log(mensajeRepetido)
             if(mensajeRepetido === 'El evento ya existe')  {
                 nombreEvento.classList.remove("is-valid")
                 nombreEvento.classList.add("is-invalid")
@@ -156,17 +155,17 @@ window.addEventListener("load", () => {
     axios
         .get("/api/tipo-evento")
         .then(function (response) {
+            const idTipoEvento = document.getElementById("tipoDelEvento").getAttribute("data-id");
             const select = document.getElementById("tipoDelEvento");
             const tiposDeEvento = response.data;
             tiposDeEvento.forEach(function (tipo) {
-                const option = document.createElement("option");
-                option.value = tipo.id;
-                option.text = tipo.nombre;
-                select.appendChild(option);
+                if(idTipoEvento != tipo.id){
+                    const option = document.createElement("option");
+                    option.value = tipo.id;
+                    option.text = tipo.nombre;
+                    select.appendChild(option);
+                }
             });
-            const idTipoEvento = document
-                .getElementById("tipoDelEvento")
-                .getAttribute("data-id");
             if (idTipoEvento != "") {
                 select.value = idTipoEvento;
             }
