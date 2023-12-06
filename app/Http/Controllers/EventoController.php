@@ -15,7 +15,9 @@ class EventoController extends Controller
 {
     public function index()
     {
-        $eventos = Evento::where('estado', 0)->with('tipoEvento', 'afiches', 'actividades')
+        $eventos = Evento::where('estado', 0)->with(['tipoEvento' => function ($query) {
+            $query->withTrashed();
+        }, 'afiches', 'actividades'])
             ->orderBy('updated_at', 'desc')
             ->get();
         return $eventos;
