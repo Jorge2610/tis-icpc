@@ -58,7 +58,8 @@ class EventoController extends Controller
             $evento->institucion        = $request->institucion;
             $evento->region             = $request->region;
             $evento->grado_academico    = $request->grado_academico;
-            $evento->cantidad_equipo     = $request->cantidad_equipo;
+            $evento->equipo_minimo      = $request->equipo_minimo;
+            $evento->equipo_maximo      = $request->equipo_maximo;
             $evento->requiere_registro  = $request->requiere_registro;
             $evento->edad_minima        = $request->edad_minima;
             $evento->edad_maxima        = $request->edad_maxima;
@@ -94,7 +95,8 @@ class EventoController extends Controller
             $evento->institucion        = $request->institucion;
             $evento->region             = $request->region;
             $evento->grado_academico    = $request->grado_academico;
-            $evento->cantidad_equipo     = $request->cantidad_equipo;
+            $evento->equipo_minimo      = $request->equipo_minimo;
+            $evento->equipo_maximo      = $request->equipo_maximo;
             $evento->requiere_registro  = $request->requiere_registro;
             $evento->edad_minima        = $request->edad_minima;
             $evento->edad_maxima        = $request->edad_maxima;
@@ -181,7 +183,8 @@ class EventoController extends Controller
             'institucion' => '',
             'region' => '',
             'grado_academico' => '',
-            'cantidad_equipo' => '',
+            'equipo_minimo' => '',
+            'equipo_maximo' => '',
             'requiere_registro' => '',
             'edad_minima' => '',
             'edad_maxima' => '',
@@ -204,7 +207,8 @@ class EventoController extends Controller
                 'institucion' => $evento->institucion,
                 'region' => $evento->region,
                 'grado_academico' =>  $evento->grado_academico,
-                'cantidad_equipo' => $evento->cantidad_equipo,
+                'equipo_minimo' => $evento->equipo_minimo,
+                'equipo_maximo' => $evento->equipo_maximo,
                 'requiere_registro' => $evento->requiere_registro,
                 'edad_minima' => $evento->edad_minima,
                 'edad_maxima' => $evento->edad_maxima,

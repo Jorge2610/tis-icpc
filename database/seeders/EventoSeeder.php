@@ -20,6 +20,7 @@ class EventoSeeder extends Seeder
         for ($i = 0; $i < 100; $i++) {
             $currentDateTime = $faker->dateTimeBetween('-1 year', 'now');
             $rangoMin = $faker->numberBetween(1, 100);
+            $rangoMinEquipo = $faker->numberBetween(1, 9);
 
             $created_at = $currentDateTime;
             $updated_at = $faker->dateTimeBetween($created_at, 'now');
@@ -39,12 +40,13 @@ class EventoSeeder extends Seeder
                 'institucion' => $faker->company() . ' - ' . $faker->companySuffix(),
                 'region' => $faker->city(),
                 'grado_academico' => $faker->randomElement(['ninguno', 'primaria', 'secundaria', 'universidad', 'postgrado', 'doctorado']),
-                'cantidad_equipo' => $faker->numberBetween(2, 10),
+                'equipo_minimo' => $faker->boolean(30)? null : $rangoMinEquipo,
+                'equipo_maximo' => $faker->numberBetween($rangoMinEquipo, 10),
                 'requiere_registro' => $faker->randomElement(['on', '']),
-                'edad_minima' => $rangoMin,
-                'edad_maxima' => $faker->numberBetween($rangoMin, 70),
+                'edad_minima' => $faker->boolean(30) ? null : $rangoMin,
+                'edad_maxima' => $faker->boolean(30) ? null : $faker->numberBetween($rangoMin, 70),
                 'genero' => $faker->randomElement(['Femenino', 'Masculino', '']),
-                'precio_inscripcion' => $faker->numberBetween(10, 100),
+                'precio_inscripcion' =>$faker->boolean(50) ? 0 : $faker->numberBetween(10, 100),
                 'estado' => $faker->boolean(80) ? 0 : $faker->numberBetween(1, 2),
                 'id_tipo_evento' => $faker->numberBetween(1, 10),
                 'created_at' => $created_at,
