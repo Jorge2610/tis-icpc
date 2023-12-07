@@ -5,10 +5,6 @@ let eventosTipo;
 let eventosOrden;
 let eventosBuscar;
 
-window.addEventListener("load", () => {
-    getEventos();
-    getTiposEventos();
-});
 
 const getEventos = async () => {
     let datos = await axios.get("/api/evento").then((response) => {
@@ -34,6 +30,34 @@ const getTiposEventos = async () => {
         console.error(error);
     });
 }
+
+const verCalendario = async() => {
+    let eventosCalendario = await eventos.map(function (evento) {
+        return {
+            title: evento.nombre,
+            start: evento.inicio_evento,
+        };
+    });
+    await console.log(eventosCalendario)
+    let calendarEl = await document.getElementById('calendar');
+    let calendar = await new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      locale: 'es',
+      headerToolbar: {
+        left: '', 
+        center: 'title',
+        right:'prev,next',
+      },
+      events:eventosCalendario
+    });
+    await calendar.render();
+}
+
+window.addEventListener("load",async () => {
+      await getEventos();
+      await getTiposEventos();
+      await verCalendario();
+});
 
 const buscarEvento = () => {
     let buscado = document.getElementById("buscadorDeEvento").value;

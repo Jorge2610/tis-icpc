@@ -44,7 +44,9 @@
         <div class="col-xl-12 col-lg-12" style="width: 565px;">
             <input id="datoEventos" type="text" value={{ $eventos }} hidden>
         </div>
+        
         <div class="row g-5" id="tarjetasRow">
+            <div class="col-md-auto">
             @foreach ($eventos as $evento)
                 <div class="col-md-auto">
                     <div class="tarjeta card mb-3" style="width: 540px; min-height: 200px; ">
@@ -78,8 +80,13 @@
                 </div>
             </div>
         @endforeach
+        </div>
     </div>
+    <div class="col-md-auto">
+            <div id="calendar"></div>
+        </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
     <script src="{{ asset('js/eventos.js') }}" defer></script>
 @endsection
