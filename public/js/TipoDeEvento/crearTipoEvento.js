@@ -8,8 +8,6 @@ let nombreAnterior = "";
 
 let idTipoEvento;
 const crearTipoEvento = (formData) => {
-    //Si el tipo de evento existe entonces se guarda este valor y servirá para la validación
-    nombreAnterior = inputNombre.value;
     axios
         .post("/api/tipo-evento", formData)
         .then(function (response) {
@@ -28,6 +26,8 @@ const crearTipoEvento = (formData) => {
             }
             /**Si existe un tipo de evento con el mismo nombre, se mantiene los datos del formulario**/
             if (mensaje === nombreIgual) {
+                //Si el tipo de evento existe entonces se guarda este valor y servirá para la validación
+                nombreAnterior = inputNombre.value;
                 inputNombre.classList.remove("is-valid");
                 inputNombre.classList.add("is-invalid");
                 inputDescripcion.classList.add("is-valid");
