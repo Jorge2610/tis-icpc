@@ -12,10 +12,13 @@ const checkTodasRango = document.getElementById("input-grado-Todas");
 const nombreEvento = document.getElementById("nombreDelEvento");
 const mensajeNombre = document.getElementById("mensajeNombre");
 const checkEquipo = document.getElementById("equipoCheck");
-const inputEquipo = document.getElementById("miembros-equipo");
 const checkNotificacion = document.getElementById("notificacion");
+const equipoMaximo = document.getElementById("equipoMaximo");
+const equipoMinimo = document.getElementById("equipoMinimo");
 
-let boolEquipo=true;
+let boolCheckEquipo=true;
+let boolMinEquipo =true;
+let boolMaxEquipo = true;
 let boolFecha = true;
 let boolCosto = true;
 let boolMinEdad = true;

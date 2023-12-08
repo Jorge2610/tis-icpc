@@ -252,23 +252,29 @@ checkTodasRango.addEventListener("change", () => {
 });
 
 checkEquipo.addEventListener("change",()=>{
-    if (boolEquipo) {
-        boolEquipo = false;
-        inputEquipo.dispatchEvent(new Event("change"));
+    if (boolMaxEquipo && boolMinEquipo && boolCheckEquipo) {
+        boolMaxEquipo = false;
+        boolMinEquipo = false;
+        equipoMaximo.dispatchEvent(new Event("change"));
+        equipoMinimo.dispatchEvent(new Event("change"));
     } else {
-        boolEquipo = true;
+        boolCheckEquipo = true;
     }
-    if (inputEquipo.classList.contains("is-invalid")) {
+
+    if (
+        equipoMaximo.classList.contains("is-invalid") ||
+        equipoMinimo.classList.contains("is-invalid")
+    ) {
         isValid(checkEquipo, false)
     } else {
-        isValid(checkEquipo, true)
+        isValid(checkEquipo, true);
     }
     if (!checkEquipo.checked) {
         checkEquipo.classList.remove("is-valid");
         checkEquipo.classList.remove("is-invalid");
     }
 });
-
+/*
 inputEquipo.addEventListener("change",()=>{
     if (checkEquipo.checked){
         if ((parseInt(inputEquipo.value)>=
@@ -300,7 +306,7 @@ inputEquipo.addEventListener("change",()=>{
     else{
         invalidFeedback.innerText="La cantidad no puede ser vacío."
     }
-});
+});*/
 
 document.querySelectorAll(".grado-requerido").forEach((Element) => {
     Element.addEventListener("change", () => {

@@ -165,7 +165,7 @@
                     <div class="col-md-6 mt-2">
                         <input type="checkbox" class="form-check-input border-dark fecha-editar"
                             onchange="datoCambiado()" id="equipoCheck"
-                            @if ($datos['cantidad_equipo']) checked @endif>
+                           >
                         <label class="form-check-label " for="equipoCheck">Por equipos</label>
                     </div>
 
@@ -183,14 +183,35 @@
 
                     <div class="col-md-6">
                         <div class="row" id="numero-integrantes" style="display:none;">
-                            <div class="col-md-4">
-                                <label class="col-form-label fecha-editar" for="costoEvento">Cantidad.</label>
+                        <div class="col-md-6">
+                                <div class="row " id="rangoEquipoMin">
+                                    <div class="col-md-3">
+                                        <label for="equipoMinimo" class="form-label">Min</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="input-group">
+                                            <input name="equipo_minimo" type="number"
+                                                class="form-control input-edad fecha-editar entero" min="2"
+                                                id="equipoMinimo" step="1" max="50"
+                                                value="{{ isset($datos['equipo_minimo']) ? $datos['equipo_minimo'] : '' }}">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-8">
-                                <input name="cantidad_equipo" type="number" class="form-control fecha-editar entero"
-                                    max="50" min="2" id="miembros-equipo" step="1"
-                                    value="{{ isset($datos['precio_inscripcion']) ? $datos['precio_inscripcion'] : '0.0' }}">
-                                <div id="equipoInvalido" class="invalid-feedback"></div>
+                            <div class="col-md-6">
+                                <div class="row " id="rangoEquipoMax">
+                                    <div class="col-md-3">
+                                        <label for="equipoMaximo" class="form-label">Max</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="input-group">
+                                            <input name="equipo_maximo" type="number"
+                                                class="form-control input-edad fecha-editar entero" id="equipoMaximo"
+                                                step="1" min="2" max="50"
+                                                value="{{ isset($datos['equipo_maximo']) ? $datos['equipo_maximo'] : '' }}">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -207,7 +228,7 @@
                                         min="1" max="5000" id="costoEvento" step="0.5"
                                         onchange="setCostoInvalidoFeedback()"
                                         value="{{ isset($datos['precio_inscripcion']) ? $datos['precio_inscripcion'] : '0.0' }}">
-                                    <div id="costoInvalido" class="invalid-feedback">chals e </div>
+                                    <div id="costoInvalido" class="invalid-feedback"></div>
                                 </div>
                             </div>
                         </div>
