@@ -46,45 +46,47 @@
         </div>
         
         <div class="row g-5" id="tarjetasRow">
-            <div class="col-md-auto">
-            @foreach ($eventos as $evento)
-                <div class="col-md-auto">
-                    <div class="tarjeta card mb-3" style="width: 540px; min-height: 200px; ">
-                        <div class="row g-0">
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title fw-bold" id="nombreEvento">{{ $evento->nombre }}</h5>
-                                    <h6 id="tipoDeEvento">{{ $evento->tipoEvento->nombre }}</h6>
-                                    <hr style="height:4px; opacity:1; border:none; background-color:{{ $evento->tipoEvento->color }};" >
-                                    </hr>
-                                    <p class="cart-text">
-                                        <span>Fecha del evento:</span>
-                                        <span id="fechaInicioEvento"
-                                            class="mx-2 fst-italic">{{ date('d-m-Y', strtotime($evento->inicio_evento)) }}</span>
-                                        <span id="fechaFinEvento"
-                                            class="fst-italic">{{ date('d-m-Y', strtotime($evento->fin_evento)) }}</span>
-                                    </p>
-                                    <div class="row text-end">
-                                        <a href="{{ route('evento.cargarEvento', ['nombre' => $evento->nombre]) }}"
-                                            id="linkEvento" class="text-decoration-none stretched-link">Saber
-                                            más...</a>
+            <div class="col-md-10">
+                @foreach ($eventos as $evento)
+                    <div class="col-md-auto">
+                        <div class="tarjeta card mb-3" style="width: 540px; min-height: 200px; ">
+                            <div class="row g-0">
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title fw-bold" id="nombreEvento">{{ $evento->nombre }}</h5>
+                                        <h6 id="tipoDeEvento">{{ $evento->tipoEvento->nombre }}</h6>
+                                        <hr style="height:4px; opacity:1; border:none; background-color:{{ $evento->tipoEvento->color }};" >
+                                        </hr>
+                                        <p class="cart-text">
+                                            <span>Fecha del evento:</span>
+                                            <span id="fechaInicioEvento"
+                                                class="mx-2 fst-italic">{{ date('d-m-Y', strtotime($evento->inicio_evento)) }}</span>
+                                            <span id="fechaFinEvento"
+                                                class="fst-italic">{{ date('d-m-Y', strtotime($evento->fin_evento)) }}</span>
+                                        </p>
+                                        <div class="row text-end">
+                                            <a href="{{ route('evento.cargarEvento', ['nombre' => $evento->nombre]) }}"
+                                                id="linkEvento" class="text-decoration-none stretched-link">Saber
+                                                más...</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="d-flex p-3 justify-content-center col-md-4" style="height: 195px">
 
-                            <img src="{{ URL::asset($evento->afiches->count() > 0 ? $evento->afiches->first()->ruta_imagen : '../image/aficheDefecto.png') }}"
-                                class="img-fluid rounded-start object-fit-scale" alt="...">
+                                <div class="d-flex p-3 justify-content-center col-md-4" style="height: 195px">
+
+                                    <img src="{{ URL::asset($evento->afiches->count() > 0 ? $evento->afiches->first()->ruta_imagen : '../image/aficheDefecto.png') }}"
+                                        class="img-fluid rounded-start object-fit-scale" alt="...">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
-        @endforeach
+            <div class="col-sm-2">
+                <div id="calendar"></div>
+            </div>
         </div>
-    </div>
-    <div class="col-md-auto">
-            <div id="calendar"></div>
-        </div>
+
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
