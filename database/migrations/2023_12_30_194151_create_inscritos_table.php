@@ -15,6 +15,8 @@ class CreateInscritosTable extends Migration
     {
         Schema::create('inscritos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_evento')->constrained('eventos')->onDelete('cascade');
+            $table->foreignId('id_participante')->constrained('participantes')->onDelete('cascade');
             $table->timestamps();
         });
     }

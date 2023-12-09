@@ -9,7 +9,7 @@ use App\Http\Controllers\PatrocinadorController;
 use App\Http\Controllers\SitioController;
 use App\Http\Controllers\TipoActividadController;
 use App\Http\Controllers\ActividadController;
-
+use App\Http\Controllers\ParticipanteController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -91,6 +91,33 @@ Route::group(['prefix' => 'actividad'], function () {
     Route::post('/', [ActividadController::class, 'store'])->name('actividad.store');
     Route::post('{id}', [ActividadController::class, 'update'])->name('actividad.update');
     Route::delete('{id}', [ActividadController::class, 'destroy'])->name('actividad.destroy');
-    Route::get('/obtener-actividad/{id}',[ActividadController::class,'obtenerActividades'])->name('actividad.obtener-actividad');
+    Route::get('/obtener-actividad/{id}', [ActividadController::class, 'obtenerActividades'])->name('actividad.obtener-actividad');
     Route::get('/{id}', [ActividadController::class, 'actividadPorEventoId'])->name('actividad.actividadPorEventoId');
 });
+
+Route::group(
+    [
+        'prefix' => 'participante',
+        'controller' => ParticipanteController::class
+    ],
+    function () {
+        Route::get('/', 'index');
+        Route::get('{id}', 'participantesEvento');
+        Route::post('/', 'inscribirEvento');
+        Route::any('/verificar/{id}', 'verificarParticipante');
+    }
+);
+
+Route::group(
+    [
+        'prefix' => 'grupo',
+        'controller' => GrupoController::class
+    ],
+    function () {
+        Route::get('/', 'index');
+        Route::get('{id}', 'show');
+        Route::post('/', 'store');
+        Route::post('{id}', 'update');
+        Route::delete('{id}', 'destroy');
+    }
+);

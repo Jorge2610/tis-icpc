@@ -42,7 +42,7 @@ class EventoSeeder extends Seeder
                 'grado_academico' => $faker->randomElement(['ninguno', 'primaria', 'secundaria', 'universidad', 'postgrado', 'doctorado']),
                 'equipo_minimo' => $faker->boolean(30)? null : $rangoMinEquipo,
                 'equipo_maximo' => $faker->numberBetween($rangoMinEquipo, 10),
-                'requiere_registro' => $faker->randomElement(['on', '']),
+                'talla' => $faker->randomElement(['on', '']),
                 'edad_minima' => $faker->boolean(30) ? null : $rangoMin,
                 'edad_maxima' => $faker->boolean(30) ? null : $faker->numberBetween($rangoMin, 70),
                 'genero' => $faker->randomElement(['Femenino', 'Masculino', '']),

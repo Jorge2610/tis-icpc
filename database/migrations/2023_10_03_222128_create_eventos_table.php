@@ -25,7 +25,7 @@ class CreateEventosTable extends Migration
             $table->string('grado_academico')->nullable();
             $table->integer('equipo_minimo')->nullable();
             $table->integer('equipo_maximo')->nullable();
-            $table->string('requiere_registro', 5)->nullable();
+            $table->string('talla', 5)->nullable();
             $table->integer('edad_minima')->nullable();
             $table->integer('edad_maxima')->nullable();
             $table->string('genero', 10)->nullable();

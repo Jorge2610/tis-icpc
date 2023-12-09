@@ -38,6 +38,6 @@ class Evento extends Model
     }
 
     public function inscritos(){
-        return $this->hasMany(Inscritos::class,'id_evento');
+        return $this->hasMany(Inscrito::class,'id_evento');
     }
 }

@@ -62,7 +62,7 @@ class EventoController extends Controller
             $evento->grado_academico    = $request->grado_academico;
             $evento->equipo_minimo      = $request->equipo_minimo;
             $evento->equipo_maximo      = $request->equipo_maximo;
-            $evento->requiere_registro  = $request->requiere_registro;
+            $evento->talla              = $request->talla;
             $evento->edad_minima        = $request->edad_minima;
             $evento->edad_maxima        = $request->edad_maxima;
             $evento->genero             = $request->genero;
@@ -99,7 +99,7 @@ class EventoController extends Controller
             $evento->grado_academico    = $request->grado_academico;
             $evento->equipo_minimo      = $request->equipo_minimo;
             $evento->equipo_maximo      = $request->equipo_maximo;
-            $evento->requiere_registro  = $request->requiere_registro;
+            $evento->talla              = $request->talla;
             $evento->edad_minima        = $request->edad_minima;
             $evento->edad_maxima        = $request->edad_maxima;
             $evento->genero             = $request->genero;
@@ -145,7 +145,7 @@ class EventoController extends Controller
         $inscritos = ['email' => 'ivpalacios47@gmail.com'];
 
         if (!empty($cambios)) {
-            foreach ($inscritos as $tipo => $valor) {
+            foreach ($inscritos as $key => $valor) {
                 // Asumo que $valor contiene la dirección de correo electrónico del usuario
                 $usuario = new User(); // Reemplaza 'Usuario' con el nombre de tu modelo de usuario
                 $usuario->email = $valor;
@@ -185,7 +185,7 @@ class EventoController extends Controller
             'grado_academico' => '',
             'equipo_minimo' => '',
             'equipo_maximo' => '',
-            'requiere_registro' => '',
+            'talla' => '',
             'edad_minima' => '',
             'edad_maxima' => '',
             'genero' => '',
@@ -197,23 +197,23 @@ class EventoController extends Controller
         if ($id !== null) {
             $evento = $this->show($id);
             $datos = [
-                'evento_id' => $evento->id,
-                'nombreDelEvento' => $evento->nombre,
-                'descripcionDelEvento' => $evento->descripcion,
-                'inicio_evento' => $evento->inicio_evento,
-                'fin_evento' => $evento->fin_evento,
-                'institucion' => $evento->institucion,
-                'region' => $evento->region,
-                'grado_academico' =>  $evento->grado_academico,
-                'equipo_minimo' => $evento->equipo_minimo,
-                'equipo_maximo' => $evento->equipo_maximo,
-                'requiere_registro' => $evento->requiere_registro,
-                'edad_minima' => $evento->edad_minima,
-                'edad_maxima' => $evento->edad_maxima,
-                'genero' => $evento->genero,
-                'precio_inscripcion' => $evento->precio_inscripcion,
-                'id_tipo_evento' => $evento->id_tipo_evento,
-                'nombre_tipo_evento' => $evento->tipoEvento->nombre
+                'evento_id'              => $evento->id,
+                'nombreDelEvento'        => $evento->nombre,
+                'descripcionDelEvento'   => $evento->descripcion,
+                'inicio_evento'          => $evento->inicio_evento,
+                'fin_evento'             => $evento->fin_evento,
+                'institucion'            => $evento->institucion,
+                'region'                 => $evento->region,
+                'grado_academico'        => $evento->grado_academico,
+                'equipo_minimo'          => $evento->equipo_minimo,
+                'equipo_maximo'          => $evento->equipo_maximo,
+                'talla'                  => $evento->talla,
+                'edad_minima'            => $evento->edad_minima,
+                'edad_maxima'            => $evento->edad_maxima,
+                'genero'                 => $evento->genero,
+                'precio_inscripcion'     => $evento->precio_inscripcion,
+                'id_tipo_evento'         => $evento->id_tipo_evento,
+                'nombre_tipo_evento'     => $evento->tipoEvento->nombre
             ];
         }
         return view('crear-evento.crearEvento', compact('datos'));
