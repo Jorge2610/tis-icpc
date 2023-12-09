@@ -110,14 +110,12 @@ Route::group(
 
 Route::group(
     [
-        'prefix' => 'grupo',
-        'controller' => GrupoController::class
+        'prefix' => 'equipo',
+        'controller' => EquipoController::class
     ],
     function () {
         Route::get('/', 'index');
-        Route::get('{id}', 'show');
-        Route::post('/', 'store');
-        Route::post('{id}', 'update');
-        Route::delete('{id}', 'destroy');
+        Route::post('/integrante', 'addIntegrante');
+        Route::post('/' , 'inscribirEquipo');
     }
 );
