@@ -48,6 +48,12 @@ class EventoController extends Controller
         return view('eventos.evento', ['evento' => $evento]);
     }
 
+    public function vistaInscripcion($id)
+    {
+        $evento = Evento::where('estado', 0)->find($id);
+        return view('inscripciones.participante', ['evento' => $evento]);
+    }
+
 
     public function store(Request $request)
     {

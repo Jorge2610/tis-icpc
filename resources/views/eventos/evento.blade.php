@@ -35,14 +35,15 @@
                         </div>
                         <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                             <div class="row mt-3 d-flex">
-                                <button type="button" class="btn btn-primary w-100 justify-content-center" disabled
-                                    hidden>Inscribirme</button>
+                                <a href={{ route('evento.inscripcion', ['id' => $evento->id]) }} type="button" class="btn btn-primary w-100 justify-content-center">
+                                    Inscribirme
+                                </a>
                             </div>
                         </div>
                     </div>
 
                     <hr>
-                    <h5> Información del evento: </h5>
+                    <h5>Información del evento:</h5>
                     <div class="row mt-3">
                         <div class="col-8">
                             <strong>Inicio del evento:</strong>
@@ -103,7 +104,7 @@
                             </div>
                         </div>
                     @endif
-{{-- 
+                    {{-- 
                     @if ($evento->requiere_registro)
                         <div class="row mt-3">
                             <div class="col-12">
@@ -220,7 +221,8 @@
                     @foreach ($evento->eventoPatrocinador as $patrocinador)
                         <div id="imagenPatrocinador" class="col-auto">
                             @if ($patrocinador->patrocinadores->enlace_web !== null)
-                                <a class="text-decoration-none" href="{{ $patrocinador->patrocinadores->enlace_web }}" target="_blank">
+                                <a class="text-decoration-none" href="{{ $patrocinador->patrocinadores->enlace_web }}"
+                                    target="_blank">
                                 @else
                                     <a class="text-decoration-none" title="{{ $patrocinador->patrocinadores->nombre }}"
                                         target="_blank">

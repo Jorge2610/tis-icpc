@@ -54,6 +54,7 @@ Route::group(['prefix' => 'eventos'], function () {
     //Route::get('crear-tipo', [TipoEventoController::class, 'mostrarCrearTipo'])->name('crear-tipo');
     Route::get('{nombre}', [EventoController::class, 'cargarEvento'])->name('evento.cargarEvento');
     Route::get('editar-evento/{id}', [EventoController::class, 'showEventForm'])->name('evento.editar');
+    Route::get('inscripcion-evento/{id}', [EventoController::class, 'vistaInscripcion'])->name('evento.inscripcion');
 });
 
 Route::group(['prefix' => 'afiche'], function () {
