@@ -62,6 +62,9 @@ const prepararFormData = () => {
     if(!checkEquipo.checked){
         formData.set("cantidad_equipo","");
     }
+    if(!document.getElementById("tallaCheck").checked){
+        formData.set("talla","");
+    }
     if(!crear){
         if(!checkNotificacion.checked){
             formData.set("notificacion","");

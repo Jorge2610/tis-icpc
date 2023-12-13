@@ -237,10 +237,10 @@
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-6">
-                        <input name="requiere_registro" type="checkbox"
+                        <input name="talla" type="checkbox"
                             class="form-check-input border-dark fecha-editar" onchange="datoCambiado()"
-                            id="registroCheck" @if ($datos['talla']) checked @endif>
-                        <label class="form-check-label" for="registroCheck">Requiere registro</label>
+                            id="tallaCheck" @if ($datos['talla']) checked @endif>
+                        <label class="form-check-label" for="tallaCheck">Requiere talla de polera</label>
                     </div>
                 </div>
 
