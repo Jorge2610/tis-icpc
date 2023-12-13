@@ -39,7 +39,7 @@ Route::group(['prefix' => 'admin/tipos-de-evento'], function () {
 Route::group(['prefix' => 'admin/eventos'], function () {
     Route::get('crear-evento', [EventoController::class, 'showEventForm'])->name('crear');
     Route::get('cancelar-evento', [EventoController::class, 'eventosValidos'])->name('cancelar-evento');
-    Route::get('anular-evento',[EventoController::class, 'eventosValidosAnular'])->name('anular-evento');
+    Route::get('anular-evento', [EventoController::class, 'eventosValidosAnular'])->name('anular-evento');
     Route::get('afiche', [AficheController::class, 'vistaTablaEventos'])->name('afiche.tablaEventos');
     Route::get('patrocinador', [PatrocinadorController::class, 'vistaTablaEventos'])->name('patrocinador.tablaEventos');
     Route::get('patrocinador/eliminar', [PatrocinadorController::class, 'vistaTablaEventosEliminar'])->name('patrocinador.tablaEventosEliminar');
@@ -73,14 +73,19 @@ Route::group(['prefix' => 'admin/patrocinador'], function () {
 
 Route::group(['prefix' => 'admin/actividad'], function () {
     Route::get('/', [ActividadController::class, 'vistaTablaActividades'])->name('actividad.crearActividad');
-    Route::get('crear-actividad/{id}',[ActividadController::class,'crearActividad'])->name('actividad.formCrearActividad');
-    Route::get('/eliminar',[ActividadController::class,'listarEventos'])->name('actividad.listar');
-    Route::get('/editar-actividad',[ActividadController::class,'listaEditar'])->name('actividad.listarEditar');
-    Route::get('/editar-actividad/{id}',[ActividadController::class,'editarActividad'])->name('actividad.editarActividad');
+    Route::get('crear-actividad/{id}', [ActividadController::class, 'crearActividad'])->name('actividad.formCrearActividad');
+    Route::get('/eliminar', [ActividadController::class, 'listarEventos'])->name('actividad.listar');
+    Route::get('/editar-actividad', [ActividadController::class, 'listaEditar'])->name('actividad.listarEditar');
+    Route::get('/editar-actividad/{id}', [ActividadController::class, 'editarActividad'])->name('actividad.editarActividad');
 });
 
 Route::get('editarEvento', [EventoController::class, 'showEditEventForm']);
 
 Route::group(['prefix' => 'admin/tipos-de-actividad'], function () {
     Route::view('/crear-tipo', 'tipo-actividad.crearTipoActividad')->name('crear-tipo');
+});
+
+Route::get('/mailable', function () {
+    $invoice = App\Models\Participante::find(1);
+    return new App\Mail\ConfirmacionParticipante($invoice);
 });
