@@ -33,13 +33,17 @@
                             <p class="fs-6">{{ $evento->tipoEvento->nombre }}
                             <p>
                         </div>
-                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-                            <div class="row mt-3 d-flex">
-                                <a href={{ route('evento.inscripcion', ['id' => $evento->id]) }} type="button" class="btn btn-primary w-100 justify-content-center">
-                                    Inscribirme
-                                </a>
+                        @if($evento->inicio_evento > date('Y-m-d\TH:i') || 
+                            $evento->actividades->where('inscripcion', 1)->filter(function($actividad) {
+                                return strtotime($actividad->fin_actividad) >= strtotime('today');})->count() > 0)
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+                                <div class="row mt-3 d-flex">
+                                    <a href={{ route('evento.inscripcion', ['id' => $evento->id]) }} type="button" class="btn btn-primary w-100 justify-content-center">
+                                        Inscribirme
+                                    </a>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
 
                     <hr>
@@ -177,7 +181,15 @@
                 <h3>Actividades</h3>
                 <hr>
                 @foreach ($evento->actividades as $actividad)
-                    <div class="card my-3" style="min-height: auto">
+                    <div class="card my-3
+                        @if($actividad->fin_actividad < date('Y-m-d\TH:i'))
+                            shadow-none
+                        @elseif($actividad->inicio_actividad <= date('Y-m-d\TH:i') && date('Y-m-d\TH:i') <= $actividad->fin_actividad )
+                            shadow-lg bg-body rounded
+                        @else
+                            shadow bg-body rounded
+                        @endif
+                    " style="min-height: auto">
                         <div class="card-body mt-3">
                             <h5 class="card-title text-center fw-bold">{{ $actividad->nombre }}</h5>
                             <hr>

@@ -37,6 +37,7 @@ class ActividadController extends Controller
             $actividad->inicio_actividad = $request->inicio_evento;
             $actividad->fin_actividad = $request->fin_evento;
             $actividad->descripcion = $request->descripcion;
+            $actividad->inscripcion = $request->inscripcion;
             $actividad->id_evento = $request->evento_id;
             /**Antes de guardar debemos revisar si el nombre ya existe**/
             $nombreExistente = Actividad::where('id_evento', $actividad->id_evento)
@@ -126,7 +127,7 @@ class ActividadController extends Controller
             if($request->notificacion){
                 $this->notificarCambios($actividad,$atributosAntiguos);
             }
-            return response()->json(['mensaje' => $notificacion, 'error' => false]);
+            return response()->json(['mensaje' => 'Actividad actualizada exitosamente', 'error' => false]);
         } catch (QueryException $e) {
             return $e->getMessage();
         }

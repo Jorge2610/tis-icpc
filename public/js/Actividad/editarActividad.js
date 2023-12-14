@@ -9,13 +9,13 @@ const mensajeFechaInicio = document.getElementById("mensajeFechaInicio");
 const mensajeFechaFin = document.getElementById("mensajeFechaFin");
 const switchMensaje = document.getElementById("notificacion")
 let nombreAnterior = ''
+let valorCheckbox = ""
 
 /**PETICIONES a AXIOS**/
 /**EDITAR   ACTIVIDAD**/
 const editarActividad = (formData) => {
-    nombreAnterior = inputNombre.value
     const estaActivado = switchMensaje.checked
-    const valorCheckbox = estaActivado ? "on":
+    valorCheckbox = estaActivado ? "on":
     formData.append("notificacion",valorCheckbox)
 
     axios.post("/api/actividad/"+formData.get("id"),formData)
@@ -28,6 +28,7 @@ const editarActividad = (formData) => {
             response.data.error ? "danger" : "success"
         );
         if(mensaje === nombreIgual){
+            nombreAnterior = inputNombre.value
             inputNombre.classList.remove('is-valid')
             inputNombre.classList.add('is-invalid')
             mensajeNombre.innerHTML = 'La actividad ya existe'

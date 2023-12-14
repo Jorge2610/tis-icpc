@@ -1,12 +1,23 @@
 const form = document.getElementById("formularioActividad");
 const inputNombre = document.getElementById('nombreActividad')
 const mensajeNombre = document.getElementById('mensajeNombre')
+const switchInscripcion = document.getElementById("inscripcion")
+let valorCheckbox = 0
 let nombreAnterior = ''
 
 /**PETICIONES a AXIOS**/
 /**CREAR ACTIVIDAD**/
 const crearActividad = (formData) => {
     nombreAnterior = inputNombre.value
+    /**Si se muestra el switch, vamos a adjuntar al form**/
+    if(switchInscripcion){
+        const estaActivado = switchInscripcion.checked
+        console.log(estaActivado)
+        valorCheckbox = estaActivado ? 1:0
+    }
+    formData.append("inscripcion",valorCheckbox)
+
+    console.log(formData)
     axios.post("/api/actividad", formData)
     .then(function(response){
         const mensaje = response.data.mensaje

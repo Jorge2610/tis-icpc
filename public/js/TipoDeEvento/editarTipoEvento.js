@@ -17,7 +17,7 @@ const dataTableOptions = {
         lengthMenu: "Mostrar _MENU_ entradas",
         zeroRecords: "Ningún tipo de evento encontrado",
         info: "Mostrando de _START_ a _END_ de un total de _TOTAL_ registros",
-        infoEmpty: "Ningún usuario encontrado",
+        infoEmpty: "Ningún tipo de evento encontrado",
         infoFiltered: "(filtrados desde _MAX_ registros totales)",
         search: "Buscar:",
         loadingRecords: "Cargando...",

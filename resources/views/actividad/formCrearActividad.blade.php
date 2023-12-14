@@ -59,6 +59,17 @@
                         </div>
 
                         <div class="row">
+                            @if($evento->actividades->where('inscripcion', 1)->filter(function($actividad) {
+                                return strtotime($actividad->fin_actividad) >= strtotime('today');})->count() > 0)
+                            @else
+                                <div class="form-check form-switch mt-4">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="inscripcion" checked>
+                                    <label class="form-check-label" for="inscripcion">¿Desea que sea una actividad de inscripción?</label>
+                                </div>
+                            @endif
+                        </div>
+
+                        <div class="row">
                             <div class="col-md-12 mt-4">
                                 <label for="detalleActividad" class="form-label">Descripción de la actividad</label>
                                 <textarea name="descripcion" class="form-control" id="detalleActividad" rows="3" style="resize: none;"
