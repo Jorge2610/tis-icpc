@@ -167,6 +167,8 @@
                             onchange="datoCambiado()" id="equipoCheck"
                            >
                         <label class="form-check-label " for="equipoCheck">Por equipos</label>
+                        <div class="invalid-feedback" id="ValidarRangoEquipo">
+                        </div>
                     </div>
 
                     <div class="col-md-6 mt-2">

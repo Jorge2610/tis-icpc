@@ -255,6 +255,7 @@ checkEquipo.addEventListener("change",()=>{
     if (boolMaxEquipo && boolMinEquipo && boolCheckEquipo) {
         boolMaxEquipo = false;
         boolMinEquipo = false;
+
         equipoMaximo.dispatchEvent(new Event("change"));
         equipoMinimo.dispatchEvent(new Event("change"));
     } else {
@@ -265,48 +266,61 @@ checkEquipo.addEventListener("change",()=>{
         equipoMaximo.classList.contains("is-invalid") ||
         equipoMinimo.classList.contains("is-invalid")
     ) {
-        isValid(checkEquipo, false)
+        isValid(checkEquipo, false);
+        isValid(equipoMaximo,false);
+        isValid(equipoMinimo,false);
     } else {
         isValid(checkEquipo, true);
     }
     if (!checkEquipo.checked) {
         checkEquipo.classList.remove("is-valid");
         checkEquipo.classList.remove("is-invalid");
+        equipoMinimo.classList.remove("is-invalid");
+        equipoMaximo.classList.remove("is-invalid");
     }
+    
 });
-/*
-inputEquipo.addEventListener("change",()=>{
-    if (checkEquipo.checked){
-        if ((parseInt(inputEquipo.value)>=
-            parseInt(inputEquipo.min) && parseInt(inputEquipo.value)<= parseFloat(inputEquipo.max)
-            )) {
-            isValid(inputEquipo, true);
-        }else{
-            isValid(inputEquipo, false);
-        }
-    } 
-    else {
-        isValid(inputEquipo, true);
-    }
-    if (boolEquipo) {
-        boolEquipo = false;
-        checkEquipo.dispatchEvent(new Event("change"));
-
-    } else {
-        boolEquipo = true;
-    }
-    let invalidFeedback = document.getElementById("equipoInvalido");
-    let value = inputEquipo.value;
-    value = parseFloat(value);
-    if (!isNaN(value)) {
-        invalidFeedback.innerText =
-            value < parseFloat(inputEquipo.min) ? "Cantidad mínima " + inputEquipo.min  :
-                value > parseFloat(inputEquipo.max) ? "Cantidad máxima " + inputEquipo.max : "";
+equipoMinimo.addEventListener("change",()=>{
+    if(equipoMinimo.value!==""
+        &&((parseInt(equipoMinimo.value)>parseInt(equipoMinimo.max))
+        ||(parseInt(equipoMinimo.value)<parseInt(equipoMinimo.min)))){
+        document.getElementById("ValidarRangoEquipo").innerText="Rango de cantidad de equipos no valido";
+        isValid(equipoMinimo,false);
     }
     else{
-        invalidFeedback.innerText="La cantidad no puede ser vacío."
+        isValid(equipoMinimo,true);
     }
-});*/
+    if(boolMinEquipo && boolMaxEquipo && boolCheckEquipo){
+        boolMaxEquipo = false;
+        boolCheckEquipo = false;
+        equipoMaximo.dispatchEvent(new Event("change"));
+        checkEquipo.dispatchEvent(new Event("change"));
+    } else {
+        boolMinEquipo = true;
+    }
+})
+equipoMaximo.addEventListener("change",()=>{
+    if(equipoMaximo.value!==""
+    &&((parseInt(equipoMaximo.value)<=parseInt(equipoMaximo.max))
+    &&(parseInt(equipoMaximo.value)>=parseInt(equipoMaximo.min)))){
+        isValid(equipoMaximo,true);
+        equipoMinimo.max=equipoMaximo.value;
+    }else{if(equipoMaximo.value!==""){
+            document.getElementById("ValidarRangoEquipo").innerText="La cantidad máxima de equipos no puede ser vacío.";
+        }else{
+            document.getElementById("ValidarRangoEquipo").innerText="Rango de cantidad de equipos no válido.";
+        }
+        isValid(equipoMaximo,false);
+    }
+    if(boolMinEquipo && boolMaxEquipo && boolCheckEquipo){
+        boolMinEquipo = false;
+        boolCheckEquipo = false;
+        equipoMinimo.dispatchEvent(new Event("change"));
+        checkEquipo.dispatchEvent(new Event("change"));
+    } else {
+        boolMaxEquipo = true;
+    }
+})
 
 document.querySelectorAll(".grado-requerido").forEach((Element) => {
     Element.addEventListener("change", () => {
