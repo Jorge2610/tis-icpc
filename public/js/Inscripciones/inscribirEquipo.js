@@ -5,16 +5,36 @@ const nombreInput =document.getElementById("nombreEquipo");
 const correoInput = document.getElementById('inputEmail');
 const validarGmail1= document.getElementById("codigoValidacion");
 const contenedorCorreo = document.getElementById('contenedorCorreo');
+const buttonConfirmacion = document.getElementById('button-equipo-confirmacion');
+const buttonCancelacion = document.getElementById('button-equipo-cancelar'); 
 
 let crear=true;
 //funciones button
 const ingresarNombreEquipo = () => {
     nombreInput.dispatchEvent(new Event("change"));
     if(nombreInput.classList.contains("is-valid")){
-        contenido1.collapse("show");
+        if(nombreInput.disabled){
+            if(validarGmail1.style.display=='none')
+                mostrarValidacion();
+            else
+                console.log("hola")
+        }else{
+            contenido1.collapse("show");
+            nombreInput.disabled=true ; 
+        }
+        
     }
     else{
-        console.log("esto no es valido");
+        contenido1.collapse("show");
+        nombreInput.disabled=true ; 
+    } 
+
+}
+const cancelarEquipo = ()=>{
+    if(!nombreInput.disabled){
+        $('#modal-inscribir').modal("hide");
+    }else{
+
     }
 }
 const mostrarValidacion = ()=>{
@@ -36,10 +56,15 @@ const registrarEquipo = ()=>{
         });
     }
 }
+const atrasCorreo = ()=>{
+    contenido1.collapse("hide");
+    removerValidacion(correoInput);
+    nombreInput.disabled=false;
+}
 //funciones
 const crearForData= ()=>{
     let formData={
-        
+
     }
 }
 //validacion de inputs
@@ -68,12 +93,16 @@ const inputEmail = (input)=>{
     }
 
 }
-
+const removerValidacion= (input)=>{
+    input.value="";
+    input.classList.remove("is-valid");
+    input.classList.remove("is-invalid");
+}
 //eventos
 modal.addEventListener('hidden.bs.modal', function (event) {
-    console.log("hola comoestas ");
-    nombreInput.classList.remove("is-valid");
-    nombreInput.classList.remove("is-invalid");
+    removerValidacion(nombreInput);
+    nombreInput.disabled=false;
+    removerValidacion(correoInput);
     contenido1.collapse("hide"); 
 })
 nombreInput.addEventListener("change",()=>{

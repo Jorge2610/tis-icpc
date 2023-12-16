@@ -7,14 +7,14 @@
             </div>
                                             
             <div class="modal-body">
-                <div class="justify-content-center">
+                <div class="justify-content-center" id="containerNombre">
                     <label class="col-form-label" for="documentoDeIdentificacion">
                        <h5>Nombre del equipo</h5>
                     </label>
                     <input id="nombreEquipo" type="text" class="form-control" >
                     <div class="invalid-feedback">
                     El nombre no puede estar vacío.
-                </div>
+                    </div>
                 </div>
                 {{-- crear equipo --}}
                 <div class="collapse mt-2" id="collapGmail" >
@@ -23,25 +23,11 @@
                         <label for="inputEmail">Correo Electrónico</label>
                         <input type="email" class="form-control" id="inputEmail" 
                         aria-describedby="emailHelp" placeholder="Ingresa tu correo electrónico" required>
-                        <div class="col-md-12 p-3">
-                            <button type="button" class="btn btn-secondary btn-sm">Atras</button>
-                            <button type="button" class="btn btn-primary btn-sm" 
-                            onclick="mostrarValidacion()">
-                                Registrar Correo
-                            </button> 
-                        </div>
                     </div>
                     <div id="codigoValidacion" style="display: none;">
                         <p>Enviamos un codigo a su correo coloque el código</p>
                         <label for="codigo1">Codigo</label>
                         <input type="text" id="codigo1" class="form-control" >
-                        <div class="col-md-12 p-3">
-                            <button type="button" class="btn btn-secondary btn-sm">Atras</button>
-                            <button type="button" class="btn btn-primary btn-sm" 
-                            onclick="mostrarValidacion()">
-                                Enviar
-                            </button> 
-                        </div>
                     </div>
                 </div>
                 </div>
@@ -61,8 +47,14 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button  type="button" class="btn btn-primary"  onclick="ingresarNombreEquipo()">Inscribirme</button>
+                <button id="button-equipo-cancelar"type="button"
+                 class="btn btn-secondary" onclick="cancelarEquipo()">
+                    Cancelar
+                </button>
+                <button id="button-equipo-confirmacion"  type="button" 
+                class="btn btn-primary"  onclick="ingresarNombreEquipo()">
+                    Inscribir
+                </button>
             </div>
         </div>
     </div>
