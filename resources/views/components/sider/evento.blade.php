@@ -23,6 +23,10 @@
             class="list-group-item list-group-item-action py-2 border-0" id="cancelarEventoSider">
                 Anular evento
             </a>
+            <a href="{{ url('/admin/notificacion/enviar') }}"
+                class="list-group-item list-group-item-action py-2 border-0" id="cancelarEventoSider">
+                Notificar evento
+            </a>
         </div>
     </div>
 </div>

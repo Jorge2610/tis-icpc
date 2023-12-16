@@ -8,8 +8,11 @@ use App\Notifications\cambiosEnEvento;
 use App\Models\Evento;
 use App\Models\Anulado;
 use App\Models\Cancelado;
+use App\Models\Participante;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
+
+use Illuminate\Support\Facades\Log;
 
 class EventoController extends Controller
 {
@@ -148,14 +151,19 @@ class EventoController extends Controller
             unset($cambios['fin_evento']);
         }
 
-        $inscritos = ['email' => 'ivpalacios47@gmail.com'];
+        $participantes = Participante::whereHas('inscritos', function ($q) use ($evento) {
+          $q->where('id_evento', $evento->id);
+        })->get();
 
         if (!empty($cambios)) {
-            foreach ($inscritos as $key => $valor) {
-                // Asumo que $valor contiene la dirección de correo electrónico del usuario
-                $usuario = new User(); // Reemplaza 'Usuario' con el nombre de tu modelo de usuario
-                $usuario->email = $valor;
-                $usuario->notify(new CambiosEnEvento($evento, $cambios));
+            foreach ($participantes as $usuario) {
+                try {
+                    $usuario->notify(new CambiosEnEvento($evento, $cambios));
+                } catch (\Exception $e) {
+                    Log::error('Error al enviar notificación: ' . $e->getMessage());
+                    // O lanza una excepción si es necesario para interrumpir la ejecución
+                    // throw new \Exception('Error al enviar notificación: ' . $e->getMessage());
+                }
             }
         }
     }

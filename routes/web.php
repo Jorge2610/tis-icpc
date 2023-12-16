@@ -7,6 +7,7 @@ use App\Http\Controllers\TipoEventoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SitioController;
 use App\Http\Controllers\ActividadController;
+use App\Http\Controllers\NotificacionController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -79,6 +80,13 @@ Route::group(['prefix' => 'admin/actividad'], function () {
     Route::get('/editar-actividad/{id}', [ActividadController::class, 'editarActividad'])->name('actividad.editarActividad');
 });
 
+Route::group([
+    'prefix' => 'admin/notificacion',
+    'controller' => NotificacionController::class
+], function () {
+    Route::get('/enviar', 'tablaEventos')->name('notificacion.tabla');
+});
+
 Route::get('editarEvento', [EventoController::class, 'showEditEventForm']);
 
 Route::group(['prefix' => 'admin/tipos-de-actividad'], function () {
@@ -87,5 +95,10 @@ Route::group(['prefix' => 'admin/tipos-de-actividad'], function () {
 
 Route::get('/mailable', function () {
     $invoice = App\Models\Participante::find(1);
-    return new App\Mail\ConfirmacionParticipante($invoice);
+    $mensaje = "holaaa \n" . "como estas \n" . "estamos para servirte";
+    $evento = App\Models\Evento::find(1);
+    $notificacion = ['asunto' => 'Cambio de estado', 'mensaje' => $mensaje, 'adjunto' => null, 'id' => 1, 'nombre' => $evento->nombre]; // Puedes reemplazar esto con el usuario al que deseas enviar la notificación
+    $notification = new App\Notifications\NotificacionEvento($notificacion);
+
+    return $notification->toMail($invoice);
 });

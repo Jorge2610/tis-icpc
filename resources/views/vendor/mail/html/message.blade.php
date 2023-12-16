@@ -21,7 +21,8 @@
 {{-- Footer --}}
 @slot('footer')
 @component('mail::footer')
-© {{ date('Y') }} {{ config('app.name') }}. @lang('All rights reserved.')
+<a href=""> <img src={{ asset('image/logo-umss.png')}} style="height: 70px; width:auto;"> <br></a>
+© {{ date('Y') }} {{ config('app.name') }}. @lang('Todos los derechos reservados.')
 @endcomponent
 @endslot
 @endcomponent
