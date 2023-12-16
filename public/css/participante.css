@@ -1,0 +1,31 @@
+/* Personaliza el form-select */
+.custom-select {
+    /* Agrega estilos de fondo, bordes y color de texto */
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    color: #495057;
+
+    /* Ajusta el estilo del cursor al pasar el ratón sobre el form-select */
+    cursor: pointer;
+
+    /* Ajusta el tamaño del texto y el relleno interno */
+    font-size: 16px;
+    color: #000;
+    padding: 5px;
+
+    /* Ajusta la apariencia del borde redondeado */
+    border-radius: 5px;
+
+    /* Ajusta la apariencia del cursor al pasar el ratón sobre las opciones */
+    cursor: pointer;
+    min-width: 105px;
+    text-align: center;
+}
+
+/* Estilo para la opción seleccionada */
+.custom-select option:checked {
+    /* Cambia el color de fondo de la opción seleccionada */
+    background-color: #007bff;
+    /* Cambia el color del texto de la opción seleccionada */
+    color: #fff;
+}

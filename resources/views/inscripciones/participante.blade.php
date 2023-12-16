@@ -69,10 +69,13 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="telefonoParticipante" class="form-label">Teléfono *</label>
-                                <input type="tel" class="form-control" id="telefonoParticipante"
-                                    pattern="[+][0-9]{3} [0-9]{8}" placeholder="Ingrese su número telefónico..." required>
-                                <div class="form-text">
-                                    Formato: +591 12345678
+                                <div class="input-group">
+                                    <select class="custom-select" style="max-width: 105px;" id="selectPais"
+                                        onchange="setCodPais()">
+                                    </select>
+                                    <span class="input-group-text rounded-start" id="codPais"></span>
+                                    <input type="tel" class="form-control" id="telefonoParticipante" maxlength="15"
+                                        pattern="[0-9]{6,15}" placeholder="Ingrese su número telefónico..." required>
                                 </div>
                             </div>
                         </div>
@@ -98,7 +101,12 @@
                                 <select id="tallaParticipante" class="form-select form-select" aria-label=".form-select-sm"
                                     {{ $evento->talla == 'on' ? 'required' : '' }}>
                                     <option value="" selected>Seleccione su talla</option>
-                                    <option value="Tallas...">Tallas...</option>
+                                    <option value="XS">XS</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                    <option value="XXL">XXL</option>
                                 </select>
                             </div>
                         </div>
@@ -149,5 +157,7 @@
             </div>
         </div>
     </div>
+    <link href="{{ asset('css/participante.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/Inscripciones/codPaises.js') }}" defer></script>
     <script src="{{ asset('js/Inscripciones/participante.js') }}" defer></script>
 @endsection

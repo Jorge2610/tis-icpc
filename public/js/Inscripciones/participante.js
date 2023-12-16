@@ -11,10 +11,30 @@ window.addEventListener("load", async () => {
     idEvento = window.location.href.split("/");
     idEvento = idEvento[idEvento.length - 1];
     nombreEvento = document.getElementById("nombreEvento").innerText;
+    cargarPaises();
 });
 
-const validarInputs = (nombreEvento) => {
-    console.log(nombreEvento);
+const cargarPaises = () => {
+    let select = document.getElementById("selectPais");
+    let options = "";
+    PAISES.map(pais => {
+        options += `
+            <option title=${pais.name_es} value=${pais.dial_code} ${pais.code_3 === "BOL" ? "selected" : ""}>
+                ${pais.emoji} ${pais.code_3}
+            </option>
+        `;
+    });
+    select.innerHTML = options;
+    setCodPais();
+};
+
+const setCodPais = () => {
+    let select = document.getElementById("selectPais");
+    let codPais = document.getElementById("codPais");
+    codPais.innerText = select.value;
+}
+
+const validarInputs = () => {
     let form = document.getElementById("formInscripcionParticipante");
     if (form.checkValidity()) {
         insribirParticipante();
@@ -80,5 +100,6 @@ const setCarnetFeedBack = () => {
 const resetForm = () => {
     let form = document.getElementById("formInscripcionParticipante");
     form.reset();
+    setCodPais();
     form.classList.remove("was-validated");
 };
