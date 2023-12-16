@@ -70,7 +70,7 @@
                             <div class="mb-3">
                                 <label for="telefonoParticipante" class="form-label">Teléfono *</label>
                                 <div class="input-group">
-                                    <select class="custom-select" style="max-width: 105px;" id="selectPais"
+                                    <select class="custom-select" id="selectPais"
                                         onchange="setCodPais()">
                                     </select>
                                     <span class="input-group-text rounded-start" id="codPais"></span>
@@ -158,6 +158,17 @@
         </div>
     </div>
     <link href="{{ asset('css/participante.css') }}" rel="stylesheet">
+    <script type="module" defer>
+        import {
+            polyfillCountryFlagEmojis
+        } from "https://cdn.skypack.dev/country-flag-emoji-polyfill";
+        polyfillCountryFlagEmojis();
+    </script>
+    <style>
+        * {
+            font-family: "Twemoji Country Flags",  "Segoe UI", "Helvetica Neue", "Noto Sans", "Liberation Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        }
+    </style>
     <script src="{{ asset('js/Inscripciones/codPaises.js') }}" defer></script>
     <script src="{{ asset('js/Inscripciones/participante.js') }}" defer></script>
 @endsection
