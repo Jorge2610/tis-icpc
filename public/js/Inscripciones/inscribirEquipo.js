@@ -7,6 +7,7 @@ const validarGmail1= document.getElementById("codigoValidacion");
 const contenedorCorreo = document.getElementById('contenedorCorreo');
 const buttonConfirmacion = document.getElementById('button-equipo-confirmacion');
 const buttonCancelacion = document.getElementById('button-equipo-cancelar'); 
+const codigoInput1 = document.getElementById('codigo1');
 
 let crear=true;
 //funciones button
@@ -15,18 +16,14 @@ const ingresarNombreEquipo = () => {
     if(nombreInput.classList.contains("is-valid")){
         if(nombreInput.disabled){
             if(validarGmail1.style.display=='none')
-                mostrarValidacion();
+                registrarCorreo();
             else
-                console.log("hola")
+                verificarCodigo();
         }else{
             contenido1.collapse("show");
             nombreInput.disabled=true ; 
         }
         
-    }
-    else{
-        contenido1.collapse("show");
-        nombreInput.disabled=true ; 
     } 
 
 }
@@ -34,14 +31,24 @@ const cancelarEquipo = ()=>{
     if(!nombreInput.disabled){
         $('#modal-inscribir').modal("hide");
     }else{
-
+        if(validarGmail1.style.display=='none'){
+            atrasCorreo();
+        }else{
+            atrasCodigo();
+        }
     }
 }
-const mostrarValidacion = ()=>{
+const registrarCorreo = ()=>{
     correoInput.dispatchEvent(new Event("change"));
     if(correoInput.classList.contains("is-valid")){
         validarGmail1.style.display='block';
         contenedorCorreo.style.display="none";
+    }
+}
+const verificarCodigo=()=>{
+    codigoInput1.dispatchEvent(new Event("change"));
+    if(codigoInput1.classList.contains("is-valid")){
+        console.log("registra tio porfavor");
     }
 }
 const registrarEquipo = ()=>{
@@ -60,6 +67,11 @@ const atrasCorreo = ()=>{
     contenido1.collapse("hide");
     removerValidacion(correoInput);
     nombreInput.disabled=false;
+}
+const atrasCodigo =()=>{
+    removerValidacion(codigoInput1);
+    validarGmail1.style.display='none';
+    contenedorCorreo.style.display="block";
 }
 //funciones
 const crearForData= ()=>{
@@ -110,5 +122,8 @@ nombreInput.addEventListener("change",()=>{
 })
 correoInput.addEventListener("change",()=>{
     inputRequired(correoInput);
-    inputEmail(correoInput)
+    inputEmail(correoInput);
+})
+codigoInput1.addEventListener("change",()=>{
+    inputRequired(codigoInput1);
 })
