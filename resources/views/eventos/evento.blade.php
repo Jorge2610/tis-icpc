@@ -36,13 +36,22 @@
                         @if($evento->inicio_evento > date('Y-m-d\TH:i') || 
                             $evento->actividades->where('inscripcion', 1)->filter(function($actividad) {
                                 return strtotime($actividad->fin_actividad) >= strtotime('today');})->count() > 0)
-                            <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-                                <div class="row mt-3 d-flex">
-                                    <a href={{ route('evento.inscripcion', ['id' => $evento->id]) }} type="button" class="btn btn-primary w-100 justify-content-center">
-                                        Inscribirme
-                                    </a>
-                                </div>
+                        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+                            <div class="row mt-3 d-flex">
+                                <button type="button" class="btn btn-primary w-100 justify-content-center"
+                                data-bs-toggle="modal" data-bs-target="#modal-inscribir">
+                                    Inscribirme
+                                </button>
+                                <!-- Modal -->
+                                @if($evento->equipo_maximo == null)
+                                    @component('components.modal-inscribir-participante')
+                                @else  
+                                    @component('components.modal-inscribir-grupo')
+                                @endif
+                                    @slot ('evento',$evento)
+                                    @endcomponent
                             </div>
+                        </div>
                         @endif
                     </div>
 

@@ -17,7 +17,6 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
     <script src="{{ asset('js/layout.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -47,8 +46,8 @@
 
                     <!-- Toggle button -->
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#sidebarMenu" aria-controls="sidebarMenu"
-                        aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                        data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+                        aria-label="{{ __('Toggle navigation') }}">
                         <i class="fas fa-bars"></i>
                     </button>
 
@@ -80,13 +79,13 @@
             <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
                 <div class="position-sticky">
                     <div class="list-group list-group-flush mx-1 mt-3">
-                        <div class="accordion" id="menuLateral" >
-                            <x-sider.tipo-evento/>
-                            <x-sider.evento/>
-                            <x-sider.actividad/>
-                            <x-sider.afiche/>
-                            <x-sider.patrocinador/>
-                            <x-sider.sitios-interes/>
+                        <div class="accordion" id="menuLateral">
+                            <x-sider.tipo-evento />
+                            <x-sider.evento />
+                            <x-sider.actividad />
+                            <x-sider.afiche />
+                            <x-sider.patrocinador />
+                            <x-sider.sitios-interes />
                         </div>
                     </div>
                 </div>
