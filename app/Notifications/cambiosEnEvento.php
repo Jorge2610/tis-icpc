@@ -7,14 +7,13 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-
 class CambiosEnEvento extends Notification implements ShouldQueue
 {
-
     use Queueable;
 
     protected $evento;
     protected $cambios;
+
     /**
      * Create a new notification instance.
      *
@@ -46,25 +45,13 @@ class CambiosEnEvento extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         $eventoNombreUrl = str_replace(' ', '%20', $this->evento->nombre);
-        return (new MailMessage())
+        return (new MailMessage)->markdown('emails.notificacion.cambios', [
+            'evento' => $this->evento,
+            'notificable' => $notifiable,
+        ])
             ->subject('Notificación de cambios en el evento: ' . $this->evento->nombre)
-            ->markdown('emails.notificacion.cambiosEvento', [
-                'evento' => $this->evento,
-                'notificable' => $notifiable,
-            ])
             ->greeting('Notificación de cambios')
             ->action('Ver detalles del evento', url('/eventos/' . $eventoNombreUrl));
-    }
-
-    
-
-    protected function getCambiosDescripcion(array $cambios)
-    {
-        $descripcion = "";
-        foreach ($cambios as $atributo => $value) {
-            $descripcion .= $atributo . ": " . $value . "\n";
-        }
-        return $descripcion;
     }
 
     /**

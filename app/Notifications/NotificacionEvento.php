@@ -42,10 +42,27 @@ class NotificacionEvento extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('email.notificaion.eventos', [
-            'data' => [$this->datos['nombre'], $this->datos['mensaje']],
-            'notifiable' => $notifiable
-        ])->greeting($this->datos['asunto'])->subject($this->datos['asunto']);
+        if ($this->datos['adjunto'] != null) {
+
+            return (new MailMessage)
+                ->markdown('email.notificaion.eventos', [
+                    'data' => [$this->datos['nombre'], $this->datos['mensaje']],
+                    'notifiable' => $notifiable
+                ])
+                ->greeting($this->datos['asunto'])
+                ->subject($this->datos['asunto'])
+                ->attach($this->datos['adjunto']
+                    ? storage_path("app/{$this->datos['adjunto']}")
+                    : null);
+        } else {
+            return (new MailMessage)
+                ->markdown('email.notificaion.eventos', [
+                    'data' => [$this->datos['nombre'], $this->datos['mensaje']],
+                    'notifiable' => $notifiable
+                ])
+                ->greeting($this->datos['asunto'])
+                ->subject($this->datos['asunto']);
+        }
     }
 
     /**
