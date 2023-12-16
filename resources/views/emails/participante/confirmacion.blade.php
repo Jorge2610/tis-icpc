@@ -1,18 +1,18 @@
 @component('mail::message')
-Hola {{$participante->apellidos}},
+Hola {{ $participante->apellidos }},
 
-Para poder confirmar su participación en el evento, por favor haga click en el siguiente botón:
-
+Parece que usted quiere inscribirse en el evento <strong> {{ $evento->nombre }} </strong>, copie el
+siguiente código de acceso:
+{{ $participante->codigo }}.
+o presione el siguiente botón:
 
 @component('mail::button', ['url' => ''])
-    Confirmar participación
+Confirmar participación
 @endcomponent
+
+Si usted no ha solicitado esta inscripción, ignore este correo electrónico.
 Gracias,<br>
 {{ config('app.name') }}
 @component('mail::footer')
-    <div class="footer" style="display: flex; justify-content: start; padding-x: 20px; ">
-        <img src="{{ asset('image/logo-umss.png') }}" alt="Logo de la empresa" style="height: 75px; width: auto;">
-        {{-- <img src="{{ asset('image/logo-departamento.png') }}" alt="Logo de la empresa" style="height: 65px; width: auto;"> --}}
-    {{-- </div> --}}
 @endcomponent
 @endcomponent

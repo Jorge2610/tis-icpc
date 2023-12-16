@@ -64,7 +64,7 @@ class EquipoController extends Controller
     public function inscribirEquipo(Request $request)
     {
         try {
-            $equipo = $this->existeEquipo($request->ci, $request->id_evento);
+            $equipo = $this->existeEquipo($request->nombre, $request->correo);
             if (!$equipo) {
                 $equipo = $this->store($request);
                 $inscribir = new EquipoInscrito();
@@ -85,10 +85,10 @@ class EquipoController extends Controller
         }
     }
 
-    private function existeEquipo($correo, $id_evento)
+    private function existeEquipo($nombre, $correo)
     {
-        $equipo = EquipoInscrito::where('id_evento', $id_evento)
-            ->where('correo', $correo)
+        $equipo = EquipoInscrito::where('correo', $correo)
+            ->where('nombre', $nombre)
             ->first();
         return $equipo;
     }

@@ -17,6 +17,10 @@ class CreateInscritosTable extends Migration
             $table->id();
             $table->foreignId('id_evento')->constrained('eventos')->onDelete('cascade');
             $table->foreignId('id_participante')->constrained('participantes')->onDelete('cascade');
+            $table->string('institucion', 64)->nullable();
+            $table->string('grado_academico', 64)->nullable();
+            $table->string('genero', 64)->nullable();
+            $table->string('talla', 10)->nullable();
             $table->timestamps();
         });
     }

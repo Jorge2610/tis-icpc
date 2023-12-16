@@ -27,68 +27,86 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['prefix' => 'tipo-evento'], function () {
-    Route::get('/', [TipoEventoController::class, 'index'])->name('tipo-eventos.index');
-    Route::get('{id}', [TipoEventoController::class, 'show'])->name('tipo-eventos.show');
-    Route::post('/', [TipoEventoController::class, 'crear'])->name('tipo-eventos.crear');
-    Route::post('actualizar/{id}', [TipoEventoController::class, 'update'])->name('tipo-eventos.update');
-    Route::delete('{id}', [TipoEventoController::class, 'destroy'])->name('tipo-eventos.destroy');
-    Route::post('restaurar/{id}', [TipoEventoController::class, 'restaurar'])->name('tipo-eventos.restaurar');
+Route::group([
+    'prefix' => 'tipo-evento',
+    'controller' => TipoEventoController::class
+], function () {
+    Route::get('/',  'index')->name('tipo-eventos.index');
+    Route::get('{id}', 'show')->name('tipo-eventos.show');
+    Route::post('/', 'crear')->name('tipo-eventos.crear');
+    Route::post('actualizar/{id}', 'update')->name('tipo-eventos.update');
+    Route::delete('{id}', 'destroy')->name('tipo-eventos.destroy');
+    Route::post('restaurar/{id}', 'restaurar')->name('tipo-eventos.restaurar');
 });
 
-Route::group(['prefix' => 'evento'], function () {
-    Route::get('/', [EventoController::class, 'index'])->name('eventos.index');
-    Route::get('{id}', [EventoController::class, 'show'])->name('eventos.show');
-    Route::post('/', [EventoController::class, 'store'])->name('eventos.store');
-    Route::post('actualizar/{id}', [EventoController::class, 'update'])->name('eventos.update');
-    Route::delete('{id}', [EventoController::class, 'destroy'])->name('eventos.destroy');
-    Route::post('/afiche', [EventoController::class, 'storageAfiche'])->name('eventos.storageAfiche');
-    Route::post('/afiche/{id}', [EventoController::class, 'asignarAfiche'])->name('eventos.asignarAfiche');
-    Route::delete('/afiche/{id}', [EventoController::class, 'eliminarAfiche'])->name('eventos.eliminarAfiche');
-    Route::post('/cancelar/{id}', [EventoController::class, 'cancelar'])->name('eventos.cancelar');
-    Route::post('/anular/{id}', [EventoController::class, 'anular'])->name('eventos.anular');
-    Route::post('/respaldos', [EventoController::class, 'subirRespaldos'])->name('eventos.subirRespaldos');
+Route::group([
+    'prefix' => 'evento',
+    'controller' => EventoController::class
+], function () {
+    Route::get('/', 'index')->name('eventos.index');
+    Route::get('{id}', 'show')->name('eventos.show');
+    Route::post('/', 'store')->name('eventos.store');
+    Route::post('actualizar/{id}',  'update')->name('eventos.update');
+    Route::delete('{id}', 'destroy')->name('eventos.destroy');
+    Route::post('/afiche', 'storageAfiche')->name('eventos.storageAfiche');
+    Route::post('/afiche/{id}', 'asignarAfiche')->name('eventos.asignarAfiche');
+    Route::delete('/afiche/{id}', 'eliminarAfiche')->name('eventos.eliminarAfiche');
+    Route::post('/cancelar/{id}', 'cancelar')->name('eventos.cancelar');
+    Route::post('/anular/{id}', 'anular')->name('eventos.anular');
+    Route::post('/respaldos', 'subirRespaldos')->name('eventos.subirRespaldos');
 });
 
-Route::group(['prefix' => 'patrocinador', 'middleware' => 'api'], function () {
-    Route::get('/', [PatrocinadorController::class, 'index'])->name('patrocinadores.index');
-    Route::get('{id}', [PatrocinadorController::class, 'showPatrocinadorbyEvento'])->name('patrocinadores.show');
-    Route::get('/show/{id}', [PatrocinadorController::class, 'show'])->name('patrocinadores.show');
-    Route::get('/evento/{id}', [PatrocinadorController::class, 'showEventoWhithPatrocinadores'])->name('eventoPatrocinadores.show');
-    Route::post('/', [PatrocinadorController::class, 'store'])->name('patrocinadores.store');
-    Route::post('/editar/{id}', [PatrocinadorController::class, 'update'])->name('patrocinadores.update');
-    Route::delete('{id}', [PatrocinadorController::class, 'destroy'])->name('patrocinadores.destroy');
-    Route::post('/asignar', [PatrocinadorController::class, 'asignarPatrocinador'])->name('patrocinadores.asignar');
-    Route::delete('/quitar/{id}', [PatrocinadorController::class, 'quitarPatrocinador'])->name('patrocinadores.quitar');
-    Route::post('/esta-borrado', [PatrocinadorController::class, 'estaBorrado'])->name('patrocinadores.estaBorrado');
-    Route::post('/restaurar/{id}', [PatrocinadorController::class, 'restaurar'])->name('patrocinadores.restore');
+Route::group([
+    'prefix' => 'patrocinador',
+    'controller' => PatrocinadorController::class
+], function () {
+    Route::get('/', 'index')->name('patrocinadores.index');
+    Route::get('{id}', 'showPatrocinadorbyEvento')->name('patrocinadores.show');
+    Route::get('/show/{id}', 'show')->name('patrocinadores.show');
+    Route::get('/evento/{id}', 'showEventoWhithPatrocinadores')->name('eventoPatrocinadores.show');
+    Route::post('/', 'store')->name('patrocinadores.store');
+    Route::post('/editar/{id}', 'update')->name('patrocinadores.update');
+    Route::delete('{id}', 'destroy')->name('patrocinadores.destroy');
+    Route::post('/asignar', 'asignarPatrocinador')->name('patrocinadores.asignar');
+    Route::delete('/quitar/{id}', 'quitarPatrocinador')->name('patrocinadores.quitar');
+    Route::post('/esta-borrado', 'estaBorrado')->name('patrocinadores.estaBorrado');
+    Route::post('/restaurar/{id}', 'restaurar')->name('patrocinadores.restore');
 });
 
-Route::group(['prefix' => 'afiche'], function () {
-    Route::post('/imagen', [AficheController::class, 'storageAfiche'])->name('eventos.storageAfiche');
-    Route::post('/', [AficheController::class, 'asignarAfiche'])->name('eventos.asignarAfiche');
-    Route::post('{id}', [AficheController::class, 'update'])->name('eventos.update');
-    Route::delete('{id}', [AficheController::class, 'eliminarAfiche'])->name('eventos.eliminarAfiche');
-    Route::get('/{id}', [AficheController::class, 'showPorEventoId'])->name('eventos.showPorEventoId');
+Route::group([
+    'prefix' => 'afiche',
+    'controller' => AficheController::class
+], function () {
+    Route::post('/imagen', 'storageAfiche')->name('eventos.storageAfiche');
+    Route::post('/', 'asignarAfiche')->name('eventos.asignarAfiche');
+    Route::post('{id}', 'update')->name('eventos.update');
+    Route::delete('{id}', 'eliminarAfiche')->name('eventos.eliminarAfiche');
+    Route::get('{id}', 'showPorEventoId')->name('eventos.showPorEventoId');
 });
 
-Route::group(['prefix' => 'sitio'], function () {
-    Route::get('/', [SitioController::class, 'index'])->name('sitio.index');
-    Route::get('{id}', [SitioController::class, 'show'])->name('sitio.show');
-    Route::post('/', [SitioController::class, 'store'])->name('sitio.store');
-    Route::post('{id}', [SitioController::class, 'update'])->name('sitio.update');
-    Route::delete('{id}', [SitioController::class, 'destroy'])->name('sitio.destroy');
+Route::group([
+    'prefix' => 'sitio',
+    'controller' => SitioController::class
+], function () {
+    Route::get('/', 'index')->name('sitio.index');
+    Route::get('{id}', 'show')->name('sitio.show');
+    Route::post('/', 'store')->name('sitio.store');
+    Route::post('{id}', 'update')->name('sitio.update');
+    Route::delete('{id}', 'destroy')->name('sitio.destroy');
 });
 
 
-Route::group(['prefix' => 'actividad'], function () {
-    Route::get('/', [ActividadController::class, 'index'])->name('actividad.index');
-    Route::get('{id}', [ActividadController::class, 'show'])->name('actividad.show');
-    Route::post('/', [ActividadController::class, 'store'])->name('actividad.store');
-    Route::post('{id}', [ActividadController::class, 'update'])->name('actividad.update');
-    Route::delete('{id}', [ActividadController::class, 'destroy'])->name('actividad.destroy');
-    Route::get('/obtener-actividad/{id}', [ActividadController::class, 'obtenerActividades'])->name('actividad.obtener-actividad');
-    Route::get('/{id}', [ActividadController::class, 'actividadPorEventoId'])->name('actividad.actividadPorEventoId');
+Route::group([
+    'prefix' => 'actividad',
+    'controller' => ActividadController::class
+], function () {
+    Route::get('/', 'index')->name('actividad.index');
+    Route::get('{id}', 'show')->name('actividad.show');
+    Route::post('/', 'store')->name('actividad.store');
+    Route::post('{id}', 'update')->name('actividad.update');
+    Route::delete('{id}', 'destroy')->name('actividad.destroy');
+    Route::get('/obtener-actividad/{id}', 'obtenerActividades')->name('actividad.obtener-actividad');
+    Route::get('/{id}', 'actividadPorEventoId')->name('actividad.actividadPorEventoId');
 });
 
 Route::group(
@@ -97,9 +115,11 @@ Route::group(
         'controller' => ParticipanteController::class
     ],
     function () {
-        Route::get('/', 'index');
+        Route::any('/existe', 'existeParticipante');
         Route::get('{id}', 'participantesEvento');
         Route::post('/', 'inscribirEvento');
+        Route::post('/enviarCodigo', 'enviarCodigoCorreo');
+        Route::get('/participantes', 'participantesEvento');
         Route::any('/verificar/{id}', 'verificarParticipante');
     }
 );

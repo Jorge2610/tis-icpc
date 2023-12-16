@@ -18,10 +18,11 @@ class CreateEquiposTable extends Migration
             $table->string('nombre', 64)->nullable();
             $table->string('correo_general', 64);
             $table->boolean('correo_confirmado')->default(0);
+            $table->string('codigo');
             $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      *

@@ -21,11 +21,8 @@ class CreateParticipantesTable extends Migration
             $table->string('correo', 64);
             $table->string('celular', 64);
             $table->date('fecha_nacimiento');
-            $table->string('institucion', 64)->nullable();
-            $table->string('grado_academico', 64)->nullable();
-            $table->string('genero', 64)->nullable();
-            $table->string('talla', 10)->nullable();
             $table->boolean('correo_confirmado')->default(0);
+            $table->boolean('codigo')->nullable();
             $table->timestamps();
         });
     }
