@@ -110,4 +110,12 @@ class EquipoController extends Controller
     {
 
     }
+    public function mostrarEquipo($id){
+        $equipo=Equipo::find($id);
+       /* $participantes = Integrante::with(['tipoEvento' => function ($query) {
+            $query->withTrashed();
+        }])->where('estado', 0)->orderBy('updated_at', 'desc')
+            ->get();*/
+        return view('inscripciones.tablaEquipo', ['equipo'=>$equipo]);
+    }
 }

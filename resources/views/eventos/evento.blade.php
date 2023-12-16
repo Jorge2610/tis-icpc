@@ -35,9 +35,18 @@
                         </div>
                         <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                             <div class="row mt-3 d-flex">
-                                <a href={{ route('evento.inscripcion', ['id' => $evento->id]) }} type="button" class="btn btn-primary w-100 justify-content-center">
+                                <button type="button" class="btn btn-primary w-100 justify-content-center"
+                                data-bs-toggle="modal" data-bs-target="#modal-inscribir">
                                     Inscribirme
-                                </a>
+                                </button>
+                                <!-- Modal -->
+                                @if($evento->equipo_maximo == null)
+                                    @component('components.modal-inscribir-participante')
+                                @else  
+                                    @component('components.modal-inscribir-grupo')
+                                @endif
+                                    @slot ('evento',$evento)
+                                    @endcomponent
                             </div>
                         </div>
                     </div>
