@@ -10,6 +10,8 @@ use App\Http\Controllers\SitioController;
 use App\Http\Controllers\TipoActividadController;
 use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\ParticipanteController;
+use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\NotificacionController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -78,12 +80,6 @@ Route::group(['prefix' => 'sitio'], function () {
     Route::delete('{id}', [SitioController::class, 'destroy'])->name('sitio.destroy');
 });
 
-Route::group(['prefix' => 'tipo-actividad'], function () {
-    Route::get('/', [TipoActividadController::class, 'index'])->name('tipo-actividad.index');
-    Route::post('/', [TipoActividadController::class, 'store'])->name('tipo-actividad.store');
-    Route::post('{id}', [TipoActividadController::class, 'update'])->name('tipo-actividad.update');
-    Route::delete('{id}', [TipoActividadController::class, 'destroy'])->name('tipo-actividad.destroy');
-});
 
 Route::group(['prefix' => 'actividad'], function () {
     Route::get('/', [ActividadController::class, 'index'])->name('actividad.index');
@@ -116,6 +112,18 @@ Route::group(
     function () {
         Route::get('/', 'index');
         Route::post('/integrante', 'addIntegrante');
-        Route::post('/' , 'inscribirEquipo');
+        Route::post('/', 'inscribirEquipo');
+    }
+);
+
+Route::group(
+    [
+        'prefix' => 'notificacion',
+        'controller' => NotificacionController::class
+    ],
+    function () {
+        Route::post('/archivos', 'storeArchivo');
+        Route::get('/{id}', 'getParticipantes');
+        Route::post('/', 'notificar');
     }
 );

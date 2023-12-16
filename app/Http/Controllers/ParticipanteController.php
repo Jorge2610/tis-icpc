@@ -6,7 +6,9 @@ use App\Models\Inscrito;
 use Illuminate\Http\Request;
 use App\Models\Participante;
 use Illuminate\Database\QueryException;
+use App\Mail\ConfirmacionParticipante;
 use Illuminate\Mail\Mailer;
+use Illuminate\Support\Facades\Mail;
 use PhpParser\Node\Expr\FuncCall;
 
 class ParticipanteController extends Controller
@@ -34,6 +36,7 @@ class ParticipanteController extends Controller
                 $inscribir->id_evento = $request->id_evento;
                 $inscribir->id_participante = $participante->id;
                 $inscribir->save();
+                Mail::to($participante->correo)->send(new ConfirmacionParticipante($participante));
                 return ['mensaje' => 'Participante inscrito correctamente.', 'error' => false];
             } else {
                 $participante = Participante::whereHas('Inscritos', function ($q) use ($request) {
@@ -41,6 +44,7 @@ class ParticipanteController extends Controller
                 })->where('ci', $request->ci)->first();
                 if ($participante->correo_confirmado == 0) {
                     $participante = $this->update($request, $participante->id);
+                    Mail::to($participante->correo)->send(new ConfirmacionParticipante($participante));
                     return ['mensaje' => 'Participante inscrito correctamente.', 'error' => false];
                 } else {
                     return ['mensaje' => 'EL participante ya ha sido inscrito.', 'error' => true];
@@ -123,8 +127,5 @@ class ParticipanteController extends Controller
         }
     }
 
-    public function enviarCorreoConfirmacion($id)
-    {
-        
-    }
+    
 }

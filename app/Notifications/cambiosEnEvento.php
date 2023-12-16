@@ -7,14 +7,13 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-
-class cambiosEnEvento extends Notification
+class CambiosEnEvento extends Notification implements ShouldQueue
 {
-
     use Queueable;
 
     protected $evento;
     protected $cambios;
+
     /**
      * Create a new notification instance.
      *
@@ -34,7 +33,7 @@ class cambiosEnEvento extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -45,23 +44,14 @@ class cambiosEnEvento extends Notification
      */
     public function toMail($notifiable)
     {
-        
-        return (new MailMessage)
-            ->line('Se realizaron cambios en el evento.')
-            ->line('Por favor revisa el evento: ')
-            ->action('Ver detalles del evento', url('/eventos/' . $this->evento->nombre))
-            ->line('Gracias por usar nuestra aplicación!');
-    }
-
-    
-
-    protected function getCambiosDescripcion(array $cambios)
-    {
-        $descripcion = "";
-        foreach ($cambios as $atributo => $value) {
-            $descripcion .= $atributo . ": " . $value . "\n";
-        }
-        return $descripcion;
+        $eventoNombreUrl = str_replace(' ', '%20', $this->evento->nombre);
+        return (new MailMessage)->markdown('emails.notificacion.cambios', [
+            'evento' => $this->evento,
+            'notificable' => $notifiable,
+        ])
+            ->subject('Notificación de cambios en el evento: ' . $this->evento->nombre)
+            ->greeting('Notificación de cambios')
+            ->action('Ver detalles del evento', url('/eventos/' . $eventoNombreUrl));
     }
 
     /**
@@ -73,7 +63,11 @@ class cambiosEnEvento extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'cambios' => $this->getCambiosDescripcion($this->cambios),
+            'url' => url('/eventos/' . $this->evento->nombre),
+            'email' => $notifiable->email,
+            'nombre' => $notifiable->name,
+            'id' => $this->id,
         ];
     }
 }
