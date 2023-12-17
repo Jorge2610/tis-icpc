@@ -8,20 +8,20 @@ const contenedorCorreo = document.getElementById('contenedorCorreo');
 const buttonConfirmacion = document.getElementById('button-equipo-confirmacion');
 const buttonCancelacion = document.getElementById('button-equipo-cancelar'); 
 const codigoInput1 = document.getElementById('codigo1');
+const form = document.getElementById('inscribirEquipo');
 
 let crear=true;
 //funciones button
 const ingresarNombreEquipo = () => {
     nombreInput.dispatchEvent(new Event("change"));
-    if(nombreInput.classList.contains("is-valid")){
-        if(nombreInput.disabled){
-            if(validarGmail1.style.display=='none')
-                registrarCorreo();
-            else
-                verificarCodigo();
-        }else{
-            contenido1.collapse("show");
-            nombreInput.disabled=true ; 
+    correoInput.dispatchEvent(new Event ("change"));
+    if(nombreInput.classList.contains("is-valid")
+        &&correoInput.classList.contains("is-valid")){
+        if(validarGmail1.style.display=='none'){
+            registrarCorreo();
+        }
+        else{
+            codigoInput1.dispatchEvent(new Event("change"));
         }
         
     } 
@@ -31,19 +31,16 @@ const cancelarEquipo = ()=>{
     if(!nombreInput.disabled){
         $('#modal-inscribir').modal("hide");
     }else{
-        if(validarGmail1.style.display=='none'){
-            atrasCorreo();
-        }else{
+            correoInput.disabled=false;
+            nombreInput.disabled=false;
             atrasCodigo();
-        }
     }
 }
 const registrarCorreo = ()=>{
-    correoInput.dispatchEvent(new Event("change"));
-    if(correoInput.classList.contains("is-valid")){
+        registrarEquipo();
         validarGmail1.style.display='block';
-        contenedorCorreo.style.display="none";
-    }
+        nombreInput.disabled=true;
+        correoInput.disabled=true;
 }
 const verificarCodigo=()=>{
     codigoInput1.dispatchEvent(new Event("change"));
@@ -52,7 +49,11 @@ const verificarCodigo=()=>{
     }
 }
 const registrarEquipo = ()=>{
-    let formData=crearForData();
+    var formData = new FormData();
+    // Agregar datos al FormData
+    formData.append('nombre', nombreInput.value);
+    formData.append('correo', correoInput.value);
+    formData.append('id_evento',nombreInput.getAttribute("evento_id"))
     if(crear){
         axios.post('/api/equipo/', formData)
         .then(function (response) {
@@ -73,12 +74,7 @@ const atrasCodigo =()=>{
     validarGmail1.style.display='none';
     contenedorCorreo.style.display="block";
 }
-//funciones
-const crearForData= ()=>{
-    let formData={
 
-    }
-}
 //validacion de inputs
 const inputRequired=(input)=>{
     if(input.value==""){
@@ -115,7 +111,7 @@ modal.addEventListener('hidden.bs.modal', function (event) {
     removerValidacion(nombreInput);
     nombreInput.disabled=false;
     removerValidacion(correoInput);
-    contenido1.collapse("hide"); 
+    validarGmail1.style.display='none';
 })
 nombreInput.addEventListener("change",()=>{
     inputRequired(nombreInput);

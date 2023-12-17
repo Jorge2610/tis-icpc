@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\AficheController;
 use App\Http\Controllers\PatrocinadorController;
 use App\Http\Controllers\EventoController;
