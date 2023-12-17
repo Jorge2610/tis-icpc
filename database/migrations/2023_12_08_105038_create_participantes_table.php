@@ -24,7 +24,7 @@ class CreateParticipantesTable extends Migration
             $table->date('fecha_nacimiento');
             $table->string('pais', 64)->nullable();
             $table->boolean('correo_confirmado')->default(0);
-            $table->boolean('codigo')->nullable();
+            $table->string('codigo',8)->nullable();
             $table->timestamps();
         });
     }

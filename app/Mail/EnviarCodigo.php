@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class EnviarCodigo extends Mailable
+class EnviarCodigo extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -35,6 +35,6 @@ class EnviarCodigo extends Mailable
         return $this->markdown('emails.participante.codigo', [
             'participante' => $this->participante,
             'evento' => $this->evento
-        ]);
+        ])->subject('Código de acceso');
     }
 }

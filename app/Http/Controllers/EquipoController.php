@@ -111,7 +111,7 @@ class EquipoController extends Controller
                             ->where('correo_confirmado', 1);
                     })
                     ->first();
-            }else{
+            } else {
                 $inscrito = null;
             }
             if ($inscrito) {
