@@ -118,7 +118,7 @@ Route::group(
         Route::any('/existe', 'existeParticipante');
         Route::get('{id}', 'participantesEvento');
         Route::post('/', 'inscribirEvento');
-        Route::post('/enviarCodigo', 'enviarCodigoCorreo');
+        Route::post('/enviarCodigo/{id}/{id}', 'enviarCodigoCorreo');
         Route::get('/participantes', 'participantesEvento');
         Route::any('/verificar/{id}', 'verificarParticipante');
     }
@@ -131,8 +131,11 @@ Route::group(
     ],
     function () {
         Route::get('/', 'index');
-        Route::post('/integrante', 'addIntegrante');
-        Route::post('/', 'inscribirEquipo');
+        Route::any('/existe', 'existeEquipo');
+        Route::post('/inscribirEquipo', 'inscribirEquipoEvento');
+        Route::post('/addIntegrante/{id}', 'addIntegrante');
+        Route::get('/{id}', 'mostrarEquipo');
+        Route::post('/enviarCorreo/{id}/{id}', 'enviarCorreo');
     }
 );
 

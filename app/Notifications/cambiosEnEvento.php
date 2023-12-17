@@ -63,7 +63,7 @@ class CambiosEnEvento extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            'cambios' => $this->getCambiosDescripcion($this->cambios),
+            //'cambios' => $this->getCambiosDescripcion($this->cambios),
             'url' => url('/eventos/' . $this->evento->nombre),
             'email' => $notifiable->email,
             'nombre' => $notifiable->name,

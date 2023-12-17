@@ -70,7 +70,7 @@ class ParticipanteController extends Controller
             $participante->correo            = $request->correo;
             $participante->celular           = $request->celular;
             $participante->fecha_nacimiento  = $request->fecha_nacimiento;
-            $participante->codigo            = Str::random(20);
+            $participante->codigo            = Str::random(8);
             $participante->save();
             return $participante;
         } catch (QueryException $e) {
@@ -98,7 +98,7 @@ class ParticipanteController extends Controller
                     // return view('inscripciones.participante', ['id_evento' => $request->id_evento, 'nombre' => $request->nombre]);
                 } else {
                     // Devuelve información sobre el participante
-                    return ['participante' => $participante, 'inscrito' => $inscrito];
+                    return ['participante' => $participante, 'inscrito' => false];
                 }
             }
         } catch (QueryException $e) {
