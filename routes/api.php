@@ -153,6 +153,7 @@ Route::group(
         Route::post('/inscribirEquipo', 'inscribirEquipoEvento');
         Route::post('/addIntegrante/{id}', 'addIntegrante');
         Route::get('/{id}', 'mostrarEquipo');
+        Route::get('/integrantes/{id}', 'mostrarIntegrantes');
         //Route::post('/enviarCorreo/{id}/{id}', 'enviarCorreo');
     }
 );

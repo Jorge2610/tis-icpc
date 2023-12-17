@@ -1,12 +1,64 @@
 @component('mail::message')
-# Introduction
+{{-- Greeting --}}
+@if (! empty($greeting))
+# {{ $greeting }}
+@else
+@if ($level === 'error')
+# @lang('Whoops!')
+@else
+# @lang('Hola! ')
+@endif
+@endif
 
-The body of your message.
+{{-- Intro Lines --}}
 
-@component('mail::button', ['url' => ''])
-Button Text
+Hola <strong> {{ ucwords(strtolower($notifiable->apellidos))}}  {{ ucwords(strtolower($notifiable->nombres))}} </strong>,
+
+Se realizaron cambios en el cronograma del evento: <strong> {{ $evento->nombre }} </strong> en el que estas inscrito,  la fecha de modificación fue: <strong> {{ date('d-m-Y', strtotime($cambios)) }} </strong> a las <strong>{{ date('H:i', strtotime($cambios)) }}</strong>.
+
+Por favor vea los cambios presionando el siguiente botón:
+
+
+{{-- Action Button --}}
+@isset($actionText)
+<?php
+    switch ($level) {
+        case 'success':
+        case 'error':
+            $color = $level;
+            break;
+        default:
+            $color = 'primary';
+    }
+?>
+@component('mail::button', ['url' => $actionUrl, 'color' => $color])
+{{ $actionText }}
 @endcomponent
+@endisset
 
-Thanks,<br>
-{{ config('app.name') }}
+{{-- Outro Lines --}}
+@foreach ($outroLines as $line)
+{{ $line }}
+
+@endforeach
+
+{{-- Salutation --}}
+Gracias!<br>
+ICPC UMSS
+
+{{-- Subcopy --}}
+@isset($actionText)
+@slot('subcopy')
+@lang(
+    "Si tienes problemas con el botón \":actionText\",  \n".
+    'copia y pega la URL:',
+    [
+        'actionText' => $actionText,
+    ]
+) <span class="break-all">[{{ $displayableActionUrl }}]({{ $actionUrl }})</span>
+<br>
+@endslot
+@endisset
+
+
 @endcomponent

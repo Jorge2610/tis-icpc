@@ -37,6 +37,7 @@ class EquipoController extends Controller
             return ['mensaje' => $e->getMessage(), 'error' => true];
         }
     }
+
     public function storeInscribir(Request $request, $id_equipo)
     {
         try {
@@ -69,7 +70,6 @@ class EquipoController extends Controller
         }
     }
 
-
     public function existeParticipante($ci, $id_equipo)
     {
         $integrante = Integrante::wherehas(
@@ -84,6 +84,10 @@ class EquipoController extends Controller
     public function inscribirEquipoEvento(Request $request)
     {
         try {
+            $equipo = Equipo::find($request->id_equipo);
+            if ($equipo->correo_verificado == 0) {
+                $this->update($request, $request->id_equipo);
+            }
             if ($request->id_equipo) {
                 $this->storeInscribir($request, $request->id_equipo);
                 return ['mensaje' => 'Equipo inscrito correctamente.', 'error' => false];
@@ -104,17 +108,23 @@ class EquipoController extends Controller
         try {
             $equipo = Equipo::where('nombre', $request->nombre)
                 ->where('correo_general', $request->correo_general)
-                ->where('correo_verificado', 1)
                 ->first();
+            $repetido = EquipoInscrito::where('id_evento', $request->id_evento)->with('equipos')
+                ->whereHas('equipos', function ($q) use ($request) {
+                    $q->where('nombre', $request->nombre)
+                        ->where('correo_verificado', 1);
+                })->first();
+            
             if ($equipo) {
                 $inscrito = EquipoInscrito::where('id_evento', $request->id_evento)
                     ->where('id_equipo', $equipo->id)
-                    ->wherehas('equipo', function ($q) use ($equipo) {
+                    ->wherehas('equipos', function ($q) use ($equipo) {
                         $q->where('nombre', $equipo->nombre)
                             ->where('correo_verificado', 1);
                     })
                     ->first();
             } else {
+                $esRepetido = $repetido ? true : false;
                 $inscrito = null;
             }
             if ($inscrito) {
@@ -127,6 +137,7 @@ class EquipoController extends Controller
                 if (!$equipo) {
                     return [
                         'inscrito' => false,
+                        'Mensaje' => ["mensaje" => $esRepetido ? " Equipo ya inscrito a este evento." : "", "error" => $esRepetido],
                     ];
                 } else {
                     return [
@@ -155,9 +166,10 @@ class EquipoController extends Controller
 
     public function mostrarEquipo($id)
     {
-        $equipo = Equipo::find($id)
+        $equipo = Equipo::where("id", $id)
             ->with('integrantes', 'integrantes.participante', 'equipoInscrito')
             ->first();
+        dd($equipo);
         return view('inscripciones.tablaEquipo', ['equipo' => $equipo]);
     }
 

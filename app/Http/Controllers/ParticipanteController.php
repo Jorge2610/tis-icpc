@@ -32,7 +32,9 @@ class ParticipanteController extends Controller
     {
         $participantes = Inscrito::where('id_evento', $id)->with(['participante' => function ($q) {
             $q->where('correo_confirmado', 1);
-        }])->get();
+        }])->whereHas('participante', function ($q) {
+            $q->where('correo_confirmado', 1);
+        })->get();
         return $participantes;
     }
 

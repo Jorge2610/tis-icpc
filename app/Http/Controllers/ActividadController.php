@@ -6,6 +6,9 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Models\Actividad;
 use App\Models\Evento;
+use App\Models\Participante;
+use App\Notifications\NotificacionActividad;
+use Illuminate\Support\Facades\Log;
 
 class ActividadController extends Controller
 {
@@ -47,21 +50,22 @@ class ActividadController extends Controller
                 return response()->json(['mensaje' => 'La actividad ya existe', 'error' => true]);
             }
             $actividad->save();
-            $this->notificacionActividad($actividad);
+            $this->notificar($actividad, $actividad->created_at);
             return response()->json(['mensaje' => 'Actividad creada exitosamente', 'error' => false]);
         } catch (QueryException $e) {
             return $e->getMessage();
         }
     }
 
-    
 
-   
+
+
     public function destroy($id)
     {
         try {
             $actividad = Actividad::find($id);
             $actividad->delete();
+            $this->notificar($actividad, now());
             return response()->json(['mensaje' => 'Eliminada exitosamente', 'error' => false]);
         } catch (QueryException $e) {
             return $e->getMessage();
@@ -73,7 +77,6 @@ class ActividadController extends Controller
         try {
             /**Obtenemos la actividad con ID**/
             $actividad = Actividad::find($id);
-            $atributosAntiguos = $actividad->getOriginal();
             $actividad->nombre = $request->nombre;
             $actividad->inicio_actividad = $request->inicio_evento;
             $actividad->fin_actividad = $request->fin_evento;
@@ -89,8 +92,8 @@ class ActividadController extends Controller
                 return response()->json(['mensaje' => 'La actividad ya existe', 'error' => true]);
             }
             $actividad->save();
-            if($request->notificacion){
-                $this->notificarCambios($actividad,$atributosAntiguos);
+            if ($request->notificacion) {
+                $this->notificar($actividad, $actividad->updated_at);
             }
             return response()->json(['mensaje' => 'Actividad actualizada exitosamente', 'error' => false]);
         } catch (QueryException $e) {
@@ -148,5 +151,24 @@ class ActividadController extends Controller
         $actividad = Actividad::find($id);
         $evento = Evento::find($actividad->id_evento);
         return view('actividad.editarActividad', ['actividad' => $actividad, 'evento' => $evento]);
+    }
+
+    private function notificar($actividad, $cambios)
+    {
+        try {
+            $evento = Evento::find($actividad->id_evento);
+            $participantes = Participante::whereHas('inscritos', function ($q) use ($actividad) {
+                $q->where('id_evento', $actividad->id_evento);
+            });
+
+            dd($participantes);
+
+            foreach ($participantes as $participante) {
+                $participante->notify(new NotificacionActividad($actividad, $evento, $cambios));
+            }
+        } catch (\Exception $e) {
+            Log::error('Error al enviar notificación: ' . $e->getMessage());
+            return $e->getMessage();
+        }
     }
 }

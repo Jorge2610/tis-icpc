@@ -13,4 +13,9 @@ class Equipo extends Model
     {
         return $this->hasMany(Integrante::class, 'id_equipo');
     }
+
+    public function equipoInscrito()
+    {
+        return $this->hasMany(EquipoInscrito::class, 'id_equipo');
+    }
 }
