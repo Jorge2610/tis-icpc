@@ -14,7 +14,7 @@
 
 Hola <strong> {{ ucwords(strtolower($notifiable->apellidos))}}  {{ ucwords(strtolower($notifiable->nombres))}} </strong>,
 
-Se realizaron cambios en el cronograma del evento: <strong> {{ $evento->nombre }} </strong> en el que estas inscrito,  la fecha de modificación fue: <strong> {{ date('d-m-Y', strtotime($cambios)) }} </strong> a las <strong>{{ date('H:i', strtotime($cambios)) }}</strong>.
+Se realizaron cambios en las actividades del evento: <strong> {{ $evento->nombre }} </strong> en el que estas inscrito,  la fecha de modificación fue: <strong> {{ date('d-m-Y', strtotime($cambios)) }} </strong> a las <strong>{{ date('H:i', strtotime($cambios)) }}</strong>.
 
 Por favor vea los cambios presionando el siguiente botón:
 

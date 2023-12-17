@@ -52,7 +52,8 @@ class NotificacionActividad extends Notification implements ShouldQueue
             'cambios' => $this->cambios,
             'notifiable' => $notifiable
         ])->subject('Notificación de evento: ' . $this->evento->nombre)
-            ->action('Ver detalles del evento', url('/eventos/' . str_replace(' ', '%20', $this->evento->nombre)));
+            ->action('Ver detalles del evento', url('/eventos/' . str_replace(' ', '%20', $this->evento->nombre)))
+            ->greeting('Notificación de cambios');
     }
 
     /**

@@ -35,6 +35,7 @@ class ActividadController extends Controller
     public function store(Request $request)
     {
         try {
+            
             $actividad = new Actividad();
             $actividad->nombre = $request->nombre;
             $actividad->inicio_actividad = $request->inicio_evento;
@@ -56,9 +57,6 @@ class ActividadController extends Controller
             return $e->getMessage();
         }
     }
-
-
-
 
     public function destroy($id)
     {
@@ -158,10 +156,9 @@ class ActividadController extends Controller
         try {
             $evento = Evento::find($actividad->id_evento);
             $participantes = Participante::whereHas('inscritos', function ($q) use ($actividad) {
-                $q->where('id_evento', $actividad->id_evento);
-            });
+                $q->where('id_evento', $actividad->id_evento );
+            })->where('correo_confirmado', 0)->get();
 
-            dd($participantes);
 
             foreach ($participantes as $participante) {
                 $participante->notify(new NotificacionActividad($actividad, $evento, $cambios));
