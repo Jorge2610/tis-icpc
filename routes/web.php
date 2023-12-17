@@ -99,9 +99,10 @@ Route::group(['prefix' => 'admin/tipos-de-actividad'], function () {
 });
 
 Route::group([
-    'prefix' => 'confirmar', 'controller' => ParticipanteController::class
+    'prefix' => 'confirmar',
 ], function () {
-    Route::get('participante/{codigo}', 'verificarCorreo')->name('confirmar.participante');
+    Route::get('participante/{codigo}', [ParticipanteController::class, 'verificarCorreo'])->name('confirmar.participante');
+    Route::get('equipo/{codigo}', [EquipoController::class, 'verificarCorreo'])->name('confirmar.equipo');
 });
 
 use App\Models\Participante;
