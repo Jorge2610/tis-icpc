@@ -41,6 +41,10 @@ class ParticipanteController extends Controller
     public function inscribirEvento(Request $request)
     {
         try {
+            $participante = Participante::find($request->id_participante);
+            if ($participante->correo_confirmado == 0) {
+                $this->update($request, $request->id_participante);
+            }
             if ($request->id_participante) {
                 //$participante = $this->update($request, $request->id_participante);
                 $this->storeInscribir($request, $request->id_participante);
@@ -168,16 +172,15 @@ class ParticipanteController extends Controller
     {
         try {
             $participante = Participante::find($id);
-            $participante->ci = $request->ci;
-            $participante->nombres = $request->nombres;
-            $participante->apellidos = $request->apellidos;
-            $participante->correo = $request->correo;
-            $participante->celular = $request->celular;
-            $participante->fecha_nacimiento = $request->fecha_nacimiento;
-            $participante->institucion = $request->institucion;
-            $participante->grado_academico = $request->grado_academico;
-            $participante->genero = $request->genero;
-            $participante->talla = $request->talla;
+            $participante->ci                = $request->ci;
+            $participante->nombres           = $request->nombres;
+            $participante->apellidos         = $request->apellidos;
+            $participante->correo            = $request->correo;
+            $participante->codigo_telefono   = $request->codigo_telefono;
+            $participante->telefono          = $request->telefono;
+            $participante->fecha_nacimiento  = $request->fecha_nacimiento;
+            $participante->pais              = $request->pais;
+            $participante->codigo            = Str::random(8);
             $participante->save();
             return $participante;
         } catch (QueryException $e) {
