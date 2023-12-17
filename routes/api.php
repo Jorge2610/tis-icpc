@@ -119,6 +119,7 @@ Route::group(
         Route::get('{id}', 'participantesEvento');
         Route::post('/', 'inscribirEvento');
         Route::post('/enviarCodigo/{id}/{id2}', 'enviarCodigoCorreo');
+        Route::post('/verificarCodigo/{id}', 'verificarCodigo');
         Route::get('/participantes', 'participantesEvento');
         Route::any('/verificar/{id}', 'verificarParticipante');
     }
