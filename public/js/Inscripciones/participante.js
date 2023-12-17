@@ -1,4 +1,3 @@
-
 let idEvento;
 let nombreEvento;
 
@@ -6,13 +5,16 @@ window.addEventListener("load", async () => {
     idEvento = window.location.href.split("/");
     idEvento = idEvento[idEvento.length - 2];
     nombreEvento = document.getElementById("nombreEvento").innerText;
-    if (localStorage.getItem("paisCarnet") === null) {
-        accesoNoAutorizado();
-    } else {
-        document.getElementById("codPaisCarnet").innerText = localStorage.getItem("paisCarnet");
-        //localStorage.removeItem("paisCarnet");
-        cargarPaises();
+    let pais = document.getElementById("codPaisCarnet");
+    if (pais.innerText === "") {
+        if (localStorage.getItem("paisCarnet") === null) {
+            accesoNoAutorizado();
+        } else {
+            document.getElementById("codPaisCarnet").innerText = localStorage.getItem("paisCarnet");
+            localStorage.removeItem("paisCarnet");
+        }
     }
+    cargarPaises();
 });
 
 const accesoNoAutorizado = () => {
@@ -27,10 +29,12 @@ const accesoNoAutorizado = () => {
 
 const cargarPaises = () => {
     let select = document.getElementById("selectPais");
+    let lit = document.getElementById("codPaisLit").value;
+    let codPaisLit = lit != "" ? lit : "+591"; 
     let options = "";
     PAISES.map(pais => {
         options += `
-            <option title=${pais.name_es} value=${pais.dial_code} ${pais.code_3 === "BOL" ? "selected" : ""}>
+            <option title=${pais.name_es} value=${pais.dial_code} ${pais.dial_code=== codPaisLit ? "selected" : ""}>
                 ${pais.emoji} ${pais.code_3}
             </option>
         `;
@@ -62,7 +66,7 @@ const insribirParticipante = async () => {
             response.data.mensaje,
             response.error ? "danger" : "success"
         );
-        
+
         setTimeout(() => {
             window.location.href = "/eventos/" + nombreEvento;
         }, 1750);
