@@ -55,14 +55,18 @@ class ParticipanteController extends Controller
 
     private function storeInscribir(Request $request, $id_participante)
     {
-        $inscribir = new Inscrito();
-        $inscribir->id_evento = $request->id_evento;
-        $inscribir->id_participante = $id_participante;
-        $inscribir->institucion = $request->institucion;
-        $inscribir->grado_academico = $request->grado_academico;
-        $inscribir->genero = $request->genero;
-        $inscribir->talla = $request->talla;
-        $inscribir->save();
+        try {
+            $inscribir = new Inscrito();
+            $inscribir->id_evento = $request->id_evento;
+            $inscribir->id_participante = $id_participante;
+            $inscribir->institucion = $request->institucion;
+            $inscribir->grado_academico = $request->grado_academico;
+            $inscribir->genero = $request->genero;
+            $inscribir->talla = $request->talla;
+            $inscribir->save();
+        } catch (QueryException $e) {
+            return ['mensaje' => $e->getMessage(), 'error' => true];
+        }
     }
 
     private function store(Request $request)
