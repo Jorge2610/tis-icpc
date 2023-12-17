@@ -84,8 +84,8 @@ class EquipoController extends Controller
     public function inscribirEquipoEvento(Request $request)
     {
         try {
-            $equipo = Equipo::find($request->id_equipo);
-            if ($equipo->correo_verificado == 0) {
+            $equipo = Equipo::where('correo_verificado', 0)->find($request->id_equipo);
+            if ($equipo) {
                 $this->update($request, $request->id_equipo);
             }
             if ($request->id_equipo) {
