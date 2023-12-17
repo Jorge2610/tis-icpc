@@ -1,18 +1,29 @@
 
 let idEvento;
 let nombreEvento;
-let inscritos = [];
-let patternBase = ")[0-9]{6,10}[\\-]?[0-9A-Z]*";
-let patternExistentes = "^(";
-let carnet = document.getElementById("carnetParticipante");
-let feedback = document.getElementById("validacionCarnetFeedback");
 
 window.addEventListener("load", async () => {
     idEvento = window.location.href.split("/");
-    idEvento = idEvento[idEvento.length - 1];
+    idEvento = idEvento[idEvento.length - 2];
     nombreEvento = document.getElementById("nombreEvento").innerText;
-    cargarPaises();
+    if (localStorage.getItem("paisCarnet") === null) {
+        accesoNoAutorizado();
+    } else {
+        document.getElementById("codPaisCarnet").innerText = localStorage.getItem("paisCarnet");
+        //localStorage.removeItem("paisCarnet");
+        cargarPaises();
+    }
 });
+
+const accesoNoAutorizado = () => {
+    let pagina = document.getElementById("formularioInscripcionEvento");
+    let content = `
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 70vh">
+            <h2 class="text-center text-secondary"><i>Acceso no autorizado...</i></h2>
+        </div>
+    `;
+    pagina.innerHTML = content;
+};
 
 const cargarPaises = () => {
     let select = document.getElementById("selectPais");
@@ -46,18 +57,15 @@ const validarInputs = () => {
 const insribirParticipante = async () => {
     let formData = getParticipanteData();
     await axios.post("/api/participante/", formData).then((response) => {
-        if (response.error) {
-            actualizarPattern();
-        } else {
-            mostrarAlerta(
-                "Éxito",
-                response.data.mensaje,
-                response.error ? "danger" : "success"
-            );
-            setTimeout(() => {
-                window.location.href = "/eventos/" + nombreEvento;
-            }, 1750);
-        }
+        mostrarAlerta(
+            "Éxito",
+            response.data.mensaje,
+            response.error ? "danger" : "success"
+        );
+        
+        setTimeout(() => {
+            window.location.href = "/eventos/" + nombreEvento;
+        }, 1750);
     });
 };
 
@@ -67,34 +75,17 @@ const getParticipanteData = () => {
     formData.append("nombres", document.getElementById("nombreParticipante").value);
     formData.append("apellidos", document.getElementById("apellidoParticipante").value);
     formData.append("correo", document.getElementById("correoParticipante").value);
-    formData.append("celular", document.getElementById("telefonoParticipante").value);
+    formData.append("codigo_telefono", document.getElementById("selectPais").value);
+    formData.append("telefono", document.getElementById("telefonoParticipante").value);
     formData.append("fecha_nacimiento", document.getElementById("fechaNacParticipante").value);
+    formData.append("pais", document.getElementById("codPaisCarnet").innerText);
     formData.append("institucion", document.getElementById("institucionParticipante").value);
     formData.append("grado_academico", document.getElementById("gradoAcademicoParticipante").value);
     formData.append("genero", document.getElementById("generoParticipante").value);
     formData.append("talla", document.getElementById("tallaParticipante").value);
+    formData.append("talla", document.getElementById("tallaParticipante").value);
     formData.append("id_evento", idEvento);
     return formData;
-};
-
-const actualizarPattern = () => {
-    inscritos.push(carnet.value);
-    setCarnetFeedBack();
-    let nuevoPattern = patternExistentes + "(?!" + carnet.value + "$)";
-    patternExistentes = nuevoPattern;
-    nuevoPattern += patternBase;
-    carnet.setAttribute("pattern", nuevoPattern);
-};
-
-const setCarnetFeedBack = () => {
-    let encontrado = inscritos.find(inscrito => {
-        return inscrito === carnet.value;
-    });
-    if (encontrado) {
-        feedback.innerText = "Ya existe un participante con este número de carnet.";
-    } else {
-        feedback.innerText = "";
-    }
 };
 
 const resetForm = () => {

@@ -42,13 +42,13 @@ class ParticipanteController extends Controller
             if ($request->id_participante) {
                 //$participante = $this->update($request, $request->id_participante);
                 $this->storeInscribir($request, $request->id_participante);
-                return ['mensaje' => 'Participante inscrito correctamente.', 'error' => false];
+                return ['mensaje' => 'Inscrito correctamente.', 'error' => false];
             } else {
                 $participante = $this->store($request);
                 $this->storeInscribir($request, $participante->id);
                 $evento = Evento::find($request->id_evento);
                 Mail::to($request->correo)->send(new ConfirmacionParticipante($participante, $evento));
-                return ['mensaje' => 'Participante inscrito correctamente.', 'error' => false];
+                return ['mensaje' => 'Inscrito correctamente, por favor, verifica tu correo.', 'error' => false];
             }
         } catch (QueryException $e) {
             return ['mensaje' => $e->getMessage(), 'error' => true];
