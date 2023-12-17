@@ -95,7 +95,10 @@ class ParticipanteController extends Controller
                 ];
             } else {
                 if (!$participante) {
-                    // return view('inscripciones.participante', ['id_evento' => $request->id_evento, 'nombre' => $request->nombre]);
+                    return [
+                        'idEvento' => $request->id_evento,
+                        'ci' => $request->ci
+                    ];
                 } else {
                     // Devuelve información sobre el participante
                     return ['participante' => $participante, 'inscrito' => false];

@@ -51,10 +51,16 @@ class EventoController extends Controller
         return view('eventos.evento', ['evento' => $evento]);
     }
 
-    public function vistaInscripcion($id)
+    public function vistaInscripcion($id, $ci)
     {
         $evento = Evento::where('estado', 0)->find($id);
-        return view('inscripciones.participante', ['evento' => $evento]);
+        $participante = Participante::where("ci", $ci)->first();
+        if ($participante) {
+            $dato = $participante;
+        } else {
+            $dato = (object)['ci' => $ci];
+        }
+        return view('inscripciones.participante', ['evento' => $evento, 'participante' => $dato]);
     }
 
 
@@ -152,7 +158,7 @@ class EventoController extends Controller
         }
 
         $participantes = Participante::whereHas('inscritos', function ($q) use ($evento) {
-          $q->where('id_evento', $evento->id);
+            $q->where('id_evento', $evento->id);
         })->get();
 
         if (!empty($cambios)) {

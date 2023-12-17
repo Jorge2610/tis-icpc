@@ -10,6 +10,25 @@
                     <div class="row border border-bottom-0 rounded-top">
                         <h5 class="mt-2">Información general</h5>
                         <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="carnetParticipante" class="form-label">Número de carnet</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="carnetParticipante"
+                                        value="{{ $participante->ci }}" disabled>
+                                    <span class="input-group-text rounded-start" id="codPaisCarnet"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="correoParticipante" class="form-label">Correo electrónico *</label>
+                                <input type="email" class="form-control" id="correoParticipante" maxlength="64"
+                                    placeholder="Ingrese su correo electrónico..." required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row border border-top-0 border-bottom-0">
+                        <div class="col-md-6">
                             <div class="mb-3 mt-1">
                                 <label for="nombreParticipante" class="form-label">Nombre(s) *</label>
                                 <input type="text" class="form-control" id="nombreParticipante" maxlength="64"
@@ -18,27 +37,9 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3 mt-1">
-                                <label for="apellidoParticipante" class="form-label">Apellidos *</label>
+                                <label for="apellidoParticipante" class="form-label">Apellido(s) *</label>
                                 <input type="text" class="form-control" id="apellidoParticipante" maxlength="64"
                                     placeholder="Ingrese sus apellidos..." required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row border border-top-0 border-bottom-0 rounded-bottom">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="carnetParticipante" class="form-label">Número de carnet *</label>
-                                <input type="text" class="form-control" id="carnetParticipante"
-                                    pattern="[0-9]{6,10}[\-]?[0-9A-Z]*" placeholder="Ingrese su número de carnet"
-                                    onkeyup="setCarnetFeedBack()" required>
-                                <div id="validacionCarnetFeedback" class="invalid-feedback"></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="correoParticipante" class="form-label">Correo electrónico *</label>
-                                <input type="email" class="form-control" id="correoParticipante" maxlength="64"
-                                    placeholder="Ingrese su correo electrónico..." required>
                             </div>
                         </div>
                     </div>
@@ -70,8 +71,7 @@
                             <div class="mb-3">
                                 <label for="telefonoParticipante" class="form-label">Teléfono *</label>
                                 <div class="input-group">
-                                    <select class="custom-select" id="selectPais"
-                                        onchange="setCodPais()">
+                                    <select class="custom-select" id="selectPais" onchange="setCodPais()">
                                     </select>
                                     <span class="input-group-text rounded-start" id="codPais"></span>
                                     <input type="tel" class="form-control" id="telefonoParticipante" maxlength="15"
@@ -143,7 +143,7 @@
                     </div>
                 </form>
                 @if ($evento->precio_inscripcion != null)
-                    <h6 class="mt-2"><b>Nota:</b> La inscripcion a este evento tiene un costo de
+                    <h6 class="mt-2"><b>Nota:</b> La inscripción a este evento tiene un costo de
                         {{ $evento->precio_inscripcion }} Bs.</h6>
                 @endif
                 <div class="d-flex justify-content-end mt-3">
@@ -166,7 +166,7 @@
     </script>
     <style>
         * {
-            font-family: "Twemoji Country Flags",  "Segoe UI", "Helvetica Neue", "Noto Sans", "Liberation Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-family: "Twemoji Country Flags", "Segoe UI", "Helvetica Neue", "Noto Sans", "Liberation Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
         }
     </style>
     <script src="{{ asset('js/Inscripciones/codPaises.js') }}" defer></script>
