@@ -9,6 +9,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SitioController;
 use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\NotificacionController;
+use App\Http\Controllers\ParticipanteController;
+use App\Mail\ConfirmacionParticipante;
 use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -95,17 +97,28 @@ Route::get('editarEvento', [EventoController::class, 'showEditEventForm']);
 Route::group(['prefix' => 'admin/tipos-de-actividad'], function () {
     Route::view('/crear-tipo', 'tipo-actividad.crearTipoActividad')->name('crear-tipo');
 });
+
+Route::group([
+    'prefix' => 'confirmar', 'controller' => ParticipanteController::class
+], function () {
+    Route::get('participante/{codigo}', 'verificarCorreo')->name('confirmar.participante');
+});
+
 use App\Models\Participante;
 use App\Models\Evento;
 use App\Mail\EnviarCodigo;
+use App\Mail\EnviarCodigoEquipo;
+use App\Models\Equipo;
 use Illuminate\Support\Facades\Mail;
+
 Route::get('/mailable', function () {
-    
+
     $participante = Participante::find(1);
+    $equipo = Equipo::find(1);
     $mensaje = "holaaa \n" . "como estas \n" . "estamos para servirte";
     $evento = Evento::find(1);
     //$notificacion = ['asunto' => 'Cambio de estado', 'mensaje' => $mensaje, 'adjunto' => null, 'id' => 1, 'nombre' => $evento->nombre];
 
     // Crea una nueva instancia de la clase EnviarCodigo, pasando el participante, el evento y la notificación
-    return new EnviarCodigo($participante, $evento);
+    return new ConfirmacionParticipante($participante, $evento);
 });

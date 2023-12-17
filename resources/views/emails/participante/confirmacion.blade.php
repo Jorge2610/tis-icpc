@@ -1,18 +1,16 @@
 @component('mail::message')
-Hola {{ $participante->apellidos }},
+Hola <strong> {{ $participante->apellidos }} {{ $participante->nombres }} </strong>,
 
-Parece que usted quiere inscribirse en el evento <strong> {{ $evento->nombre }} </strong>, copie el
-siguiente código de acceso:
-{{ $participante->codigo }}.
-o presione el siguiente botón:
+Parece que usted quiere inscribirse en el evento <strong> {{ $evento->nombre }} </strong>, confirme su participación pulsando el siguiente botón:
 
-@component('mail::button', ['url' => ''])
+@component('mail::button', ['url' => url('confirmar/participante/' . $evento->codigo)])
 Confirmar participación
 @endcomponent
 
 Si usted no ha solicitado esta inscripción, ignore este correo electrónico.
-Gracias,<br>
+
+Gracias.
+
 {{ config('app.name') }}
-@component('mail::footer')
-@endcomponent
+
 @endcomponent

@@ -60,8 +60,6 @@
                             <p class="text-muted mt-1" style="font-size: 14px">
                                 El archivo no puede exceder los 5 MB
                             </p>
-
-
                         </form>
                         <div class="d-flex justify-content-center mt-4">
                             <button class="btn btn-primary" onclick="validarForm()" id="botonEnviar">Enviar</button>

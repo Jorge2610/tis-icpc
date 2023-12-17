@@ -2,13 +2,12 @@
 
 namespace App\Mail;
 
-use App\Models\Participante;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ConfirmacionParticipante extends Mailable
+class EnviarCodigoEquipo extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -18,11 +17,11 @@ class ConfirmacionParticipante extends Mailable
      * @return void
      */
 
-    protected $participante;
-    protected $evento;
-    public function __construct(Participante $participante, $evento)
+    public $equipo;
+    public $evento;
+    public function __construct($equipo, $evento)
     {
-        $this->participante = $participante;
+        $this->equipo = $equipo;
         $this->evento = $evento;
     }
 
@@ -33,9 +32,9 @@ class ConfirmacionParticipante extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.participante.confirmacion', [
-            'participante' => $this->participante,
+        return $this->markdown('emails.equipo.codigo', [
+            'equipo' => $this->equipo,
             'evento' => $this->evento
-        ]);
+        ])->subject('Código de acceso');
     }
 }

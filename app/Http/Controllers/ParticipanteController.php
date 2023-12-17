@@ -46,6 +46,8 @@ class ParticipanteController extends Controller
             } else {
                 $participante = $this->store($request);
                 $this->storeInscribir($request, $participante->id);
+                $evento = Evento::find($request->id_evento);
+                Mail::to($request->correo)->send(new ConfirmacionParticipante($participante, $evento));
                 return ['mensaje' => 'Participante inscrito correctamente.', 'error' => false];
             }
         } catch (QueryException $e) {
@@ -106,10 +108,16 @@ class ParticipanteController extends Controller
                 ];
             } else {
                 if (!$participante) {
-                    // return view('inscripciones.participante', ['id_evento' => $request->id_evento, 'nombre' => $request->nombre]);
+                    return [
+                        'idEvento' => $request->id_evento,
+                        'ci' => $request->ci,
+                        'error' => false,
+                    ];
                 } else {
-                    // Devuelve información sobre el participante
-                    return ['participante' => $participante, 'inscrito' => false];
+                    return [
+                        'participante' => $participante,
+                        'inscrito' => false
+                    ];
                 }
             }
         } catch (QueryException $e) {
@@ -121,10 +129,21 @@ class ParticipanteController extends Controller
     {
         $participante = Participante::findorfail($id);
         if ($participante->codigo == $request->codigo) {
-            redirect()->route('evento.inscripcion', ['participante' => $participante, 'evento' => ['id' => $request->id_evento, 'nombre' => $request->nombre]]);
+            return ['error' => false, 'mensaje' => 'Código verificado correctamente.'];
         } else {
             return ['error' => true, 'mensaje' => 'El código de participante no coincide.'];
         }
+    }
+
+    public function verificarCorreo($codigo, $id_evento)
+    {
+        $participante = Participante::where('codigo', $codigo)->first();
+        if ($participante) {
+            $participante->correo_verificado = 1;
+            $participante->save();
+            return ['error' => false, 'mensaje' => 'Correo verificado correctamente.'];
+        }
+        return ['error' => true, 'mensaje' => 'No es posible verificar el correo.'];
     }
 
     public function enviarCodigoCorreo($id_evento, $id_participante)
@@ -133,7 +152,7 @@ class ParticipanteController extends Controller
             $participante = Participante::findorfail($id_participante);
             $evento = Evento::findorfail($id_evento);
             Mail::to($participante->correo)->locale('es')->send(
-                new EnviarCodigo($participante, $evento)
+                new EnviarCodigo($participante, $evento, null)
             );
             return ['mensaje' => 'Código enviado correctamente.', 'error' => false];
         } catch (QueryException $e) {

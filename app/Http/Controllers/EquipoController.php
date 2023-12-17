@@ -12,8 +12,8 @@ use Illuminate\Support\Str;
 use Facade\Ignition\QueryRecorder\Query;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
-
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\EnviarCodigoEquipo;
 
 class EquipoController extends Controller
 {
@@ -164,7 +164,7 @@ class EquipoController extends Controller
     {
         $equipo = Equipo::findorfail($id_equipo);
         $evento = Evento::findorfail($id_evento);
-        return $equipo->codigo;
+        Mail::to($equipo->correo_general)->locale('es')->send(new EnviarCodigoEquipo($equipo, $evento));
     }
 
     public function verificarCodigo(Request $request, $id)
