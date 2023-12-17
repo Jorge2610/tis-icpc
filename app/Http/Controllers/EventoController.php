@@ -58,7 +58,16 @@ class EventoController extends Controller
         if ($participante) {
             $dato = $participante;
         } else {
-            $dato = (object)['ci' => $ci];
+            $dato = (object)[
+                'ci' => $ci,
+                'nombres' => null,
+                'apellidos' => null,
+                'correo' => null,
+                'fecha_nacimiento' => null,
+                'codigo_telefono' => null,
+                'telefono' => null,
+                'pais' => null
+            ];
         }
         return view('inscripciones.participante', ['evento' => $evento, 'participante' => $dato]);
     }

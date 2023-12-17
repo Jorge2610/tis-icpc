@@ -29,3 +29,9 @@
     color: #fff;
     border: 1px solid #ced4da;
 }
+
+.custom-select:disabled {
+    /* Cambia el color de fondo de la opción seleccionada */
+    background-color: #e9ecef;
+
+}

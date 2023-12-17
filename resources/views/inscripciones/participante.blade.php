@@ -15,7 +15,8 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="carnetParticipante"
                                         value="{{ $participante->ci }}" disabled>
-                                    <span class="input-group-text rounded-start" id="codPaisCarnet"></span>
+                                    <span class="input-group-text rounded-start"
+                                        id="codPaisCarnet">{{ $participante->pais }}</span>
                                 </div>
                             </div>
                         </div>
@@ -23,7 +24,8 @@
                             <div class="mb-3">
                                 <label for="correoParticipante" class="form-label">Correo electrónico *</label>
                                 <input type="email" class="form-control" id="correoParticipante" maxlength="64"
-                                    placeholder="Ingrese su correo electrónico..." required>
+                                    placeholder="Ingrese su correo electrónico..." required
+                                    value="{{ $participante->correo }}" {{ $participante->correo ? 'disabled' : '' }}>
                             </div>
                         </div>
                     </div>
@@ -32,14 +34,16 @@
                             <div class="mb-3 mt-1">
                                 <label for="nombreParticipante" class="form-label">Nombre(s) *</label>
                                 <input type="text" class="form-control" id="nombreParticipante" maxlength="64"
-                                    placeholder="Ingrese su nombre o nombres..." pattern="[a-zA-Z]*" required>
+                                    placeholder="Ingrese su nombre o nombres..." pattern="[a-zA-Z]*" required
+                                    value="{{ $participante->nombres }}" {{ $participante->nombres ? 'disabled' : '' }}>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3 mt-1">
                                 <label for="apellidoParticipante" class="form-label">Apellido(s) *</label>
                                 <input type="text" class="form-control" id="apellidoParticipante" maxlength="64"
-                                    placeholder="Ingrese sus apellidos..." required>
+                                    placeholder="Ingrese sus apellidos..." required value="{{ $participante->apellidos }}"
+                                    {{ $participante->apellidos ? 'disabled' : '' }}>
                             </div>
                         </div>
                     </div>
@@ -53,7 +57,9 @@
                                 <label for="fechaNacParticipante" class="form-label">Fecha de nacimiento *</label>
                                 <input type="date" class="form-control" id="fechaNacParticipante"
                                     min={{ date('Y-m-d', strtotime('-' . $edad_maxima . ' year')) }}
-                                    max={{ date('Y-m-d', strtotime('-' . $edad_minima . ' year')) }} required>
+                                    max={{ date('Y-m-d', strtotime('-' . $edad_minima . ' year')) }} required
+                                    value="{{ $participante->fecha_nacimiento }}"
+                                    {{ $participante->fecha_nacimiento ? 'disabled' : '' }}>
                                 <div class="form-text">
                                     @if ($evento->edad_minima != null && $evento->edad_maxima == null)
                                         Debes ser mayor de {{ $evento->edad_minima }} años para inscribirte al evento.
@@ -71,11 +77,15 @@
                             <div class="mb-3">
                                 <label for="telefonoParticipante" class="form-label">Teléfono *</label>
                                 <div class="input-group">
-                                    <select class="custom-select" id="selectPais" onchange="setCodPais()">
+                                    <input hidden value="{{ $participante->codigo_telefono }}" id="codPaisLit">
+                                    <select class="custom-select" id="selectPais" onchange="setCodPais()"
+                                        {{ $participante->codigo_telefono ? 'disabled' : '' }}>
                                     </select>
                                     <span class="input-group-text rounded-start" id="codPais"></span>
                                     <input type="tel" class="form-control" id="telefonoParticipante" maxlength="15"
-                                        pattern="[0-9]{6,15}" placeholder="Ingrese su número telefónico..." required>
+                                        pattern="[0-9]{6,15}" placeholder="Ingrese su número telefónico..." required
+                                        value="{{ $participante->telefono }}"
+                                        {{ $participante->codigo_telefono ? 'disabled' : '' }}>
                                 </div>
                             </div>
                         </div>
@@ -146,12 +156,12 @@
                     <h6 class="text-muted mt-2"><b>Nota:</b> La inscripción a este evento tiene un costo de
                         {{ $evento->precio_inscripcion }} Bs.</h6>
                 @endif
-                
+                @if (!$participante->nombres)
                     <h6 class="text-muted mt-2">
                         <b>*</b> Para asegurar tu participación en este evento, por favor, confirma tu correo
                         electrónico mediante el mensaje de verificación que fue enviado a tu correo.
                     </h6>
-                
+                @endif
                 <div class="d-flex justify-content-end mt-3">
                     <button type="button" class="btn btn-light text-primary me-3" onclick="resetForm()">
                         Cancelar
