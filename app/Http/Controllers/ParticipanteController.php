@@ -138,12 +138,12 @@ class ParticipanteController extends Controller
     public function verificarCorreo($codigo, $id_evento)
     {
         $participante = Participante::where('codigo', $codigo)->first();
-        if ($participante) {
+        if ($participante->correo_verificado == 0) {
             $participante->correo_verificado = 1;
             $participante->save();
             return ['error' => false, 'mensaje' => 'Correo verificado correctamente.'];
         }
-        return ['error' => true, 'mensaje' => 'No es posible verificar el correo.'];
+        return ['error' => true, 'mensaje' => 'El correo ya ha sido verificado.'];
     }
 
     public function enviarCodigoCorreo($id_evento, $id_participante)

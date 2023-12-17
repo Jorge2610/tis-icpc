@@ -18,6 +18,7 @@ const mostrarAlerta = (titulo, mensaje, tipo) => {
 
 
     const alertsContainer = document.getElementById("alertsContainer");
+    alertsContainer.style.zIndex = "9999";
     alertsContainer.innerHTML = alerta;
     alertsContainer.style.display = 'block';
 

@@ -7,20 +7,23 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class CambiosEnEvento extends Notification implements ShouldQueue
+class NotificacionActividad extends Notification implements ShouldQueue
 {
     use Queueable;
-
-    protected $evento;
-    protected $cambios;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($evento, $cambios)
+
+    public $actividad;
+    public $evento;
+    public $cambios;
+
+    public function __construct($actividad, $evento, $cambios = null)
     {
+        $this->actividad = $actividad;
         $this->evento = $evento;
         $this->cambios = $cambios;
     }
@@ -44,14 +47,13 @@ class CambiosEnEvento extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        $eventoNombreUrl = str_replace(' ', '%20', $this->evento->nombre);
-        return (new MailMessage)->markdown('emails.notificacion.cambios', [
+        return (new MailMessage)->markdown('emails.notificacion.actividad', [
+            'actividad' => $this->actividad,
+            'cambios' => $this->cambios,
             'evento' => $this->evento,
-            'notificable' => $notifiable,
-        ])
-            ->subject('Notificación de evento: ' . $this->evento->nombre)
-            ->greeting('Notificación de cambios')
-            ->action('Ver detalles del evento', url('/eventos/' . $eventoNombreUrl));
+            'notifiable' => $notifiable
+        ])->subject('Notificación de evento: ' . $this->evento->nombre)
+            ->action('Ver detalles del evento', url('/eventos/' . str_replace(' ', '%20', $this->evento->nombre)));
     }
 
     /**
@@ -63,11 +65,10 @@ class CambiosEnEvento extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            //'cambios' => $this->getCambiosDescripcion($this->cambios),
-            'url' => url('/eventos/' . $this->evento->nombre),
-            'email' => $notifiable->email,
-            'nombre' => $notifiable->name,
-            'id' => $this->id,
+            'actividad' => $this->actividad,
+            'cambios' => $this->cambios,
+            'evento' => $this->evento,
+            'notifiable' => $notifiable
         ];
     }
 }

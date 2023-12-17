@@ -9,7 +9,7 @@ acceso:
 <strong> {{ $participante->codigo }} </strong>
 
 o presione el siguiente botón:
-@component('mail::button', ['url' => url('/eventos/inscripcion-evento/' . $evento->id . '/' . $participante->id)])
+@component('mail::button', ['url' => url('/eventos/inscripcion-evento/' . $evento->id . '/' . $participante->ci)])
     Confirmar participación
 @endcomponent
 

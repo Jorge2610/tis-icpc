@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EnviarCodigoEquipo;
+use App\Mail\ConfirmacionEquipo;
 
 class EquipoController extends Controller
 {
@@ -89,6 +90,8 @@ class EquipoController extends Controller
             } else {
                 $equipo = $this->store($request);
                 $this->storeInscribir($request, $equipo->id);
+                $evento = Evento::find($request->id_evento);
+                Mail::to($equipo->correo_general)->send(new ConfirmacionEquipo($equipo, $evento));
                 return ['mensaje' => 'Equipo inscrito correctamente.', 'error' => false];
             }
         } catch (QueryException $e) {
@@ -101,14 +104,14 @@ class EquipoController extends Controller
         try {
             $equipo = Equipo::where('nombre', $request->nombre)
                 ->where('correo_general', $request->correo_general)
-                ->where('correo_confirmado', 1)
+                ->where('correo_verificado', 1)
                 ->first();
             if ($equipo) {
                 $inscrito = EquipoInscrito::where('id_evento', $request->id_evento)
                     ->where('id_equipo', $equipo->id)
                     ->wherehas('equipo', function ($q) use ($equipo) {
                         $q->where('nombre', $equipo->nombre)
-                            ->where('correo_confirmado', 1);
+                            ->where('correo_verificado', 1);
                     })
                     ->first();
             } else {
@@ -152,11 +155,9 @@ class EquipoController extends Controller
 
     public function mostrarEquipo($id)
     {
-        $equipo = Equipo::find($id)->with('integrantes', 'integrantes.participante', 'equipoInscrito')->first();
-        /* $participantes = Integrante::with(['tipoEvento' => function ($query) {
-            $query->withTrashed();
-        }])->where('estado', 0)->orderBy('updated_at', 'desc')
-            ->get();*/
+        $equipo = Equipo::find($id)
+            ->with('integrantes', 'integrantes.participante', 'equipoInscrito')
+            ->first();
         return view('inscripciones.tablaEquipo', ['equipo' => $equipo]);
     }
 
@@ -164,10 +165,28 @@ class EquipoController extends Controller
     {
         $equipo = Equipo::findorfail($id_equipo);
         $evento = Evento::findorfail($id_evento);
-        Mail::to($equipo->correo_general)->locale('es')->send(new EnviarCodigoEquipo($equipo, $evento));
+        Mail::to($equipo->correo_general)->locale('es')
+            ->send(new EnviarCodigoEquipo($equipo, $evento));
     }
 
     public function verificarCodigo(Request $request, $id)
     {
+        $equipo = Equipo::findorfail($id);
+        if ($equipo->codigo == $request->codigo) {
+            return ['error' => false, 'mensaje' => 'Código verificado correctamente.'];
+        } else {
+            return ['error' => true, 'mensaje' => 'El código de equipo no coincide.'];
+        }
+    }
+
+    public function verificarCorreo($codigo, $id_evento)
+    {
+        $equipo = Equipo::where('codigo', $codigo)->first();
+        if ($equipo->correo_verificado == 0) {
+            $equipo->correo_verificado = 1;
+            $equipo->save();
+            return ['error' => false, 'mensaje' => 'Correo verificado correctamente.'];
+        }
+        return ['error' => true, 'mensaje' => 'El correo ya ha sido verificado.'];
     }
 }
