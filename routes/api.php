@@ -106,7 +106,7 @@ Route::group([
     Route::post('{id}', 'update')->name('actividad.update');
     Route::delete('{id}', 'destroy')->name('actividad.destroy');
     Route::get('/obtener-actividad/{id}', 'obtenerActividades')->name('actividad.obtener-actividad');
-    Route::get('/{id}', 'actividadPorEventoId')->name('actividad.actividadPorEventoId');
+    Route::get('{id}', 'actividadPorEventoId')->name('actividad.actividadPorEventoId');
 });
 
 Route::group(
@@ -118,7 +118,7 @@ Route::group(
         Route::any('/existe', 'existeParticipante');
         Route::get('{id}', 'participantesEvento');
         Route::post('/', 'inscribirEvento');
-        Route::post('/enviarCodigo/{id}/{id}', 'enviarCodigoCorreo');
+        Route::post('/enviarCodigo/{id}/{id2}', 'enviarCodigoCorreo');
         Route::get('/participantes', 'participantesEvento');
         Route::any('/verificar/{id}', 'verificarParticipante');
     }
@@ -135,7 +135,7 @@ Route::group(
         Route::post('/inscribirEquipo', 'inscribirEquipoEvento');
         Route::post('/addIntegrante/{id}', 'addIntegrante');
         Route::get('/{id}', 'mostrarEquipo');
-        Route::post('/enviarCorreo/{id}/{id}', 'enviarCorreo');
+        //Route::post('/enviarCorreo/{id}/{id}', 'enviarCorreo');
     }
 );
 

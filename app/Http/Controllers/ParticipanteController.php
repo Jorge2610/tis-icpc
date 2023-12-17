@@ -6,9 +6,14 @@ use App\Models\Inscrito;
 use App\Models\Participante;
 use App\Models\Evento;
 
+use App\Mail\EnviarCodigo;
+
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Str;
+
+use Illuminate\Support\Facades\Log;
+
 
 use App\Mail\ConfirmacionParticipante;
 use Illuminate\Mail\Mailer;
@@ -68,8 +73,10 @@ class ParticipanteController extends Controller
             $participante->nombres           = $request->nombres;
             $participante->apellidos         = $request->apellidos;
             $participante->correo            = $request->correo;
-            $participante->celular           = $request->celular;
+            $participante->codigo_telefono   = $request->codigo_telefono;
+            $participante->telefono          = $request->telefono;
             $participante->fecha_nacimiento  = $request->fecha_nacimiento;
+            $participante->pais              = $request->pais;
             $participante->codigo            = Str::random(8);
             $participante->save();
             return $participante;
@@ -121,9 +128,17 @@ class ParticipanteController extends Controller
 
     public function enviarCodigoCorreo($id_evento, $id_participante)
     {
-        $participante = Participante::findorfail($id_participante);
-        $evento = Evento::findorfail($id_evento);
-        return $participante->codigo;
+        try {
+            $participante = Participante::findorfail($id_participante);
+            $evento = Evento::findorfail($id_evento);
+            Mail::to($participante->correo)->locale('es')->send(
+                new EnviarCodigo($participante, $evento)
+            );
+            return ['mensaje' => 'Código enviado correctamente.', 'error' => false];
+        } catch (QueryException $e) {
+            Log::error($e->getMessage());
+            return ['mensaje' => $e->getMessage(), 'error' => true];
+        }
     }
 
     public function update(Request $request, $id)

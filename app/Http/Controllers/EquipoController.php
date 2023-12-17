@@ -101,15 +101,19 @@ class EquipoController extends Controller
         try {
             $equipo = Equipo::where('nombre', $request->nombre)
                 ->where('correo_general', $request->correo_general)
-                ->where('correo_verificado', 1)
+                ->where('correo_confirmado', 1)
                 ->first();
-            $inscrito = EquipoInscrito::where('id_evento', $request->id_evento)
-                ->where('id_equipo', $equipo->id)
-                ->wherehas('equipo', function ($q) use ($equipo) {
-                    $q->where('nombre', $equipo->nombre)
-                        ->where('correo_verificado', 1);
-                })
-                ->first();
+            if ($equipo) {
+                $inscrito = EquipoInscrito::where('id_evento', $request->id_evento)
+                    ->where('id_equipo', $equipo->id)
+                    ->wherehas('equipo', function ($q) use ($equipo) {
+                        $q->where('nombre', $equipo->nombre)
+                            ->where('correo_confirmado', 1);
+                    })
+                    ->first();
+            } else {
+                $inscrito = null;
+            }
             if ($inscrito) {
                 return [
                     'inscrito' => true,
@@ -163,7 +167,7 @@ class EquipoController extends Controller
         return $equipo->codigo;
     }
 
-    public function verificarCodigo(Request $request, $id){
-
+    public function verificarCodigo(Request $request, $id)
+    {
     }
 }
