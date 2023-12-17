@@ -30,7 +30,7 @@
                     <div class="row">
                         <div class="col-lg-9 col-md-12 col-sm-12 col-12">
                             <h3>{{ $evento->nombre }}</h3>
-                            <p class="fs-6">{{ $evento->tipoEvento->nombre }}
+                            <p class="fs-6 mb-0">{{ $evento->tipoEvento->nombre }}
                             <p>
                         </div>
                         @if (
@@ -56,7 +56,15 @@
                                 </div>
                             @endif
                         </div>
-
+                        @if ($participantes->count() > 0)
+                            @php
+                                $plural = $participantes->count() > 1 ? 's' : '';
+                            @endphp
+                            <div class="d-flex justify-content-end fs-6">
+                                Este evento tiene {{ $participantes->count() }}
+                                participante{{ $plural }} inscrito{{ $plural }}.
+                            </div>
+                        @endif
                         <hr>
                         <h5>Información del evento:</h5>
                         <div class="row mt-3">

@@ -10,6 +10,7 @@ use App\Models\Anulado;
 use App\Models\Cancelado;
 use App\Models\Participante;
 use App\Models\User;
+use App\Models\Inscrito;
 use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Support\Facades\Log;
@@ -45,10 +46,21 @@ class EventoController extends Controller
         }, 'sitios', 'actividades'])
             ->where('nombre', $nombre)->first();
 
+        $participantes = $this->participantesEvento($evento->id);
         if (!$evento) {
             return abort(404);
         }
-        return view('eventos.evento', ['evento' => $evento]);
+        return view('eventos.evento', ['evento' => $evento, 'participantes' => $participantes]);
+    }
+
+    public function participantesEvento($id)
+    {
+        $participantes = Inscrito::where('id_evento', $id)->with(['participante' => function ($q) {
+            $q->where('correo_confirmado', 1);
+        }])->whereHas('participante', function ($q) {
+            $q->where('correo_confirmado', 1);
+        })->get();
+        return $participantes;
     }
 
     public function vistaInscripcion($id, $ci)
