@@ -34,7 +34,7 @@
                             <div class="mb-3 mt-1">
                                 <label for="nombreParticipante" class="form-label">Nombre(s) *</label>
                                 <input type="text" class="form-control" id="nombreParticipante" maxlength="64"
-                                    placeholder="Ingrese su nombre o nombres..." pattern="[a-zA-Z]*" required
+                                    placeholder="Ingrese su nombre o nombres..." pattern="[a-zA-Z ]+" required
                                     value="{{ $participante->nombres }}" {{ $participante->nombres ? 'disabled' : '' }}>
                             </div>
                         </div>
@@ -42,8 +42,8 @@
                             <div class="mb-3 mt-1">
                                 <label for="apellidoParticipante" class="form-label">Apellido(s) *</label>
                                 <input type="text" class="form-control" id="apellidoParticipante" maxlength="64"
-                                    placeholder="Ingrese sus apellidos..." required value="{{ $participante->apellidos }}"
-                                    {{ $participante->apellidos ? 'disabled' : '' }}>
+                                    placeholder="Ingrese sus apellidos..." pattern="[a-zA-Z ]+" required
+                                    value="{{ $participante->apellidos }}" {{ $participante->apellidos ? 'disabled' : '' }}>
                             </div>
                         </div>
                     </div>
@@ -62,11 +62,11 @@
                                     {{ $participante->fecha_nacimiento ? 'disabled' : '' }}>
                                 <div class="form-text">
                                     @if ($evento->edad_minima != null && $evento->edad_maxima == null)
-                                        Debes ser mayor de {{ $evento->edad_minima }} años para inscribirte al evento.
+                                        Debes ser mayor de {{ $edad_minima }} años para inscribirte al evento.
                                     @elseif ($evento->edad_minima == null && $evento->edad_maxima != null)
-                                        Debes ser menor de {{ $evento->edad_minima }} años para inscribirte al evento.
-                                    @else
-                                        Debes tener entre {{ $evento->edad_minima }} y {{ $evento->edad_maxima }} años
+                                        Debes ser menor de {{ $edad_maxima }} años para inscribirte al evento.
+                                    @elseif ($evento->edad_minima != null && $evento->edad_maxima != null)
+                                        Debes tener entre {{ $edad_minima }} y {{ $edad_maxima }} años
                                         para
                                         inscribirte al evento.
                                     @endif

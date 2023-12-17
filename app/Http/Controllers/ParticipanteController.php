@@ -137,15 +137,16 @@ class ParticipanteController extends Controller
         }
     }
 
-    public function verificarCorreo($codigo, $id_evento)
+    public function verificarCorreo($codigo)
     {
         $participante = Participante::where('codigo', $codigo)->first();
-        if ($participante->correo_verificado == 0) {
-            $participante->correo_verificado = 1;
+        if ($participante->correo_confirmado == 0) {
+            $participante->correo_confirmado = 1;
             $participante->save();
-            return ['error' => false, 'mensaje' => 'Correo verificado correctamente.'];
+            $verificado = (object)['error' => false, 'mensaje' => 'Correo verificado correctamente.'];
         }
-        return ['error' => true, 'mensaje' => 'El correo ya ha sido verificado.'];
+        $verificado =  (object)['error' => true, 'mensaje' => 'El correo ya ha sido verificado.'];
+        return view("inscripciones.confirmacionCorreo", ['verificado' => $verificado]);
     }
 
     public function enviarCodigoCorreo($id_evento, $id_participante)

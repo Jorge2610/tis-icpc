@@ -66,7 +66,6 @@ const insribirParticipante = async () => {
             response.data.mensaje,
             response.error ? "danger" : "success"
         );
-
         setTimeout(() => {
             window.location.href = "/eventos/" + nombreEvento;
         }, 1750);
