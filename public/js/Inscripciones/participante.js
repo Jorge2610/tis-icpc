@@ -4,12 +4,26 @@ let nombreEvento;
 
 window.addEventListener("load", async () => {
     idEvento = window.location.href.split("/");
-    idEvento = idEvento[idEvento.length - 1];
+    idEvento = idEvento[idEvento.length - 2];
     nombreEvento = document.getElementById("nombreEvento").innerText;
-    document.getElementById("codPaisCarnet").innerText = localStorage.getItem("paisCarnet");
-    localStorage.removeItem("paisCarnet");
-    cargarPaises();
+    if (localStorage.getItem("paisCarnet") === null) {
+        accesoNoAutorizado();
+    } else {
+        document.getElementById("codPaisCarnet").innerText = localStorage.getItem("paisCarnet");
+        //localStorage.removeItem("paisCarnet");
+        cargarPaises();
+    }
 });
+
+const accesoNoAutorizado = () => {
+    let pagina = document.getElementById("formularioInscripcionEvento");
+    let content = `
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 70vh">
+            <h2 class="text-center text-secondary"><i>Acceso no autorizado...</i></h2>
+        </div>
+    `;
+    pagina.innerHTML = content;
+};
 
 const cargarPaises = () => {
     let select = document.getElementById("selectPais");
@@ -48,6 +62,7 @@ const insribirParticipante = async () => {
             response.data.mensaje,
             response.error ? "danger" : "success"
         );
+        
         setTimeout(() => {
             window.location.href = "/eventos/" + nombreEvento;
         }, 1750);

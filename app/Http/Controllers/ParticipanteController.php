@@ -46,7 +46,7 @@ class ParticipanteController extends Controller
             } else {
                 $participante = $this->store($request);
                 $this->storeInscribir($request, $participante->id);
-                return ['mensaje' => 'Participante inscrito correctamente.', 'error' => false];
+                return ['mensaje' => 'Inscrito correctamente, por favor, verifica tu correo.', 'error' => false];
             }
         } catch (QueryException $e) {
             return ['mensaje' => $e->getMessage(), 'error' => true];

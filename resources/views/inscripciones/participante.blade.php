@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mb-3">
+    <div class="container mb-3" id="formularioInscripcionEvento">
         <div class="d-flex justify-content-center">
             <div class="col-md-8">
                 <h2 id="nombreEvento">{{ $evento->nombre }}</h2>
@@ -143,9 +143,15 @@
                     </div>
                 </form>
                 @if ($evento->precio_inscripcion != null)
-                    <h6 class="mt-2"><b>Nota:</b> La inscripción a este evento tiene un costo de
+                    <h6 class="text-muted mt-2"><b>Nota:</b> La inscripción a este evento tiene un costo de
                         {{ $evento->precio_inscripcion }} Bs.</h6>
                 @endif
+                
+                    <h6 class="text-muted mt-2">
+                        <b>*</b> Para asegurar tu participación en este evento, por favor, confirma tu correo
+                        electrónico mediante el mensaje de verificación que fue enviado a tu correo.
+                    </h6>
+                
                 <div class="d-flex justify-content-end mt-3">
                     <button type="button" class="btn btn-light text-primary me-3" onclick="resetForm()">
                         Cancelar
