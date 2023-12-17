@@ -252,6 +252,7 @@ const iniciarEditar=()=>{
     mostrarInput("genero", inputGenero.checked);
     mostrarInput("rangosDeEdad", inputEdad.checked);
     mostrarInput("eventoPago", inputCosto.checked);
+    mostrarInput("numero-integrantes",checkEquipo.checked);
     let f1=new Date(fechaInicio.value);
     let fl1=new Date(laFecha);
     let boolGrado=true;

@@ -164,7 +164,7 @@
                 <div class="row mt-4">
                     <div class="col-md-6 mt-2">
                         <input type="checkbox" class="form-check-input border-dark fecha-editar"
-                            onchange="datoCambiado()" id="equipoCheck"
+                            onchange="datoCambiado()" id="equipoCheck"  @if ($datos['equipo_minimo']) checked @endif
                            >
                         <label class="form-check-label " for="equipoCheck">Por equipos</label>
                         <div class="invalid-feedback" id="ValidarRangoEquipo">
