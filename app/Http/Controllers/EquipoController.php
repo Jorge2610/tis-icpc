@@ -106,15 +106,22 @@ class EquipoController extends Controller
                 ->where('correo_general', $request->correo_general)
                 ->where('correo_verificado', 1)
                 ->first();
+            $repetido = EquipoInscrito::where('id_evento', $request->id_evento)
+                ->whereHas('equipos', function ($q) use ($request) {
+                    $q->where('nombre', $request->nombre)
+                        ->where('correo_verificado', 1);
+                })->first();
+                
             if ($equipo) {
                 $inscrito = EquipoInscrito::where('id_evento', $request->id_evento)
                     ->where('id_equipo', $equipo->id)
-                    ->wherehas('equipo', function ($q) use ($equipo) {
+                    ->wherehas('equipos', function ($q) use ($equipo) {
                         $q->where('nombre', $equipo->nombre)
                             ->where('correo_verificado', 1);
                     })
                     ->first();
             } else {
+                $esRepetido = $repetido ? true : false;
                 $inscrito = null;
             }
             if ($inscrito) {
@@ -127,6 +134,7 @@ class EquipoController extends Controller
                 if (!$equipo) {
                     return [
                         'inscrito' => false,
+                        'Mensaje' => ["mensaje" => $esRepetido ? " Equipo ya inscrito a este evento." : "", "error" => $esRepetido],
                     ];
                 } else {
                     return [

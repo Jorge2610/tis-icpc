@@ -21,11 +21,11 @@ class NotificacionActividad extends Notification implements ShouldQueue
     public $evento;
     public $cambios;
 
-    public function __construct($actividad, $evento, $cambios = null)
+    public function __construct($actividad, $evento, $cambios)
     {
         $this->actividad = $actividad;
         $this->evento = $evento;
-        $this->cambios = $cambios;
+        $this->cambios = date('d-m-Y H:i', strtotime($cambios));
     }
 
     /**
@@ -48,9 +48,8 @@ class NotificacionActividad extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)->markdown('emails.notificacion.actividad', [
-            'actividad' => $this->actividad,
-            'cambios' => $this->cambios,
             'evento' => $this->evento,
+            'cambios' => $this->cambios,
             'notifiable' => $notifiable
         ])->subject('Notificación de evento: ' . $this->evento->nombre)
             ->action('Ver detalles del evento', url('/eventos/' . str_replace(' ', '%20', $this->evento->nombre)));

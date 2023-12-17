@@ -110,16 +110,25 @@ use App\Models\Evento;
 use App\Mail\EnviarCodigo;
 use App\Mail\EnviarCodigoEquipo;
 use App\Models\Equipo;
+use App\Models\Actividad;
+use App\Notifications\NotificacionActividad;
 use Illuminate\Support\Facades\Mail;
 
 Route::get('/mailable', function () {
-
     $participante = Participante::find(1);
     $equipo = Equipo::find(1);
     $mensaje = "holaaa \n" . "como estas \n" . "estamos para servirte";
     $evento = Evento::find(1);
-    //$notificacion = ['asunto' => 'Cambio de estado', 'mensaje' => $mensaje, 'adjunto' => null, 'id' => 1, 'nombre' => $evento->nombre];
+    $actividad = Actividad::find(1);
+    
+    // Crea una nueva instancia de la clase NotificacionActividad, pasando el participante, la actividad y el evento
 
-    // Crea una nueva instancia de la clase EnviarCodigo, pasando el participante, el evento y la notificación
-    return new ConfirmacionParticipante($participante, $evento);
+    $notificacion = new NotificacionActividad($actividad, $evento, $actividad->updated_at);
+    $participante->notify($notificacion);
+
+    // Obtén la representación de la notificación como un correo electrónico
+    return  $notificacion->toMail($participante);
+
+    // Obtén el contenido de la vista previa del correo electrónico (Markdown)
 });
+
