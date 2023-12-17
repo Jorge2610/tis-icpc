@@ -52,17 +52,19 @@ const registrarEquipo = ()=>{
     var formData = new FormData();
     // Agregar datos al FormData
     formData.append('nombre', nombreInput.value);
-    formData.append('correo', correoInput.value);
+    formData.append('correo_general', correoInput.value);
     formData.append('id_evento',nombreInput.getAttribute("evento_id"))
-    if(crear){
-        axios.post('/api/equipo/', formData)
+    formData.forEach(function(valor, clave) {
+        console.log("Clave:", clave, "Valor:", valor);
+    });
+        axios.post('/api/equipo/existe', formData)
         .then(function (response) {
             console.log('Respuesta del servidor:', response.data);
         })
         .catch(function (error) {
             console.error('Error en la petición:', error);
         });
-    }
+    
 }
 const atrasCorreo = ()=>{
     contenido1.collapse("hide");
