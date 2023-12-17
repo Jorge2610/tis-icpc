@@ -114,7 +114,7 @@ class EquipoController extends Controller
                     $q->where('nombre', $request->nombre)
                         ->where('correo_verificado', 1);
                 })->first();
-            
+
             if ($equipo) {
                 $inscrito = EquipoInscrito::where('id_evento', $request->id_evento)
                     ->where('id_equipo', $equipo->id)
@@ -166,10 +166,13 @@ class EquipoController extends Controller
 
     public function mostrarEquipo($id)
     {
-        $equipo = Equipo::where("id", $id)
-            ->with('integrantes', 'integrantes.participante', 'equipoInscrito')
-            ->first();
-        dd($equipo);
+        $equipo = Equipo::with([
+            'integrantes',
+            'integrantes.participante',
+            'equipoInscrito',
+            'equipoInscrito.evento',
+        ])
+            ->findOrFail($id);
         return view('inscripciones.tablaEquipo', ['equipo' => $equipo]);
     }
 

@@ -5,14 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Evento;
 use App\Models\Participante;
 use Illuminate\Http\Request;
-use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use App\Notifications\NotificacionEvento;
 use Illuminate\Support\Facades\Log;
 
 
-class NotificacionController extends Controller 
+class NotificacionController extends Controller
 {
     public function tablaEventos()
     {
