@@ -19,8 +19,10 @@ class CreateParticipantesTable extends Migration
             $table->string('nombres', 64);
             $table->string('apellidos', 64);
             $table->string('correo', 64);
-            $table->string('celular', 64);
+            $table->string('codigo_telefono', 10);
+            $table->string('telefono', 64);
             $table->date('fecha_nacimiento');
+            $table->string('pais', 64)->nullable();
             $table->boolean('correo_confirmado')->default(0);
             $table->boolean('codigo')->nullable();
             $table->timestamps();

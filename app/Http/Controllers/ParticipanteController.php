@@ -68,8 +68,10 @@ class ParticipanteController extends Controller
             $participante->nombres           = $request->nombres;
             $participante->apellidos         = $request->apellidos;
             $participante->correo            = $request->correo;
-            $participante->celular           = $request->celular;
+            $participante->codigo_telefono   = $request->codigo_telefono;
+            $participante->telefono          = $request->telefono;
             $participante->fecha_nacimiento  = $request->fecha_nacimiento;
+            $participante->pais              = $request->pais;
             $participante->codigo            = Str::random(8);
             $participante->save();
             return $participante;
