@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
-
 use App\Models\Equipo;
 use App\Models\EquipoInscrito;
 use App\Models\Integrante;
@@ -73,8 +71,10 @@ class EquipoController extends Controller
                 $participante->pais = $request->pais;
                 $participante->codigo = Str::random(8);
                 $participante->save();
-                $integrante = $this->storeIntegrante($request, $id_equipo, $participante->id);
-                Mail::to($request->correo)->send(new ConfirmacionEquipo($integrante, $request->id_evento));
+                $this->storeIntegrante($request, $id_equipo, $participante->id);
+                $equipo = Equipo::find($id_equipo);
+                $evento = Evento::find($request->id_evento);
+                Mail::to($request->correo)->send(new ConfirmacionEquipo($equipo, $evento, $participante));
                 return ['mensaje' => 'Inscrito correctamente, por favor, verifica tu correo.'];
             }
         } catch (QueryException $e) {

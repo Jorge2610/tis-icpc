@@ -1,14 +1,9 @@
 @component('mail::message')
 Hola,
 
-Parece que usted quiere inscribir a su equipo <strong> {{ $equipo->nombre }} </strong> en el evento <strong> {{ $evento->nombre }} </strong>,copie el siguiente código de
-acceso:
+Parece que usted quiere unirse al equipo <strong> {{ $equipo->nombre }} </strong> en el evento <strong> {{ $evento->nombre }} </strong>, confirme su participación pulsando el siguiente botón:
 
-<strong> {{ $equipo->codigo }} </strong>
-
-o presione el siguiente botón:
-
-@component('mail::button', ['url' => url('confirmar/equipo/' . $equipo->codigo)])
+@component('mail::button', ['url' => url('confirmar/participante/' . $participante->codigo)])
 Confirmar participación
 @endcomponent
 
