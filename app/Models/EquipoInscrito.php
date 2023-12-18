@@ -14,7 +14,7 @@ class EquipoInscrito extends Model
         return $this->belongsTo(Equipo::class, 'id_equipo');
     }
 
-    public function evento()
+    public function eventos()
     {
         return $this->belongsTo(Evento::class, 'id_evento');
     }

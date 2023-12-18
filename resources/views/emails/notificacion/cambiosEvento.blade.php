@@ -12,7 +12,7 @@
 
 {{-- Intro Lines --}}
 
-Hola <strong> {{ ucwords(strtolower($notificable->apellidos))}}  {{ ucwords(strtolower($notificable->nombres))}} </strong>,
+Hola <strong> {{ ucwords(strtolower($notifiable->apellidos))}}  {{ ucwords(strtolower($notifiable->nombres))}} </strong>,
 
 Se realizaron cambios en el evento: <strong> {{ $evento->nombre }} </strong> en el que estas inscrito,  la fecha de modificación fue: <strong> {{ date('d-m-Y', strtotime($evento->updated_at)) }} </strong> a las <strong>{{ date('H:i', strtotime($evento->updated_at)) }}</strong>.
 

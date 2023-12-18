@@ -9,8 +9,12 @@ class Integrante extends Model
 {
     use HasFactory;
 
-    public function grupo()
+    public function equipo()
     {
-        return $this->belongsTo(Grupo::class, 'id_grupo');
+        return $this->belongsTo(Equipo::class, 'id_equipo');
+    }
+
+    public function participantes(){
+        return $this->belongsTo(Participante::class, 'id_participante');
     }
 }

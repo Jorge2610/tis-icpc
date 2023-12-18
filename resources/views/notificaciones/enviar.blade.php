@@ -70,15 +70,17 @@
                             Esta notificación se enviará a los participantes inscritos en el evento.
                         </p>
                         @component('components.modal')
-                            @slot('modalId', 'modalEnviarNotificacion')
-                            @slot('modalTitle', 'Confirmación')
-                            @slot('modalContent')
-                                <p>¿Está seguro de enviar la notificación?</p @endslot @slot('modalButton') <button type="button"
-                                    class="btn btn-secondary" data-bs-dismiss="modal" onclick="resetInputs()">
-                                No</button>
-                                <button type="button" class="btn btn-danger" onclick="enviar()">Sí</button>
-                            @endslot
-                        @endcomponent
+                        @slot('modalId', 'modalEnviarNotificacion')
+                        @slot('modalTitle', 'Confirmación')
+                        @slot('modalContent')
+                            ¿Está seguro de enviar la notificación?
+                        @endslot
+                        @slot('modalButton')
+                            <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal" onclick="resetInputs()">No</button>
+                            <button type="reset" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal"
+                                onclick="enviar()">Sí</button>
+                        @endslot
+                    @endcomponent
 
                     </div>
                 </div>
