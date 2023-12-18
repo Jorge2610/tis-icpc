@@ -173,7 +173,13 @@ class EquipoController extends Controller
         try {
             $equipo = Equipo::where('correo_verificado', 0)->find($request->id_equipo);
             if ($equipo) {
-                $this->update($request, $request->id_equipo);
+                $equipo = $this->update($request, $request->id_equipo);
+                $equipoInscrito = EquipoInscrito::where('id_evento', $request->id_evento)
+                    ->where('id_equipo', $equipo->id)
+                    ->first();
+                if(!$equipoInscrito){
+                    $this->storeInscribir($request, $equipo->id);
+                }
             }
             if ($request->id_equipo) {
                 $this->storeInscribir($request, $request->id_equipo);
