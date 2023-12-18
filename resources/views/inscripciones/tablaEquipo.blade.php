@@ -43,7 +43,7 @@
                 <button type="button" class="btn btn-primary btn-sm" 
                 data-bs-toggle="modal" data-bs-target="#modal-inscribir"
                 {{$equipo->integrantes->count() < $evento->equipo_maximo ? "" : "disabled"}}>
-                    inscribir participante al equipo
+                    Inscribir participante al equipo
                 </button>
                 
                 @component('components.modal-inscribir-participante-equipo')
