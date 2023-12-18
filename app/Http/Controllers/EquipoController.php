@@ -203,8 +203,7 @@ class EquipoController extends Controller
         $equipo = Equipo::with([
             'integrantes',
             'integrantes.participante',
-            'equipoInscrito',
-            'equipoInscrito.evento',
+            'equipoInscrito'
         ])
             ->where('codigo',$codigo)
             ->first();

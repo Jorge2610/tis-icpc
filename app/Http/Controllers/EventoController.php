@@ -11,6 +11,7 @@ use App\Models\Cancelado;
 use App\Models\Participante;
 use App\Models\User;
 use App\Models\Inscrito;
+use App\Models\Equipo;
 use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Support\Facades\Log;
@@ -319,5 +320,26 @@ class EventoController extends Controller
         }])->get();
         $anular = true;
         return view('eventos.cancelarEvento', ['eventos' => $eventos, 'anular' => $anular]);
+    }
+    public function vistaInscripcionEquipo($idEquipo,$ci,$idEvento){
+        $evento = Evento::find($idEvento);
+        $equipo = Equipo::find($idEquipo);
+        $participante = Participante::where("ci", $ci)->first();
+        if ($participante) {
+            $dato = $participante;
+        } else {
+            $dato = (object)[
+                'ci' => $ci,
+                'nombres' => null,
+                'apellidos' => null,
+                'correo' => null,
+                'fecha_nacimiento' => null,
+                'codigo_telefono' => null,
+                'telefono' => null,
+                'pais' => null
+            ];
+        }
+        return view('inscripciones.participanteEquipo', ['equipo' => $equipo, 'participante' => $dato,'evento'=>$evento]);
+    
     }
 }

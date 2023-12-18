@@ -9,7 +9,7 @@
             <h3>{{$equipo->nombre}}</h3>
             <div class="col-sm-12">
                 <table class="table table-responsive table-striped text-secondary  cursor" id="tablaEvento">
-                    <caption>Eventos</caption>
+                    <caption>Participantes</caption>
                     <thead>
                         <tr>
                             <th scope="col" class="col-sm-3 col-md-3">Nombres de participante</th>
@@ -19,7 +19,7 @@
                             
                         </tr>
                     </thead>
-                    <<tbody id="datosTabla">
+                    <tbody id="datosTabla">
                         @foreach ($equipo->integrantes as $integrante)
                             
                                 <tr id="{{ $integrante->participante->id }}">
@@ -36,8 +36,9 @@
                     inscribir participante al equipo
                 </button>
                 
-                @component('components.modal-inscribir-participante')
+                @component('components.modal-inscribir-participante-equipo')
                     @slot('evento', $evento)
+                    @slot('equipo', $equipo)
                 @endcomponent
             </div>
         </div>
