@@ -212,16 +212,26 @@
                                 <h5 class="card-title text-center fw-bold">{{ $actividad->nombre }}</h5>
                                 <hr>
                                 <div class="row">
-                                    <p class="card-text col-lg-2 col-sm-4 col-6"><strong> Inicio: </strong>
-                                        {{ date('d-m-Y', strtotime($actividad->inicio_actividad)) }}
+                                    @if($actividad->inscripcion == 1)
+                                        <p class="card-text col-lg-2 col-sm-3 col-4"><strong> Inicio: </strong>
+                                            {{ date('d-m-Y', strtotime($actividad->inicio_actividad)) }}
+                                        </p>
+                                        <p class="card-text col-lg-7 col-sm-7 col-5">
+                                            <strong>Hora: </strong> {{ date('H:i', strtotime($actividad->inicio_actividad)) }}
+                                        </p>
+                                        <div class="alert alert-primary text-center col-lg-3 col-sm-2 col-3" style="height:25px;padding:0;width:200px">
+                                            Actividad de inscripción
+                                        </div>        
+                                    @else
+                                        <p class="card-text col-lg-2 col-sm-4 col-6"><strong> Inicio: </strong>
+                                            {{ date('d-m-Y', strtotime($actividad->inicio_actividad)) }}
 
-                                    </p>
-                                    <p class="card-text col-lg-10 col-sm-8 col-6">
-                                        <strong>Hora: </strong> {{ date('H:i', strtotime($actividad->inicio_actividad)) }}
-                                    </p>
-
-
-
+                                        </p>
+                                        <p class="card-text col-lg-10 col-sm-8 col-6">
+                                            <strong>Hora: </strong> {{ date('H:i', strtotime($actividad->inicio_actividad)) }}
+                                        </p>
+                                    @endif
+                                    
                                     <p class="card-text col-lg-2 col-sm-4 col-6"><strong> Fin: </strong>
                                         {{ date('d-m-Y', strtotime($actividad->fin_actividad)) }}
                                     </p>
