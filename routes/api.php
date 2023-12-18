@@ -156,7 +156,7 @@ Route::group(
         Route::get('/integrantes/{id}', 'mostrarIntegrantes');
         Route::post('/verificarCodigo/{id}', 'verificarCodigo');
         Route::post('/existe/{ci}/{id_equipo}/{id_evento}', 'existeParticipante');
-        //Route::post('/enviarCorreo/{id}/{id}', 'enviarCorreo');
+        Route::post('/enviarCorreo/{id_equipo}/{id_evento}', 'enviarCorreo');
     }
 );
 

@@ -198,7 +198,7 @@ class EquipoController extends Controller
         }
     }
 
-    public function mostrarEquipo($id)
+    public function mostrarEquipo($codigo,$id)
     {
         $equipo = Equipo::with([
             'integrantes',
@@ -206,8 +206,10 @@ class EquipoController extends Controller
             'equipoInscrito',
             'equipoInscrito.evento',
         ])
-            ->findOrFail($id);
-        return view('inscripciones.tablaEquipo', ['equipo' => $equipo]);
+            ->where('codigo',$codigo)
+            ->first();
+        $evento = Evento::find($id);
+        return view('inscripciones.tablaEquipo', ['equipo' => $equipo,'evento'=>$evento]);
     }
 
     public function enviarCorreo($id_equipo, $id_evento)
