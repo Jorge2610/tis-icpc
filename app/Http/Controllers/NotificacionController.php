@@ -24,7 +24,7 @@ class NotificacionController extends Controller
             }])
             ->withCount(['inscritos as cantidad_inscritos' => function ($q) {
                 $q->whereHas('participante', function ($q) {
-                    $q->where('correo_confirmado', 0);
+                    $q->where('correo_confirmado', 1);
                 });
             }])
             ->where('estado', 0)
@@ -55,7 +55,7 @@ class NotificacionController extends Controller
     {
         $participantes = Participante::whereHas('inscritos', function ($q) use ($id_evento) {
             $q->where('id_evento', $id_evento);
-        })->where('correo_confirmado', 0)->get();
+        })->where('correo_confirmado', 1)->get();
         return $participantes;
     }
 

@@ -156,7 +156,7 @@ class ActividadController extends Controller
             $evento = Evento::find($actividad->id_evento);
             $participantes = Participante::whereHas('inscritos', function ($q) use ($actividad) {
                 $q->where('id_evento', $actividad->id_evento );
-            })->where('correo_confirmado', 0)->get();
+            })->where('correo_confirmado', 1)->get();
 
 
             foreach ($participantes as $participante) {
