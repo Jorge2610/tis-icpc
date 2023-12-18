@@ -15,7 +15,7 @@ class CreateParticipantesTable extends Migration
     {
         Schema::create('participantes', function (Blueprint $table) {
             $table->id();
-            $table->integer('ci');
+            $table->bigInteger('ci');
             $table->string('nombres', 64);
             $table->string('apellidos', 64);
             $table->string('correo', 64);
