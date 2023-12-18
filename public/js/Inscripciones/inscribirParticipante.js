@@ -5,8 +5,10 @@ const displayCodigo = document.getElementById("displayCodAcceso");
 const inputCod = document.getElementById("codParticipante");
 let idEvento;
 let idParticipante;
+let onclick;
 
 window.addEventListener("load", async () => {
+    onclick = document.getElementById("botonPrincipal").getAttribute("onclick");
     cargarPaises();
 });
 
@@ -45,7 +47,7 @@ const resetModal = () => {
     inputCod.removeAttribute("required");
     let boton = document.getElementById("botonPrincipal");
     boton.innerText = "Inscribirme";
-    boton.setAttribute("onclick", "validarDatos({{ $evento->id }})");
+    boton.setAttribute("onclick", onclick);
     formModalInscripcion.reset();
     formModalInscripcion.classList.remove("was-validated");
 };
