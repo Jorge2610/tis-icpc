@@ -154,6 +154,7 @@ Route::group(
         Route::post('/addIntegrante/{id}', 'addIntegrante');
         Route::get('/{id}', 'mostrarEquipo');
         Route::get('/integrantes/{id}', 'mostrarIntegrantes');
+        Route::post('/verificarCodigo/{id}', 'verificarCodigo');
         //Route::post('/enviarCorreo/{id}/{id}', 'enviarCorreo');
     }
 );
