@@ -51,18 +51,45 @@ class EquipoController extends Controller
         }
     }
 
-    public function addIntegrante(Request $request, $id_equipo)
+    public function addintegrante(Request $request, $id_equipo)
     {
         try {
-            if ($this->existeParticipante($request->ci, $id_equipo, $request->id_evento)) {
-                return ['mensaje' => 'Participante ya inscrito', 'error' => true];
+            $participante = Participante::where('correo_confirmado', 0)->find($request->id_participante);
+            if ($participante) {
+                $this->updateParticipante($request, $request->id_participante);
             }
+            if ($request->id_participante) {
+                $this->storeIntegrante($request, $id_equipo, $request->id_participante);
+                return ['mensaje' => 'Inscrito correctamente.', 'error' => false];
+            } else {
+                $participante = new Participante();
+                $participante->ci = $request->ci;
+                $participante->nombres = $request->nombres;
+                $participante->apellidos = $request->apellidos;
+                $participante->correo = $request->correo;
+                $participante->codigo_telefono = $request->codigo_telefono;
+                $participante->telefono = $request->telefono;
+                $participante->fecha_nacimiento = $request->fecha_nacimiento;
+                $participante->pais = $request->pais;
+                $participante->codigo = Str::random(8);
+                $participante->save();
+                $integrante = $this->storeIntegrante($request, $id_equipo, $participante->id);
+                Mail::to($request->correo)->send(new ConfirmacionEquipo($integrante, $request->id_evento));
+                return ['mensaje' => 'Inscrito correctamente, por favor, verifica tu correo.'];
+            }
+        } catch (QueryException $e) {
+            return ['mensaje' => $e->getMessage(), 'error' => true];
+        }
+    }
+    public function storeIntegrante(Request $request, $id_equipo, $id_participante)
+    {
+        try {
             $integrante = new Integrante();
             $integrante->institucion = $request->institucion;
             $integrante->grado_academico = $request->grado_academico;
             $integrante->genero = $request->genero;
             $integrante->talla = $request->talla;
-            $integrante->id_participante = $request->id_participante;
+            $integrante->id_participante = $id_participante;
             $integrante->id_equipo = $id_equipo;
             $integrante->save();
             return $integrante;
@@ -71,6 +98,25 @@ class EquipoController extends Controller
         }
     }
 
+    public function updateParticipante(Request $request, $id)
+    {
+        try {
+            $participante = Participante::find($id);
+            $participante->ci                = $request->ci;
+            $participante->nombres           = $request->nombres;
+            $participante->apellidos         = $request->apellidos;
+            $participante->correo            = $request->correo;
+            $participante->codigo_telefono   = $request->codigo_telefono;
+            $participante->telefono          = $request->telefono;
+            $participante->fecha_nacimiento  = $request->fecha_nacimiento;
+            $participante->pais              = $request->pais;
+            $participante->codigo            = Str::random(8);
+            $participante->save();
+            return $participante;
+        } catch (QueryException $e) {
+            return ['mensaje' => $e->getMessage(), 'error' => true];
+        }
+    }
     public function existeParticipante($ci, $id_equipo, $id_evento)
     {
         $participante = Participante::where('ci', $ci)->first();
@@ -90,7 +136,7 @@ class EquipoController extends Controller
             return [
                 'error' => true,
                 'inscrito' => true,
-                'mensaje' => 'Participante ya inscrito'
+                'mensaje' => 'El participante ya se encuentra inscrito en este evento.'
             ];
         }
         if ($participante) {
@@ -99,7 +145,7 @@ class EquipoController extends Controller
                 return [
                     'inscrito' => false,
                     'integrante' => true,
-                    'mensaje' => 'Participante ya inscrito'
+                    'mensaje' => 'Participante ya pertenece a este equipo.'
                 ];
             } else {
                 return [
@@ -198,7 +244,7 @@ class EquipoController extends Controller
         }
     }
 
-    public function mostrarEquipo($codigo,$id)
+    public function mostrarEquipo($codigo, $id)
     {
         $equipo = Equipo::with([
             'integrantes',
@@ -206,10 +252,10 @@ class EquipoController extends Controller
             'equipoInscrito',
             'equipoInscrito.evento',
         ])
-            ->where('codigo',$codigo)
+            ->where('codigo', $codigo)
             ->first();
         $evento = Evento::find($id);
-        return view('inscripciones.tablaEquipo', ['equipo' => $equipo,'evento'=>$evento]);
+        return view('inscripciones.tablaEquipo', ['equipo' => $equipo, 'evento' => $evento]);
     }
 
     public function enviarCorreo($id_equipo, $id_evento)
