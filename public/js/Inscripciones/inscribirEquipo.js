@@ -41,7 +41,6 @@ const crearEquipo=async()=>{
             // Manejar errores
             console.error('Error al obtener datos:', error);
           });
-        console.log(response.data.error);
         if(response.data.error){
             esValido(codigoInput1,false);
         }else{
@@ -67,7 +66,7 @@ const registrarCorreo = async()=>{
 const verificarCodigo=()=>{
     codigoInput1.dispatchEvent(new Event("change"));
     if(codigoInput1.classList.contains("is-valid")){
-        console.log("registra tio porfavor");
+
     }
 }
 const registrarEquipo = async()=>{
@@ -77,7 +76,7 @@ const registrarEquipo = async()=>{
     formData.append('correo_general', correoInput.value);
     formData.append('id_evento',nombreInput.getAttribute("evento_id"))
     formData.forEach(function(valor, clave) {
-        console.log("Clave:", clave, "Valor:", valor);
+
     });
         const response = await axios.post('/api/equipo/existe', formData)
         .catch(function (error) {
@@ -88,10 +87,9 @@ const registrarEquipo = async()=>{
             id_equipo = response.data.equipo.id;
             enviarCorreo(id_equipo,formData.get("id_evento"));
             formData.append('id_equipo',response.data.equipo.id);
-            console.log("este equipo ya esta registrado y inscrito");
+            
         }else{
             if(response.data.equipo){
-                console.log(response.data)
                 id_equipo=response.data.equipo.id;
                 formData.append('id_equipo',response.data.equipo.id);
             }
@@ -103,8 +101,7 @@ const registrarEquipo = async()=>{
 const enviarCorreo = (id_equipo,id_evento)=>{
     axios.post('/api/enviarCorreo/'+id_equipo+'/'+id_evento)
     .then(response => {
-        // Manejar la respuesta exitosa
-        console.log('Datos:', response.data);
+
       })
       .catch(error => {
         // Manejar errores
@@ -125,7 +122,6 @@ const registrarEquipoEvento=(formData)=>{
     
     axios.post("/api/equipo/inscribirEquipo",formData)
     .then(function (response) {
-        console.log('Respuesta del servidor:', response.data);
         if(response.data.equipo){
             id_equipo=response.data.equipo.id;
         }

@@ -5,7 +5,6 @@ let codEquipo;
 
 window.addEventListener("load", async () => {
     idEvento = window.location.href.split("/");
-    console.log(idEvento);
     idEquipo = idEvento[5]
     idEvento = idEvento[7];
     nombreEvento = document.getElementById("nombreEvento").innerText;
