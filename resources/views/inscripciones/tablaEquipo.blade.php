@@ -9,9 +9,9 @@
             <h3>{{$equipo->nombre}}</h3>
             <p>Rango de participantes por equipo: 
                 @if ($evento->equipo_minimo)
-                    desde los 2
+                    desde {{ $evento->equipo_minimo }}  
                 @else
-                    desde {{ $evento->equipo_minimo }}
+                    desde los 2
                 @endif
                 hasta los {{ $evento->equipo_maximo }}
             </p>
@@ -29,7 +29,7 @@
                     </thead>
                     <tbody id="datosTabla">
                         @foreach ($equipo->integrantes as $integrante)
-                                @if($integrante->participante)
+                                @if($integrante->participantes)
                                 <tr >
                                     <td>{{ $integrante->participantes->nombres }}</td>
                                     <td class="text-center">{{ $integrante->participantes->apellidos }}</td>
@@ -43,7 +43,7 @@
                 <button type="button" class="btn btn-primary btn-sm" 
                 data-bs-toggle="modal" data-bs-target="#modal-inscribir"
                 {{$equipo->integrantes->count() < $evento->equipo_maximo ? "" : "disabled"}}>
-                    inscribir participante al equipo
+                    Inscribir participante al equipo
                 </button>
                 
                 @component('components.modal-inscribir-participante-equipo')

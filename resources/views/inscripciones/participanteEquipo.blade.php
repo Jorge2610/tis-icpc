@@ -4,10 +4,9 @@
     <div class="container mb-3" id="formularioInscripcionEvento">
         <div class="d-flex justify-content-center">
             <div class="col-md-8">
-                <h2 id="nombreEvento">{{ $equipo->nombre }}</h2>
-                <h4>Formulario de inscripción al </h4>
+                <h2 id="nombreEvento">Equipo: {{ $equipo->nombre }}</h2>
+                <h4>Formulario de integrante</h4>
                 <hr>
-                <h4>{{$equipo->nombre}}</h4>
                 <form class="needs-validation" novalidate id="formInscripcionParticipante">
                     <div class="row border border-bottom-0 rounded-top">
                         <h5 class="mt-2">Información general</h5>

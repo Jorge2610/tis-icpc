@@ -9,10 +9,13 @@ const buttonConfirmacion = document.getElementById('button-equipo-confirmacion')
 const buttonCancelacion = document.getElementById('button-equipo-cancelar'); 
 const codigoInput1 = document.getElementById('codigo1');
 const form = document.getElementById('inscribirEquipo');
+const mensaCorreo = document.getElementById('mensajeErrorCorreo');
+const mensajeNombre = document.getElementById('mensajeErrorNombre');
 
 let crear=true;
 let Datos;
 let id_equipo;
+let id_evento;
 //funciones button
 const ingresarNombreEquipo = () => {
     nombreInput.dispatchEvent(new Event("change"));
@@ -43,7 +46,12 @@ const crearEquipo=async()=>{
           });
         if(response.data.error){
             esValido(codigoInput1,false);
+            mensaCorreo.innerText="Código incorrecto.";
+            participanteYaInscrito(response);
+
         }else{
+            localStorage.setItem("codigo",codigoInput1.value);
+            console.log(localStorage.getItem('codigo'));
             window.location.href= "/eventos/tabla-equipo/"+codigoInput1.value+"/"+nombreInput.getAttribute("evento_id");
         }
     }
@@ -59,9 +67,11 @@ const cancelarEquipo = ()=>{
 }
 const registrarCorreo = async()=>{
         await registrarEquipo();
-        validarGmail1.style.display='block';
-        nombreInput.disabled=true;
-        correoInput.disabled=true;
+        if(nombreInput.classList.contains("is-valid")){
+            validarGmail1.style.display='block';
+            nombreInput.disabled=true;
+            correoInput.disabled=true;
+        }
 }
 const verificarCodigo=()=>{
     codigoInput1.dispatchEvent(new Event("change"));
@@ -74,7 +84,8 @@ const registrarEquipo = async()=>{
     // Agregar datos al FormData
     formData.append('nombre', nombreInput.value);
     formData.append('correo_general', correoInput.value);
-    formData.append('id_evento',nombreInput.getAttribute("evento_id"))
+    formData.append('id_evento',nombreInput.getAttribute("evento_id"));
+    id_evento=nombreInput.getAttribute("evento_id");
     formData.forEach(function(valor, clave) {
 
     });
@@ -87,19 +98,35 @@ const registrarEquipo = async()=>{
             id_equipo = response.data.equipo.id;
             enviarCorreo(id_equipo,formData.get("id_evento"));
             formData.append('id_equipo',response.data.equipo.id);
-            
+            validarGmail1.style.display='block';
+            nombreInput.disabled=true;
+            correoInput.disabled=true;
+            enviarCorreo(id_equipo,id_evento)
         }else{
             if(response.data.equipo){
                 id_equipo=response.data.equipo.id;
-                formData.append('id_equipo',response.data.equipo.id);
+                formData.append('id_equipo',response.data.equipo.id)
             }
-                
-            registrarEquipoEvento(formData);
+            if(response.data.Mensaje.error){
+                mostrarAlerta(
+                    "Éxito",
+                    response.data.Mensaje.mensaje,
+                    response.data.Mensaje.error ? "danger" : "success"
+                );
+                esValido(correoInput,false);
+                esValido(nombreInput,false);
+                mensajeNombre.innerText="Nombre ya esta registrado.";
+                mensaCorreo.innerHTML="Correo no válido.";
+
+            }else{
+                registrarEquipoEvento(formData);
+            }   
+            
         }
     
 }
 const enviarCorreo = (id_equipo,id_evento)=>{
-    axios.post('/api/enviarCorreo/'+id_equipo+'/'+id_evento)
+    axios.post('/api/equipo/enviarCorreo/'+id_equipo+'/'+id_evento)
     .then(response => {
 
       })
@@ -130,6 +157,24 @@ const registrarEquipoEvento=(formData)=>{
         console.error('Error en la petición:', error);
     });
 }
+const reEnviarCodigo = async()=>{
+    let res = await enviarCorreo(id_equipo,id_evento);
+}
+const enviarCodigoAcceso = async () => {
+    let data = await axios.post("/api/participante/enviarCodigo/" + idEvento + "/" + idParticipante).then(response => {
+        return response.data;
+    });
+    return data;
+};
+const participanteYaInscrito = (response) => {
+    //$('#modal-inscribir').modal('hide');
+    //resetModal();
+    mostrarAlerta(
+        "Éxito",
+        response.data.Mensaje.mensaje,
+        response.data.Mensaje.error ? "danger" : "success"
+    );
+};
 //validacion de inputs
 const inputRequired=(input)=>{
     if(input.value==""){
@@ -153,6 +198,7 @@ const inputEmail = (input)=>{
         esValido(input,true);
     }else{
         esValido(input,false);
+        mensaCorreo.innerText="Correo inválido.";
     }
 
 }
@@ -168,6 +214,7 @@ modal.addEventListener('hidden.bs.modal', function (event) {
     removerValidacion(correoInput);
     correoInput.disabled=false;
     validarGmail1.style.display='none';
+    removerValidacion(codigoInput1);
 })
 nombreInput.addEventListener("change",()=>{
     inputRequired(nombreInput);
