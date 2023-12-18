@@ -3,7 +3,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Inscribirse al Evento</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Inscribirse al evento</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                     onclick="resetModal()"></button>
             </div>
@@ -29,7 +29,7 @@
                         <div style="display: none" id="displayCodAcceso">
                             <div class="mb-2">
                                 <label for="codParticipante" class="form-label">
-                                    <h6>Código de acceso</h6>
+                                    <h6>Código de acceso *</h6>
                                 </label>
                                 <input type="text" class="form-control" id="codParticipante" pattern=".+"
                                     placeholder="Ingrese el código de acceso">
