@@ -157,6 +157,7 @@ Route::group(
         Route::post('/verificarCodigo/{id}', 'verificarCodigo');
         Route::post('/existe/{ci}/{id_equipo}/{id_evento}', 'existeParticipante');
         Route::post('/enviarCorreo/{id_equipo}/{id_evento}', 'enviarCorreo');
+        Route::post('/enviarCorreoParticipante/{id_participante}/{id_equipo}/{id_evento}', 'enviarCorreoParticipante');
     }
 );
 

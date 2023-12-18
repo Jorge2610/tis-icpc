@@ -14,6 +14,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EnviarCodigoEquipo;
 use App\Mail\ConfirmacionEquipo;
+use Illuminate\Support\Facades\Log;
 
 class EquipoController extends Controller
 {
@@ -173,31 +174,31 @@ class EquipoController extends Controller
         try {
             $mensaje = "Equipo inscrito correctamente.";
             $equipo = Equipo::where('correo_verificado', 0)->find($request->id_equipo);
-            
+
             if ($equipo) {
                 $equipo = $this->update($request, $request->id_equipo);
                 $equipoInscrito = EquipoInscrito::where('id_evento', $request->id_evento)
                     ->where('id_equipo', $equipo->id)
                     ->first();
-                if(!$equipoInscrito){
+                if (!$equipoInscrito) {
                     $this->storeInscribir($request, $equipo->id);
                 }
                 $evento = Evento::find($request->id_evento);
-                Mail::to($equipo->correo_general)->send(new EnviarCodigoEquipo($equipo, $evento ));
-                return ['mensaje' => $mensaje , 'error' => false, 'equipo' => $equipo];
+                Mail::to($equipo->correo_general)->send(new EnviarCodigoEquipo($equipo, $evento));
+                return ['mensaje' => $mensaje, 'error' => false, 'equipo' => $equipo];
             }
             if ($request->id_equipo) {
                 $this->storeInscribir($request, $request->id_equipo);
                 $equipo = Equipo::find($request->id_equipo);
                 $evento = Evento::find($request->id_evento);
                 Mail::to($equipo->correo_general)->send(new EnviarCodigoEquipo($equipo, $evento));
-                return ['mensaje' => $mensaje , 'error' => false, 'equipo' => $equipo];
+                return ['mensaje' => $mensaje, 'error' => false, 'equipo' => $equipo];
             } else {
                 $equipo = $this->store($request);
                 $this->storeInscribir($request, $equipo->id);
                 $evento = Evento::find($request->id_evento);
                 Mail::to($equipo->correo_general)->send(new EnviarCodigoEquipo($equipo, $evento));
-                return ['mensaje' => $mensaje , 'error' => false, 'equipo' => $equipo];
+                return ['mensaje' => $mensaje, 'error' => false, 'equipo' => $equipo];
             }
         } catch (QueryException $e) {
             return ['mensaje' => $e->getMessage(), 'error' => true];
@@ -210,12 +211,13 @@ class EquipoController extends Controller
             $equipo = Equipo::where('nombre', $request->nombre)
                 ->where('correo_general', $request->correo_general)
                 ->first();
+
             $repetido = EquipoInscrito::where('id_evento', $request->id_evento)->with('equipos')
                 ->whereHas('equipos', function ($q) use ($request) {
                     $q->where('nombre', $request->nombre)
                         ->where('correo_verificado', 1);
                 })->first();
-
+            dd($repetido);
             if ($equipo) {
                 $inscrito = EquipoInscrito::where('id_evento', $request->id_evento)
                     ->where('id_equipo', $equipo->id)
@@ -231,14 +233,14 @@ class EquipoController extends Controller
             if ($inscrito) {
                 return [
                     'inscrito' => true,
-                    'mensaje' => 'Equipo ya ha inscrito a este evento',
+                    'mensaje' => ['mensaje' => 'El equipo ya ha sido inscrito a este evento', 'error' => true],
                     'equipo' => $equipo
                 ];
             } else {
                 if (!$equipo) {
                     return [
                         'inscrito' => false,
-                        'Mensaje' => ["mensaje" => $esRepetido ? " Equipo ya inscrito a este evento." : "", "error" => $esRepetido],
+                        'Mensaje' => ["mensaje" => $esRepetido ? " El nombre del equipo ya registrado a este evento." : "", "error" => $esRepetido],
                     ];
                 } else {
                     return [
@@ -311,5 +313,19 @@ class EquipoController extends Controller
             return ['error' => false, 'mensaje' => 'Correo verificado correctamente.'];
         }
         return ['error' => true, 'mensaje' => 'El correo ya ha sido verificado.'];
+    }
+
+    public function enviarCodigoCorreoParticipante($id_participante, $id_equipo, $id_evento)
+    {
+        try {
+            $participante = Participante::find($id_participante);
+            $equipo = Equipo::find($id_equipo);
+            $evento = Evento::find($id_evento);
+            Mail::to($participante->correo)
+                ->send(new ConfirmacionEquipo($equipo, $evento, $participante));
+        } catch (QueryException $e) {
+            Log::error($e->getMessage());
+            return ['mensaje' => $e->getMessage(), 'error' => true];
+        }
     }
 }
