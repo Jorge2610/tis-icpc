@@ -9,6 +9,7 @@ const buttonConfirmacion = document.getElementById('button-equipo-confirmacion')
 const buttonCancelacion = document.getElementById('button-equipo-cancelar'); 
 const codigoInput1 = document.getElementById('codigo1');
 const form = document.getElementById('inscribirEquipo');
+const mensaCorreo = document.getElementById('mensajeErrorCorreo');
 
 let crear=true;
 let Datos;
@@ -41,9 +42,11 @@ const crearEquipo=async()=>{
             // Manejar errores
             console.error('Error al obtener datos:', error);
           });
-        console.log(response.data.error);
         if(response.data.error){
             esValido(codigoInput1,false);
+            mensaCorreo.innerText="Código incorrecto.";
+            participanteYaInscrito(response);
+
         }else{
             localStorage.setItem("codigo",codigoInput1.value);
             console.log(localStorage.getItem('codigo'));
@@ -87,9 +90,7 @@ const registrarEquipo = async()=>{
         });
 
         if(response.data.inscrito){
-            id_equipo = response.data.equipo.id;
-            enviarCorreo(id_equipo,formData.get("id_evento"));
-            formData.append('id_equipo',response.data.equipo.id);
+            participanteYaInscrito(response);
             console.log("este equipo ya esta registrado y inscrito");
         }else{
             if(response.data.equipo){
@@ -136,6 +137,29 @@ const registrarEquipoEvento=(formData)=>{
         console.error('Error en la petición:', error);
     });
 }
+const reEnviarCodigo = async()=>{
+    let res = await enviarCodigoAcceso();
+    mostrarAlerta(
+        "Éxito",
+        res.mensaje,
+        res.error ? "danger" : "success"
+    );
+}
+const enviarCodigoAcceso = async () => {
+    let data = await axios.post("/api/participante/enviarCodigo/" + idEvento + "/" + idParticipante).then(response => {
+        return response.data;
+    });
+    return data;
+};
+const participanteYaInscrito = (response) => {
+    //$('#modal-inscribir').modal('hide');
+    //resetModal();
+    mostrarAlerta(
+        "Éxito",
+        response.data.mensaje,
+        response.data.error ? "danger" : "success"
+    );
+};
 //validacion de inputs
 const inputRequired=(input)=>{
     if(input.value==""){
@@ -159,6 +183,7 @@ const inputEmail = (input)=>{
         esValido(input,true);
     }else{
         esValido(input,false);
+        mensaCorreo.innerText="Correo inválido.";
     }
 
 }
@@ -174,6 +199,7 @@ modal.addEventListener('hidden.bs.modal', function (event) {
     removerValidacion(correoInput);
     correoInput.disabled=false;
     validarGmail1.style.display='none';
+    removerValidacion(codigoInput1);
 })
 nombreInput.addEventListener("change",()=>{
     inputRequired(nombreInput);
