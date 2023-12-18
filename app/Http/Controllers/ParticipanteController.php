@@ -41,9 +41,18 @@ class ParticipanteController extends Controller
     public function inscribirEvento(Request $request)
     {
         try {
-            $participante = Participante::where('correo_confirmado', 0)->find($request->id_participante);
+            $participante = Participante::where('correo_confirmado', 0)
+                ->where('ci', $request->ci)
+                ->first();
             if ($participante) {
-                $this->update($request, $request->id_participante);
+                $participante = $this->update($request, $participante->id);
+                $inscrito = Inscrito::where("id_evento")->where("id_participante", $participante->id)->first();
+                if ($inscrito) {
+                    $this->storeInscribir($request, $participante->id);
+                }
+                $evento = Evento::find($request->id_evento);
+                Mail::to($request->correo)->send(new ConfirmacionParticipante($participante, $evento));
+                return ['mensaje' => 'Inscrito correctamente, por favor, verifica tu correo.', 'error' => false];
             }
             if ($request->id_participante) {
                 //$participante = $this->update($request, $request->id_participante);
