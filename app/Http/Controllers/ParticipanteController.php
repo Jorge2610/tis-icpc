@@ -46,7 +46,10 @@ class ParticipanteController extends Controller
                 ->first();
             if ($participante) {
                 $participante = $this->update($request, $participante->id);
-                $this->storeInscribir($request, $participante->id);
+                $inscrito = Inscrito::where("id_evento")->where("id_participante", $participante->id)->first();
+                if ($inscrito) {
+                    $this->storeInscribir($request, $participante->id);
+                }
                 $evento = Evento::find($request->id_evento);
                 Mail::to($request->correo)->send(new ConfirmacionParticipante($participante, $evento));
                 return ['mensaje' => 'Inscrito correctamente, por favor, verifica tu correo.', 'error' => false];
