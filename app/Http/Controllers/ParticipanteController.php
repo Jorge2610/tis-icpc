@@ -41,7 +41,9 @@ class ParticipanteController extends Controller
     public function inscribirEvento(Request $request)
     {
         try {
-            $participante = Participante::where('correo_confirmado', 0)->find($request->id_participante);
+            $participante = Participante::where('correo_confirmado', 0)
+                ->where('ci', $request->ci)
+                ->first();
             if ($participante) {
                 $this->update($request, $request->id_participante);
             }
