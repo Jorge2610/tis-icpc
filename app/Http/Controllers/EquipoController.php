@@ -220,7 +220,6 @@ class EquipoController extends Controller
                     $q->where('nombre', $request->nombre)
                         ->where('correo_verificado', 1);
                 })->first();
-            dd($repetido);
             if ($equipo) {
                 $inscrito = EquipoInscrito::where('id_evento', $request->id_evento)
                     ->where('id_equipo', $equipo->id)

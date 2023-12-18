@@ -35,7 +35,7 @@
                         </label>
                         <input type="text" id="codigo1" class="form-control">
                         <div class="invalid-feedback">
-                            Código no valido.
+                            Código no válido.
                         </div>
                             <div class="text-muted" style="font-size: 15 px">
                                 Se envio un código a su correo.
