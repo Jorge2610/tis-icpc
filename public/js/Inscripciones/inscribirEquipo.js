@@ -138,7 +138,7 @@ const registrarEquipoEvento=(formData)=>{
     });
 }
 const reEnviarCodigo = async()=>{
-    let res = await enviarCodigoAcceso();
+    let res = await enviarCorreo();
     mostrarAlerta(
         "Éxito",
         res.mensaje,
