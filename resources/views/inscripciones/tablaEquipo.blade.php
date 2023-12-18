@@ -9,9 +9,9 @@
             <h3>{{$equipo->nombre}}</h3>
             <p>Rango de participantes por equipo: 
                 @if ($evento->equipo_minimo)
-                    desde los 2
+                    desde {{ $evento->equipo_minimo }}  
                 @else
-                    desde {{ $evento->equipo_minimo }}
+                    desde los 2
                 @endif
                 hasta los {{ $evento->equipo_maximo }}
             </p>
