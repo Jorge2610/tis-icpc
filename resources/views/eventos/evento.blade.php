@@ -127,38 +127,34 @@
                                 </div>
                             </div>
                         @endif
-                        {{-- 
-                    @if ($evento->requiere_registro)
-                        <div class="row mt-3">
-                            <div class="col-12">
-                                <strong>Es por equipo</strong>
-                            </div>
-                        </div>
-                    @endif --}}
 
-                        {{-- @if ($evento->evento_equipos)
-                        <div class="row mt-3">
-                            <div class="col-12">
-                                <strong>El evento requiere registro</strong>
-                            </div>
-                        </div>
-                    @endif --}}
 
-                        @if ($evento->precio_inscripcion == null)
+                        @if ($evento->equipo_minimo || $evento->equipo_maximo)
                             <div class="row mt-3">
                                 <div class="col-12">
-                                    <strong>Costo:</strong>
-                                    GRATUITO
-                                </div>
-                            </div>
-                        @else
-                            <div class="row mt-3">
-                                <div class="col-12">
-                                    <strong>Costo:</strong>
-                                    {{ $evento->precio_inscripcion }} Bs.
+                                    <strong>El evento es por equipos: de
+                                        {{ $evento->equipo_minimo ? $evento->equipo_minimo : 2 }} a
+                                        {{ $evento->equipo_maximo }} participantes</strong>
                                 </div>
                             </div>
                         @endif
+                        <div class="row mt-3 fs-5">
+                            @if ($evento->precio_inscripcion == null)
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <strong>Costo de inscripción:</strong>
+                                        GRATUITO
+                                    </div>
+                                </div>
+                            @else
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <strong>Costo de inscripción:</strong>
+                                        {{ $evento->precio_inscripcion }} Bs.
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
 
 
                     </div>
@@ -212,16 +208,17 @@
                                 <h5 class="card-title text-center fw-bold">{{ $actividad->nombre }}</h5>
                                 <hr>
                                 <div class="row">
-                                    @if($actividad->inscripcion == 1)
+                                    @if ($actividad->inscripcion == 1)
                                         <p class="card-text col-lg-2 col-sm-3 col-4"><strong> Inicio: </strong>
                                             {{ date('d-m-Y', strtotime($actividad->inicio_actividad)) }}
                                         </p>
                                         <p class="card-text col-lg-7 col-sm-7 col-5">
                                             <strong>Hora: </strong> {{ date('H:i', strtotime($actividad->inicio_actividad)) }}
                                         </p>
-                                        <div class="alert alert-primary text-center col-lg-3 col-sm-2 col-3" style="height:25px;padding:0;width:200px">
+                                        <div class="alert alert-primary text-center col-lg-3 col-sm-2 col-3"
+                                            style="height:25px;padding:0;width:200px">
                                             Actividad de inscripción
-                                        </div>        
+                                        </div>
                                     @else
                                         <p class="card-text col-lg-2 col-sm-4 col-6"><strong> Inicio: </strong>
                                             {{ date('d-m-Y', strtotime($actividad->inicio_actividad)) }}
@@ -231,7 +228,7 @@
                                             <strong>Hora: </strong> {{ date('H:i', strtotime($actividad->inicio_actividad)) }}
                                         </p>
                                     @endif
-                                    
+
                                     <p class="card-text col-lg-2 col-sm-4 col-6"><strong> Fin: </strong>
                                         {{ date('d-m-Y', strtotime($actividad->fin_actividad)) }}
                                     </p>
