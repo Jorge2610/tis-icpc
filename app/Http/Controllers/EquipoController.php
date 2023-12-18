@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Equipo;
 use App\Models\EquipoInscrito;
 use App\Models\Integrante;
@@ -52,9 +53,16 @@ class EquipoController extends Controller
     public function addIntegrante(Request $request, $id_equipo)
     {
         try {
-            $participante = Participante::where('correo_confirmado', 0)->find($request->id_participante);
+            $participante = Participante::where('correo_confirmado', 0)
+                ->where('ci', $request->ci)
+                ->first();
             if ($participante) {
-                $this->updateParticipante($request, $request->id_participante);
+                $this->updateParticipante($request, $participante->id);
+                $this->storeIntegrante($request, $id_equipo, $participante->id);
+                $equipo = Equipo::find($id_equipo);
+                $evento = Evento::find($request->id_evento);
+                Mail::to($request->correo)->send(new ConfirmacionEquipo($equipo, $evento, $participante));
+                return ['mensaje' => 'Inscrito correctamente, por favor, verifica tu correo.'];
             }
             if ($request->id_participante) {
                 $this->storeIntegrante($request, $id_equipo, $request->id_participante);
