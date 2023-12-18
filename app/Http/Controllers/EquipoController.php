@@ -14,6 +14,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EnviarCodigoEquipo;
 use App\Mail\ConfirmacionEquipo;
+use App\Mail\EnviarCodigoEquipoParticipante;
 use Illuminate\Support\Facades\Log;
 
 class EquipoController extends Controller
@@ -324,7 +325,7 @@ class EquipoController extends Controller
             $equipo = Equipo::find($id_equipo);
             $evento = Evento::find($id_evento);
             Mail::to($participante->correo)
-                ->send(new ConfirmacionEquipo($equipo, $evento, $participante));
+                ->send(new EnviarCodigoEquipoParticipante($equipo, $evento, $participante));
         } catch (QueryException $e) {
             Log::error($e->getMessage());
             return ['mensaje' => $e->getMessage(), 'error' => true];

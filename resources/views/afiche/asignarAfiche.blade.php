@@ -18,7 +18,7 @@
                     </thead>
                     <tbody id="datosTabla">
                         @foreach ($afiches as $afiche)
-                            @if(strtotime($afiche->fin_evento) >= time())
+                            @if (strtotime($afiche->fin_evento) >= time())
                                 <tr onclick="seleccionarEvento({{ $afiche->id }}, '{{ $afiche->nombre }}', event)"
                                     id="{{ $afiche->id }}">
                                     <td>{{ $afiche->nombre }}</td>
@@ -54,10 +54,15 @@
                     </div>
                     <div id="contenedorAsignar" style="display: none">
                         <button type="button" class="btn btn-light btn-lg hover-button"
-                            onclick="document.getElementById('imageUpload').click()">Cambiar</button>
+                            onclick="document.getElementById('imageUpload').click()">Reemplazar</button>
                         <button type="button" class="btn btn-primary btn-lg hover-button"
                             onclick="asignarAfiche()">Asignar</button>
+                        <div>
+                            <p class="text-muted mt-3">Si el afiche seleccionado no es el deseado, puede reemplazarlo
+                                presionado "Reemplazar".</p>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
