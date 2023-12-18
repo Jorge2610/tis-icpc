@@ -10,10 +10,12 @@ const buttonCancelacion = document.getElementById('button-equipo-cancelar');
 const codigoInput1 = document.getElementById('codigo1');
 const form = document.getElementById('inscribirEquipo');
 const mensaCorreo = document.getElementById('mensajeErrorCorreo');
+const mensajeNombre = document.getElementById('mensajeErrorNombre');
 
 let crear=true;
 let Datos;
 let id_equipo;
+let id_evento;
 //funciones button
 const ingresarNombreEquipo = () => {
     nombreInput.dispatchEvent(new Event("change"));
@@ -65,9 +67,11 @@ const cancelarEquipo = ()=>{
 }
 const registrarCorreo = async()=>{
         await registrarEquipo();
-        validarGmail1.style.display='block';
-        nombreInput.disabled=true;
-        correoInput.disabled=true;
+        if(nombreInput.classList.contains("is-valid")){
+            validarGmail1.style.display='block';
+            nombreInput.disabled=true;
+            correoInput.disabled=true;
+        }
 }
 const verificarCodigo=()=>{
     codigoInput1.dispatchEvent(new Event("change"));
@@ -80,7 +84,8 @@ const registrarEquipo = async()=>{
     // Agregar datos al FormData
     formData.append('nombre', nombreInput.value);
     formData.append('correo_general', correoInput.value);
-    formData.append('id_evento',nombreInput.getAttribute("evento_id"))
+    formData.append('id_evento',nombreInput.getAttribute("evento_id"));
+    id_evento=nombreInput.getAttribute("evento_id");
     formData.forEach(function(valor, clave) {
         console.log("Clave:", clave, "Valor:", valor);
     });
@@ -90,21 +95,38 @@ const registrarEquipo = async()=>{
         });
 
         if(response.data.inscrito){
-            participanteYaInscrito(response);
+            id_equipo = response.data.equipo.id;
             console.log("este equipo ya esta registrado y inscrito");
+            validarGmail1.style.display='block';
+            nombreInput.disabled=true;
+            correoInput.disabled=true;
+            enviarCorreo(id_equipo,id_evento)
         }else{
             if(response.data.equipo){
                 console.log(response.data)
                 id_equipo=response.data.equipo.id;
-                formData.append('id_equipo',response.data.equipo.id);
+                formData.append('id_equipo',response.data.equipo.id)
             }
-                
-            registrarEquipoEvento(formData);
+            if(response.data.Mensaje.error){
+                mostrarAlerta(
+                    "Éxito",
+                    response.data.Mensaje.mensaje,
+                    response.data.Mensaje.error ? "danger" : "success"
+                );
+                esValido(correoInput,false);
+                esValido(nombreInput,false);
+                mensajeNombre.innerText="Nombre ya esta registrado.";
+                mensaCorreo.innerHTML="Correo no válido.";
+
+            }else{
+                registrarEquipoEvento(formData);
+            }   
+            
         }
     
 }
 const enviarCorreo = (id_equipo,id_evento)=>{
-    axios.post('/api/enviarCorreo/'+id_equipo+'/'+id_evento)
+    axios.post('/api/equipo/enviarCorreo/'+id_equipo+'/'+id_evento)
     .then(response => {
         // Manejar la respuesta exitosa
         console.log('Datos:', response.data);
@@ -138,12 +160,7 @@ const registrarEquipoEvento=(formData)=>{
     });
 }
 const reEnviarCodigo = async()=>{
-    let res = await enviarCorreo();
-    mostrarAlerta(
-        "Éxito",
-        res.mensaje,
-        res.error ? "danger" : "success"
-    );
+    let res = await enviarCorreo(id_equipo,id_evento);
 }
 const enviarCodigoAcceso = async () => {
     let data = await axios.post("/api/participante/enviarCodigo/" + idEvento + "/" + idParticipante).then(response => {
@@ -156,8 +173,8 @@ const participanteYaInscrito = (response) => {
     //resetModal();
     mostrarAlerta(
         "Éxito",
-        response.data.mensaje,
-        response.data.error ? "danger" : "success"
+        response.data.Mensaje.mensaje,
+        response.data.Mensaje.error ? "danger" : "success"
     );
 };
 //validacion de inputs

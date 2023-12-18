@@ -14,7 +14,7 @@
                     </label>
                     <input evento_id={{$evento->id}} id="nombreEquipo" type="text" class="form-control" 
                     placeholder="Ingrese el nombre de equipo">
-                    <div class="invalid-feedback">
+                    <div class="invalid-feedback" id="mensajeErrorNombre">
                     El nombre no puede estar vacío.
                     </div>
                 </div>

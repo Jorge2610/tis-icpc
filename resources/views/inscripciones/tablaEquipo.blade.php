@@ -29,7 +29,7 @@
                     </thead>
                     <tbody id="datosTabla">
                         @foreach ($equipo->integrantes as $integrante)
-                                @if($integrante->participante)
+                                @if($integrante->participantes)
                                 <tr >
                                     <td>{{ $integrante->participantes->nombres }}</td>
                                     <td class="text-center">{{ $integrante->participantes->apellidos }}</td>

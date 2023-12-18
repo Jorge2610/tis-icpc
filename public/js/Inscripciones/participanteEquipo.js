@@ -72,7 +72,7 @@ const insribirParticipante = async () => {
         );
         setTimeout(() => {
             codEquipo =localStorage.getItem("codigo");
-            window.location.href = "/eventos/tabla-equipo/"+codEquipo+'/'+idEquipo ;
+            window.location.href = "/eventos/tabla-equipo/"+codEquipo+'/'+idEvento ;
         }, 1750);
     });
 };
