@@ -90,7 +90,9 @@ const getParticipanteData = () => {
     formData.append("talla", document.getElementById("tallaParticipante").value);
     formData.append("talla", document.getElementById("tallaParticipante").value);
     formData.append("id_evento", idEvento);
-    formData.append("id_participante", idParticipante);
+    if (idParticipante != "") {
+        formData.append("id_participante", idParticipante);
+    }
     return formData;
 };
 
