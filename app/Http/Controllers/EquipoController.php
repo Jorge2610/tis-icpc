@@ -51,7 +51,7 @@ class EquipoController extends Controller
         }
     }
 
-    public function addintegrante(Request $request, $id_equipo)
+    public function addIntegrante(Request $request, $id_equipo)
     {
         try {
             $participante = Participante::where('correo_confirmado', 0)->find($request->id_participante);
@@ -74,7 +74,7 @@ class EquipoController extends Controller
                 $participante->codigo = Str::random(8);
                 $participante->save();
                 $integrante = $this->storeIntegrante($request, $id_equipo, $participante->id);
-                Mail::to($request->correo)->send(new ConfirmacionEquipo($integrante, $request->id_evento));
+                //Mail::to($request->correo)->send(new ConfirmacionEquipo($integrante, $request->id_evento));
                 return ['mensaje' => 'Inscrito correctamente, por favor, verifica tu correo.'];
             }
         } catch (QueryException $e) {
@@ -248,7 +248,7 @@ class EquipoController extends Controller
     {
         $equipo = Equipo::with([
             'integrantes',
-            'integrantes.participante',
+            'integrantes.participantes',
             'equipoInscrito'
         ])
             ->where('codigo', $codigo)
