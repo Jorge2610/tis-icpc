@@ -155,7 +155,7 @@ Route::group(
         Route::get('/{id}', 'mostrarEquipo');
         Route::get('/integrantes/{id}', 'mostrarIntegrantes');
         Route::post('/verificarCodigo/{id}', 'verificarCodigo');
-        //Route::post('/enviarCorreo/{id}/{id}', 'enviarCorreo');
+        Route::post('/enviarCorreo/{id_equipo}/{id_evento}', 'enviarCorreo');
     }
 );
 
