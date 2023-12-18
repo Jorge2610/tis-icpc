@@ -29,13 +29,14 @@
                     </thead>
                     <tbody id="datosTabla">
                         @foreach ($equipo->integrantes as $integrante)
-                            
-                                <tr id="{{ $integrante->participantes->id }}">
+                                @if($integrante->participante)
+                                <tr >
                                     <td>{{ $integrante->participantes->nombres }}</td>
                                     <td class="text-center">{{ $integrante->participantes->apellidos }}</td>
                                     <td class="text-center">{{ $integrante->participantes->correo }}</td>
                                     <td class="text-center">{{$integrante->participantes->telefono }}</td>
                                 </tr>
+                                @endif
                         @endforeach
                     </tbody>       
                 </table>

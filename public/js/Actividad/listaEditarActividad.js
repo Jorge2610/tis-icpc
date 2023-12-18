@@ -86,7 +86,7 @@ const cambiarEvento = (evento) => {
         // Verificar si la fecha de inicio es mayor al día de hoy
         const fechaFin = new Date(actividad.fin_actividad);
         const hoy = new Date();
-
+        const inscripcion = actividad.inscripcion ? `<div class="d-flex justify-content-end align-items-center" style="border-radius: 10px; width: 100%; height: 25px;"> <p class=" text-center rounded m-2 py-1 px-2 text-info">Inscripción</p> </div>` : ``;
         if (fechaFin > hoy) {
             // Agregar el contenido de la actividad al div con el botón de eliminar
             actividadDiv.innerHTML = `
@@ -97,6 +97,7 @@ const cambiarEvento = (evento) => {
                             <h5 class="card-text text-truncate d-block" style="max-width: 300px;">${actividad.descripcion}</h5>
                             <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Inicio: ${actividad.inicio_actividad}</h6>
                             <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Fin: ${actividad.fin_actividad}</h6>
+                            ${inscripcion}
                         </div>
                         <div class="card-footer d-flex justify-content-center">
                             <a href="#" class="btn btn-primary" data-bs-toggle="modal"

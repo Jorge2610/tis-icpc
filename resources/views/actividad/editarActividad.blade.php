@@ -55,7 +55,7 @@
                                 <div class="col-md-7 p-0">
                                     <input name="fin_evento" id="fechaFin" class="form-control" type="datetime-local"
                                         value="{{ $actividad->fin_actividad }}"
-                                        @if (strtotime($actividad->inicio_actividad) <= time()) min="{{ date('Y-m-d\TH:i') }}"    
+                                        @if (strtotime($actividad->inicio_actividad) <= time()) min="{{ date('Y-m-d\TH:i') }}"
                                     
                                     @else
                                         min="{{ $evento->inicio_evento }}" @endif
@@ -101,7 +101,7 @@
                                     @slot('modalId', 'modalConfirmacion')
                                     @slot('modalTitle', 'Confirmación')
                                     @slot('modalContent')
-                                        ¿Está seguro de editar la actividad?                 
+                                        ¿Está seguro de editar la actividad?
                                     @endslot
                                     @slot('modalButton')
                                         <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal">No</button>

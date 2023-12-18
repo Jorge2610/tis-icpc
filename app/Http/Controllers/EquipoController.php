@@ -248,7 +248,9 @@ class EquipoController extends Controller
     {
         $equipo = Equipo::with([
             'integrantes',
-            'integrantes.participantes',
+            'integrantes.participantes' => function ($q) {
+                $q->where('correo_confirmado', 1);
+            },
             'equipoInscrito'
         ])
             ->where('codigo', $codigo)
