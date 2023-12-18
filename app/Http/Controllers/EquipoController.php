@@ -93,7 +93,7 @@ class EquipoController extends Controller
                 $this->storeInscribir($request, $request->id_equipo);
                 $equipo = Equipo::find($request->id_equipo);
                 Mail::to($equipo->correo_general)->send(new EnviarCodigoEquipo($equipo, $request->id_evento));
-                return ['mensaje' => 'Equipo inscrito correctamente.', 'error' => false , 'equipo' => $equipo];
+                return ['mensaje' => 'Equipo inscrito correctamente.', 'error' => false, 'equipo' => $equipo];
             } else {
                 $equipo = $this->store($request);
                 $this->storeInscribir($request, $equipo->id);
@@ -190,11 +190,11 @@ class EquipoController extends Controller
     public function verificarCodigo(Request $request, $id)
     {
         $equipo = Equipo::findorfail($id);
-        if ($equipo->correo_verificado == 0) {
-            $equipo->correo_verificado = 1;
-            $equipo->save();
-        }
         if ($equipo->codigo == $request->codigo) {
+            if ($equipo->correo_verificado == 0) {
+                $equipo->correo_verificado = 1;
+                $equipo->save();
+            }
             return ['error' => false, 'mensaje' => 'Código verificado correctamente.'];
         } else {
             return ['error' => true, 'mensaje' => 'El código de equipo no coincide.'];
