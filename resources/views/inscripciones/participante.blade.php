@@ -93,7 +93,7 @@
                     <div class="row border border-top-0 rounded-bottom">
                         <div class="col-md-6" {{ $evento->genero != null ? '' : 'hidden' }}>
                             <div class="mb-3">
-                                <label for="generoParticipante" class="form-label">Genero *</label>
+                                <label for="generoParticipante" class="form-label">Género *</label>
                                 <select id="generoParticipante" class="form-select form-select" aria-label=".form-select-sm"
                                     disabled>
                                     <option value={{ $evento->genero ? $evento->genero : '' }} selected>
@@ -159,7 +159,7 @@
                 @if (!$participante->nombres)
                     <h6 class="text-muted mt-2">
                         <b>*</b> Para asegurar tu participación en este evento, por favor, confirma tu correo
-                        electrónico mediante el mensaje de verificación que fue enviado a tu correo.
+                        electrónico mediante el mensaje de verificación que se enviará a tu correo.
                     </h6>
                 @endif
                 <div class="d-flex justify-content-end mt-3">
