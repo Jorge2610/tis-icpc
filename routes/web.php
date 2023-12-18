@@ -108,7 +108,7 @@ Route::group([
 
 use App\Models\Participante;
 use App\Models\Evento;
-use App\Mail\EnviarCodigo;
+use App\Mail\ConfirmacionEquipo;
 use App\Mail\EnviarCodigoEquipo;
 use App\Models\Equipo;
 use App\Models\Actividad;
@@ -123,12 +123,12 @@ Route::get('/mailable', function () {
     $actividad = Actividad::find(1);
     
     // Crea una nueva instancia de la clase NotificacionActividad, pasando el participante, la actividad y el evento
+    return new ConfirmacionEquipo($equipo, $evento, $participante);
+    // $notificacion = new NotificacionActividad($actividad, $evento, $actividad->updated_at);
+    // $participante->notify($notificacion);
 
-    $notificacion = new NotificacionActividad($actividad, $evento, $actividad->updated_at);
-    $participante->notify($notificacion);
-
-    // Obtén la representación de la notificación como un correo electrónico
-    return  $notificacion->toMail($participante);
+    // // Obtén la representación de la notificación como un correo electrónico
+    // return  $notificacion->toMail($participante);
 
     // Obtén el contenido de la vista previa del correo electrónico (Markdown)
 });

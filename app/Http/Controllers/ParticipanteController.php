@@ -100,10 +100,11 @@ class ParticipanteController extends Controller
     public function existeParticipante(Request $request)
     {
         try {
-            $participante = Participante::where('ci', $request->ci)->first();
+            $participante = Participante::where('ci', $request->ci)->where('correo_confirmado', 1)->first();
             $inscrito = Inscrito::where('id_evento', $request->id_evento)
                 ->whereHas('participante', function ($q) use ($request) {
-                    $q->where('ci', $request->ci);
+                    $q->where('ci', $request->ci)
+                        ->where('correo_confirmado', 1);
                 })
                 ->first();
 

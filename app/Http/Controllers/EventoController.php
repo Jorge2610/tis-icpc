@@ -66,7 +66,7 @@ class EventoController extends Controller
 
     public function vistaInscripcion($id, $ci)
     {
-        $evento = Evento::where('estado', 0)->find($id);
+        $evento = Evento::where('estado', 0)->where('correo_confirmado', 1)->find($id);
         $participante = Participante::where("ci", $ci)->first();
         if ($participante) {
             $dato = $participante;
@@ -321,7 +321,8 @@ class EventoController extends Controller
         $anular = true;
         return view('eventos.cancelarEvento', ['eventos' => $eventos, 'anular' => $anular]);
     }
-    public function vistaInscripcionEquipo($idEquipo,$ci,$idEvento){
+    public function vistaInscripcionEquipo($idEquipo, $ci, $idEvento)
+    {
         $evento = Evento::find($idEvento);
         $equipo = Equipo::find($idEquipo);
         $participante = Participante::where("ci", $ci)->first();
@@ -339,7 +340,6 @@ class EventoController extends Controller
                 'pais' => null
             ];
         }
-        return view('inscripciones.participanteEquipo', ['equipo' => $equipo, 'participante' => $dato,'evento'=>$evento]);
-    
+        return view('inscripciones.participanteEquipo', ['equipo' => $equipo, 'participante' => $dato, 'evento' => $evento]);
     }
 }

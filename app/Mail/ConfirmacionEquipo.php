@@ -19,10 +19,12 @@ class ConfirmacionEquipo extends Mailable
 
     public $equipo;
     public $evento;
-    public function __construct($equipo, $evento)
+    public $participante;
+    public function __construct($equipo, $evento, $participante)
     {
         $this->equipo = $equipo;
         $this->evento = $evento;
+        $this->participante = $participante;
     }
 
     /**
@@ -34,7 +36,8 @@ class ConfirmacionEquipo extends Mailable
     {
         return $this->markdown('emails.equipo.confirmacion', [
             'equipo' => $this->equipo,
-            'evento' => $this->evento
+            'evento' => $this->evento,
+            'participante' => $this->participante
         ])->subject('Confirmación de equipo');
     }
 }
