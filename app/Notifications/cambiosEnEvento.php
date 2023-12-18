@@ -47,7 +47,7 @@ class CambiosEnEvento extends Notification implements ShouldQueue
         $eventoNombreUrl = str_replace(' ', '%20', $this->evento->nombre);
         return (new MailMessage)->markdown('emails.notificacion.cambios', [
             'evento' => $this->evento,
-            'notificable' => $notifiable,
+            'notifiable' => $notifiable,
         ])
             ->subject('Notificación de evento: ' . $this->evento->nombre)
             ->greeting('Notificación de cambios')
