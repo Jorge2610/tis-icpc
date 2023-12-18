@@ -57,7 +57,7 @@ class EquipoController extends Controller
                 ->where('ci', $request->ci)
                 ->first();
             if ($participante) {
-                $this->updateParticipante($request, $participante->id);
+                $participante = $this->updateParticipante($request, $participante->id);
                 $this->storeIntegrante($request, $id_equipo, $participante->id);
                 $equipo = Equipo::find($id_equipo);
                 $evento = Evento::find($request->id_evento);
