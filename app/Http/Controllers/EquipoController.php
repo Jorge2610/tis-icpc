@@ -42,8 +42,8 @@ class EquipoController extends Controller
     {
         try {
             $inscrito = new EquipoInscrito();
-            $inscrito->id_equipo = $request->id_equipo;
-            $inscrito->id_participante = $request->id_equipo;
+            $inscrito->id_equipo = $id_equipo;
+            $inscrito->id_evento = $request->id_evento;
             $inscrito->save();
             return $inscrito;
         } catch (QueryException $e) {
