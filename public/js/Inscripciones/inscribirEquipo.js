@@ -44,6 +44,8 @@ const crearEquipo=async()=>{
         console.log(response.data.error);
         if(response.data.error){
             esValido(codigoInput1,false);
+        }else{
+            window.location.href= "/eventos/tabla-equipo/"+codigoInput1.value+"/"+nombreInput.getAttribute("evento_id");
         }
     }
 }
@@ -83,7 +85,8 @@ const registrarEquipo = async()=>{
         });
 
         if(response.data.inscrito){
-            console.log(response.data)
+            id_equipo = response.data.equipo.id;
+            enviarCorreo(id_equipo,formData.get("id_evento"));
             formData.append('id_equipo',response.data.equipo.id);
             console.log("este equipo ya esta registrado y inscrito");
         }else{
@@ -96,6 +99,17 @@ const registrarEquipo = async()=>{
             registrarEquipoEvento(formData);
         }
     
+}
+const enviarCorreo = (id_equipo,id_evento)=>{
+    axios.post('/api/enviarCorreo/'+id_equipo+'/'+id_evento)
+    .then(response => {
+        // Manejar la respuesta exitosa
+        console.log('Datos:', response.data);
+      })
+      .catch(error => {
+        // Manejar errores
+        console.error('Error al obtener datos:', error);
+      });
 }
 const atrasCorreo = ()=>{
     contenido1.collapse("hide");
@@ -112,6 +126,9 @@ const registrarEquipoEvento=(formData)=>{
     axios.post("/api/equipo/inscribirEquipo",formData)
     .then(function (response) {
         console.log('Respuesta del servidor:', response.data);
+        if(response.data.equipo){
+            id_equipo=response.data.equipo.id;
+        }
     })
     .catch(function (error) {
         console.error('Error en la petición:', error);
