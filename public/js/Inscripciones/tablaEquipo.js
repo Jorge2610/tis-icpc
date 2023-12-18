@@ -1,7 +1,6 @@
 let tablaDeTipos;
 let tablaInicializada = false;
 let idEvento = null;
-let contraseña = "admin123";
 
 const dataTableOptions = {
     pageLength: 10,

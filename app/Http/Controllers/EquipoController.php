@@ -49,7 +49,7 @@ class EquipoController extends Controller
         }
     }
 
-    public function addintegrante(Request $request, $id_equipo)
+    public function addIntegrante(Request $request, $id_equipo)
     {
         try {
             $participante = Participante::where('correo_confirmado', 0)->find($request->id_participante);
