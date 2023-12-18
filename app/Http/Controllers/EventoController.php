@@ -79,7 +79,8 @@ class EventoController extends Controller
                 'fecha_nacimiento' => null,
                 'codigo_telefono' => null,
                 'telefono' => null,
-                'pais' => null
+                'pais' => null,
+                'id' => null
             ];
         }
         return view('inscripciones.participante', ['evento' => $evento, 'participante' => $dato]);

@@ -1,10 +1,12 @@
 let idEvento;
 let nombreEvento;
+let idParticipante;
 
 window.addEventListener("load", async () => {
     idEvento = window.location.href.split("/");
     idEvento = idEvento[idEvento.length - 2];
     nombreEvento = document.getElementById("nombreEvento").innerText;
+    idParticipante = document.getElementById("idParticipante").value;
     let pais = document.getElementById("codPaisCarnet");
     if (pais.innerText === "") {
         if (localStorage.getItem("paisCarnet") === null) {
@@ -30,11 +32,11 @@ const accesoNoAutorizado = () => {
 const cargarPaises = () => {
     let select = document.getElementById("selectPais");
     let lit = document.getElementById("codPaisLit").value;
-    let codPaisLit = lit != "" ? lit : "+591"; 
+    let codPaisLit = lit != "" ? lit : "+591";
     let options = "";
     PAISES.map(pais => {
         options += `
-            <option title=${pais.name_es} value=${pais.dial_code} ${pais.dial_code=== codPaisLit ? "selected" : ""}>
+            <option title=${pais.name_es} value=${pais.dial_code} ${pais.dial_code === codPaisLit ? "selected" : ""}>
                 ${pais.emoji} ${pais.code_3}
             </option>
         `;
@@ -88,6 +90,7 @@ const getParticipanteData = () => {
     formData.append("talla", document.getElementById("tallaParticipante").value);
     formData.append("talla", document.getElementById("tallaParticipante").value);
     formData.append("id_evento", idEvento);
+    formData.append("id_participante", idParticipante);
     return formData;
 };
 
