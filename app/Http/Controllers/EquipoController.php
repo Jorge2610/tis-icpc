@@ -128,6 +128,7 @@ class EquipoController extends Controller
                     $q->whereHas('participantes', function ($q) use ($ci, $id_evento) {
                         $q->where('ci', $ci);
                         $q->where('id_evento', $id_evento);
+                        $q->where('correo_verificado', 1);
                     });
                 });
             })
