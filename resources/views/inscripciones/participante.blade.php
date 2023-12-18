@@ -78,6 +78,7 @@
                                 <label for="telefonoParticipante" class="form-label">Teléfono *</label>
                                 <div class="input-group">
                                     <input hidden value="{{ $participante->codigo_telefono }}" id="codPaisLit">
+                                    <input hidden value="{{ $participante->id }}" id="idParticipante">
                                     <select class="custom-select" id="selectPais" onchange="setCodPais()"
                                         {{ $participante->codigo_telefono ? 'disabled' : '' }}>
                                     </select>

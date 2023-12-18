@@ -82,7 +82,6 @@ const participanteYaInscrito = (response) => {
 };
 
 const estaRegistrado = (participante) => {
-    console.log(participante);
     idParticipante = participante.id;
     enviarCodigoAcceso();
     let mensaje = "El código de acceso se envio al correo ";
@@ -127,7 +126,6 @@ const verificarCodigoAcceso = async () => {
     let data = await axios.post("/api/participante/verificarCodigo/" + idParticipante, formData).then(response => {
         return response.data;
     });
-    console.log(data);
     if (data.error) {
         actualizarPattern();
         formModalInscripcion.classList.add("was-validated");
