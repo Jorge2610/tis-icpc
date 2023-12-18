@@ -171,7 +171,9 @@ class EquipoController extends Controller
     public function inscribirEquipoEvento(Request $request)
     {
         try {
+            $mensaje = "Equipo inscrito correctamente.";
             $equipo = Equipo::where('correo_verificado', 0)->find($request->id_equipo);
+            
             if ($equipo) {
                 $equipo = $this->update($request, $request->id_equipo);
                 $equipoInscrito = EquipoInscrito::where('id_evento', $request->id_evento)
@@ -180,18 +182,22 @@ class EquipoController extends Controller
                 if(!$equipoInscrito){
                     $this->storeInscribir($request, $equipo->id);
                 }
+                $evento = Evento::find($request->id_evento);
+                Mail::to($equipo->correo_general)->send(new EnviarCodigoEquipo($equipo, $evento ));
+                return ['mensaje' => $mensaje , 'error' => false, 'equipo' => $equipo];
             }
             if ($request->id_equipo) {
                 $this->storeInscribir($request, $request->id_equipo);
                 $equipo = Equipo::find($request->id_equipo);
-                Mail::to($equipo->correo_general)->send(new EnviarCodigoEquipo($equipo, $request->id_evento));
-                return ['mensaje' => 'Equipo inscrito correctamente.', 'error' => false, 'equipo' => $equipo];
+                $evento = Evento::find($request->id_evento);
+                Mail::to($equipo->correo_general)->send(new EnviarCodigoEquipo($equipo, $evento));
+                return ['mensaje' => $mensaje , 'error' => false, 'equipo' => $equipo];
             } else {
                 $equipo = $this->store($request);
                 $this->storeInscribir($request, $equipo->id);
                 $evento = Evento::find($request->id_evento);
                 Mail::to($equipo->correo_general)->send(new EnviarCodigoEquipo($equipo, $evento));
-                return ['mensaje' => 'Equipo inscrito correctamente.', 'error' => false, 'equipo' => $equipo];
+                return ['mensaje' => $mensaje , 'error' => false, 'equipo' => $equipo];
             }
         } catch (QueryException $e) {
             return ['mensaje' => $e->getMessage(), 'error' => true];
