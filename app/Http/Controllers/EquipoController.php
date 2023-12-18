@@ -54,7 +54,7 @@ class EquipoController extends Controller
     public function addIntegrante(Request $request, $id_equipo)
     {
         try {
-            if ($this->existeParticipante($request->ci, $id_equipo)) {
+            if ($this->existeParticipante($request->ci, $id_equipo, $request->id_evento)) {
                 return ['mensaje' => 'Participante ya inscrito', 'error' => true];
             }
             $integrante = new Integrante();
@@ -71,15 +71,46 @@ class EquipoController extends Controller
         }
     }
 
-    public function existeParticipante($ci, $id_equipo)
+    public function existeParticipante($ci, $id_equipo, $id_evento)
     {
-        $integrante = Integrante::wherehas(
-            'participante',
-            function ($q) use ($ci) {
-                $q->where('ci', $ci);
+        $participante = Participante::where('ci', $ci)->first();
+
+        $equipoInscrito = EquipoInscrito::where('id_evento', $id_evento)
+            ->where('id_equipo', $id_equipo)
+            ->whereHas('equipos', function ($q) use ($ci, $id_evento) {
+                $q->whereHas('integrantes', function ($q) use ($ci, $id_evento) {
+                    $q->whereHas('participantes', function ($q) use ($ci, $id_evento) {
+                        $q->where('ci', $ci);
+                        $q->where('id_evento', $id_evento);
+                    });
+                });
+            })
+            ->first();
+        if ($equipoInscrito) {
+            return [
+                'error' => true,
+                'inscrito' => true,
+                'mensaje' => 'Participante ya inscrito'
+            ];
+        }
+        if ($participante) {
+            $integrante = Integrante::where('id_participante', $participante->id)->where('id_equipo', $id_equipo)->first();
+            if ($integrante) {
+                return [
+                    'inscrito' => false,
+                    'integrante' => true,
+                    'mensaje' => 'Participante ya inscrito'
+                ];
+            } else {
+                return [
+                    'integrante' => false,
+                    'inscrito' => false,
+                    'participante' => $participante
+                ];
             }
-        )->where('id_equipo', $id_equipo)->first();
-        return $integrante;
+        } else {
+            return ['error' => false];
+        }
     }
 
     public function inscribirEquipoEvento(Request $request)
