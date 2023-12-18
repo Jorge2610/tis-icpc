@@ -45,6 +45,8 @@ const crearEquipo=async()=>{
         if(response.data.error){
             esValido(codigoInput1,false);
         }else{
+            localStorage.setItem("codigo",codigoInput1.value);
+            console.log(localStorage.getItem('codigo'));
             window.location.href= "/eventos/tabla-equipo/"+codigoInput1.value+"/"+nombreInput.getAttribute("evento_id");
         }
     }

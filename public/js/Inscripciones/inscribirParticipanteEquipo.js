@@ -137,9 +137,8 @@ const verificarCodigoAcceso = async () => {
         formModalInscripcion.classList.add("was-validated");
     } else {
         let ci = inputCI.value;
-        localStorage.setItem("codigo",inputCod.value);
         resetModal();
-        window.location.href = "/eventos/inscripcion-evento/" + idEquipo + "/" + ci+"/"+idEvento;
+        window.location.href = "/eventos/inscripcion-equipo/" + idEquipo + "/" + ci+"/"+idEvento;
     }
 };
 

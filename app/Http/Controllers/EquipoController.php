@@ -119,7 +119,9 @@ class EquipoController extends Controller
     }
     public function existeParticipante($ci, $id_equipo, $id_evento)
     {
-        $participante = Participante::where('ci', $ci)->first();
+        $participante = Participante::where('ci', $ci)
+        ->where('correo_confirmado', 1)
+        ->first();
 
         $equipoInscrito = EquipoInscrito::where('id_evento', $id_evento)
             ->where('id_equipo', $id_equipo)
@@ -128,6 +130,7 @@ class EquipoController extends Controller
                     $q->whereHas('participantes', function ($q) use ($ci, $id_evento) {
                         $q->where('ci', $ci);
                         $q->where('id_evento', $id_evento);
+                       $q->where('correo_confirmado', 1);
                     });
                 });
             })
