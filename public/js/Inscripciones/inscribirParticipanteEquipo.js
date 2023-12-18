@@ -101,7 +101,8 @@ const estaRegistrado = (participante) => {
 };
 
 const enviarCodigoAcceso = async () => {
-    let data = await axios.post("/api/participante/enviarCodigo/" + idEvento + "/" + idParticipante).then(response => {
+    let data = await axios.post("/api/equipo/enviarCorreoParticipante/"
+     + idParticipante + "/" + idEquipo+"/"+idEvento).then(response => {
         return response.data;
     });
     return data;
