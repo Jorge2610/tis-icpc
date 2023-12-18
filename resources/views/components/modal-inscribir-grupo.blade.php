@@ -23,11 +23,17 @@
                         <label for="inputEmail">Correo Electrónico</label>
                         <input type="email" class="form-control" id="inputEmail" 
                         aria-describedby="emailHelp" placeholder="Ingresa tu correo electrónico" required>
+                        <div class="invalid-feedback">
+                            El correo no puede estar vacío.
+                        </div>
                     </div>
                     <div id="codigoValidacion" style="display: none;">
                         <p>Enviamos un codigo a su correo coloque el código</p>
                         <label for="codigo1">Codigo</label>
-                        <input type="text" id="codigo1" class="form-control" >
+                        <input type="text" id="codigo1" class="form-control">
+                        <div class="invalid-feedback">
+                            Código no valido.
+                        </div>
                     </div>
 
             </div>

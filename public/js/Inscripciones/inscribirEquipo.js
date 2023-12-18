@@ -11,6 +11,8 @@ const codigoInput1 = document.getElementById('codigo1');
 const form = document.getElementById('inscribirEquipo');
 
 let crear=true;
+let Datos;
+let id_equipo;
 //funciones button
 const ingresarNombreEquipo = () => {
     nombreInput.dispatchEvent(new Event("change"));
@@ -22,10 +24,28 @@ const ingresarNombreEquipo = () => {
         }
         else{
             codigoInput1.dispatchEvent(new Event("change"));
+            if(codigoInput1.classList.contains("is-valid")){
+                crearEquipo(); 
+            }
         }
         
     } 
 
+}
+const crearEquipo=async()=>{
+    let formData=new FormData();
+    formData.append("codigo",codigoInput1.value);
+    if(crear){
+        const response = await axios.post("/api/equipo/verificarCodigo/"+id_equipo,formData)
+          .catch(error => {
+            // Manejar errores
+            console.error('Error al obtener datos:', error);
+          });
+        console.log(response.data.error);
+        if(response.data.error){
+            esValido(codigoInput1,false);
+        }
+    }
 }
 const cancelarEquipo = ()=>{
     if(!nombreInput.disabled){
@@ -36,8 +56,8 @@ const cancelarEquipo = ()=>{
             atrasCodigo();
     }
 }
-const registrarCorreo = ()=>{
-        registrarEquipo();
+const registrarCorreo = async()=>{
+        await registrarEquipo();
         validarGmail1.style.display='block';
         nombreInput.disabled=true;
         correoInput.disabled=true;
@@ -48,7 +68,7 @@ const verificarCodigo=()=>{
         console.log("registra tio porfavor");
     }
 }
-const registrarEquipo = ()=>{
+const registrarEquipo = async()=>{
     var formData = new FormData();
     // Agregar datos al FormData
     formData.append('nombre', nombreInput.value);
@@ -57,13 +77,24 @@ const registrarEquipo = ()=>{
     formData.forEach(function(valor, clave) {
         console.log("Clave:", clave, "Valor:", valor);
     });
-        axios.post('/api/equipo/existe', formData)
-        .then(function (response) {
-            console.log('Respuesta del servidor:', response.data);
-        })
+        const response = await axios.post('/api/equipo/existe', formData)
         .catch(function (error) {
             console.error('Error en la petición:', error);
         });
+
+        if(response.data.inscrito){
+            console.log(response.data)
+            formData.append('id_equipo',response.data.equipo.id);
+            console.log("este equipo ya esta registrado y inscrito");
+        }else{
+            if(response.data.equipo){
+                console.log(response.data)
+                id_equipo=response.data.equipo.id;
+                formData.append('id_equipo',response.data.equipo.id);
+            }
+                
+            registrarEquipoEvento(formData);
+        }
     
 }
 const atrasCorreo = ()=>{
@@ -76,7 +107,16 @@ const atrasCodigo =()=>{
     validarGmail1.style.display='none';
     contenedorCorreo.style.display="block";
 }
-
+const registrarEquipoEvento=(formData)=>{
+    
+    axios.post("/api/equipo/inscribirEquipo",formData)
+    .then(function (response) {
+        console.log('Respuesta del servidor:', response.data);
+    })
+    .catch(function (error) {
+        console.error('Error en la petición:', error);
+    });
+}
 //validacion de inputs
 const inputRequired=(input)=>{
     if(input.value==""){
@@ -113,6 +153,7 @@ modal.addEventListener('hidden.bs.modal', function (event) {
     removerValidacion(nombreInput);
     nombreInput.disabled=false;
     removerValidacion(correoInput);
+    correoInput.disabled=false;
     validarGmail1.style.display='none';
 })
 nombreInput.addEventListener("change",()=>{
