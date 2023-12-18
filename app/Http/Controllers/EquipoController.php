@@ -44,6 +44,7 @@ class EquipoController extends Controller
             $inscrito = new EquipoInscrito();
             $inscrito->id_equipo = $request->id_equipo;
             $inscrito->id_participante = $request->id_equipo;
+            $inscrito->save();
             return $inscrito;
         } catch (QueryException $e) {
             return ['mensaje' => $e->getMessage(), 'error' => true];
