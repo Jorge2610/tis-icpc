@@ -66,8 +66,10 @@ class EventoController extends Controller
 
     public function vistaInscripcion($id, $ci)
     {
-        $evento = Evento::where('estado', 0)->where('correo_confirmado', 1)->find($id);
-        $participante = Participante::where("ci", $ci)->first();
+        $evento = Evento::where('estado', 0)->find($id);
+        $participante = Participante::where("ci", $ci)
+            ->where('correo_confirmado', 1)
+            ->first();
         if ($participante) {
             $dato = $participante;
         } else {
