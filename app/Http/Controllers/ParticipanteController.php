@@ -41,8 +41,8 @@ class ParticipanteController extends Controller
     public function inscribirEvento(Request $request)
     {
         try {
-            $participante = Participante::find($request->id_participante);
-            if ($participante->correo_confirmado == 0) {
+            $participante = Participante::where('correo_confirmado', 0)->find($request->id_participante);
+            if ($participante) {
                 $this->update($request, $request->id_participante);
             }
             if ($request->id_participante) {
@@ -148,8 +148,9 @@ class ParticipanteController extends Controller
             $participante->correo_confirmado = 1;
             $participante->save();
             $verificado = (object)['error' => false, 'mensaje' => 'Correo verificado correctamente.'];
+        } else {
+            $verificado =  (object)['error' => true, 'mensaje' => 'El correo ya ha sido verificado.'];
         }
-        $verificado =  (object)['error' => true, 'mensaje' => 'El correo ya ha sido verificado.'];
         return view("inscripciones.confirmacionCorreo", ['verificado' => $verificado]);
     }
 

@@ -41,7 +41,7 @@
                                     </tr>
                                 @endif
                             @else
-                                @if (strtotime($evento->inicio_evento) >= time())
+                                @if (strtotime($evento->inicio_evento) >= time() && $evento->inscritos->count() == 0)
                                     <tr id="{{ $evento->id }}">
                                         <td>{{ $evento->nombre }}</td>
                                         <td class="text-center">{{ $evento->tipoEvento->nombre }}</td>
