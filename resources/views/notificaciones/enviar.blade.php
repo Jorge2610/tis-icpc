@@ -19,6 +19,7 @@
                     </thead>
                     <tbody id="datosTabla">
                         @foreach ($eventos as $evento)
+                            @if($evento->cantidad_inscritos > 0)
                             <tr onclick="seleccionarEvento({{ $evento->id }}, '{{ $evento->nombre }}', event)"
                                 id="{{ $evento->id }}">
                                 <td>{{ $evento->nombre }}</td>
@@ -27,6 +28,7 @@
                                 <td class="text-center" id="contadorActividades{{ $evento->id }}">
                                     {{ $evento->cantidad_inscritos }}</td>
                             </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>
