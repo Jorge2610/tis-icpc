@@ -35,7 +35,6 @@ class ActividadController extends Controller
     public function store(Request $request)
     {
         try {
-            
             $actividad = new Actividad();
             $actividad->nombre = $request->nombre;
             $actividad->inicio_actividad = $request->inicio_evento;
