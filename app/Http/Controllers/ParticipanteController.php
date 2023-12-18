@@ -45,7 +45,7 @@ class ParticipanteController extends Controller
                 ->where('ci', $request->ci)
                 ->first();
             if ($participante) {
-                $this->update($request, $request->id_participante);
+                $this->update($request, $participante->id);
             }
             if ($request->id_participante) {
                 //$participante = $this->update($request, $request->id_participante);
