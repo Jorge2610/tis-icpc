@@ -325,7 +325,7 @@ class EquipoController extends Controller
             $equipo = Equipo::find($id_equipo);
             $evento = Evento::find($id_evento);
             Mail::to($participante->correo)
-                ->send(new EnviarCodigoEquipoParticipante($equipo, $evento, $participante));
+                ->send(new EnviarCodigoEquipoParticipante($participante, $equipo, $evento));
         } catch (QueryException $e) {
             Log::error($e->getMessage());
             return ['mensaje' => $e->getMessage(), 'error' => true];
