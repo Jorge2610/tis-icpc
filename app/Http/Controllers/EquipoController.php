@@ -130,8 +130,8 @@ class EquipoController extends Controller
     public function existeParticipante($ci, $id_equipo, $id_evento)
     {
         $participante = Participante::where('ci', $ci)
-        ->where('correo_confirmado', 1)
-        ->first();
+            ->where('correo_confirmado', 1)
+            ->first();
 
         $equipoInscrito = EquipoInscrito::where('id_evento', $id_evento)
             ->where('id_equipo', $id_equipo)
@@ -242,12 +242,20 @@ class EquipoController extends Controller
                 if (!$equipo) {
                     return [
                         'inscrito' => false,
-                        'Mensaje' => ["mensaje" => $esRepetido ? " El nombre del equipo ya registrado a este evento." : "", "error" => $esRepetido],
+                        'error' => $esRepetido,
+                        'Mensaje' => [
+                            "mensaje" => $esRepetido ? " El nombre del equipo ya registrado a este evento." : "",
+                            "error" => $esRepetido
+                        ],
                     ];
                 } else {
                     return [
                         'inscrito' => false,
-                        'equipo' => $equipo
+                        'equipo' => $equipo,
+                        'Mensaje' => [
+                            "mensaje" => $esRepetido ? " El nombre del equipo ya registrado a este evento." : "",
+                            "error" => false
+                        ]
                     ];
                 }
             }
