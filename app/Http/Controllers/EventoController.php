@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Models\Inscrito;
 use App\Models\Equipo;
 use App\Models\EquipoInscrito;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Support\Facades\Log;
@@ -53,9 +54,9 @@ class EventoController extends Controller
             return abort(404);
         }
 
-        $equipos = $this->equiposEvento($evento->id);
-        
-        return view('eventos.evento', ['evento' => $evento, 'participantes' => $participantes, 'equipos' => $equipos]);
+        $cantidadEquipos = $this->equiposEvento($evento->id, $evento->equipo_minimo);
+
+        return view('eventos.evento', ['evento' => $evento, 'participantes' => $participantes, 'equipos' => $cantidadEquipos]);
     }
 
     public function participantesEvento($id)
@@ -68,14 +69,29 @@ class EventoController extends Controller
         return $participantes;
     }
 
-    public function equiposEvento($id)
+    public function equiposEvento($id, $equipo_minimo)
     {
-        $equipos = EquipoInscrito::where('id_evento', $id)->with(['equipos' => function ($q) {
-            $q->where('correo_verificado',1);
-        }])->whereHas('equipos', function ($q) {
-            $q->where('correo_verificado',1);
-        })->get();
-        return $equipos;
+        $cantidad = $equipo_minimo ? $equipo_minimo : 2;
+
+        $inscritos = Evento::with([
+            'equiposInscrito' => function ($q) use ($cantidad) {
+                $q->whereHas('equipos', function ($q) use ($cantidad) {
+                    $q->where('correo_verificado', 1)
+                        ->withCount(['integrantes as cantidad_integrantes' => function ($q) {
+                            $q->whereHas('participantes', function ($q) {
+                                $q->where('correo_confirmado', 1);
+                            });
+                        }])
+                        ->having('cantidad_integrantes', '>=', $cantidad);
+                });
+            },
+            'equiposInscrito.equipos.integrantes'
+        ])->find($id);
+        
+        return $inscritos->equiposInscrito->count();
+
+
+        
     }
 
     public function vistaInscripcion($id, $ci)

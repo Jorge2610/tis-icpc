@@ -65,12 +65,12 @@
                                 participante{{ $plural }} inscrito{{ $plural }}.
                             </div>
                         @endif
-                        @if ($equipos->count() > 0)
+                        @if ($equipos > 0)
                             @php
-                                $plural = $equipos->count() > 1 ? 's' : '';
+                                $plural = $equipos > 1 ? 's' : '';
                             @endphp
                             <div class="d-flex justify-content-end fs-6">
-                                Este evento tiene {{ $equipos->count() }}
+                                Este evento tiene {{ $equipos }}
                                 equipo{{ $plural }} inscrito{{ $plural }}.
                             </div>
                         @endif

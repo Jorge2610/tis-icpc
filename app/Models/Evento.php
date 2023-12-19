@@ -33,11 +33,18 @@ class Evento extends Model
         return $this->hasMany(EventoPatrocinador::class, 'id_evento');
     }
 
-    public function actividades(){
-        return $this->hasMany(Actividad::class,'id_evento');
+    public function actividades()
+    {
+        return $this->hasMany(Actividad::class, 'id_evento');
     }
 
-    public function inscritos(){
-        return $this->hasMany(Inscrito::class,'id_evento');
+    public function inscritos()
+    {
+        return $this->hasMany(Inscrito::class, 'id_evento');
+    }
+
+    public function equiposInscrito()
+    {
+        return $this->hasMany(EquipoInscrito::class, 'id_evento');
     }
 }
