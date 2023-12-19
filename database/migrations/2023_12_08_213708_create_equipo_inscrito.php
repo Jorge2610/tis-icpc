@@ -17,7 +17,6 @@ class CreateEquipoInscrito extends Migration
             $table->id();
             $table->foreignId('id_equipo')->constrained('equipos')->restrictOnDelete()->cascadeOnUpdate();
             $table->foreignId('id_evento')->constrained('eventos')->restrictOnDelete()->cascadeOnUpdate();
-            $table->boolean('estado', 0)->nullable();
             $table->timestamps();
         });
     }
