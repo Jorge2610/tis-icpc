@@ -90,7 +90,9 @@ const actualizarTipoEvento = async (bb) => {
         mensaje,
         error ? "danger" : "success"
     );
-    window.location.href = "/admin/tipos-de-evento";
+    setTimeout(() => {
+        window.location.href = "/admin/tipos-de-evento";
+    }, 1800);
 };
 
 form.addEventListener("submit", (event) => {
