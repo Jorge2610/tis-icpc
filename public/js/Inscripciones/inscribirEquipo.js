@@ -38,6 +38,7 @@ const ingresarNombreEquipo = () => {
 const crearEquipo=async()=>{
     let formData=new FormData();
     formData.append("codigo",codigoInput1.value);
+    formData.append("id_evento",id_evento);
     if(crear){
         const response = await axios.post("/api/equipo/verificarCodigo/"+id_equipo,formData)
           .catch(error => {
