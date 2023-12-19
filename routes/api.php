@@ -139,6 +139,7 @@ Route::group(
         Route::post('/verificarCodigo/{id}', 'verificarCodigo');
         Route::get('/participantes', 'participantesEvento');
         Route::any('/verificar/{id}', 'verificarParticipante');
+        Route::get('/borrar/{id}/{id2}', 'borrarInscripcionesBasura');
     }
 );
 

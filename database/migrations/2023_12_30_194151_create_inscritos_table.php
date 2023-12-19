@@ -21,6 +21,7 @@ class CreateInscritosTable extends Migration
             $table->string('grado_academico', 64)->nullable();
             $table->string('genero', 64)->nullable();
             $table->string('talla', 10)->nullable();
+            $table->boolean('estado', 0)->nullable();
             $table->timestamps();
         });
     }

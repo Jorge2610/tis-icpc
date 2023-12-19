@@ -55,7 +55,6 @@ class ParticipanteController extends Controller
                 return ['mensaje' => 'Inscrito correctamente, por favor, verifica tu correo.', 'error' => false];
             }
             if ($request->id_participante) {
-                //$participante = $this->update($request, $request->id_participante);
                 $this->storeInscribir($request, $request->id_participante);
                 return ['mensaje' => 'Inscrito correctamente.', 'error' => false];
             } else {
@@ -151,17 +150,31 @@ class ParticipanteController extends Controller
         }
     }
 
-    public function verificarCorreo($codigo)
+    public function verificarCorreo($id_evento, $codigo)
     {
         $participante = Participante::where('codigo', $codigo)->first();
         if ($participante->correo_confirmado == 0) {
             $participante->correo_confirmado = 1;
             $participante->save();
+            $this->borrarInscripcionesBasura($participante->id, $id_evento);
             $verificado = (object)['error' => false, 'mensaje' => 'Correo verificado correctamente.'];
         } else {
             $verificado =  (object)['error' => true, 'mensaje' => 'El correo ya ha sido verificado.'];
         }
         return view("inscripciones.confirmacionCorreo", ['verificado' => $verificado]);
+    }
+
+    public function borrarInscripcionesBasura($id_participante, $id_evento)
+    {
+        try {
+            $inscrito = Inscrito::where('id_evento', '<>', $id_evento)
+                ->where('id_participante', $id_participante)
+                ->delete();
+            return $inscrito;
+        } catch (QueryException $e) {
+            Log::error($e->getMessage());
+            return ['mensaje' => $e->getMessage(), 'error' => true];
+        }
     }
 
     public function enviarCodigoCorreo($id_evento, $id_participante)
