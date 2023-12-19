@@ -187,5 +187,6 @@
         }
     </style>
     <script src="{{ asset('js/Inscripciones/codPaises.js') }}" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.10/dayjs.min.js"></script>
     <script src="{{ asset('js/Inscripciones/participante.js') }}" defer></script>
 @endsection
