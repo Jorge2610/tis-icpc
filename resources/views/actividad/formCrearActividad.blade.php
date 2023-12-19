@@ -57,8 +57,8 @@
                                 <div class="col-md-5">Inicio</div>
                                 <div class="col-md-7 p-0">
                                     <input name="inicio_evento" id="fechaInicio" class="form-control" type="datetime-local"
-                                        min="{{ max($evento->inicio_evento, date('Y-m-d\TH:i')) }}"
-                                        max="{{ $evento->fin_evento }}" required />
+                                        min="{{ date('Y-m-d\TH:i', strtotime($evento->inicio_evento)) }}"
+                                        max="{{ date('Y-m-d\TH:i', strtotime($evento->fin_evento)) }}" required />
                                     <div id="mensajeFechaInicio" class="invalid-feedback"></div>
                                 </div>
                             </div>
@@ -67,8 +67,8 @@
                                 <div class="col-md-4">Fin</div>
                                 <div class="col-md-7 p-0">
                                     <input name="fin_evento" id="fechaFin" class="form-control" type="datetime-local"
-                                        min="{{ max($evento->inicio_evento, date('Y-m-d\TH:i')) }}"
-                                        max="{{ $evento->fin_evento }}" disabled required />
+                                        min="{{ max(date('Y-m-d\TH:i', strtotime($evento->inicio_evento)), date('Y-m-d\TH:i')) }}"
+                                        max="{{ date('Y-m-d\TH:i', strtotime($evento->fin_evento)) }}" disabled required />
                                     <div id="mensajeFechaFin" class="invalid-feedback">
                                         <!--Aqui entran los mensajes de validacion de fecha-->
                                     </div>

@@ -42,7 +42,7 @@
                                 <div class="row mt-3 d-flex">
                                     <button type="button" class="btn btn-primary w-100 justify-content-center"
                                         data-bs-toggle="modal" data-bs-target="#modal-inscribir">
-                                        Inscribirme
+                                        {{$evento->equipo_maximo == null ? "Inscribirme" : "Inscribir equipo"}}
                                     </button>
                                     <!-- Modal -->
                                     @if ($evento->equipo_maximo == null)

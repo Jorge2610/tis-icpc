@@ -18,12 +18,12 @@
                                 <input type="text" class="form-control" id="carnetParticipante"
                                     pattern="[0-9]{6,10}[\-]?[0-9A-Z]*" placeholder="Ingrese su número de carnet"
                                     onkeyup="setCarnetFeedBack()" required>
-                                    <select class="custom-select" id="selectPais">
-                                    </select>
+                                <select class="custom-select" id="selectPais">
+                                </select>
                                 <div id="validacionCarnetFeedback" class="invalid-feedback" style="font-size: 14px">
                                     El número de carnet no puede estar vacio.
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div style="display: none" id="displayCodAcceso">
@@ -55,14 +55,25 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                     onclick="resetModal()">Cancelar</button>
-                <button type="button" class="btn btn-primary" 
-                onclick="validarDatos({{ $evento->id }},{{$equipo->id}})" id="botonPrincipal">
+                <button type="button" class="btn btn-primary"
+                    onclick="validarDatos({{ $evento->id }},{{ $equipo->id }})" id="botonPrincipal">
                     Inscribirme
                 </button>
             </div>
         </div>
     </div>
 </div>
+<script type="module" defer>
+    import {
+        polyfillCountryFlagEmojis
+    } from "https://cdn.skypack.dev/country-flag-emoji-polyfill";
+    polyfillCountryFlagEmojis();
+</script>
+<style>
+    * {
+        font-family: "Twemoji Country Flags", "Segoe UI", "Helvetica Neue", "Noto Sans", "Liberation Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
+</style>
 <link href="{{ asset('css/participante.css') }}" rel="stylesheet">
 <script src="{{ asset('js/Inscripciones/codPaises.js') }}" defer></script>
 <script src="{{ asset('js/Inscripciones/inscribirParticipanteEquipo.js') }}" defer></script>
