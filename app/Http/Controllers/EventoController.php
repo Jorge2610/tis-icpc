@@ -12,6 +12,7 @@ use App\Models\Participante;
 use App\Models\User;
 use App\Models\Inscrito;
 use App\Models\Equipo;
+use App\Models\EquipoInscrito;
 use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Support\Facades\Log;
@@ -51,7 +52,10 @@ class EventoController extends Controller
         if (!$evento) {
             return abort(404);
         }
-        return view('eventos.evento', ['evento' => $evento, 'participantes' => $participantes]);
+
+        $equipos = $this->equiposEvento($evento->id);
+        
+        return view('eventos.evento', ['evento' => $evento, 'participantes' => $participantes, 'equipos' => $equipos]);
     }
 
     public function participantesEvento($id)
@@ -62,6 +66,16 @@ class EventoController extends Controller
             $q->where('correo_confirmado', 1);
         })->get();
         return $participantes;
+    }
+
+    public function equiposEvento($id)
+    {
+        $equipos = EquipoInscrito::where('id_evento', $id)->with(['equipos' => function ($q) {
+            $q->where('correo_verificado',1);
+        }])->whereHas('equipos', function ($q) {
+            $q->where('correo_verificado',1);
+        })->get();
+        return $equipos;
     }
 
     public function vistaInscripcion($id, $ci)
