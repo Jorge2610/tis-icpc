@@ -3,7 +3,7 @@ Hola <strong> {{ $participante->apellidos }} {{ $participante->nombres }} </stro
 
 Parece que usted quiere inscribirse en el evento <strong> {{ $evento->nombre }} </strong>, confirme su participación pulsando el siguiente botón:
 
-@component('mail::button', ['url' => url('confirmar/participante/' . $participante->codigo)])
+@component('mail::button', ['url' => url('confirmar/participante/'.$evento->id . '/' . $participante->codigo)])
 Confirmar participación
 @endcomponent
 
