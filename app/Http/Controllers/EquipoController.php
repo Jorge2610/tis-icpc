@@ -253,7 +253,7 @@ class EquipoController extends Controller
                         'inscrito' => false,
                         'equipo' => $equipo,
                         'Mensaje' => [
-                            "mensaje" => $esRepetido ? " El nombre del equipo ya registrado a este evento." : "",
+                            "mensaje" =>"",
                             "error" => false
                         ]
                     ];
