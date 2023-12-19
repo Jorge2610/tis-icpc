@@ -253,7 +253,7 @@ class EquipoController extends Controller
                         'inscrito' => false,
                         'equipo' => $equipo,
                         'Mensaje' => [
-                            "mensaje" =>"",
+                            "mensaje" => "",
                             "error" => false
                         ]
                     ];
@@ -307,6 +307,7 @@ class EquipoController extends Controller
             if ($equipo->correo_verificado == 0) {
                 $equipo->correo_verificado = 1;
                 $equipo->save();
+                $this->borrarInscritosEquipo($equipo->id, $request->id_evento);
             }
             return ['error' => false, 'mensaje' => 'Código verificado correctamente.'];
         } else {
@@ -314,15 +315,29 @@ class EquipoController extends Controller
         }
     }
 
-    public function verificarCorreo($codigo, $id_evento)
+    public function verificarCorreo($id_evento, $codigo)
     {
         $equipo = Equipo::where('codigo', $codigo)->first();
         if ($equipo->correo_verificado == 0) {
             $equipo->correo_verificado = 1;
             $equipo->save();
+            $this->borrarInscritosEquipo($equipo->id, $id_evento);
             return ['error' => false, 'mensaje' => 'Correo verificado correctamente.'];
         }
         return ['error' => true, 'mensaje' => 'El correo ya ha sido verificado.'];
+    }
+
+    public function borrarInscritosEquipo($id_equipo, $id_evento)
+    {
+        try {
+            $inscrito = EquipoInscrito::where('id_evento', '<>', $id_evento)
+                ->where('id_equipo', $id_equipo)
+                ->delete();
+            return $inscrito;
+        } catch (QueryException $e) {
+            Log::error($e->getMessage());
+            return ['mensaje' => $e->getMessage(), 'error' => true];
+        }
     }
 
     public function enviarCodigoCorreoParticipante($id_participante, $id_equipo, $id_evento)
