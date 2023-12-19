@@ -103,7 +103,7 @@ Route::group([
     'prefix' => 'confirmar',
 ], function () {
     Route::get('participante/{id_evento}/{codigo}', [ParticipanteController::class, 'verificarCorreo'])->name('confirmar.participante');
-    Route::get('equipo/{codigo}', [EquipoController::class, 'verificarCorreo'])->name('confirmar.equipo');
+    Route::get('equipo/(id_evento)/{codigo}', [EquipoController::class, 'verificarCorreo'])->name('confirmar.equipo');
 });
 
 use App\Models\Participante;
