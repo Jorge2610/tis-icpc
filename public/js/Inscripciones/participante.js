@@ -1,12 +1,11 @@
 let idEvento;
-let nombreEvento;
-let idParticipante;
+let nombreEvento = document.getElementById("nombreEvento").innerText;;
+let idParticipante = document.getElementById("idParticipante").value;
+let inputFechaNac = document.getElementById("fechaNacParticipante");
 
 window.addEventListener("load", async () => {
     idEvento = window.location.href.split("/");
     idEvento = idEvento[idEvento.length - 2];
-    nombreEvento = document.getElementById("nombreEvento").innerText;
-    idParticipante = document.getElementById("idParticipante").value;
     let pais = document.getElementById("codPaisCarnet");
     if (pais.innerText === "") {
         if (localStorage.getItem("paisCarnet") === null) {
@@ -54,9 +53,29 @@ const setCodPais = () => {
 const validarInputs = () => {
     let form = document.getElementById("formInscripcionParticipante");
     if (form.checkValidity()) {
-        insribirParticipante();
+        if (inputFechaNac.hasAttribute("disabled")) {
+            validarFechadNac();
+        } else {
+            insribirParticipante();
+        }
     } else {
         form.classList.add('was-validated');
+    }
+};
+
+const validarFechadNac = () => {
+    let fecha = dayjs(inputFechaNac.value);
+    let min = dayjs(inputFechaNac.min);
+    let max = dayjs(inputFechaNac.max);
+    if (!fecha.isBefore(min) && !fecha.isAfter(max)) {
+        insribirParticipante()
+    } else {
+        inputFechaNac.classList.toggle("is-invalid");
+        mostrarAlerta(
+            "Éxito",
+            "No puede inscribirse a este evento, por que no cumple con la restricción de edad.",
+            "danger"
+        );
     }
 };
 
@@ -100,5 +119,6 @@ const resetForm = () => {
     let form = document.getElementById("formInscripcionParticipante");
     form.reset();
     setCodPais();
+    inputFechaNac.classList.toggle("is-invalid");
     form.classList.remove("was-validated");
 };
