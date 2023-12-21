@@ -306,9 +306,9 @@ equipoMaximo.addEventListener("change",()=>{
         isValid(equipoMaximo,true);
         equipoMinimo.max=equipoMaximo.value;
     }else{if(equipoMaximo.value===""){
-            document.getElementById("ValidarRangoEquipo").innerText="La cantidad máxima de equipos no puede ser vacío.";
+            document.getElementById("ValidarRangoEquipo").innerText=`La cantidad m\u00E1xima de equipos no puede ser vacío.`;
         }else{
-            document.getElementById("ValidarRangoEquipo").innerText="Rango de cantidad de equipos no válido.";
+            document.getElementById("ValidarRangoEquipo").innerText="Rango de cantidad de equipos no m\xE1lido.";
         }
         isValid(equipoMaximo,false);
     }
