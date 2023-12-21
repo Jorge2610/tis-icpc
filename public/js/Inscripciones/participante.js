@@ -119,6 +119,6 @@ const resetForm = () => {
     let form = document.getElementById("formInscripcionParticipante");
     form.reset();
     setCodPais();
-    inputFechaNac.classList.toggle("is-invalid");
+    inputFechaNac.classList.remove("is-invalid");
     form.classList.remove("was-validated");
 };
