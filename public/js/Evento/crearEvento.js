@@ -16,6 +16,7 @@ const checkNotificacion = document.getElementById("notificacion");
 const equipoMaximo = document.getElementById("equipoMaximo");
 const equipoMinimo = document.getElementById("equipoMinimo");
 
+
 let boolCheckEquipo=true;
 let boolMinEquipo =true;
 let boolMaxEquipo = true;
@@ -60,7 +61,8 @@ const prepararFormData = () => {
         formData.set("precio_inscripcion", "");
     }
     if(!checkEquipo.checked){
-        formData.set("cantidad_equipo","");
+        formData.set("equipo_minimo","");
+        formData.set("equipo_maximo","");
     }
     if(!document.getElementById("tallaCheck").checked){
         formData.set("talla","");
@@ -72,7 +74,7 @@ const prepararFormData = () => {
             formData.set("notificacion","on");
         }    
     }
-    
+
     return formData;
 };
 
