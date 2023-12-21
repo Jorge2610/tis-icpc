@@ -53,15 +53,20 @@
 
                     </div>
                     <div id="contenedorAsignar" style="display: none">
-                        <button type="button" class="btn btn-light btn-lg hover-button"
-                            onclick="document.getElementById('imageUpload').click()">Reemplazar</button>
-                        <button type="button" class="btn btn-primary btn-lg hover-button"
-                            onclick="asignarAfiche()">Asignar</button>
+                        <div class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-light btn-lg hover-button"
+                                onclick="document.getElementById('imageUpload').click()">Reemplazar</button>
+                            <button type="button" class="btn btn-primary btn-lg hover-button"
+                                onclick="asignarAfiche()">Asignar</button>
+                        </div>
                         <div>
-                            <p class="text-muted mt-3">Si el afiche seleccionado no es el deseado, puede reemplazarlo
-                                presionado "Reemplazar".</p>
+                            <p class="text-muted mt-3">
+                                Si el afiche seleccionado no es el deseado, puede reemplazarlo
+                                presionado "Reemplazar".
+                            </p>
                         </div>
                     </div>
+
 
                 </div>
             </div>
