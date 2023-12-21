@@ -108,10 +108,7 @@ const previsualizarImagen = (event, idAfiche) => {
             };
             reader.readAsDataURL(file);
             aficheSeleccion = idAfiche;
-            const modal = new bootstrap.Modal(
-                document.getElementById("modalCambiarAfiche")
-            );
-            modal.show();
+            $('#modalCambiarAfiche').modal('show');
         } else {
             mostrarAlerta("Error", mensaje.mensaje, "danger");
         }
