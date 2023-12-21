@@ -94,7 +94,7 @@ const cambiarEvento = (evento) => {
                     <div class="card w-100 my-3 shadow" style="min-height: 100px; width: 17rem !important">
                         <div class="card-body">
                             <h3 class="card-title">${actividad.nombre}</h3>
-                            <h5 class="card-text text-truncate d-block" style="max-width: 300px;">${actividad.descripcion}</h5>
+                            <h5 class="card-text text-truncate d-block" style="max-width: 300px;" title="${actividad.descripcion}">${actividad.descripcion}</h5>
                             <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Inicio: ${actividad.inicio_actividad}</h6>
                             <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Fin: ${actividad.fin_actividad}</h6>
                             ${inscripcion}
@@ -114,7 +114,7 @@ const cambiarEvento = (evento) => {
                     <div class="card w-100 my-3 shadow" style="min-height: 100px; width: 17rem !important">
                         <div class="card-body">
                             <h3 class="card-title">${actividad.nombre}</h3>
-                            <h5 class="card-text text-truncate d-block" style="max-width: 300px;">${actividad.descripcion}</h5>
+                            <h5 class="card-text text-truncate d-block" style="max-width: 300px;" title="${actividad.descripcion}">${actividad.descripcion}</h5>
                             <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Inicio: ${actividad.inicio_actividad}</h6>
                             <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Fin: ${actividad.fin_actividad}</h6>
                         </div>
