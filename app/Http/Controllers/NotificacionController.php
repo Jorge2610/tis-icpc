@@ -20,7 +20,8 @@ class NotificacionController extends Controller
             'id_tipo_evento'
         )
             ->with(['tipoEvento' => function ($q) {
-                $q->select('id', 'nombre');
+                $q->select('id', 'nombre')
+                    ->withTrashed();
             }])
             ->withCount(['inscritos as cantidad_inscritos' => function ($q) {
                 $q->whereHas('participante', function ($q) {
