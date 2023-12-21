@@ -2,6 +2,7 @@ let idEvento;
 let nombreEvento;
 let idEquipo;
 let codEquipo;
+let inputFechaNac = document.getElementById("fechaNacParticipante");
 
 window.addEventListener("load", async () => {
     idEvento = window.location.href.split("/");
@@ -55,9 +56,29 @@ const setCodPais = () => {
 const validarInputs = () => {
     let form = document.getElementById("formInscripcionParticipante");
     if (form.checkValidity()) {
-        insribirParticipante();
+        if (inputFechaNac.hasAttribute("disabled")) {
+            validarFechadNac();
+        } else {
+            insribirParticipante();
+        }
     } else {
         form.classList.add('was-validated');
+    }
+};
+
+const validarFechadNac = () => {
+    let fecha = dayjs(inputFechaNac.value);
+    let min = dayjs(inputFechaNac.min);
+    let max = dayjs(inputFechaNac.max);
+    if (!fecha.isBefore(min) && !fecha.isAfter(max)) {
+        insribirParticipante()
+    } else {
+        inputFechaNac.classList.toggle("is-invalid");
+        mostrarAlerta(
+            "Éxito",
+            "No puede inscribirse a este equipo, por que no cumple con la restricción de edad del evento.",
+            "danger"
+        );
     }
 };
 
