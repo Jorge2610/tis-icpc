@@ -19,14 +19,14 @@
                     </thead>
                     <tbody id="datosTabla">
                         @foreach ($eventos as $evento)
-                            @if($evento->cantidad_inscritos > 0)
+                            @if($evento->cantidad_inscritos > 0 or $evento->cantidad_equipos > 0)
                             <tr onclick="seleccionarEvento({{ $evento->id }}, '{{ $evento->nombre }}', event)"
                                 id="{{ $evento->id }}">
                                 <td>{{ $evento->nombre }}</td>
                                 <td class="text-center">{{ $evento->tipoEvento->nombre }}</td>
                                 <td class="text-center">{{ date('d-m-Y', strtotime($evento->updated_at)) }}</td>
                                 <td class="text-center" id="contadorActividades{{ $evento->id }}">
-                                    {{ $evento->cantidad_inscritos }}</td>
+                                    {{ $evento->cantidad_inscritos > 0 ? $evento->cantidad_inscritos : $evento->cantidad_equipos }}</td>
                             </tr>
                             @endif
                         @endforeach

@@ -12,7 +12,8 @@
 
 {{-- Intro Lines --}}
 
-Hola <strong> {{ ucwords(strtolower($notifiable->apellidos))}}  {{ ucwords(strtolower($notifiable->nombres))}} </strong>,
+Hola <strong> {{ ucwords(strtolower($notifiable->apellidos))}}  {{ ucwords(strtolower($notifiable->nombres))}}  {{ucwords(strtolower($notifiable->nombre))}}</strong>,
+
 
 
 

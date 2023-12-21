@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Equipo;
 use App\Models\Evento;
 use App\Models\Participante;
 use Illuminate\Http\Request;
@@ -26,6 +27,11 @@ class NotificacionController extends Controller
             ->withCount(['inscritos as cantidad_inscritos' => function ($q) {
                 $q->whereHas('participante', function ($q) {
                     $q->where('correo_confirmado', 1);
+                });
+            }])
+            ->withCount(['equiposInscrito as cantidad_equipos' => function ($q) {
+                $q->whereHas('equipos', function ($q) {
+                    $q->where('correo_verificado', 1);
                 });
             }])
             ->where('estado', 0)
@@ -76,7 +82,11 @@ class NotificacionController extends Controller
 
 
             $participantes = $this->getParticipantes($request->id_evento);
+            $equipos = $this->getEquipos($request->id_evento);
 
+            foreach ($equipos as $equipo) {
+                $equipo->notify(new NotificacionEvento($datos));
+            }
 
             foreach ($participantes as $participante) {
                 $participante->notify(new NotificacionEvento($datos));
@@ -87,5 +97,12 @@ class NotificacionController extends Controller
             Log::error('Error al enviar la notificación: ' . $e->getMessage());
             return 'Error al enviar la notificación.';
         }
+    }
+
+    public function getEquipos($id_evento){
+        $equipos = Equipo::whereHas('equipoInscrito', function ($q) use ($id_evento) {
+            $q->where('id_evento', $id_evento);
+        })->where('correo_verificado', 1)->get();
+        return $equipos;
     }
 }
