@@ -81,7 +81,7 @@ const validarFechadNac = () => {
 
 const insribirParticipante = async () => {
     let formData = getParticipanteData();
-    await axios.post("/api/participante/", formData).then((response) => {
+    await axios.post("/api/participante", formData).then((response) => {
         mostrarAlerta(
             "Éxito",
             response.data.mensaje,
