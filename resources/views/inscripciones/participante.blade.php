@@ -14,7 +14,7 @@
                                 <label for="carnetParticipante" class="form-label">Número de carnet</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="carnetParticipante"
-                                        value="{{ $participante->ci }}" disabled>
+                                        value="{{ $participante->ci }}" maxlength="16" disabled>
                                     <span class="input-group-text rounded-start"
                                         id="codPaisCarnet">{{ $participante->pais }}</span>
                                 </div>

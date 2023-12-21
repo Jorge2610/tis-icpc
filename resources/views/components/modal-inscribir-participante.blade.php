@@ -17,7 +17,7 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" id="carnetParticipante"
                                     pattern="[0-9]{6,10}[\-]?[0-9A-Z]*" placeholder="Ingrese su número de carnet"
-                                    onkeyup="setCarnetFeedBack()" required>
+                                    onkeyup="setCarnetFeedBack()" maxlength="16" required>
                                     <select class="custom-select" id="selectPais">
                                     </select>
                                 <div id="validacionCarnetFeedback" class="invalid-feedback" style="font-size: 14px">
