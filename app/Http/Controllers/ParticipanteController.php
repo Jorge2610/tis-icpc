@@ -152,8 +152,8 @@ class ParticipanteController extends Controller
 
     public function verificarCorreo($id_evento, $codigo)
     {
-        $participante = Participante::where('codigo', $codigo)->first();
-        if ($participante->correo_confirmado == 0) {
+        $participante = Participante::where('codigo', $codigo)->where('correo_confirmado', 0)->first();
+        if ($participante) {
             $participante->correo_confirmado = 1;
             $participante->save();
             $this->borrarInscripcionesBasura($participante->id, $id_evento);

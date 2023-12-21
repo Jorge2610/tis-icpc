@@ -1,9 +1,9 @@
 @component('mail::message')
-Hola,
+Hola <strong> {{ $participante->apellidos }} {{ $participante->nombres }} </strong>,
 
 Parece que usted quiere unirse al equipo <strong> {{ $equipo->nombre }} </strong> en el evento <strong> {{ $evento->nombre }} </strong>, confirme su participación pulsando el siguiente botón:
 
-@component('mail::button', ['url' => url('confirmar/equipo/' . $evento->id . '/' . $equipo->codigo)])
+@component('mail::button', ['url' => url('confirmar/' . $evento->id . '/'. $equipo->id . '/' . $participante->codigo)])
 Confirmar participación
 @endcomponent
 
