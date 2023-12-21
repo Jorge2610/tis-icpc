@@ -62,7 +62,7 @@
                         <div>
                             <p class="text-muted mt-3">
                                 Si el afiche seleccionado no es el deseado, puede reemplazarlo
-                                presionado "Reemplazar".
+                                presionando "Reemplazar".
                             </p>
                         </div>
                     </div>
