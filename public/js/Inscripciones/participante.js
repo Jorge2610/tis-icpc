@@ -81,7 +81,7 @@ const validarFechadNac = () => {
 
 const insribirParticipante = async () => {
     let formData = getParticipanteData();
-    await axios.post("/api/participante/", formData).then((response) => {
+    await axios.post("/api/participante", formData).then((response) => {
         mostrarAlerta(
             "Éxito",
             response.data.mensaje,
@@ -119,6 +119,6 @@ const resetForm = () => {
     let form = document.getElementById("formInscripcionParticipante");
     form.reset();
     setCodPais();
-    inputFechaNac.classList.toggle("is-invalid");
+    inputFechaNac.classList.remove("is-invalid");
     form.classList.remove("was-validated");
 };
