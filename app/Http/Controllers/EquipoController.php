@@ -280,14 +280,21 @@ class EquipoController extends Controller
     public function mostrarEquipo($codigo, $id)
     {
         $equipo = Equipo::with([
-            'integrantes',
-            'integrantes.participantes' => function ($q) {
+            'integrantes' => function ($q) {
+                $q->whereHas('participantes', function ($q) {
+                    $q->where('correo_confirmado', 1);
+                });
+            }
+        , 'integrantes.participantes'])->whereHas('integrantes', function ($q) {
+            $q->whereHas('participantes', function ($q) {
                 $q->where('correo_confirmado', 1);
-            },
-            'equipoInscrito'
-        ])
+            });
+        })
             ->where('codigo', $codigo)
             ->first();
+        if(!$equipo){
+            $equipo = Equipo::where('codigo', $codigo)->first();
+        }
         $evento = Evento::find($id);
         return view('inscripciones.tablaEquipo', ['equipo' => $equipo, 'evento' => $evento]);
     }

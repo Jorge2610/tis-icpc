@@ -372,6 +372,7 @@ class EventoController extends Controller
             $dato = $participante;
         } else {
             $dato = (object)[
+                'id' => null,
                 'ci' => $ci,
                 'nombres' => null,
                 'apellidos' => null,
