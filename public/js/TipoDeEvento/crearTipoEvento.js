@@ -56,7 +56,6 @@ const crearTipoEvento = (formData) => {
 };
 
 const restaurarTipoEvento = async () => {
-    modalActualizar();
     await axios
         .post("/api/tipo-evento/restaurar/" + idTipoEvento)
         .then(() => {
@@ -66,6 +65,7 @@ const restaurarTipoEvento = async () => {
         .catch((error) => {
             console.log(error);
         });
+        modalActualizar();
 };
 
 const actualizarTipoEvento = async (bb) => {
