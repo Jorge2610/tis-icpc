@@ -87,11 +87,8 @@ class EventoController extends Controller
             },
             'equiposInscrito.equipos.integrantes'
         ])->find($id);
-        
+
         return $inscritos->equiposInscrito->count();
-
-
-        
     }
 
     public function vistaInscripcion($id, $ci)
@@ -212,18 +209,30 @@ class EventoController extends Controller
             unset($cambios['fin_evento']);
         }
 
-        $participantes = Participante::whereHas('inscritos', function ($q) use ($evento) {
-            $q->where('id_evento', $evento->id);
+        $participantes = Participante::with('inscritos')->whereHas('inscritos', function ($q) use ($evento) {
+            $q->where('id_evento', $evento->id)
+                ->where('correo_confirmado', 1);
         })->get();
-
+        $equipos = Equipo::with('equipoInscrito')->whereHas('equipoInscrito', function ($q) use ($evento) {
+            $q->where('id_evento', $evento->id);
+        })->where('correo_verificado', 1)->get();
         if (!empty($cambios)) {
-            foreach ($participantes as $usuario) {
-                try {
-                    $usuario->notify(new CambiosEnEvento($evento, $cambios));
-                } catch (\Exception $e) {
-                    Log::error('Error al enviar notificación: ' . $e->getMessage());
-                    // O lanza una excepción si es necesario para interrumpir la ejecución
-                    // throw new \Exception('Error al enviar notificación: ' . $e->getMessage());
+            if ($participantes) {
+                foreach ($participantes as $usuario) {
+                    try {
+                        $usuario->notify(new CambiosEnEvento($evento, $cambios));
+                    } catch (\Exception $e) {
+                        return $e->getMessage();
+                    }
+                }
+            }
+            if ($equipos) {
+                foreach ($equipos as $equipo) {
+                    try {
+                        $equipo->notify(new CambiosEnEvento($evento, $cambios));
+                    } catch (\Exception $e) {
+                        return $e->getMessage();
+                    }
                 }
             }
         }

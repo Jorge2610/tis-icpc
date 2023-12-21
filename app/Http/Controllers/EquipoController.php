@@ -315,16 +315,21 @@ class EquipoController extends Controller
         }
     }
 
-    public function verificarCorreo($id_evento, $codigo)
+    public function verificarCorreo($id_evento, $id_equipo, $codigo)
     {
-        $equipo = Equipo::where('codigo', $codigo)->first();
-        if ($equipo->correo_verificado == 0) {
-            $equipo->correo_verificado = 1;
-            $equipo->save();
+        $participante = Participante::where('codigo', $codigo)
+            ->where('correo_confirmado', 0)
+            ->first();
+        $equipo = Equipo::findorfail($id_equipo);
+        if ($participante) {
+            $participante->correo_confirmado = 1;
+            $participante->save();
             $this->borrarInscritosEquipo($equipo->id, $id_evento);
-            return ['error' => false, 'mensaje' => 'Correo verificado correctamente.'];
+            $verificado = (object)['error' => false, 'mensaje' => 'Correo verificado correctamente.'];
+        } else {
+            $verificado =  (object)['error' => true, 'mensaje' => 'El correo ya ha sido verificado.'];
         }
-        return ['error' => true, 'mensaje' => 'El correo ya ha sido verificado.'];
+        return view("inscripciones.confirmacionCorreo", ['verificado' => $verificado]);
     }
 
     public function borrarInscritosEquipo($id_equipo, $id_evento)
