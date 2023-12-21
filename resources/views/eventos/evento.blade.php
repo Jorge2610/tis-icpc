@@ -34,9 +34,8 @@
                             <p>
                         </div>
                         @if (
-                            $evento->inicio_evento > date('Y-m-d\TH:i') ||
                                 $evento->actividades->where('inscripcion', 1)->filter(function ($actividad) {
-                                        return strtotime($actividad->fin_actividad) >= strtotime('today');
+                                        return $actividad->inicio_actividad <= date('Y-m-d\TH:i') && date('Y-m-d\TH:i') <= $actividad->fin_actividad ;
                                     })->count() > 0)
                             <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                 <div class="row mt-3 d-flex">
