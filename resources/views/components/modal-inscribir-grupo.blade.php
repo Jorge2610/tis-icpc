@@ -30,9 +30,11 @@
                         </div>
                     </div>
                     <div id="codigoValidacion" style="display: none;">
+                        <div class="row mt-3">
                         <label for="codigo1">
                             <h6>Código de acceso*</h6>
                         </label>
+                        </div>
                         <input type="text" id="codigo1" class="form-control">
                         <div class="invalid-feedback">
                             Código no válido.
