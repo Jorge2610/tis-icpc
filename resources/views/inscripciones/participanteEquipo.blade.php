@@ -8,6 +8,7 @@
                 <h4>Formulario de integrante</h4>
                 <hr>
                 <form class="needs-validation" novalidate id="formInscripcionParticipante">
+                    <input type="hidden" id="idParticipante" value="{{ $participante->id }}">
                     <div class="row border border-bottom-0 rounded-top">
                         <h5 class="mt-2">Información general</h5>
                         <div class="col-md-6">

@@ -3,8 +3,10 @@ let nombreEvento;
 let idEquipo;
 let codEquipo;
 let inputFechaNac = document.getElementById("fechaNacParticipante");
+let idParticipante = document.getElementById("idParticipante").value;
 
 window.addEventListener("load", async () => {
+    console.log(idParticipante)
     idEvento = window.location.href.split("/");
     idEquipo = idEvento[5]
     idEvento = idEvento[7];
@@ -113,6 +115,9 @@ const getParticipanteData = () => {
     formData.append("talla", document.getElementById("tallaParticipante").value);
     formData.append("talla", document.getElementById("tallaParticipante").value);
     formData.append("id_evento", idEvento);
+    if (idParticipante != "") {
+        formData.append("id_participante", idParticipante);
+    }
     return formData;
 };
 
