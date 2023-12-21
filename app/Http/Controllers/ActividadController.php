@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Models\Actividad;
+use App\Models\Equipo;
 use App\Models\Evento;
 use App\Models\Participante;
 use App\Notifications\NotificacionActividad;
@@ -61,8 +62,8 @@ class ActividadController extends Controller
     {
         try {
             $actividad = Actividad::find($id);
-            $actividad->delete();
             $this->notificar($actividad, now());
+            $actividad->delete();
             return response()->json(['mensaje' => 'Eliminada exitosamente', 'error' => false]);
         } catch (QueryException $e) {
             return $e->getMessage();
@@ -154,13 +155,30 @@ class ActividadController extends Controller
     {
         try {
             $evento = Evento::find($actividad->id_evento);
-            $participantes = Participante::whereHas('inscritos', function ($q) use ($actividad) {
-                $q->where('id_evento', $actividad->id_evento );
+            $participantes = Participante::with('inscritos')->whereHas('inscritos', function ($q) use ($actividad) {
+                $q->where('id_evento', $actividad->id_evento);
             })->where('correo_confirmado', 1)->get();
 
-
-            foreach ($participantes as $participante) {
-                $participante->notify(new NotificacionActividad($actividad, $evento, $cambios));
+            $equipos = Equipo::with('equipoInscrito')->whereHas('equipoInscrito', function ($q) use ($actividad) {
+                $q->where('id_evento', $actividad->id_evento);
+            })->where('correo_verificado', 1)->get();
+            if ($participantes) {
+                foreach ($participantes as $usuario) {
+                    try {
+                        $usuario->notify(new NotificacionActividad($actividad, $evento, $cambios));
+                    } catch (\Exception $e) {
+                        return $e->getMessage();
+                    }
+                }
+            }
+            if ($equipos) {
+                foreach ($equipos as $equipo) {
+                    try {
+                        $equipo->notify(new NotificacionActividad($actividad, $evento, $cambios));
+                    } catch (\Exception $e) {
+                        return $e->getMessage();
+                    }
+                }
             }
         } catch (\Exception $e) {
             Log::error('Error al enviar notificación: ' . $e->getMessage());
