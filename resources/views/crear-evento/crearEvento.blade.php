@@ -136,7 +136,8 @@
                                             <input name="edad_minima" type="number"
                                                 class="form-control input-edad fecha-editar entero" min="10"
                                                 id="edadMinima" step="1" max="99"
-                                                value="{{ isset($datos['edad_minima']) ? $datos['edad_minima'] : '' }}">
+                                                value="{{ isset($datos['edad_minima']) ? $datos['edad_minima'] : '' }}"
+                                                required>
                                         </div>
                                     </div>
                                 </div>
@@ -151,7 +152,8 @@
                                             <input name="edad_maxima" type="number"
                                                 class="form-control input-edad fecha-editar entero" id="edadMaxima"
                                                 step="1" min="10" max="99"
-                                                value="{{ isset($datos['edad_maxima']) ? $datos['edad_maxima'] : '' }}">
+                                                value="{{ isset($datos['edad_maxima']) ? $datos['edad_maxima'] : '' }}"
+                                                required>
                                         </div>
                                     </div>
                                 </div>
@@ -229,7 +231,8 @@
                                     <input name="precio_inscripcion" type="number" class="form-control fecha-editar"
                                         min="1" max="5000" id="costoEvento" step="0.5"
                                         onchange="setCostoInvalidoFeedback()"
-                                        value="{{ isset($datos['precio_inscripcion']) ? $datos['precio_inscripcion'] : '0.0' }}">
+                                        value="{{ isset($datos['precio_inscripcion']) ? $datos['precio_inscripcion'] : '0.0' }}"
+                                        required>
                                     <div id="costoInvalido" class="invalid-feedback"></div>
                                 </div>
                             </div>
@@ -274,7 +277,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-9">
                     <input name="fin_evento" id="fechaFin" class="form-control" type="datetime-local"
                         onchange="datoCambiado()" min=""
-                        value="{{ isset($datos['fin_evento']) ? $datos['fin_evento'] : '' }}"required
+                        value="{{ isset($datos['fin_evento']) ? $datos['fin_evento'] : '' }}" required
                         {{ strtotime($datos['inicio_evento']) > time() ? 'disabled' : '' }} />
                     <div class="invalid-feedback" id="mensajeErrorFechaFin"></div>
                 </div>

@@ -1,7 +1,7 @@
 form.querySelectorAll(".form-control, .form-select").forEach((Element) => {
     Element.addEventListener("change", () => {
-        if (Element.hasAttribute("required"))
-            isValid(Element, Element.value != "");
+        isValid(Element,Element.checkValidity());
+        //validacion(Element);
     });
 });
 
@@ -12,7 +12,6 @@ chekcTodas.addEventListener("change", () => {
         }
     });
 });
-
 document.querySelectorAll(".institucion").forEach((Element) => {
     Element.addEventListener("change", () => {
         let bandera = true;
@@ -27,8 +26,59 @@ document.querySelectorAll(".institucion").forEach((Element) => {
         chekcTodas.checked = bandera;
     });
 });
+//Validacion de edad
+edadMaxima.addEventListener("change", () => {
+    if(!inputEdad.checked)
+        isValid(edadMaxima,true);
+    else{
+        if(edadMaxima.classList.contains("is-invalid")){
+            if(edadMaxima.value===""&&
+            edadMinima.classList.contains("is-valid"))
+                isValid(edadMaxima,true);
+        }else{
+            edadMinima.max=edadMaxima.value;
+            if(edadMinima.value==="")
+                document.getElementById("ValidoRangoEdad").innerText = "Edad válida hasta los " + edadMaxima.value + " años.";   
+            else
+                document.getElementById("ValidoRangoEdad").innerText = "";  
+        }
+    }
+    if (boolMinEdad && boolMaxEdad && boolcheckEdad) {
+        boolMinEdad = false;
+        boolcheckEdad = false;
+        edadMinima.dispatchEvent(new Event("change"));
+        inputEdad.dispatchEvent(new Event("change"));
+    } else {
+        boolMaxEdad = true;
+    }
+});
+edadMinima.addEventListener("change", () => {
+    if(!inputEdad.checked)
+        isValid(edadMinima,true);
+    else{
+        if(edadMinima.classList.contains("is-invalid")){
+            if(edadMinima.value===""&&
+            edadMaxima.classList.contains("is-valid"))
+                isValid(edadMinima,true);
+        }else{
+            edadMaxima.min=edadMinima.value;
+            if(edadMaxima.value==="")
+                document.getElementById("ValidoRangoEdad").innerText = "Edad válida desde los " + edadMinima.value + " años.";   
+            else
+                document.getElementById("ValidoRangoEdad").innerText = "";  
+        }
+    }
+    if (boolMinEdad && boolMaxEdad && boolcheckEdad) {
+        boolMaxEdad = false;
+        boolcheckEdad = false;
+        edadMaxima.dispatchEvent(new Event("change"));
+        inputEdad.dispatchEvent(new Event("change"));;
+    } else {
+        boolMinEdad = true;
+    }
 
-const validarEdad = () => {
+});
+inputEdad.addEventListener("change", () => {
     if (boolMaxEdad && boolMinEdad && boolcheckEdad) {
         boolMaxEdad = false;
         boolMinEdad = false;
@@ -37,39 +87,13 @@ const validarEdad = () => {
     } else {
         boolcheckEdad = true;
     }
-
-    if (
-        edadMaxima.classList.contains("is-invalid") ||
-        edadMinima.classList.contains("is-invalid")
-    ) {
-        isValid(inputEdad, false)
-    } else {
-        isValid(inputEdad, true);
-    }
+    isValid(inputEdad,edadMaxima.classList.contains("is-valid") &&
+            edadMinima.classList.contains("is-valid"));    
     if (!inputEdad.checked) {
-        inputEdad.classList.remove("is-valid");
-        inputEdad.classList.remove("is-invalid");
+        removerValidacion(inputEdad);
     }
-};
-
-const validarCosto = () => {
-    if (boolCosto) {
-        boolCosto = false;
-        costo.dispatchEvent(new Event("change"));
-    } else {
-        boolCosto = true;
-    }
-    if (costo.classList.contains("is-invalid")) {
-        isValid(inputCosto, false)
-    } else {
-        isValid(inputCosto, true)
-    }
-    if (!inputCosto.checked) {
-        inputCosto.classList.remove("is-valid");
-        inputCosto.classList.remove("is-invalid");
-    }
-};
-
+});
+//Validacion de costo
 costo.addEventListener("keyup", () => {
     let numero = costo.value.toString();
     var decimales = (numero.split('.')[1] || []).length;
@@ -78,151 +102,48 @@ costo.addEventListener("keyup", () => {
         costo.value = numero;
     }
 });
-
 costo.addEventListener("change", () => {
-
-
-    if (inputCosto.checked){
-        if (parseFloat(costo.value)>=
-            parseFloat(costo.min) && parseFloat(costo.value)<= parseFloat(costo.max)) {
-            isValid(costo, true);
-        }else{
-            isValid(costo, false);
-        }
-    } 
-    else {
+    if (!inputCosto.checked)
         isValid(costo, true);
-    }
-    if (boolCosto) {
-        boolCosto = false;
-        validarCosto();
-
-    } else {
+    if (boolCosto){
+        boolCosto=false
+        inputCosto.dispatchEvent(new Event("change"));
+    }else
         boolCosto = true;
-    }
-});
-
-fechaInicio.addEventListener("change", () => {
-    if(fechaInicio.classList.contains("is-invalid")){
-        document.getElementById("mensajeErrorFechaInicio").innerHTML="Seleccione una fecha y hora.";
-    }
-    if ((fechaInicio.value < fechaInicio.min &&
-        fechaInicio.value !== "")
-    ) {
-        isValid(fechaInicio, false);
-        document.getElementById("mensajeErrorFechaInicio").innerHTML="Seleccione una fecha correcta.";
-    } else {
-        if (!fechaInicio.hasAttribute('disabled')){
-            boolFecha=false;
-            fechaFin.min = fechaInicio.value;
-        }
-        else{
-            boolFecha=true;
-        }
-    }
-    if(fechaInicio.classList.contains("is-valid")){
-        fechaFin.disabled=false;
-        fechaFin.dispatchEvent(new Event("change"));
-    }     
-    else{
-        fechaFin.disabled=true;
-        fechaFin.value="";
-        fechaFin.classList.remove("is-valid");
-        fechaFin.classList.remove("is-invalid");
-    }
-        
-}); 
-
-fechaFin.addEventListener("change", () => {
-    if(fechaFin.classList.contains("is-invalid")){
-        document.getElementById("mensajeErrorFechaFin").innerHTML="Seleccione una fecha y hora.";
-    }
-    if (fechaFin.value < fechaFin.min && fechaFin.value !== "") {
-        isValid(fechaFin);
-        document.getElementById("mensajeErrorFechaFin").innerHTML="Seleccione una fecha correcta.";
-        fechaInicio.max="";
-    }
-    if(boolFecha){
-        boolFecha=false;
-    }
-    else{
-        boolFecha=true;
-    }
-});
-
-edadMaxima.addEventListener("change", () => {
-    let ambos = edadMaxima.value === "" && edadMinima.value === "";
-    if (parseInt(edadMaxima.value) < parseInt(edadMaxima.min) && (edadMaxima.value !== "")) {
-        isValid(edadMaxima, false);
-    } else {
-        if (ambos && inputEdad.checked) {
-            isValid(edadMaxima, false);
-        } else {
-            if (edadMaxima.value > parseInt(edadMaxima.max)) {
-                isValid(edadMaxima, false);
-            }
-            else {
-                isValid(edadMaxima, true);
-                if (edadMaxima.value !== "" && edadMinima.value === "") {
-                    document.getElementById("ValidoRangoEdad").innerText = "Edad válida hasta los " + edadMaxima.value + " años.";
-                }
-                else {
-                    if (edadMinima.value !== "" && edadMaxima.value !== "")
-                        document.getElementById("ValidoRangoEdad").innerText = "";
-                }
-            }
-
-        }
-    }
-    if (boolMinEdad && boolMaxEdad && boolcheckEdad) {
-        boolMinEdad = false;
-        boolcheckEdad = false;
-        edadMinima.dispatchEvent(new Event("change"));
-        validarEdad();
-    } else {
-        boolMaxEdad = true;
-    }
-});
-edadMinima.addEventListener("change", () => {
-    let ambos = edadMaxima.value === "" && edadMinima.value === "";
-
-    if (parseInt(edadMinima.value) < parseInt(edadMinima.min) && edadMinima.value !== "") {
-        isValid(edadMinima, false);
-    } else {
-        if (ambos && inputEdad.checked) {
-            isValid(edadMinima, false);
-        } else {
-            if (edadMinima.value > parseInt(edadMinima.max))
-                isValid(edadMinima, false);
-            else {
-                if (edadMinima.value !== "")
-                    edadMaxima.min = edadMinima.value;
-                isValid(edadMinima, true);
-                if (edadMinima.value !== "" && edadMaxima.value === "") {
-                    document.getElementById("ValidoRangoEdad").innerText = "Edad válida desde los " + edadMinima.value + " años.";
-                }
-                else {
-                    if (edadMaxima.value !== "" && edadMinima.value !== "")
-                        document.getElementById("ValidoRangoEdad").innerText = "";
-                }
-            }
-        }
-
-
-    }
-
-    if (boolMinEdad && boolMaxEdad && boolcheckEdad) {
-        boolMaxEdad = false;
-        boolcheckEdad = false;
-        edadMaxima.dispatchEvent(new Event("change"));
-        validarEdad();
-    } else {
-        boolMinEdad = true;
-    }
-
 });
 inputCosto.addEventListener("change", () => {
-    validarCosto();
+    if (boolCosto){
+        boolCosto=false
+        costo.dispatchEvent(new Event("change"));
+    }else
+        boolCosto =true;
+    if (!inputCosto.checked) {
+        removerValidacion(inputCosto);
+    }else
+        isValid(inputCosto,costo.classList.contains("is-valid"));
+});
+//Validacion de fechas
+fechaInicio.addEventListener("change", () => {
+    if(fechaInicio.classList.contains("is-invalid")){
+        fechaFin.disabled=true;
+        fechaFin.value="";
+        removerValidacion(fechaFin);
+        if(fechaInicio==="")
+            document.getElementById("mensajeErrorFechaInicio").innerHTML="Seleccione una fecha y hora.";
+        else
+            document.getElementById("mensajeErrorFechaInicio").innerHTML="Seleccione una fecha correcta.";
+    }else{
+        fechaFin.disabled=false;
+        fechaFin.dispatchEvent(new Event("change"));
+    }    
+}); 
+fechaFin.addEventListener("change", () => {
+    if(fechaFin.classList.contains("is-invalid")){
+        if(fechaFin.value=="")
+            document.getElementById("mensajeErrorFechaFin").innerHTML="Seleccione una fecha y hora.";
+        else
+            document.getElementById("mensajeErrorFechaFin").innerHTML="Seleccione una fecha correcta.";
+    }
 });
 
 const setCostoInvalidoFeedback = () => {
@@ -239,9 +160,6 @@ const setCostoInvalidoFeedback = () => {
     }
 }
 
-inputEdad.addEventListener("change", () => {
-    validarEdad();
-});
 
 checkTodasRango.addEventListener("change", () => {
     document.querySelectorAll(".grado-requerido").forEach((Element) => {
@@ -250,7 +168,20 @@ checkTodasRango.addEventListener("change", () => {
         }
     });
 });
-
+document.querySelectorAll(".grado-requerido").forEach((Element) => {
+    Element.addEventListener("change", () => {
+        let bandera = true;
+        document.querySelectorAll(".grado-requerido").forEach((Element) => {
+            if (!Element.disabled) {
+                if (!Element.checked) {
+                    bandera = false;
+                }
+            }
+        });
+        checkTodasRango.checked = bandera;
+    });
+});
+//validacion de equipo
 checkEquipo.addEventListener("change",()=>{
     if (boolMaxEquipo && boolMinEquipo && boolCheckEquipo) {
         boolMaxEquipo = false;
@@ -261,7 +192,6 @@ checkEquipo.addEventListener("change",()=>{
     } else {
         boolCheckEquipo = true;
     }
-
     if (
         equipoMaximo.classList.contains("is-invalid") ||
         equipoMinimo.classList.contains("is-invalid")
@@ -278,7 +208,6 @@ checkEquipo.addEventListener("change",()=>{
         equipoMinimo.classList.remove("is-invalid");
         equipoMaximo.classList.remove("is-invalid");
     }
-    
 });
 equipoMinimo.addEventListener("change",()=>{
     if(equipoMinimo.value!==""
@@ -322,20 +251,6 @@ equipoMaximo.addEventListener("change",()=>{
     }
 })
 
-document.querySelectorAll(".grado-requerido").forEach((Element) => {
-    Element.addEventListener("change", () => {
-        let bandera = true;
-        document.querySelectorAll(".grado-requerido").forEach((Element) => {
-            if (!Element.disabled) {
-                if (!Element.checked) {
-                    bandera = false;
-                }
-            }
-        });
-        checkTodasRango.checked = bandera;
-    });
-});
-
 const isValid = (componente, bandera) => {
     if (bandera) {
         componente.classList.remove("is-invalid");
@@ -346,7 +261,10 @@ const isValid = (componente, bandera) => {
         componente.classList.add("is-invalid");
     }
 }
-
+const removerValidacion = (componente)=>{
+    componente.classList.remove("is-invalid");
+    componente.classList.remove("is-valid");
+}
 document.querySelectorAll(".entero").forEach((Element)=>{
     Element.addEventListener("keyup",()=>{
         console.log(Element.value.includes("."));
