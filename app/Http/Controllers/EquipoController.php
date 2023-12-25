@@ -284,15 +284,15 @@ class EquipoController extends Controller
                 $q->whereHas('participantes', function ($q) {
                     $q->where('correo_confirmado', 1);
                 });
-            }
-        , 'integrantes.participantes'])->whereHas('integrantes', function ($q) {
+            }, 'integrantes.participantes'
+        ])->whereHas('integrantes', function ($q) {
             $q->whereHas('participantes', function ($q) {
                 $q->where('correo_confirmado', 1);
             });
         })
             ->where('codigo', $codigo)
             ->first();
-        if(!$equipo){
+        if (!$equipo) {
             $equipo = Equipo::where('codigo', $codigo)->first();
         }
         $evento = Evento::find($id);

@@ -99,7 +99,8 @@ class NotificacionController extends Controller
         }
     }
 
-    public function getEquipos($id_evento){
+    public function getEquipos($id_evento)
+    {
         $equipos = Equipo::whereHas('equipoInscrito', function ($q) use ($id_evento) {
             $q->where('id_evento', $id_evento);
         })->where('correo_verificado', 1)->get();

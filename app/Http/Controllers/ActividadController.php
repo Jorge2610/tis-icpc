@@ -79,9 +79,6 @@ class ActividadController extends Controller
             $actividad->inicio_actividad = $request->inicio_evento;
             $actividad->fin_actividad = $request->fin_evento;
             $actividad->descripcion = $request->descripcion;
-            /**Antes de guardar debemos revisar si el nombre ya existe y que no sea el id del evento
-             * Para eso obtenemos el id del evento al que pertenece esta actividad
-             **/
             $nombreExistente = Actividad::where('id_evento', $actividad->id_evento)
                 ->where('id', '!=', $id)
                 ->where('nombre', $actividad->nombre)

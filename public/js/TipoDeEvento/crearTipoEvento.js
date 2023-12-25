@@ -11,7 +11,6 @@ const crearTipoEvento = (formData) => {
     axios
         .post("/api/tipo-evento", formData)
         .then(function (response) {
-            console.log(response.data);
             const mensaje = response.data.mensaje;
             const nombreIgual = "El tipo de evento ya existe";
             if (response.data.borrado) {
