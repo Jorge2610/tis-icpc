@@ -159,8 +159,6 @@ const setCostoInvalidoFeedback = () => {
         invalidFeedback.innerText="El costo no puede ser vacío."
     }
 }
-
-
 checkTodasRango.addEventListener("change", () => {
     document.querySelectorAll(".grado-requerido").forEach((Element) => {
         if (!Element.disabled) {
@@ -203,21 +201,19 @@ checkEquipo.addEventListener("change",()=>{
         isValid(checkEquipo, true);
     }
     if (!checkEquipo.checked) {
-        checkEquipo.classList.remove("is-valid");
-        checkEquipo.classList.remove("is-invalid");
+        removerValidacion(checkEquipo);
         equipoMinimo.classList.remove("is-invalid");
         equipoMaximo.classList.remove("is-invalid");
     }
 });
 equipoMinimo.addEventListener("change",()=>{
-    if(equipoMinimo.value!==""
-        &&((parseInt(equipoMinimo.value)>parseInt(equipoMinimo.max))
-        ||(parseInt(equipoMinimo.value)<parseInt(equipoMinimo.min)))){
+    if(equipoMinimo.classList.contains("is-invalid")){
         document.getElementById("ValidarRangoEquipo").innerText="Rango de cantidad de equipos no valido";
-        isValid(equipoMinimo,false);
-    }
-    else{
-        isValid(equipoMinimo,true);
+    }else{
+        if(equipoMinimo.value==="")
+            equipoMaximo.min=2;
+        else
+            equipoMaximo.min=equipoMinimo.value;
     }
     if(boolMinEquipo && boolMaxEquipo && boolCheckEquipo){
         boolMaxEquipo = false;
@@ -229,18 +225,13 @@ equipoMinimo.addEventListener("change",()=>{
     }
 })
 equipoMaximo.addEventListener("change",()=>{
-    if(equipoMaximo.value!==""
-    &&((parseInt(equipoMaximo.value)<=parseInt(equipoMaximo.max))
-    &&(parseInt(equipoMaximo.value)>=parseInt(equipoMaximo.min)))){
-        isValid(equipoMaximo,true);
-        equipoMinimo.max=equipoMaximo.value;
-    }else{if(equipoMaximo.value===""){
+    if(equipoMaximo.classList.contains("is-invalid")){
+        if(equipoMaximo.value=="")
             document.getElementById("ValidarRangoEquipo").innerText=`La cantidad m\u00E1xima de equipos no puede ser vacío.`;
-        }else{
+        else
             document.getElementById("ValidarRangoEquipo").innerText="Rango de cantidad de equipos no v\xE1lido.";
-        }
-        isValid(equipoMaximo,false);
-    }
+    }else
+        equipoMinimo.max=equipoMaximo.value;
     if(boolMinEquipo && boolMaxEquipo && boolCheckEquipo){
         boolMinEquipo = false;
         boolCheckEquipo = false;

@@ -212,7 +212,8 @@
                                             <input name="equipo_maximo" type="number"
                                                 class="form-control input-edad fecha-editar entero" id="equipoMaximo"
                                                 step="1" min="2" max="50"
-                                                value="{{ isset($datos['equipo_maximo']) ? $datos['equipo_maximo'] : '' }}">
+                                                value="{{ isset($datos['equipo_maximo']) ? $datos['equipo_maximo'] : '' }}"
+                                                required>
                                         </div>
                                     </div>
                                 </div>
