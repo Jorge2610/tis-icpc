@@ -47,7 +47,6 @@ let idEvento;
 let eventoAux;
 let actividadSeleccionada;
 
-
 const seleccionarEvento = (evento) => {
     if (seleccionado) {
         seleccionado.classList.remove("table-primary");
@@ -75,8 +74,8 @@ const cambiarEvento = (evento) => {
     contenedorAsignar.appendChild(actividadesContainer);
 
     evento.actividades.forEach((actividad) => {
-        if(actividad.descripcion==null){
-            actividad.descripcion="";
+        if (actividad.descripcion == null) {
+            actividad.descripcion = "";
         }
         // Crear un elemento div para cada actividad
         const actividadDiv = document.createElement("div");
@@ -84,10 +83,35 @@ const cambiarEvento = (evento) => {
         actividadDiv.id = `tarjetaActividad${actividad.id}`;
 
         // Verificar si la fecha de inicio es mayor al día de hoy
-        const fechaFin = new Date(actividad.fin_actividad);
+        const opcionesHora = {
+            hour: "numeric",
+            minute: "2-digit",
+            timeZone: "UTC",
+        };
+        const fechaInicio =
+            new Date(actividad.inicio_actividad)
+                .toLocaleDateString("es-ES", { timeZone: "UTC" })
+                .replace(/\//g, "-") +
+            " , " +
+            new Date(actividad.inicio_actividad).toLocaleTimeString(
+                "es-ES",
+                opcionesHora
+            );
+        const fechaFin =
+            new Date(actividad.fin_actividad)
+                .toLocaleDateString("es-ES", { timeZone: "UTC" })
+                .replace(/\//g, "-") +
+            " , " +
+            new Date(actividad.fin_actividad).toLocaleTimeString(
+                "es-ES",
+                opcionesHora
+            );
         const hoy = new Date();
-        const inscripcion = actividad.inscripcion ? `<div class="d-flex justify-content-end align-items-center" style="border-radius: 10px; width: 100%; height: 25px;"> <p class=" text-center rounded m-2 py-1 px-2 text-info">Inscripción</p> </div>` : ``;
-        if (fechaFin > hoy) {
+        const fin = new Date(actividad.fin_actividad); 
+        const inscripcion = actividad.inscripcion
+            ? `<div class="d-flex justify-content-end align-items-center" style="border-radius: 10px; width: 100%; height: 25px;"> <p class=" text-center rounded m-2 py-1 px-2 text-info">Inscripción</p> </div>`
+            : ``;
+        if (fin > hoy) {
             // Agregar el contenido de la actividad al div con el botón de eliminar
             actividadDiv.innerHTML = `
                 <div class="container col-12 col-md-12 col-lg-12">
@@ -95,8 +119,8 @@ const cambiarEvento = (evento) => {
                         <div class="card-body">
                             <h3 class="card-title">${actividad.nombre}</h3>
                             <h5 class="card-text text-truncate d-block" style="max-width: 300px;" title="${actividad.descripcion}">${actividad.descripcion}</h5>
-                            <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Inicio: ${actividad.inicio_actividad}</h6>
-                            <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Fin: ${actividad.fin_actividad}</h6>
+                            <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Inicio: ${fechaInicio}</h6>
+                            <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Fin: ${fechaFin}</h6>
                             ${inscripcion}
                         </div>
                         <div class="card-footer d-flex justify-content-center">
@@ -115,8 +139,8 @@ const cambiarEvento = (evento) => {
                         <div class="card-body">
                             <h3 class="card-title">${actividad.nombre}</h3>
                             <h5 class="card-text text-truncate d-block" style="max-width: 300px;" title="${actividad.descripcion}">${actividad.descripcion}</h5>
-                            <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Inicio: ${actividad.inicio_actividad}</h6>
-                            <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Fin: ${actividad.fin_actividad}</h6>
+                            <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Inicio: ${fechaInicio}</h6>
+                            <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Fin: ${fechaFin}</h6>
                             ${inscripcion}
                         </div>
                     </div>
@@ -130,28 +154,28 @@ const cambiarEvento = (evento) => {
 };
 
 const seleccionarActividad = (id) => {
-    window.location.href="/admin/actividad/editar-actividad/"+id;
+    window.location.href = "/admin/actividad/editar-actividad/" + id;
 };
 
-
-
-
-
 const cargarActividades = async () => {
-    const tarjetasActividad = document.querySelectorAll('[id^="tarjetaActividad"]');
+    const tarjetasActividad = document.querySelectorAll(
+        '[id^="tarjetaActividad"]'
+    );
 
     // Oculta todas las actividades
     tarjetasActividad.forEach((tarjetaActividad) => {
-        tarjetaActividad.style.display = 'none';
+        tarjetaActividad.style.display = "none";
     });
 
     await axios.get(`/api/actividad/${idEvento}`).then((response) => {
         response.data.forEach((actividad) => {
-            const actividadDiv = document.getElementById(`tarjetaActividad${actividad.id}`);
-            
+            const actividadDiv = document.getElementById(
+                `tarjetaActividad${actividad.id}`
+            );
+
             if (actividadDiv) {
                 // Si la actividad ya existe, muéstrala
-                actividadDiv.style.display = 'block';
+                actividadDiv.style.display = "block";
             } else {
                 // Si la actividad no existe, créala y agrégala al contenedor
                 cambiarEvento(eventoAux); // Asegúrate de que eventoAux esté disponible
@@ -159,7 +183,9 @@ const cargarActividades = async () => {
         });
 
         // Actualizar el contador de actividades en la tabla después de cargar
-        const contadorActividadesElement = document.getElementById(`contadorActividades${idEvento}`);
+        const contadorActividadesElement = document.getElementById(
+            `contadorActividades${idEvento}`
+        );
         if (contadorActividadesElement) {
             contadorActividadesElement.textContent = response.data.length;
         }

@@ -110,7 +110,7 @@ class EventoController extends Controller
                 'id' => null
             ];
         }
-        if (!$evento || !$participante) {
+        if (!$evento) {
             return abort(404);
         }
         return view('inscripciones.participante', ['evento' => $evento, 'participante' => $dato]);
@@ -384,7 +384,7 @@ class EventoController extends Controller
                 'pais' => null
             ];
         }
-        if (!$evento || !$equipo || !$participante) {
+        if (!$evento || !$equipo) {
             return abort(404);
         }
         return view('inscripciones.participanteEquipo', ['equipo' => $equipo, 'participante' => $dato, 'evento' => $evento]);

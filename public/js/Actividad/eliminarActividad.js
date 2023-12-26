@@ -84,10 +84,37 @@ const cambiarEvento = (evento) => {
         actividadDiv.id = `tarjetaActividad${actividad.id}`;
 
         // Verificar si la fecha de inicio es mayor al día de hoy
-        const fechaInicio = new Date(actividad.inicio_actividad);
+        const opcionesHora = {
+            hour: "numeric",
+            minute: "2-digit",
+            timeZone: "UTC",
+        };
+        const fechaInicio =
+            new Date(actividad.inicio_actividad)
+                .toLocaleDateString("es-ES", { timeZone: "UTC" })
+                .replace(/\//g, "-") +
+            " , " +
+            new Date(actividad.inicio_actividad).toLocaleTimeString(
+                "es-ES",
+                opcionesHora
+            );
+        const fechaFin =
+            new Date(actividad.fin_actividad)
+                .toLocaleDateString("es-ES", { timeZone: "UTC" })
+                .replace(/\//g, "-") +
+            " , " +
+            new Date(actividad.fin_actividad).toLocaleTimeString(
+                "es-ES",
+                opcionesHora
+            );
+       
+        const inscripcion = actividad.inscripcion
+            ? `<div class="d-flex justify-content-end align-items-center" style="border-radius: 10px; width: 100%; height: 25px;"> <p class=" text-center rounded m-2 py-1 px-2 text-info">Inscripción</p> </div>`
+            : ``;
+        const inicio = new Date(actividad.inicio_actividad);
         const hoy = new Date();
 
-        if (fechaInicio > hoy) {
+        if (inicio > hoy) {
             // Agregar el contenido de la actividad al div con el botón de eliminar
             actividadDiv.innerHTML = `
                 <div class="container col-12 col-md-12 col-lg-12">
@@ -95,8 +122,9 @@ const cambiarEvento = (evento) => {
                         <div class="card-body">
                             <h3 class="card-title">${actividad.nombre}</h3>
                             <h5 class="card-text text-truncate d-block" style="max-width: 300px;" title="${actividad.descripcion}">${actividad.descripcion}</h5>
-                            <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Inicio: ${actividad.inicio_actividad}</h6>
-                            <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Fin: ${actividad.fin_actividad}</h6>
+                            <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Inicio: ${fechaInicio}</h6>
+                            <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Fin: ${fechaFin}</h6>
+                            ${inscripcion}
                         </div>
                         <div class="card-footer d-flex justify-content-center">
                             <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
@@ -114,8 +142,9 @@ const cambiarEvento = (evento) => {
                         <div class="card-body">
                             <h3 class="card-title">${actividad.nombre}</h3>
                             <h5 class="card-text text-truncate d-block" style="max-width: 300px;" title="${actividad.descripcion}">${actividad.descripcion}</h5>
-                            <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Inicio: ${actividad.inicio_actividad}</h6>
-                            <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Fin: ${actividad.fin_actividad}</h6>
+                            <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Inicio: ${fechaInicio}</h6>
+                            <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Fin: ${fechaFin}</h6>
+                            ${inscripcion}
                         </div>
                     </div>
                 </div>
