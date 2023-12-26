@@ -30,7 +30,11 @@
                     @foreach ($tiposDeEventos as $tipoDeEvento)
                         <tr>
                             <td>{{ $tipoDeEvento->nombre }}</td>
-                            <td class="container-color">
+                            @php
+                                $height = strlen($tipoDeEvento->nombre) > 40 ? '48px' : '30px';
+                            @endphp
+                            <td class="d-flex container-color justify-content-center align-items-center"
+                                style="height: {{ $height }}">
                                 <div class="color-cell" style="background-color:{{ $tipoDeEvento->color }};"></div>
                             </td>
                             <td class="text-center">Yo</td>

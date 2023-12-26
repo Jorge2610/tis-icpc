@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        
+
         <div class="row">
             <div class="col-md-12">
                 <h2>Detalle de evento</h2>
@@ -27,8 +27,8 @@
                         </div>
 
                         <div class="col-md-7 col-sm-7  mt-3 " style="font-size: small">
-                    @else
-                        <div class="col-md-12 col-sm-12  mt-3 " style="font-size: small">
+                        @else
+                            <div class="col-md-12 col-sm-12  mt-3 " style="font-size: small">
                     @endif
                     <div class="row">
                         <div class="col-lg-9 col-md-12 col-sm-12 col-12">
@@ -37,10 +37,10 @@
                             <p>
                         </div>
                         @if (
-                                $evento->actividades->where('inscripcion', 1)->filter(function ($actividad) {
+                            $evento->actividades->where('inscripcion', 1)->filter(function ($actividad) {
                                     $currentDateTime = now()->format('Y-m-d H:i:s');
-                                        return $actividad->inicio_actividad <= $currentDateTime && $currentDateTime <= $actividad->fin_actividad ;
-                                    })->count() > 0)
+                                    return $actividad->inicio_actividad <= $currentDateTime && $currentDateTime <= $actividad->fin_actividad;
+                                })->count() > 0)
                             <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                 <div class="row mt-3 d-flex">
                                     <button type="button" class="btn btn-primary w-100 justify-content-center"
@@ -55,10 +55,10 @@
                                             @endif
                                             @slot('evento', $evento)
                                         @endcomponent
+                                    </div>
                                 </div>
-                            </div>
                             @endif
-                    </div>
+                        </div>
 
                         @if ($participantes->count() > 0)
                             @php
@@ -209,7 +209,9 @@
                     @foreach ($evento->actividades as $actividad)
                         <div class="card my-3
                         @if ($actividad->fin_actividad < now()->format('Y-m-d H:i:s')) shadow-none
-                        @elseif($actividad->inicio_actividad <= now()->format('Y-m-d H:i:s') && now()->format('Y-m-d H:i:s') <= $actividad->fin_actividad)
+                        @elseif(
+                            $actividad->inicio_actividad <= now()->format('Y-m-d H:i:s') &&
+                                now()->format('Y-m-d H:i:s') <= $actividad->fin_actividad)
                             shadow-lg bg-body rounded
                         @else
                             shadow bg-body rounded @endif
@@ -276,7 +278,8 @@
                                             target="_blank">
                                 @endif
                                 <img id="imagenPatrocinador" src="{{ $patrocinador->patrocinadores->ruta_imagen }}"
-                                    alt="Imagen del patrocinador" style="object-fit: cover; max-height: 7rem; max-width: 100%;">
+                                    alt="Imagen del patrocinador" style="object-fit: cover; max-height: 7rem; max-width: 100%;"
+                                    title="{{ $patrocinador->patrocinadores->nombre }}">
                                 </a>
                             </div>
                         @endforeach

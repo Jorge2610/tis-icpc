@@ -28,23 +28,25 @@
                 </thead>
                 <tbody id="datosTabla">
                     @foreach ($tiposDeEventos as $tipoDeEvento)
-                        
-                            <tr>
-                                <td>{{ $tipoDeEvento->nombre }}</td>
-                                <td class="container-color">
-                                    <div class="color-cell" style="background-color:{{ $tipoDeEvento->color }};"></div>
-                                </td>
-                                <td class="text-center">Yo</td>
-                                <td class="text-center">{{ date('d-m-Y', strtotime($tipoDeEvento->created_at)) }}</td>
-                                <td class="text-center">{{ $tipoDeEvento->eventos->count() }}</td>
-                                <td class="text-center">
-                                    <button type="button" class="btn btn-primary btn-sm"
-                                        onclick="window.location.href='/admin/tipos-de-evento/editar-tipo-evento/{{ $tipoDeEvento->id }}'">
-                                        <i class="bi bi-pencil-fill"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                       
+                        <tr>
+                            <td>{{ $tipoDeEvento->nombre }}</td>
+                            @php
+                                $height = strlen($tipoDeEvento->nombre) > 40 ? '48px' : '30px';
+                            @endphp
+                            <td class="d-flex container-color justify-content-center align-items-center"
+                                style="height: {{ $height }}">
+                                <div class="color-cell" style="background-color:{{ $tipoDeEvento->color }};"></div>
+                            </td>
+                            <td class="text-center">Yo</td>
+                            <td class="text-center">{{ date('d-m-Y', strtotime($tipoDeEvento->created_at)) }}</td>
+                            <td class="text-center">{{ $tipoDeEvento->eventos->count() }}</td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-primary btn-sm"
+                                    onclick="window.location.href='/admin/tipos-de-evento/editar-tipo-evento/{{ $tipoDeEvento->id }}'">
+                                    <i class="bi bi-pencil-fill"></i>
+                                </button>
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
