@@ -48,12 +48,10 @@ class EventoController extends Controller
             $q->withTrashed();
         }, 'sitios', 'actividades'])
             ->where('nombre', $nombre)->first();
-
-        $participantes = $this->participantesEvento($evento->id);
         if (!$evento) {
             return abort(404);
         }
-
+        $participantes = $this->participantesEvento($evento->id);
         $cantidadEquipos = $this->equiposEvento($evento->id, $evento->equipo_minimo);
 
         return view('eventos.evento', ['evento' => $evento, 'participantes' => $participantes, 'equipos' => $cantidadEquipos]);
@@ -111,6 +109,9 @@ class EventoController extends Controller
                 'pais' => null,
                 'id' => null
             ];
+        }
+        if (!$evento || !$participante) {
+            return abort(404);
         }
         return view('inscripciones.participante', ['evento' => $evento, 'participante' => $dato]);
     }
@@ -382,6 +383,9 @@ class EventoController extends Controller
                 'telefono' => null,
                 'pais' => null
             ];
+        }
+        if (!$evento || !$equipo || !$participante) {
+            return abort(404);
         }
         return view('inscripciones.participanteEquipo', ['equipo' => $equipo, 'participante' => $dato, 'evento' => $evento]);
     }

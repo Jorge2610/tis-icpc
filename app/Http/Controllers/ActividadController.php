@@ -99,6 +99,9 @@ class ActividadController extends Controller
     public function crearActividad($id)
     {
         $evento = Evento::where('id', $id)->first();
+        if(!$evento){
+            return abort(404);
+        }
         return view('actividad.formCrearActividad', ['evento' => $evento]);
     }
 
@@ -121,6 +124,9 @@ class ActividadController extends Controller
     public function obtenerActividades($eventoId)
     {
         $actividades = Actividad::where('id_evento', $eventoId)->get();
+        if(!$actividades){
+            return abort(404);
+        }
         return view('actividad.eliminarActividad', ['actividades' => $actividades]);
     }
 
@@ -144,6 +150,9 @@ class ActividadController extends Controller
     public function editarActividad($id)
     {
         $actividad = Actividad::find($id);
+        if(!$actividad){
+            return abort(404);
+        }
         $evento = Evento::find($actividad->id_evento);
         return view('actividad.editarActividad', ['actividad' => $actividad, 'evento' => $evento]);
     }
