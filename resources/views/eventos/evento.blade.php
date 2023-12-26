@@ -2,10 +2,12 @@
 
 @section('content')
     <div class="container">
+        
         <div class="row">
             <div class="col-md-12">
                 <h2>Detalle de evento</h2>
             </div>
+
             <div class="col-md-12">
                 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                     <ol class="breadcrumb">
@@ -15,6 +17,7 @@
                 </nav>
             </div>
         </div>
+
         <div class="row">
             <div class="col-md-12 col-main  g-5">
                 <div class="row">
@@ -23,19 +26,19 @@
                             <x-carrusel :evento="$evento" />
                         </div>
 
-                        <div class="col-md-7 col-sm-7  mt-3 " style="font-size: small">
-                        @else
-                            <div class="col-md-12 col-sm-12  mt-3 " style="font-size: small">
+                        <div class="col-md-7 col-sm-7  mt-3 " style="font-size: small"></div>
+                    @else
+                        <div class="col-md-12 col-sm-12  mt-3 " style="font-size: small"></div>
                     @endif
                     <div class="row">
                         <div class="col-lg-9 col-md-12 col-sm-12 col-12">
                             <h3>{{ $evento->nombre }}</h3>
-                            <p class="fs-6 mb-0">{{ $evento->tipoEvento->nombre }}
-                            <p>
+                            <p class="fs-6 mb-0">{{ $evento->tipoEvento->nombre }}</p>
                         </div>
                         @if (
                                 $evento->actividades->where('inscripcion', 1)->filter(function ($actividad) {
-                                        return $actividad->inicio_actividad <= date('Y-m-d\TH:i') && date('Y-m-d\TH:i') <= $actividad->fin_actividad ;
+                                    $currentDateTime = now()->format('Y-m-d H:i:s');
+                                        return $actividad->inicio_actividad <= $currentDateTime && $currentDateTime <= $actividad->fin_actividad ;
                                     })->count() > 0)
                             <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                                 <div class="row mt-3 d-flex">
@@ -51,10 +54,11 @@
                                             @endif
                                             @slot('evento', $evento)
                                         @endcomponent
-                                    </div>
                                 </div>
+                            </div>
                             @endif
-                        </div>
+                    </div>
+                </div>
                         @if ($participantes->count() > 0)
                             @php
                                 $plural = $participantes->count() > 1 ? 's' : '';
@@ -167,11 +171,8 @@
 
 
                     </div>
-
                 </div>
-
             </div>
-
         </div>
         @if ($evento->descripcion !== null)
             <div class="row mt-5">
@@ -206,8 +207,8 @@
                     <hr>
                     @foreach ($evento->actividades as $actividad)
                         <div class="card my-3
-                        @if ($actividad->fin_actividad < date('Y-m-d\TH:i')) shadow-none
-                        @elseif($actividad->inicio_actividad <= date('Y-m-d\TH:i') && date('Y-m-d\TH:i') <= $actividad->fin_actividad)
+                        @if ($actividad->fin_actividad < now()->format('Y-m-d H:i:s')) shadow-none
+                        @elseif($actividad->inicio_actividad <= now()->format('Y-m-d H:i:s') && now()->format('Y-m-d H:i:s') <= $actividad->fin_actividad)
                             shadow-lg bg-body rounded
                         @else
                             shadow bg-body rounded @endif

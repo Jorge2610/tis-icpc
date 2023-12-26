@@ -25,7 +25,8 @@
                         <div class="row">
                             @if (
                                 $evento->actividades->where('inscripcion', 1)->filter(function ($actividad) {
-                                        return strtotime($actividad->fin_actividad) >= strtotime('today');
+                                    $currentDateTime = now()->format('Y-m-d H:i:s');
+                                 return $actividad->fin_actividad >= $currentDateTime;
                                     })->count() > 0)
                             @else
                                 <div class="form-check form-switch mt-4">
@@ -57,7 +58,7 @@
                                 <div class="col-md-5">Inicio</div>
                                 <div class="col-md-7 p-0">
                                     <input name="inicio_evento" id="fechaInicio" class="form-control" type="datetime-local"
-                                        min="{{ date('Y-m-d\TH:i', strtotime($evento->inicio_evento)) }}"
+                                        min="{{ max(date('Y-m-d\TH:i', strtotime($evento->inicio_evento)), date('Y-m-d\TH:i')) }}"
                                         max="{{ date('Y-m-d\TH:i', strtotime($evento->fin_evento)) }}" required />
                                     <div id="mensajeFechaInicio" class="invalid-feedback"></div>
                                 </div>
