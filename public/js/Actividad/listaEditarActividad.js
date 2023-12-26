@@ -91,7 +91,7 @@ const cambiarEvento = (evento) => {
             // Agregar el contenido de la actividad al div con el botón de eliminar
             actividadDiv.innerHTML = `
                 <div class="container col-12 col-md-12 col-lg-12">
-                    <div class="card w-100 my-3 shadow" style="min-height: 100px; width: 17rem !important">
+                    <div class="card w-100 my-3 shadow" style="min-height: 150px; width: 17rem !important">
                         <div class="card-body">
                             <h3 class="card-title">${actividad.nombre}</h3>
                             <h5 class="card-text text-truncate d-block" style="max-width: 300px;" title="${actividad.descripcion}">${actividad.descripcion}</h5>
@@ -117,6 +117,7 @@ const cambiarEvento = (evento) => {
                             <h5 class="card-text text-truncate d-block" style="max-width: 300px;" title="${actividad.descripcion}">${actividad.descripcion}</h5>
                             <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Inicio: ${actividad.inicio_actividad}</h6>
                             <h6 class="card-text text-truncate d-block" style="max-width: 300px;">Fin: ${actividad.fin_actividad}</h6>
+                            ${inscripcion}
                         </div>
                     </div>
                 </div>
