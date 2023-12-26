@@ -10,8 +10,6 @@ use App\Http\Controllers\SitioController;
 use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\NotificacionController;
 use App\Http\Controllers\ParticipanteController;
-use App\Mail\ConfirmacionParticipante;
-use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -134,3 +132,6 @@ Route::get('/mailable', function () {
     // Obtén el contenido de la vista previa del correo electrónico (Markdown)
 });
 
+Route::any('{any}', function () {
+    return abort(404);
+})->where('any', '.*');

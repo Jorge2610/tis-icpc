@@ -296,6 +296,9 @@ class EquipoController extends Controller
             $equipo = Equipo::where('codigo', $codigo)->first();
         }
         $evento = Evento::find($id);
+        if(!$evento || !$equipo){
+            return abort(404);
+        }
         return view('inscripciones.tablaEquipo', ['equipo' => $equipo, 'evento' => $evento]);
     }
 
@@ -335,6 +338,9 @@ class EquipoController extends Controller
             $verificado = (object)['error' => false, 'mensaje' => 'Correo verificado correctamente.'];
         } else {
             $verificado =  (object)['error' => true, 'mensaje' => 'El correo ya ha sido verificado.'];
+        }
+        if(!$participante || !$equipo){
+            return abort(404);
         }
         return view("inscripciones.confirmacionCorreo", ['verificado' => $verificado]);
     }
