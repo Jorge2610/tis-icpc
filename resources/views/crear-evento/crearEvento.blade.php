@@ -81,7 +81,7 @@
                     </button>
                     <ul class="dropdown-menu p-3 col-lg-2 col-md-4" id="ul-grado" aria-labelledby="boton-grado"
                         data-grado="{{ $datos['grado_academico'] }}">
-                        @foreach (['Todas', 'Primaria', 'Secundaria', 'Universidad', 'Licenciatura', 'Maestria', 'Doctorado'] as $grado)
+                        @foreach (['Todas', 'Primaria', 'Secundaria', 'Universidad', 'Licenciatura', 'Maestría', 'Doctorado'] as $grado)
                             <li @if ($grado == 'Todas') id="todas-grado" @endif>
                                 <input class="form-check-input grado-requerido border-dark" type="checkbox"
                                     value="{{ $grado }}" id="input-grado-{{ $grado }}">
