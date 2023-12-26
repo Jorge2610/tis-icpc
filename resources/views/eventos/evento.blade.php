@@ -26,14 +26,15 @@
                             <x-carrusel :evento="$evento" />
                         </div>
 
-                        <div class="col-md-7 col-sm-7  mt-3 " style="font-size: small"></div>
+                        <div class="col-md-7 col-sm-7  mt-3 " style="font-size: small">
                     @else
-                        <div class="col-md-12 col-sm-12  mt-3 " style="font-size: small"></div>
+                        <div class="col-md-12 col-sm-12  mt-3 " style="font-size: small">
                     @endif
                     <div class="row">
                         <div class="col-lg-9 col-md-12 col-sm-12 col-12">
                             <h3>{{ $evento->nombre }}</h3>
-                            <p class="fs-6 mb-0">{{ $evento->tipoEvento->nombre }}</p>
+                            <p class="fs-6 mb-0">{{ $evento->tipoEvento->nombre }}
+                            <p>
                         </div>
                         @if (
                                 $evento->actividades->where('inscripcion', 1)->filter(function ($actividad) {
@@ -58,7 +59,7 @@
                             </div>
                             @endif
                     </div>
-                </div>
+
                         @if ($participantes->count() > 0)
                             @php
                                 $plural = $participantes->count() > 1 ? 's' : '';
