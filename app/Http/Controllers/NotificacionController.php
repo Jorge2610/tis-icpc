@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Equipo;
+use App\Models\EquipoInscrito;
 use App\Models\Evento;
 use App\Models\Participante;
 use Illuminate\Http\Request;
 use App\Notifications\NotificacionEvento;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 
@@ -18,12 +20,22 @@ class NotificacionController extends Controller
             'id',
             'nombre',
             'updated_at',
-            'id_tipo_evento'
+            'id_tipo_evento',
+            'equipo_minimo',
+            'equipo_maximo'
         )
-            ->with(['tipoEvento' => function ($q) {
-                $q->select('id', 'nombre')
-                    ->withTrashed();
-            }])
+            ->with([
+                'tipoEvento' => function ($q) {
+                    $q->select('id', 'nombre')->withTrashed();
+                },
+                'equiposInscrito.equipos' => function ($q) {
+                    $q->withCount(['integrantes as cantidad_integrantes' => function ($q) {
+                        $q->whereHas('participantes', function ($q) {
+                            $q->where('correo_confirmado', 1);
+                        });
+                    }]);
+                }
+            ])
             ->withCount(['inscritos as cantidad_inscritos' => function ($q) {
                 $q->whereHas('participante', function ($q) {
                     $q->where('correo_confirmado', 1);
@@ -31,12 +43,18 @@ class NotificacionController extends Controller
             }])
             ->withCount(['equiposInscrito as cantidad_equipos' => function ($q) {
                 $q->whereHas('equipos', function ($q) {
-                    $q->where('correo_verificado', 1);
+                    $q->where('correo_verificado', 1)
+                        ->whereHas('integrantes.participantes', function ($q) {
+                            $q->where('correo_confirmado', 1);
+                        });
                 });
             }])
             ->where('estado', 0)
             ->orderBy('eventos.updated_at', 'desc')
             ->get();
+
+
+        // return $eventos;
 
         return view('notificaciones.enviar', ['eventos' => $eventos]);
     }

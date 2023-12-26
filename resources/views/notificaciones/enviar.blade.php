@@ -19,15 +19,29 @@
                     </thead>
                     <tbody id="datosTabla">
                         @foreach ($eventos as $evento)
-                            @if($evento->cantidad_inscritos > 0 or $evento->cantidad_equipos > 0)
-                            <tr onclick="seleccionarEvento({{ $evento->id }}, '{{ $evento->nombre }}', event)"
-                                id="{{ $evento->id }}">
-                                <td>{{ $evento->nombre }}</td>
-                                <td class="text-center">{{ $evento->tipoEvento->nombre }}</td>
-                                <td class="text-center">{{ date('d-m-Y', strtotime($evento->updated_at)) }}</td>
-                                <td class="text-center" id="contadorActividades{{ $evento->id }}">
-                                    {{ $evento->cantidad_inscritos > 0 ? $evento->cantidad_inscritos : $evento->cantidad_equipos }}</td>
-                            </tr>
+                            @php
+                                $contador = 0;
+                                $equipoMinimo = $evento->equipo_minimo;
+                                foreach ($evento->equiposInscrito as $equipo) {
+                                    $cantidadIntegrantes = $equipo->equipos->cantidad_integrantes;
+
+                                    if ($equipoMinimo !== null) {
+                                        $res = $cantidadIntegrantes >= $equipoMinimo ? ++$contador : $contador;
+                                    } else {
+                                        $res = $cantidadIntegrantes >= 2 ? ++$contador : $contador;
+                                    }
+                                }
+                            @endphp
+                            @if ($evento->cantidad_inscritos > 0 or $contador > 0)
+                                <tr onclick="seleccionarEvento({{ $evento->id }}, '{{ $evento->nombre }}', event)"
+                                    id="{{ $evento->id }}">
+                                    <td>{{ $evento->nombre }}</td>
+                                    <td class="text-center">{{ $evento->tipoEvento->nombre }}</td>
+                                    <td class="text-center">{{ date('d-m-Y', strtotime($evento->updated_at)) }}</td>
+                                    <td class="text-center" id="contadorActividades{{ $evento->id }}">
+                                        {{ $evento->cantidad_inscritos > 0 ? $evento->cantidad_inscritos : $contador }}
+                                    </td>
+                                </tr>
                             @endif
                         @endforeach
                     </tbody>
@@ -70,17 +84,18 @@
                             Esta notificación se enviará a los participantes inscritos en el evento.
                         </p>
                         @component('components.modal')
-                        @slot('modalId', 'modalEnviarNotificacion')
-                        @slot('modalTitle', 'Confirmación')
-                        @slot('modalContent')
-                            ¿Está seguro de enviar la notificación?
-                        @endslot
-                        @slot('modalButton')
-                            <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal" onclick="resetInputs()">No</button>
-                            <button type="reset" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal"
-                                onclick="enviar()">Sí</button>
-                        @endslot
-                    @endcomponent
+                            @slot('modalId', 'modalEnviarNotificacion')
+                            @slot('modalTitle', 'Confirmación')
+                            @slot('modalContent')
+                                ¿Está seguro de enviar la notificación?
+                            @endslot
+                            @slot('modalButton')
+                                <button type="button" class="btn btn-secondary w-25 mx-8" data-bs-dismiss="modal"
+                                    onclick="resetInputs()">No</button>
+                                <button type="reset" class="btn btn-primary w-25 mx-8" data-bs-dismiss="modal"
+                                    onclick="enviar()">Sí</button>
+                            @endslot
+                        @endcomponent
 
                     </div>
                 </div>
