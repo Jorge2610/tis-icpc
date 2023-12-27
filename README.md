@@ -71,4 +71,4 @@ php artisan serve
 
 La aplicación estará disponible en http://localhost:8000. Puedes acceder a ella utilizando un navegador web.
 
-¡Listo! Has configurado y ejecutado con éxito tu aplicación Laravel. Recuerda que estos son pasos básicos, y puedes necesitar ajustar la configuración según las necesidades específicas de tu proyecto. ¡Disfruta desarrollando con Laravel!
+¡Listo! Has configurado y ejecutado con éxito tu aplicación Laravel.
